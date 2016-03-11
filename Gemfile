@@ -59,9 +59,11 @@ gem 'sitemap_generator'
 gem 'whenever', require: false
 gem 'sucker_punch', '~> 1.0'
 gem 'newrelic_rpm'
+gem 'nested_form'
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
+  gem 'annotate'
 end
 
 group :production do

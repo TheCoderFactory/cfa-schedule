@@ -11,7 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311034638) do
+ActiveRecord::Schema.define(version: 20160311042731) do
+
+  create_table "event_intakes", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "intake_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "event_intakes", ["event_id"], name: "index_event_intakes_on_event_id"
+  add_index "event_intakes", ["intake_id"], name: "index_event_intakes_on_intake_id"
+
+  create_table "event_times", force: :cascade do |t|
+    t.integer  "event_id"
+    t.date     "date"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "event_times", ["event_id"], name: "index_event_times_on_event_id"
+
+  create_table "event_types", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "icon"
+    t.string   "color"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "event_type_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "events", ["event_type_id"], name: "index_events_on_event_type_id"
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -26,6 +68,21 @@ ActiveRecord::Schema.define(version: 20160311034638) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
+  create_table "intakes", force: :cascade do |t|
+    t.string   "name"
+    t.date     "term_one_start"
+    t.date     "term_one_end"
+    t.date     "term_two_start"
+    t.date     "term_two_end"
+    t.date     "term_three_start"
+    t.date     "term_three_end"
+    t.date     "term_four_start"
+    t.date     "term_four_end"
+    t.string   "color"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -36,6 +93,17 @@ ActiveRecord::Schema.define(version: 20160311034638) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "teachers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "image"
+    t.text     "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "teachers", ["user_id"], name: "index_teachers_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

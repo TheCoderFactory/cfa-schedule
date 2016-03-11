@@ -1,0 +1,26 @@
+<h1>Listing teachers</h1>
+
+<table class="table">
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>Image</th>
+      <th>Bio</th>
+        <th colspan="3"></th>
+    </tr>
+
+  <%= content_tag_for(:tr, @teachers) do |teacher| %>
+    <td><%= teacher.user %></td>
+    <td><%= teacher.name %></td>
+    <td><%= teacher.image %></td>
+    <td><%= teacher.bio %></td>
+      <td><%= link_to 'Show', teacher %></td>
+    <td><%= link_to 'Edit', edit_teacher_path(teacher), class: 'btn btn-edit' %></td>
+    <td><%= link_to 'Delete', teacher, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-destroy' %></td>
+  <% end %>
+</table>
+
+
+<div class="form-actions">
+  <%= link_to 'New Teacher', new_teacher_path, class: 'btn btn-success' %>
+</div>

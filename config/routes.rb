@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :intakes
+  resources :teachers
+  resources :event_times
+  resources :events
+  resources :event_types
   get 'admin', to: 'pages#admin'
   get 'contact', to: 'pages#contact'
   root 'pages#home'

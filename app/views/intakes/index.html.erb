@@ -1,0 +1,38 @@
+<h1>Listing intakes</h1>
+
+<table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Term_one_start</th>
+      <th>Term_one_end</th>
+      <th>Term_two_start</th>
+      <th>Term_two_end</th>
+      <th>Term_three_start</th>
+      <th>Term_three_end</th>
+      <th>Term_four_start</th>
+      <th>Term_four_end</th>
+      <th>Color</th>
+        <th colspan="3"></th>
+    </tr>
+
+  <%= content_tag_for(:tr, @intakes) do |intake| %>
+    <td><%= intake.name %></td>
+    <td><%= intake.term_one_start %></td>
+    <td><%= intake.term_one_end %></td>
+    <td><%= intake.term_two_start %></td>
+    <td><%= intake.term_two_end %></td>
+    <td><%= intake.term_three_start %></td>
+    <td><%= intake.term_three_end %></td>
+    <td><%= intake.term_four_start %></td>
+    <td><%= intake.term_four_end %></td>
+    <td><%= intake.color %></td>
+      <td><%= link_to 'Show', intake %></td>
+    <td><%= link_to 'Edit', edit_intake_path(intake), class: 'btn btn-edit' %></td>
+    <td><%= link_to 'Delete', intake, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-destroy' %></td>
+  <% end %>
+</table>
+
+
+<div class="form-actions">
+  <%= link_to 'New Intake', new_intake_path, class: 'btn btn-success' %>
+</div>
