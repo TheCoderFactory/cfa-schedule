@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.association :event_type %>
     <% if params[:intake] %>
-      <%= f.input :intakes, input_html: {value: params[:intake]} %>
+      <%= f.input :intake_id, input_html: {value: params[:intake]} %>
     <% else %>
       <%= f.association :intakes, as: :check_boxes %>
     <% end %>
