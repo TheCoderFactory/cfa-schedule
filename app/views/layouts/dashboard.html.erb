@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
+
   <title><%= content_for?(:title) ? yield(:title) : "Page Title" %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -17,11 +18,9 @@
     <![endif]-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body style="padding-top:100px;">
-<%= render 'layouts/navbar' %>
-<%= render 'layouts/flash_messages' %>
-<div class="container">
-  <%= yield %>
-</div>
+<body>
+	<div class="container-fluid">
+		<%= yield %>
+	</div>
 </body>
 </html>
