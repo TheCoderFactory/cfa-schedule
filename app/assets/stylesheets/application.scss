@@ -1,0 +1,23 @@
+@import 'bootstrap';
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,700,300,400italic);
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #000;
+  color: #ddd;
+}
+.white {
+  color: white;
+}
+.giant {
+  font-size: 10em;
+}
+.blue-bg {
+  background-color: #1194F6;
+}
+.green-bg {
+  background-color: #48B04B;
+}
+.orange-bg {
+  background-color: #FF9900;
+}

@@ -45,7 +45,7 @@ group :development do
   gem 'spring'
 end
 
-
+gem 'bootstrap'
 gem 'devise'
 gem 'simple_form'
 gem 'country_select'

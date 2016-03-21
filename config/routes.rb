@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :event_types
   get 'admin', to: 'pages#admin'
   get 'contact', to: 'pages#contact'
+  get 'dashboard', to: 'pages#dashboard'
   root 'pages#home'
   get 'pages/home'
 
