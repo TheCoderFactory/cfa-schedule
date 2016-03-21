@@ -1,20 +1,6 @@
 Rails.application.routes.draw do
-  resources :intakes
-  resources :teachers
-  resources :event_times
-  resources :events
-  resources :event_types
-  get 'admin', to: 'pages#admin'
-  get 'contact', to: 'pages#contact'
-  get 'dashboard', to: 'pages#dashboard'
-  root 'pages#home'
-  get 'pages/home'
-
-  get 'pages/admin'
-
-  get 'pages/contact'
-
-  devise_for :users
+  devise_for :students
+  devise_for :teachers
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
