@@ -1,16 +1,10 @@
-# == Schema Information
-#
-# Table name: teachers
-#
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  name       :string
-#  image      :string
-#  bio        :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 class Teacher < ActiveRecord::Base
-  belongs_to :user
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :event_teachers
+  has_many :events, through: :event_teachers
+  has_many :points
 end
