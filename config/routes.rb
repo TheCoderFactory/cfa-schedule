@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   }
 
   root "dashboard#index"
+
+  get "admin/dashboard"   =>  "dashboard#admin"
 end

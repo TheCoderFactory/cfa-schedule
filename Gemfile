@@ -16,6 +16,7 @@ gem 'materialize-sass'
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
+  gem 'quiet_assets'
 end
 
 group :development do
