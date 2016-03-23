@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'materialize-sass'
+gem 'simple_form'
 
 group :development, :test do
   gem 'sqlite3'
