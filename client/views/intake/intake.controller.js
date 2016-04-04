@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('IntakeCtrl', ['$location', 'Auth', function ($location, Auth) {
+  .controller('IntakeCtrl', ['$location', 'IntakeService', 'Auth', function ($location, IntakeService, Auth) {
 
     var vm = this;
 
@@ -19,4 +19,5 @@ angular.module('cfaDashboard')
         });
     };
 
+    vm.showAllIntakes();
   }]);
