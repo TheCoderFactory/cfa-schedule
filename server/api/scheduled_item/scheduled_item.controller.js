@@ -15,7 +15,22 @@ function handleError (res, err) {
  * @param req
  * @param res
  */
-exports.create = function (req, res) {
+exports.createItem = function (req, res) {
+  Scheduled_item.create(req.body, function (err, scheduled_item) {
+    if (err) { return handleError(res, err); }
+    res.status(201).json({
+      scheduled_item: _.omit(scheduled_item.toObject(), ['passwordHash', 'salt'])
+    });
+  });
+};
+
+/**
+ * Gets a Scheduled_item from the DB.
+ *
+ * @param req
+ * @param res
+ */
+exports.getItem = function (req, res) {
   Scheduled_item.create(req.body, function (err, scheduled_item) {
     if (err) { return handleError(res, err); }
     res.status(201).json({
