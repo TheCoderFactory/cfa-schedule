@@ -40,7 +40,7 @@ module.exports = {
   bsync: function () {
     bsync.init({
       proxy: 'localhost:9000',
-      browser: process.env.BROWSER || 'google chrome',
+      browser: process.env.BROWSER || 'firefox',
       online: false,
       notify: false,
       watchOptions: {
