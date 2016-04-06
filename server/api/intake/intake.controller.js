@@ -16,16 +16,25 @@ function handleError (res, err) {
  * @param res
  */
 exports.create = function (req, res) {
-  Intake.create(req.body, function (err, intake) {
-    if (err) { return handleError(res, err); }
-    res.status(201).json({
-      intake: _.omit(intake.toObject(), ['passwordHash', 'salt'])
-    });
+  var intake = new Intake ({
+    name: req.body.name,
+    start: req.body.start,
+    end: req.body.end,
+    colour: req.body.colour,
+    image: req.body.image,
+    _term_id: []
+
   });
+
+  intake.save(function (err, data) {
+    if (err) throw err;
+
+    res.json(data);
+  })
 };
 
-exports.getIntake = function (req, res) {
-  Intake.findById(req.intake._id, function (err, intake) {
+exports.getIntakes = function (req, res) {
+  Intake.find(function (err, intake) {
     if (err) { return handleError(res, err); }
     if (!intake) { return res.json(401); }
     res.status(200).json(intake);

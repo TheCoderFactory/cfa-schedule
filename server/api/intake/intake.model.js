@@ -11,3 +11,5 @@ var IntakeSchema = new Schema({
   image: {type: String, required: true},
   _term_id: [{type: mongoose.Schema.Types.ObjectId, ref:'Term'}]
 });
+
+module.exports = mongoose.model('Intake', IntakeSchema);

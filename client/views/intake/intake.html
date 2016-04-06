@@ -1,6 +1,72 @@
-<div>
-  {{vm.name}}
+<div class=" col-md-4">
+	<h1>Create Intake</h1>
+	<form ng-submit="vm.createIntake()">
+	  <div class="form-group">
+	    <label for="nameInput">Name</label>
+	    <input ng-model="vm.formIntakeData.name" type="text" class="form-control" id="nameInput" placeholder="Name">
+	  </div>
+	  
+
+	  <div>
+	  	<label for="startDateInput">Start Date</label>
+      <div class="input-group">
+	      
+	      <input ng-model="vm.formIntakeData.start" type="text"
+	      uib-datepicker-popup="mediumDate"
+	      is-open="vm.startDatePickerIsOpen"
+	      ng-click="vm.valuationDatePickerOpen()"
+	      class="form-control" id="startDateInput" required>
+	      <span class="input-group-btn">
+	        <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'start')">
+	          <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+	        </button>
+	      </span>
+      </div>
+    </div>
+
+    <div>
+	  	<label for="endDateInput">End Date</label>
+      <div class="input-group">
+	      
+	      <input ng-model="vm.formIntakeData.end" type="text"
+	      uib-datepicker-popup="mediumDate"
+	      is-open="vm.endDatePickerIsOpen"
+	      ng-click="vm.valuationDatePickerOpen()"
+	      class="form-control" id="endDateInput" required>
+	      <span class="input-group-btn">
+	        <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'end')">
+	          <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+	        </button>
+	      </span>
+      </div>
+    </div>
+
+	 
+	  <div class="form-group">
+	    <label for="colorInput">Colour</label>
+	    <input ng-model="vm.formIntakeData.colour" type="text" class="form-control" id="colorInput" placeholder="Colour">
+	  </div>
+	  <div class="form-group">
+	    <label for="imageInput">Image</label>
+	    <input ng-model="vm.formIntakeData.image" type="text" class="form-control" id="imageInput">
+	  </div>
+	  
+		
+
+	  <button type="submit" class="btn btn-default">Submit</button>
+	</form>
 </div>
-<div ng-repeat="intake in vm.intakes">
-  <h2><a href="/intake/{{intake._id}}">{{intake.name}}</a></h2>
+
+<!-- Intakes list -->
+<div class="col-md-offset-1 col-md-6">
+	<h1>Intakes</h1>
+	<div class="row" ng-repeat="intake in vm.intakes | orderBy:reverse">
+	  <div class="col-md-12 well">
+	  <h5 align="center"><a href="/intake/{{intake._id}}">{{intake.name}}</a></h5>
+	  <p><strong>Start: </strong>{{intake.start}}</p>
+	  <p><strong>end: </strong>{{intake.end}}</p>
+	  <p><strong>Colour: </strong>{{intake.colour}}</p>
+
+	  </div>
+	</div>
 </div>

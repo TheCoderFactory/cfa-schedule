@@ -3,7 +3,8 @@
 angular.module('cfaDashboard', [
   'ngRoute',
   'ngCookies',
-  'btford.socket-io'
+  'btford.socket-io',
+  'ui.bootstrap'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
 
