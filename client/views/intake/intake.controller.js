@@ -41,13 +41,18 @@ angular.module('cfaDashboard')
       console.log(vm.formIntakeData);
       IntakeService.createIntake(vm.formIntakeData)
         .then(function (intake) {
-          console.log(intake);
+          var _id = intake.data._id;
           // add to array if not there i.e. created intake
-          console.log(intake.data);
-          console.log(vm.intakes.indexOf(intake.data));
-
-          if (intake.edited = false){
+          // fogure out cleaner way to do this --> check if intake is in array
+          var edited = _.map(vm.intakes, function (intake) { 
+            if (intake._data === _id) {
+              return intake;
+            }
+          }).length;
+          
+          if (edited < 1){
             vm.intakes.push(intake.data);
+            console.log(vm.intakes);
           }
           // purge form
           vm.formIntakeData = {};
