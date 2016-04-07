@@ -4,6 +4,7 @@ var _ = require('lodash');
 
 var authService = require('../../auth/auth.service');
 var Intake = require('./intake.model');
+var errorHandler = require('../../error/error-handling');
 
 function handleError (res, err) {
   return res.status(500).send(err);
@@ -16,21 +17,48 @@ function handleError (res, err) {
  * @param res
  */
 exports.create = function (req, res) {
-  var intake = new Intake ({
-    name: req.body.name,
-    start: req.body.start,
-    end: req.body.end,
-    colour: req.body.colour,
-    image: req.body.image,
-    _term_id: []
+  
 
-  });
+  // Check if intake already exists --> either way send back the object
+  if (req.body._id) {
+    // if there is a id then this an update
+    Intake.findByIdAndUpdate(req.body._id, {
+      name: req.body.name,
+      start: req.body.start,
+      end: req.body.end,
+      colour: req.body.colour,
+      image: req.body.image,
+      _term_id: []
 
-  intake.save(function (err, data) {
-    if (err) throw err;
+    }, function (err, intake) {
+      if (err) 
+        errorHandler.handle(res, err, 404);
+      else {
+        intake.edited = true;
+        res.json(intake);
+      }
+    });
+  } else {
+    var intake = new Intake ({
+      name: req.body.name,
+      start: req.body.start,
+      end: req.body.end,
+      colour: req.body.colour,
+      image: req.body.image,
+      _term_id: []
 
-    res.json(data);
-  })
+    });
+    // if there is not an id save it
+    intake.save(function (err, intake) {
+      if (err) 
+        errorHandler.handle(res, err, 404);
+      else {
+        intake.edited = false;
+        res.json(intake);
+      }
+    });
+  }
+
 };
 
 exports.getIntakes = function (req, res) {

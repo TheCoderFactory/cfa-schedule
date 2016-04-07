@@ -5,12 +5,23 @@ angular.module('cfaDashboard')
 
     var vm = this;
     vm.formIntakeData = {};
+    vm.showDetailsFor = [];
     vm.startDatePickerIsOpen = false;
     vm.endDatePickerIsOpen = false;
 
     angular.extend(vm, {
       name: 'IntakeCtrl'
     });
+
+    vm.showDetails = function (_id) {
+      vm.showDetailsFor.push(_id);
+      console.log(vm.showDetailsFor);
+    };
+
+    vm.hideDetails = function (_id) {
+      vm.showDetailsFor = _.without(vm.showDetailsFor, _id);
+      console.log(vm.showDetailsFor);
+    };
 
     vm.valuationDatePickerOpen = function ($event, whichDate) {
       if ($event) {
@@ -26,11 +37,18 @@ angular.module('cfaDashboard')
       };
 
     vm.createIntake = function () {
+      //edit uses the same as create, but sends the id along for the ride!
       console.log(vm.formIntakeData);
       IntakeService.createIntake(vm.formIntakeData)
         .then(function (intake) {
           console.log(intake);
-          vm.intakes.push(intake.data);
+          // add to array if not there i.e. created intake
+          console.log(intake.data);
+          console.log(vm.intakes.indexOf(intake.data));
+
+          if (intake.edited = false){
+            vm.intakes.push(intake.data);
+          }
           // purge form
           vm.formIntakeData = {};
         })  
@@ -49,6 +67,10 @@ angular.module('cfaDashboard')
           vm.error = err;
         });
     };
+
+    vm.editIntake = function (intake) {
+      vm.formIntakeData = intake;
+    }
 
     vm.showAllIntakes();
   }]);

@@ -5,7 +5,12 @@ angular.module('cfaDashboard')
 
     var service = {};
 
-    service.createIntake = function (formIntakeData) {
+    service.createIntake = function (formIntakeData, _id) {
+
+      if (_id) {
+        formIntakeData[id] = _id;
+      }
+
       var deferred = $q.defer();
       $http.post('/api/intakes/create', formIntakeData)
         .then(function (res) {
