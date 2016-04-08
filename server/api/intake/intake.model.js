@@ -8,7 +8,7 @@ var IntakeSchema = new Schema({
   start: {type: Date, required: true},
   end: {type: Date, required: true},
   colour: {type: String, required: true},
-  image: {type: String, required: true},
+  image: {type: String},
   _term_id: [{type: mongoose.Schema.Types.ObjectId, ref:'Term'}]
 });
 

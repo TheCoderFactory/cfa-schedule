@@ -1,23 +1,41 @@
-<div class=" col-md-4">
+<!-- Create/Edit Intakes -->
+<div class=" col-md-6">
 	<h1 ng-if="vm.formIntakeData._id === undefined">Create Intake</h1>
 	<h1 ng-if="vm.formIntakeData._id !== undefined">Edit Intake</h1> 
 	<a ng-if="vm.formIntakeData._id !== undefined" ng-click="vm.formIntakeData = {}">Create Intake</a>
 	<form ng-submit="vm.createIntake()">
-	  <div class="form-group">
+	  <!-- Name -->
+	  <div class="form-group col-md-6">
 	    <label for="nameInput">Name</label>
 	    <input ng-model="vm.formIntakeData.name" type="text" class="form-control" id="nameInput" placeholder="Name">
 	  </div>
 	  
+	  <!-- Colour -->
+	  <div class="form-group col-md-6">
+	    <label for="colorInput">Colour</label>
+	    <input ng-model="vm.formIntakeData.colour" type="text" class="form-control" id="colorInput" placeholder="Colour">
+	  </div>
 
-	  <div>
-	  	<label for="startDateInput">Start Date</label>
+		<hr>
+
+		<!-- Term selection -->
+		<!-- Add Term -->
+		<label class="col-md-12"><h3>Terms<span class="glyphicon glyphicon-plus" ng-click="vm.addTerm()"></span></h3></label>
+		<!-- Name -->
+	  <div class="form-group col-md-12">
+	    <label for="nameInput">Name</label>
+	    <input ng-model="vm.term.name" type="text" class="form-control" id="nameInput" placeholder="Name">
+	  </div>
+
+		<!-- Start Date -->
+	  <div class="col-md-6">
+	  	<label for="startDateInput">Start</label>
       <div class="input-group">
-	      
-	      <input ng-model="vm.formIntakeData.start" type="text"
+	      <input ng-model="vm.term.start" type="text"
 	      uib-datepicker-popup="mediumDate"
 	      is-open="vm.startDatePickerIsOpen"
 	      ng-click="vm.valuationDatePickerOpen()"
-	      class="form-control" id="startDateInput" required>
+	    	class="form-control" id="startDateInput" required>
 	      <span class="input-group-btn">
 	        <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'start')">
 	          <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
@@ -26,11 +44,11 @@
       </div>
     </div>
 
-    <div>
-	  	<label for="endDateInput">End Date</label>
+    <!-- End Date -->
+    <div class="col-md-6">
+    	<label for="endDateInput">End</label>
       <div class="input-group">
-	      
-	      <input ng-model="vm.formIntakeData.end" type="text"
+	      <input ng-model="vm.term.end" type="text"
 	      uib-datepicker-popup="mediumDate"
 	      is-open="vm.endDatePickerIsOpen"
 	      ng-click="vm.valuationDatePickerOpen()"
@@ -43,25 +61,36 @@
       </div>
     </div>
 
-	 
-	  <div class="form-group">
-	    <label for="colorInput">Colour</label>
-	    <input ng-model="vm.formIntakeData.colour" type="text" class="form-control" id="colorInput" placeholder="Colour">
-	  </div>
-	  <div class="form-group">
-	    <label for="imageInput">Image</label>
-	    <input ng-model="vm.formIntakeData.image" type="text" class="form-control" id="imageInput">
-	  </div>
-	  
-		
+    <p align="center" class="row"></p>
 
-	  <button ng-if="vm.formIntakeData._id === undefined" type="submit" class="btn btn-default">Create</button>
-	  <button ng-if="vm.formIntakeData._id !== undefined" type="submit" class="btn btn-default">Edit</button>
+		<table ng-if="vm.formIntakeData.terms.length > 0" class="table table-striped table-hover ">
+		  <thead>
+		    <tr>
+		      <th>Term Name</th>
+		      <th>Start</th>
+		      <th>End</th>
+		      <th>Remove</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr ng-class="termItem" ng-click="vm.editTerm(term)" ng-repeat = "term in vm.formIntakeData.terms">
+		      <td>{{term.name}}</td>
+		      <td>{{term.start | date: 'longDate'}}</td>
+		      <td>{{term.end | date: 'longDate'}}</td>
+		      <td><span ng-mouseover="termItem = 'trashHover'" ng-mouseleave="termItem = ''" ng-click="vm.removeTerm($event)" class="glyphicon glyphicon-trash"></span></td>
+		    </tr>
+	   </tbody>
+   </table>
+
+		<hr>
+	  
+	  <button ng-if="vm.formIntakeData._id === undefined" type="submit" class="btn btn-lg btn-block">Create Intake</button>
+	  <button ng-if="vm.formIntakeData._id !== undefined" type="submit" class="btn btn-lg btn-block">Edit Intake</button>
 	</form>
 </div>
 
 <!-- Intakes list -->
-<div class="col-md-offset-1 col-md-6">
+<div class="col-md-offset-1 col-md-5">
 	<h1>Intakes</h1>
 	<div class="row" ng-repeat="intake in vm.intakes | orderBy:reverse">
 		<div class="panel panel-default">

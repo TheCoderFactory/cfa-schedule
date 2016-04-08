@@ -5,13 +5,34 @@ angular.module('cfaDashboard')
 
     var vm = this;
     vm.formIntakeData = {};
+    vm.formIntakeData.terms = [];
     vm.showDetailsFor = [];
     vm.startDatePickerIsOpen = false;
     vm.endDatePickerIsOpen = false;
+    vm.term = {};
 
     angular.extend(vm, {
       name: 'IntakeCtrl'
     });
+
+    vm.addTerm = function () {
+      vm.formIntakeData.terms.push({
+        name: vm.term.name,
+        start: vm.term.start,
+        end: vm.term.end
+      });
+      //purge term
+      vm.term = {};
+    };
+
+    vm.removeTerm = function ($event) {
+      console.log('Deleting');
+      $event.stopPropagation();
+    };
+
+    vm.editTerm = function (term) {
+      console.log(term);
+    };
 
     vm.showDetails = function (_id) {
       vm.showDetailsFor.push(_id);
