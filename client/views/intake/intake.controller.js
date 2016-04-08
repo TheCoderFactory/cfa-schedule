@@ -15,18 +15,23 @@ angular.module('cfaDashboard')
       name: 'IntakeCtrl'
     });
 
+    vm.formValidation = function (data) {
+      //put input validation here
+    };
+
     vm.addTerm = function () {
+      console.log(vm.formValidation(vm.term));
       vm.formIntakeData.terms.push({
         name: vm.term.name,
         start: vm.term.start,
         end: vm.term.end
       });
-      //purge term
+      //purge term fields
       vm.term = {};
     };
 
-    vm.removeTerm = function ($event) {
-      console.log('Deleting');
+    vm.removeTerm = function ($event, term) {
+      vm.formIntakeData.terms = _.without(vm.formIntakeData.terms, term);
       $event.stopPropagation();
     };
 

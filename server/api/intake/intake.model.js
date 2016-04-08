@@ -5,11 +5,8 @@ var Schema = mongoose.Schema;
 
 var IntakeSchema = new Schema({
   name: {type: String, required: true},
-  start: {type: Date, required: true},
-  end: {type: Date, required: true},
   colour: {type: String, required: true},
-  image: {type: String},
-  _term_id: [{type: mongoose.Schema.Types.ObjectId, ref:'Term'}]
+  terms: [{name: String, start: Date, end: Date}]
 });
 
 module.exports = mongoose.model('Intake', IntakeSchema);

@@ -24,11 +24,8 @@ exports.create = function (req, res) {
     // if there is a id then this an update
     Intake.findByIdAndUpdate(req.body._id, {
       name: req.body.name,
-      start: req.body.start,
-      end: req.body.end,
       colour: req.body.colour,
-      image: req.body.image,
-      _term_id: []
+      terms: req.body.terms
 
     }, function (err, intake) {
       if (err) 
@@ -41,11 +38,8 @@ exports.create = function (req, res) {
   } else {
     var intake = new Intake ({
       name: req.body.name,
-      start: req.body.start,
-      end: req.body.end,
       colour: req.body.colour,
-      image: req.body.image,
-      _term_id: []
+      terms: req.body.terms
 
     });
     // if there is not an id save it
