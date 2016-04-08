@@ -44,8 +44,8 @@ angular.module('cfaDashboard')
           var _id = intake.data._id;
           // add to array if not there i.e. created intake
           // fogure out cleaner way to do this --> check if intake is in array
-          var edited = _.map(vm.intakes, function (intake) { 
-            if (intake._data === _id) {
+          var edited = _.filter(vm.intakes, function (intake) { 
+            if (intake._id === _id) {
               return intake;
             }
           }).length;
