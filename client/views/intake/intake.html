@@ -2,7 +2,7 @@
 <div class=" col-md-6">
 	<h1 ng-if="vm.formIntakeData._id === undefined">Create Intake</h1>
 	<h1 ng-if="vm.formIntakeData._id !== undefined">Edit Intake</h1> 
-	<a ng-if="vm.formIntakeData._id !== undefined" ng-click="vm.formIntakeData = {}">Create Intake</a>
+	<!-- <a ng-if="vm.formIntakeData._id !== undefined" ng-click="vm.formIntakeData = {}">Create Intake</a> -->
 	<form ng-submit="vm.createIntake()">
 	  <!-- Name -->
 	  <div class="form-group col-md-6">
@@ -62,7 +62,7 @@
     </div>
 
     <!-- Add Term -->
-    <p align="center" ng-click="vm.addTerm()"><a class="addTermLink">Add term</a></p>
+    <a ng-click="vm.addTerm()" align-"center" class="addTermLink">Add term</a>
 
     <!-- Term table -->
 		<table ng-if="vm.formIntakeData.terms.length > 0" class="table table-striped table-hover ">
@@ -88,7 +88,7 @@
 		<hr>
 	  
 	  <button ng-if="vm.formIntakeData._id === undefined" type="submit" class="btn btn-lg btn-block">Create Intake</button>
-	  <button ng-if="vm.formIntakeData._id !== undefined" type="submit" class="btn btn-lg btn-block">Edit Intake</button>
+	  <button ng-if="vm.formIntakeData._id !== undefined" type="submit" class="btn btn-lg btn-block">Save Changes</button>
 	</form>
 </div>
 
@@ -101,7 +101,7 @@
 		  <div class="panel-body intakePanel">
 		    <h3 class="panel-title intakePanelElement"><a href="/intake/{{intake._id}}">{{intake.name}}</a></h3>
 		    <div class="intakePanelElement">(<a ng-click="vm.editIntake(intake)">Edit</a>)</div>
-		    <div class="circle intakePanelElement" ng-style="{'background': intake.colour}" ></div>
+		    <div class="circle intakePanelElement col-md-offset-8" ng-style="{'background': intake.colour}" ></div>
 		  </div>
 		</div>
 
