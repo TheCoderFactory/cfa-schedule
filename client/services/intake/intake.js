@@ -34,5 +34,17 @@ angular.module('cfaDashboard')
         return deferred.promise;
     }
 
+    service.getIntake = function (_id) {
+      var deferred = $q.defer();
+      $http.get('/api/intakes/' + _id)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    }
+
     return service;
   }]);

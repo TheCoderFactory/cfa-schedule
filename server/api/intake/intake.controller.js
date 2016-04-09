@@ -56,7 +56,15 @@ exports.create = function (req, res) {
 };
 
 exports.getIntakes = function (req, res) {
-  Intake.find(function (err, intake) {
+  Intake.find(function (err, intakes) {
+    if (err) { return handleError(res, err); }
+    if (!intakes) { return res.json(401); }
+    res.status(200).json(intakes);
+  });
+};
+
+exports.getIntake = function (req, res) {
+  Intake.findById({_id: req.params.id}, function (err, intake) {
     if (err) { return handleError(res, err); }
     if (!intake) { return res.json(401); }
     res.status(200).json(intake);
