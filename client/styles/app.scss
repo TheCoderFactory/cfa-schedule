@@ -1,3 +1,28 @@
 body {
   font-family: sans-serif;
 }
+
+.circle {
+	width: 30px;
+	height: 30px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.trashHover {
+	background-color: #ffe6e6 !important;
+}
+
+.intakePanel {
+	align-items: center !important;
+	display: flex;
+}
+
+.intakePanelElement {
+	padding-left: 5px;
+}
+
+.addTermLink {
+	margin-top: 10px !important;
+}

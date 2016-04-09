@@ -6,8 +6,7 @@
 
 var gulp        = require('gulp');
 var chalk       = require('chalk');
-var plumber     = require('gulp-plumber');
-var mocha       = require('gulp-mocha');
+var KarmaServer = require('karma').Server;
 
 /**
  * Log. With options.
@@ -28,19 +27,19 @@ function testServer (done) {
 
   log('Running server tests...', { padding: true });
 
-  gulp.src('server/**/*.spec.js', { read: false })
-    .pipe(plumber())
-    .pipe(mocha({ reporter: 'spec' }))
-    .once('error', function (err) { done(err); })
-    .once('end', function () { done(0); });
+  done();
+
 }
 
 function testClient (done) {
 
   log('Running client tests...', { padding: true });
 
-  done();
+  var server = new KarmaServer({
+    configFile: __dirname + '/../karma.conf.js'
+  }, done);
 
+  server.start();
 }
 
 exports.test = function (done) {
