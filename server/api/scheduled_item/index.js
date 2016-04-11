@@ -5,8 +5,8 @@ var router = express.Router();
 var controller = require('./scheduled_item.controller');
 var auth = require('../../auth/auth.service');
 
-router.get('/:id', auth.isAuthenticated(), controller.getItem);
+router.get('/:intakeId', auth.isAuthenticated(), controller.getIntakeItems);
+router.get('/', auth.isAuthenticated(), controller.getAllItems);
 router.post('/create', auth.isAuthenticated(), controller.create);
-router.post('/', auth.isAuthenticated(), controller.getItems);
 
 module.exports = router;

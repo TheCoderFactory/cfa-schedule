@@ -58,23 +58,20 @@ exports.create = function (req, res) {
 
 };
 
-// Get all scheduled items
-exports.getItems = function (req, res) {
-  if (req.params.intakeId) {
-    scheduledItem.find({_intakeId: req.intakeId }, function (err, intakes) {
-      if (err) { return handleError(res, err); }
-      if (!intakes) { return res.json(401); }
-      res.status(200).json(intakes);
-    });
-  }else {
-    scheduledItem.find(function (err, intakes) {
-      if (err) { return handleError(res, err); }
-      if (!intakes) { return res.json(401); }
-      res.status(200).json(intakes);
-    });
-  }
+// Get all scheduled items for an intake
+exports.getIntakeItems = function (req, res) {
+  ScheduledItem.find({_intakeId: req.params.intakeId}, function (err, scheduledItems) {
+    if (err) { return handle(res, err); }
+    res.status(200).json(scheduledItems);
+  });
+};
 
-  
+// Get all scheduled items
+exports.getAllItems = function (req, res) {
+  ScheduledItem.find(function (err, scheduledItems) {
+    if (err) { return handle(res, err); }
+    res.status(200).json(scheduledItems);
+  });
 };
 
 /**

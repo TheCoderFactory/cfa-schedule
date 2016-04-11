@@ -1,3 +1,13 @@
 <div ng-repeat="scheduledItem in scheduledItems">
-	{{scheduledItem.name}}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			{{scheduledItem.name}}
+		</div>
+		<div class="panel-body">
+			<p><strong>Description:</strong></p>
+			<p>{{scheduledItem.description}}</p>
+			
+		</div>
+	</div>
+
 </div>

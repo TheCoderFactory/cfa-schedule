@@ -22,9 +22,11 @@ angular.module('cfaDashboard')
     });
 
     //Get intakes scheduled items -->pass Id to only get this intakes items
+    console.log($routeParams);
     ScheduledItemService.getScheduledItems($routeParams.id)
       .then(function (scheduledItems) {
-        vm.scheduledItems = scheduledItems;
+        vm.scheduledItems = scheduledItems.data;
+        console.log(scheduledItems);
       })  
       .catch(function (err) {
         vm.error = err;
