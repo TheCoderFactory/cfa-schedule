@@ -22,9 +22,10 @@ angular.module('cfaDashboard')
         return deferred.promise;
     }
 
-    service.getScheduledItems = function () {
+    service.getScheduledItems = function (intakeId) {
+      var intakeId = intakeId || null;
       var deferred = $q.defer();
-      $http.get('/api/scheduled_items')
+      $http.get('/api/scheduled_items', intakeId)
         .then(function (res) {
           deferred.resolve(res);
         })

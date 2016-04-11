@@ -7,5 +7,6 @@ var auth = require('../../auth/auth.service');
 
 router.get('/:id', auth.isAuthenticated(), controller.getItem);
 router.post('/create', auth.isAuthenticated(), controller.create);
+router.post('/', auth.isAuthenticated(), controller.getItems);
 
 module.exports = router;

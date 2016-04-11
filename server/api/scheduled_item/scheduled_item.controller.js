@@ -4,6 +4,7 @@ var _ = require('lodash');
 
 var authService = require('../../auth/auth.service');
 var ScheduledItem = require('./scheduled_item.model');
+var errorHandler = require('../../error/error-handling');
 
 function handleError (res, err) {
   return res.status(500).send(err);
@@ -17,13 +18,13 @@ exports.create = function (req, res) {
     // if there is a id then this an update
     ScheduledItem.findByIdAndUpdate(req.body._id, {
       name: req.body.name,
-      description: req.body.colour,
+      description: req.body.description,
       location: req.body.location,
       start:req.body.start,
       end: req.body.end,
       type: req.body.type,
       _intakeId: req.body.intakeId,
-      _hostId: req.body.host_id
+      _hostId: req.body.hostId
 
     }, function (err, scheduledItem) {
       if (err) 
@@ -35,13 +36,13 @@ exports.create = function (req, res) {
   } else {
     var scheduledItem = new ScheduledItem ({
       name: req.body.name,
-      description: req.body.colour,
+      description: req.body.description,
       location: req.body.location,
       start:req.body.start,
       end: req.body.end,
       type: req.body.type,
       _intakeId: req.body.intakeId,
-      _hostId: req.body.host_id
+      _hostId: req.body.hostId
 
     });
     // if there is not an id save it
@@ -55,6 +56,25 @@ exports.create = function (req, res) {
     });
   }
 
+};
+
+// Get all scheduled items
+exports.getItems = function (req, res) {
+  if (req.params.intakeId) {
+    scheduledItem.find({_intakeId: req.intakeId }, function (err, intakes) {
+      if (err) { return handleError(res, err); }
+      if (!intakes) { return res.json(401); }
+      res.status(200).json(intakes);
+    });
+  }else {
+    scheduledItem.find(function (err, intakes) {
+      if (err) { return handleError(res, err); }
+      if (!intakes) { return res.json(401); }
+      res.status(200).json(intakes);
+    });
+  }
+
+  
 };
 
 /**
