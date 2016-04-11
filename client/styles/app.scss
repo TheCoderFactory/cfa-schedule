@@ -25,4 +25,19 @@ body {
 
 .addTermLink {
 	margin-top: 10px !important;
+	cursor: pointer;
+}
+
+.circleHeading {
+	display: inline-flex;
+	float: left;
+	padding-right: 5px;
+}
+
+.intakeHeading {
+	align-items: center !important;
+}
+
+a {
+	cursor: pointer !important;
 }

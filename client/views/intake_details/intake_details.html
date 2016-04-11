@@ -1,28 +1,37 @@
 
-<h1><div class="circle" ng-style="{'background': vm.intake.colour}" ></div> {{vm.intake.name}}</h1>
+<h1 class="intakeHeading"><div class="circle circleHeading" ng-style="{'background': vm.intake.colour}" ></div> {{vm.intake.name}}</h1>
 
-<!-- Intake Meta details -->
-<div class="col-md-8">
-	
+<div class="col-md-6">
+	<!-- Intake Meta details -->
+	<div class="col-md-12">
+	<p><a ng-click="vm.toggleCreateScheduleItem()">Create Schedule Item</a></p>
+		<p>Intake meta details</p>
+	</div>
+
+	<!-- Students -->
+	<div class="col-md-12">
+		<h3>Students</h3>
+		<student-table></student-table>
+	</div>
 </div>
 
-<div class="col-md-4">
-	<scheduled-items scheduled-items="vm.scheduledItems"></scheduled-items>
-</div>
 
-<div class="well col-md-6">
+<!-- Schedule items stuff -->
+
+<div class="col-md-6">
+	<!-- Create schedule item -->
+	<div ng-if="vm.createScheduleItem" class=" well col-md-12">
 		<h3 align="center">Create Scheduled Item</h3>
 		<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems"></create-schedule-item>
+	</div>
+	<!-- Schedule items list -->
+	<div class="row">
+		<h3 align="center">Scheduled items:</h3>
+		<div class="col-md-12">
+			<scheduled-items scheduled-items="vm.scheduledItems"></scheduled-items>
+		</div>
+	</div>
 </div>
 
-<!-- Intake students -->
-<div class="col-md-8">
-<h3>Students</h3>
-	<student-table></student-table>
-</div>
-
-
-
-	
 
 	

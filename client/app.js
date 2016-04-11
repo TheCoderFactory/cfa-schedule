@@ -3,6 +3,7 @@
 angular.module('cfaDashboard', [
   'ngRoute',
   'ngCookies',
+  'ngAnimate',
   'btford.socket-io',
   'ui.bootstrap',
   'colorpicker.module'
