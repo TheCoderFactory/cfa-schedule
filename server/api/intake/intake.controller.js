@@ -17,7 +17,6 @@ function handleError (res, err) {
  * @param res
  */
 exports.create = function (req, res) {
-  
 
   // Check if intake already exists --> either way send back the object
   if (req.body._id) {

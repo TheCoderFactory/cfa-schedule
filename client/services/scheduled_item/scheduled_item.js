@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .service('IntakeService', ['$q', '$http', function ($q, $http) {
+  .service('ScheduledItemService', ['$q', '$http', function ($q, $http) {
 
     var service = {};
 
-    service.createIntake = function (formIntakeData, _id) {
+    service.createScheduledItem = function (formScheduledItem, _id) {
 
       if (_id) {
-        formIntakeData[id] = _id;
+        formScheduledItem[id] = _id;
       }
 
       var deferred = $q.defer();
-      $http.post('/api/intakes/create', formIntakeData)
+      $http.post('/api/scheduled_items/create', formScheduledItem)
         .then(function (res) {
           deferred.resolve(res);
         })
@@ -22,9 +22,9 @@ angular.module('cfaDashboard')
         return deferred.promise;
     }
 
-    service.showAllIntakes = function () {
+    service.getScheduledItems = function () {
       var deferred = $q.defer();
-      $http.get('/api/intakes')
+      $http.get('/api/scheduled_items')
         .then(function (res) {
           deferred.resolve(res);
         })
@@ -34,9 +34,9 @@ angular.module('cfaDashboard')
         return deferred.promise;
     }
 
-    service.getIntake = function (_id) {
+    service.getScheduledItem = function (_id) {
       var deferred = $q.defer();
-      $http.get('/api/intakes/' + _id)
+      $http.get('/api/scheduled_items/' + _id)
         .then(function (res) {
           deferred.resolve(res);
         })
