@@ -5,7 +5,6 @@ var router = express.Router();
 var controller = require('./registration.controller');
 var auth = require('../../auth/auth.service');
 
-router.get('/:intakeId', auth.isAuthenticated(), controller.getUsersNotInIntake);
-router.get('/', auth.isAuthenticated(), controller.getAllUsers);
+router.post('/create', auth.isAuthenticated(), controller.create);
 
 module.exports = router;

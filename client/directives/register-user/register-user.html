@@ -3,8 +3,8 @@
 	<div class="row">
 		<div class="form-group col-md-6">
 			<label for="user">User</label>
-			<select ng-model="formRegisterUser.user" id="user" class="form-control" required>
-				<option ng-repeat="user in users">{{user.firstName}} {{user.lastName</option>
+			<select ng-model="formRegisterUser.userId" id="user" class="form-control" required>
+				<option value="{{user._id}}" ng-repeat="user in users">{{user.firstName}} {{user.lastName}}</option>
 			</select>
 		</div>
 
@@ -21,9 +21,9 @@
 	<!-- Intake: if this is on the intake page then use that intake id -->
 	<div ng-if="showIntakeList" class="form-group col-md-6">
 		<label for="scheduleItemIntake">Intake</label>
-		<input ng-model="formScheduledItem.intake" type="text" class="form-control" id="scheduleItemIntake" placeholder="Name" required>
+		<input ng-model="formScheduledItem.intakeId" type="text" class="form-control" id="scheduleItemIntake" placeholder="Name" required>
 	</div>
 
 	<button type="submit" class="btn btn-lg btn-block">Register User</button>
-	
+	{{users}}
 </form>

@@ -7,7 +7,8 @@ angular.module('cfaDashboard')
     vm.formScheduledItem = {};
     vm.scheduledItems = [];
     vm.createScheduleItem = false;
-
+    vm.formRegisterUser = {};
+    
     vm.students = [
       {
         image: 'image.png',
@@ -81,7 +82,7 @@ angular.module('cfaDashboard')
       });
 
     // Get users for directive --> pass intake Id to EXCLUDE the users already in intake
-    RegistrationService.getUsers($routeParams.id)
+    Auth.getUsers($routeParams.id)
       .then(function (users) {
         vm.users = users.data;
       })

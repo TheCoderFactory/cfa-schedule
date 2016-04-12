@@ -2,7 +2,7 @@
 
 angular.module('cfaDashboard')
   .service('IntakeService', ['$q', '$http', function ($q, $http) {
-
+    
     var service = {};
 
     service.createIntake = function (formIntakeData, _id) {

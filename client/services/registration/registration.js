@@ -5,18 +5,17 @@ angular.module('cfaDashboard')
 
     var service = {};
 
-    service.getUsers = function (intakeId) {
-      var intakeId = intakeId || '';
-      var deferred = $q.defer();
-      $http.get('/api/registration/' + intakeId)
-        .then(function (res) {
-          deferred.resolve(res);
-        })
-        .catch(function (err) {
-          deferred.reject(err.data);
-        });
-        return deferred.promise;
-    };
+    service.registerUser = function (formRegisterUser) {
+    	var deferred = $q.defer();
+    	$http.post('/api/registrations/create', formRegisterUser)
+    		.then(function (res) {
+    			deferred.resolve(res);
+    		})
+    		.catch(function (err) {
+    			deferred.reject(err.data);
+    		});
+    		return deferred.promise;
+    }
 
     return service;
   }]);

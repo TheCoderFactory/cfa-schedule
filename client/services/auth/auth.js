@@ -101,4 +101,18 @@ angular.module('cfaDashboard')
       return _user;
     };
 
+    this.getUsers = function (intakeId) {
+      var intakeId = intakeId || '';
+      console.log(intakeId);
+      var deferred = $q.defer();
+      $http.get('/api/users/' + intakeId)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    };
+
   });
