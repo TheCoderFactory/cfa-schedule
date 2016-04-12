@@ -8,6 +8,37 @@ angular.module('cfaDashboard')
     vm.scheduledItems = [];
     vm.createScheduleItem = false;
 
+    vm.students = [
+      {
+        image: 'image.png',
+        firstName: 'Simon',
+        lastName: 'Angell',
+        email: 'simon@example.com',
+        totalPoints: 200
+      },
+      {
+        image: 'image.png',
+        firstName: 'Simon',
+        lastName: 'Angell',
+        email: 'simon@example.com',
+        totalPoints: 200
+      },
+      {
+        image: 'image.png',
+        firstName: 'Simon',
+        lastName: 'Angell',
+        email: 'simon@example.com',
+        totalPoints: 200
+      },
+      {
+        image: 'image.png',
+        firstName: 'Simon',
+        lastName: 'Angell',
+        email: 'simon@example.com',
+        totalPoints: 200
+      },
+    ]
+
     vm.toggleCreateScheduleItem = function () {
       if (vm.createScheduleItem === true) {
         vm.createScheduleItem = false;
@@ -21,6 +52,7 @@ angular.module('cfaDashboard')
     IntakeService.getIntake($routeParams.id)
       .then(function (intake) {
         vm.intake = intake.data;
+        console.log(vm.intake);
       })
       .catch(function (err) {
         vm.error = err;

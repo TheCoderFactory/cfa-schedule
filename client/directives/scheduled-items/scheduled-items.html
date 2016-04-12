@@ -1,12 +1,30 @@
 <div ng-repeat="scheduledItem in scheduledItems">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			{{scheduledItem.name}}
+			{{scheduledItem.name}} ({{scheduledItem.type}})
 		</div>
 		<div class="panel-body">
-			<p><strong>Description:</strong></p>
-			<p>{{scheduledItem.description}}</p>
-			
+			<div class="row">
+				<div class="col-md-6">
+					<strong>Start: </strong>{{scheduledItem.start | date: 'MMM d, y h:mm a'}}
+				</div>
+				<div class="col-md-6">
+					<strong>End: </strong>{{scheduledItem.end | date: 'MMM d, y h:mm a'}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<strong>Location: </strong>{{scheduledItem.location}}
+				</div>
+				<div class="col-md-6">
+					<strong>Host: </strong>{{scheduledItem.host}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<strong>Description: </strong>
+					{{scheduledItem.description}}
+				</div>
 		</div>
 	</div>
 

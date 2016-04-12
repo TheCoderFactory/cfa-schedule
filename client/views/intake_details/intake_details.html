@@ -1,34 +1,42 @@
 
 <h1 class="intakeHeading"><div class="circle circleHeading" ng-style="{'background': vm.intake.colour}" ></div> {{vm.intake.name}}</h1>
 
-<div class="col-md-6">
-	<!-- Intake Meta details -->
-	<div class="col-md-12">
-	<p><a ng-click="vm.toggleCreateScheduleItem()">Create Schedule Item</a></p>
-		<p>Intake meta details</p>
+<div class="row">
+	<div class="col-md-6">
+		<!-- Intake Meta details -->
+		<div class="row">
+			<div class="col-md-12">
+
+			<p><a ng-click="vm.toggleCreateScheduleItem()">Create Schedule Item</a></p>
+				<h3>Terms</h3>
+				<term-table terms="vm.intake.terms"></term-table>
+			</div>
+		</div>
+		<!-- Students -->
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Students</h3>
+				<student-table students="vm.students"></student-table>
+			</div>
+		</div>
 	</div>
 
-	<!-- Students -->
-	<div class="col-md-12">
-		<h3>Students</h3>
-		<student-table></student-table>
-	</div>
-</div>
 
+	<!-- Schedule items stuff -->
 
-<!-- Schedule items stuff -->
-
-<div class="col-md-6">
-	<!-- Create schedule item -->
-	<div ng-if="vm.createScheduleItem" class=" well col-md-12">
-		<h3 align="center">Create Scheduled Item</h3>
-		<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems"></create-schedule-item>
-	</div>
-	<!-- Schedule items list -->
-	<div class="row">
-		<h3 align="center">Scheduled items:</h3>
-		<div class="col-md-12">
-			<scheduled-items scheduled-items="vm.scheduledItems"></scheduled-items>
+	<div class="col-md-6">
+		<!-- Create schedule item -->
+		<div ng-if="vm.createScheduleItem" class="fadeInOut well col-md-12">
+			<h3 align="center">Create Scheduled Item</h3>
+			<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems"></create-schedule-item>
+		</div>
+		<!-- Schedule items list -->
+		
+		<h3>Scheduled items</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<scheduled-items scheduled-items="vm.scheduledItems"></scheduled-items>
+			</div>
 		</div>
 	</div>
 </div>
