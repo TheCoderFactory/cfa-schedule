@@ -1,17 +1,35 @@
-<div>
-  {{ vm.name }}
+
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">
+    <form ng-submit="vm.signup()">
+      <input class="form-control" type="text"
+             ng-model="vm.user.firstName"
+             placeholder="first name" required>
+      <input class="form-control" type="text"
+             ng-model="vm.user.lastName"
+             placeholder="last name" required>
+      <input class="form-control" type="text"
+             ng-model="vm.user.image"
+             placeholder="image">
+      <input class="form-control" type="email"
+             ng-model="vm.user.email"
+             placeholder="email">
+      <input class="form-control" type="password"
+             ng-model="vm.user.password"
+             placeholder="password">
+
+    <div class="checkbox">
+      <label>
+        <input ng-model="vm.user.admin" type="checkbox" value="vm.user.admin">
+          Admin
+      </label>
+    </div>
+      
+      <button class="btn btn-default" type="submit">
+        signup
+      </button>
+    </form>
+  </div>
 </div>
-
-<form ng-submit="vm.signup()">
-  <input type="email"
-         ng-model="vm.user.email"
-         placeholder="email">
-  <input type="password"
-         ng-model="vm.user.password"
-         placeholder="password">
-  <button type="submit">
-    signup
-  </button>
-</form>
-
 <pre ng-if="vm.error">{{ vm.error | json }}</pre>
+{{vm.user}}

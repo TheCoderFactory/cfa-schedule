@@ -11,10 +11,26 @@
 			</div>
 		</div>
 		<!-- Students -->
+		<h3>Users</h3>
+		<p><a ng-click="vm.toggleRegisterUser()">Register a User</a></p>
+		<!-- Register User form -->
+		<div class="row">
+			<div ng-if="vm.registerUser" class="fadeInOut well col-md-12">
+				<h3 align="center">Register User</h3>
+				<register-user form-register-user="vm.formRegisterUser" intake-id="{{vm.intake._id}}"></register-user>
+			</div>
+		</div>
+		<!-- Teachers table -->
 		<div class="row">
 			<div class="col-md-12">
-				<h3>Students</h3>
-				<p><a ng-click="">Register a Student</a></p>
+				<h4>Teachers</h4>
+				<student-table students="vm.students"></student-table>
+			</div>
+		</div>
+		<!-- Students table -->
+		<div class="row">
+			<div class="col-md-12">
+				<h4>Students</h4>
 				<student-table students="vm.students"></student-table>
 			</div>
 		</div>

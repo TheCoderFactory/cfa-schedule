@@ -45,7 +45,14 @@ angular.module('cfaDashboard')
       }else {
         vm.createScheduleItem = true;
       }
-      console.log(vm.createScheduleItem);
+    };
+
+    vm.toggleRegisterUser = function () {
+      if (vm.registerUser === true) {
+        vm.registerUser = false;
+      }else {
+        vm.registerUser = true;
+      }
     };
 
     //Get intake data
@@ -74,5 +81,6 @@ angular.module('cfaDashboard')
         vm.error = err;
       });
 
+    // 
     
   }]);

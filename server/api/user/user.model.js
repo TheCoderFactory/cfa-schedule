@@ -5,10 +5,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  firstName: String,
-  lastName: String,
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: true},
   image: String,
-  admin: Boolean,
+  admin: {type: Boolean, required: true},
   _registrations: [{type: Schema.Types.ObjectId, ref: 'Registration', required: false}],
   email: String,
   passwordHash: { type: String, select: false },

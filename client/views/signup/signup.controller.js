@@ -12,7 +12,7 @@ angular.module('cfaDashboard')
       /**
        * User credentials
        */
-      user: { email: 'test@test.com', password: 'test' },
+      user: { email: 'test@test.com', password: 'test', admin: false },
 
       /**
        * Signup
