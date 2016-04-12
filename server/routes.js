@@ -5,6 +5,7 @@ var config = require('./config/environment');
 module.exports = function (app) {
 
   // API
+  app.use('/api/students', require('./api/student'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/scheduled_items', require('./api/scheduled_item'));
 

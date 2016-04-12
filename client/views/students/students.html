@@ -1,0 +1,23 @@
+<div>
+  {{ vm.name }}
+</div>
+<form ng-submit="createStudent(val)">
+  <input type="name"
+         ng-model="val"
+         placeholder="Name">
+  <button type="submit">
+    Create student
+  </button>
+</form>
+<div>
+	<table class="table table-striped">
+		<tr>
+			<th> Name </th>
+			<th> Stuff </th>
+		</tr>
+		<tr ng-repeat="student in students">
+			<td>{{student.name}}</td>
+		</tr>
+</div>
+
+<pre ng-if="vm.error">{{ vm.error | json }}</pre>
