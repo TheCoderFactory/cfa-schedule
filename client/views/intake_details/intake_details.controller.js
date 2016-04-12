@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('IntakeDetailsCtrl', ['$routeParams', 'IntakeService', 'Auth', 'ScheduledItemService', function ($routeParams, IntakeService, Auth, ScheduledItemService) {
+  .controller('IntakeDetailsCtrl', ['$routeParams', 'IntakeService', 'Auth', 'ScheduledItemService', 'RegistrationService', function ($routeParams, IntakeService, Auth, ScheduledItemService, RegistrationService) {
 
     var vm = this;
     vm.formScheduledItem = {};
@@ -70,8 +70,7 @@ angular.module('cfaDashboard')
       name: 'IntakeCtrl'
     });
 
-    //Get intakes scheduled items -->pass Id to only get this intakes items
-    console.log($routeParams);
+    //Get intakes scheduled items for directive -->pass intake Id to only get this intakes items
     ScheduledItemService.getScheduledItems($routeParams.id)
       .then(function (scheduledItems) {
         vm.scheduledItems = scheduledItems.data;
@@ -81,6 +80,12 @@ angular.module('cfaDashboard')
         vm.error = err;
       });
 
-    // 
-    
+    // Get users for directive --> pass intake Id to EXCLUDE the users already in intake
+    RegistrationService.getUsers($routeParams.id)
+      .then(function (users) {
+        vm.users = users.data;
+      })
+      .catch(function (err) {
+        vm.error = err;
+      });
   }]);

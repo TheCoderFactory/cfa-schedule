@@ -61,7 +61,7 @@ exports.create = function (req, res) {
 // Get all scheduled items for an intake
 exports.getIntakeItems = function (req, res) {
   ScheduledItem.find({_intakeId: req.params.intakeId}, function (err, scheduledItems) {
-    if (err) { return handle(res, err); }
+    if (err) { return handleError(res, err); }
     res.status(200).json(scheduledItems);
   });
 };
@@ -69,7 +69,7 @@ exports.getIntakeItems = function (req, res) {
 // Get all scheduled items
 exports.getAllItems = function (req, res) {
   ScheduledItem.find(function (err, scheduledItems) {
-    if (err) { return handle(res, err); }
+    if (err) { return handleError(res, err); }
     res.status(200).json(scheduledItems);
   });
 };

@@ -8,6 +8,7 @@ module.exports = function (app) {
   app.use('/api/users', require('./api/user'));
   app.use('/api/scheduled_items', require('./api/scheduled_item'));
   app.use('/api/intakes', require('./api/intake'));
+  app.use('/api/registrations', require('./api/registration'));
   
   // Auth
   app.use('/auth', require('./auth'));
