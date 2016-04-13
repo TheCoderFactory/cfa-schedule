@@ -10,6 +10,10 @@ angular.module('cfaDashboard')
       name: 'AwardsCtrl'
     });
 
+    vm.createAward = function(){
+    	AwardService.createAward(vm.awardData);
+    	vm.getAwards();
+    };
 
     vm.onCancelClick = function(award) {
       award.isEditing = false;
@@ -21,14 +25,10 @@ angular.module('cfaDashboard')
       // award.editAward = award;
     };
 
-    vm.createAward = function(){
-    	AwardService.createAward(vm.awardData);
-    	vm.getAwards();
-    };
-
     vm.editAward = function (award, awardData) {
       console.log('editAward being called');
       AwardService.editAward(award, awardData);
+      vm.awardData = {}; //Clear Cache
       vm.getAwards();
     }
 

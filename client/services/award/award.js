@@ -43,11 +43,19 @@ angular.module('cfaDashboard')
 		}	
 
 		this.editAward = function(award, awardData){
-			console.log('Editing: ' + award.name);
-			console.log('With: ' + awardData.name + ' ' + awardData.value);
-			$http.put(`/api/awards/${award._id}`, { name: awardData.name, value: awardData.value}).success( response => {
-				award.isEditing = false;
-			});
+			// console.log('Editing: ' + award.name);
+			// console.log('With: ' + awardData.name + ' ' + awardData.value);
+			var deferred = $q.defer();
+			$http.put(`/api/awards/${award._id}`, 
+				{ name: awardData.name, 
+					value: awardData.value
+				}).then(function (res) {
+	        deferred.resolve(res);
+	      })
+	      .catch(function (err) {
+	        deferred.reject(err.data);
+	      });
+	      return deferred.promise;
 		}
 
   }]);
