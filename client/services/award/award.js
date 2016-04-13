@@ -30,9 +30,9 @@ angular.module('cfaDashboard')
 	      return deferred.promise;
     }
 
-   	this.deleteAward = function (award) {
+   	this.deleteAward = function (id) {
    		var deferred = $q.defer();
-  		$http.delete(`/api/awards/${award._id}`)
+  		$http.delete(`/api/awards/${id}`)
 	      .then(function (res) {
 	        deferred.resolve(res);
 	      })
@@ -41,5 +41,13 @@ angular.module('cfaDashboard')
 	      });
 	      return deferred.promise;
 		}	
+
+		this.editAward = function(award, awardData){
+			console.log('Editing: ' + award.name);
+			console.log('With: ' + awardData.name + ' ' + awardData.value);
+			$http.put(`/api/awards/${award._id}`, { name: awardData.name, value: awardData.value}).success( response => {
+				award.isEditing = false;
+			});
+		}
 
   }]);

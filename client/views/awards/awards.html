@@ -1,35 +1,67 @@
-<div class="col-md-12">
+<div class="col-md-6">
 	<h1>Awards</h1>
-	<div class="row-fluid" ng-repeat="award in vm.awards">
-		<div class="panel panel-default col-md-6">
-		  <div class="panel-body">
-		  		<h3 class="panel-title col-md-3"><a href="/awards/{{award._id}}">{{award.name}}</a></h3>
-		  		<h3 class="panel-title col-md-3">{{award.value}}</h3>
-		    <a href="" ng-click="vm.deleteAward(award)">Remove</a>
-		    <a href="" ng-click="vm.editAward(award)">Edit</a>
-		  </div>
+	<div class="row" ng-repeat="award in vm.awards">
+		<div ng-if="!award.isEditing" class="panel panel-default">
+		  <div class="panel-heading">{{award.name}}</div>
+			  <div class="panel-body">Points: {{award.value}}</h3>
+			  	<div class="pull-right">
+						<button class="btn btn-info"
+						ng-click="vm.onEditClick(award)">
+							Edit
+						</button>
+						<button class="btn btn-danger"
+						ng-click="vm.deleteAward(award._id)">
+							Delete
+						</button>
+					</div>
+			  </div>
 		</div>
+	  <!-- Form to Edit an Award -->
+	  <div ng-if="award.isEditing">
+		  <form ng-if="award.isEditing" ng-submit="vm.editAward()">
+			  <input class="form-control"
+			      ng-value="award.name"
+			      ng-model="vm.awardData.name" />
+			 	<select class="form-control" ng-model="vm.awardData.value">
+					<option ng-repeat="n in [] | range:15" value="{{$index+1}}">{{$index+1}}</option>
+				</select>
+			</form>
+			<!-- Buttons to Edit an Award -->
+			<button ng-if="award.isEditing"
+			class="btn btn-primary"
+			ng-click="vm.editAward(award, vm.awardData)">
+				Save
+			</button>
+			<button ng-if="award.isEditing"
+			class="btn btn-default"
+			ng-click="vm.onCancelClick(award)">
+				Cancel
+			</button>
+			<br>
+		</div>
+					<br>
 	</div>
 </div>
-
-<h1>Create an Award</h1>
-<form ng-submit="vm.createAward()">
-  <!-- Name -->
-  <div class="form-group col-md-6">
-    <label for="nameInput">Name</label>
-    <input ng-model="vm.awardData.name" type="text" class="form-control" id="nameInput" placeholder="Name" required>
-  </div>
-  <!-- Points -->
- 	<!-- Below code uses a filter. Logic can be found in client/filters/range/range.js -->
-  <div class="form-group col-md-6">
-    <label for="valueInput">Value</label>
-    <select class="form-control" ng-model="vm.awardData.value">
-		<option  ng-repeat="n in [] | range:15" value="{{$index+1}}">{{$index+1}} 
-		</option>
-		</select>
-  </div>
-
-  <button class="btn btn-primary" type="submit">
-  	Create Award
-	</button>
-</form>
+<div class="col-md-6">
+	<h1>Create an Award</h1>
+	<form ng-submit="vm.createAward()">
+	  <!-- Name -->
+	  <div class="form-group col-md-6">
+	    <label for="nameInput">Name</label>
+	    <input ng-model="vm.awardData.name" type="text" class="form-control" id="nameInput" placeholder="Name" required>
+	  </div>
+	  <!-- Points -->
+	 	<!-- Below code uses a filter. Logic can be found in client/filters/range/range.js -->
+	  <div class="form-group col-md-6">
+	    <label for="valueInput">Value</label>
+	    <select class="form-control" ng-model="vm.awardData.value">
+				<option  ng-repeat="n in [] | range:15" value="{{$index+1}}">{{$index+1}}</option>
+			</select>
+	  </div>
+	 	<div class="form-group col-md-6">
+		  <button class="btn btn-primary" type="submit">
+		  	New Award
+			</button>
+		</div>
+	</form>
+</div>
