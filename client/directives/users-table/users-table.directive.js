@@ -6,7 +6,8 @@ angular.module('cfaDashboard')
 			restrict: 'E',
 			templateUrl: 'directives/users-table/users-table.html',
 			scope: {
-				users: '='
+				users: '=',
+				userType: '@'
 			},
 
 			link: function (scope, elem, attrs) {
