@@ -15,23 +15,27 @@
 		<p><a ng-click="vm.toggleRegisterUser()">Register a User</a></p>
 		<!-- Register User form -->
 		<div class="row">
-			<div ng-if="vm.registerUser" class="fadeInOut well col-md-12">
-				<h3 align="center">Register User</h3>
-				<register-user form-register-user="vm.formRegisterUser" intake-id="{{vm.intake._id}}" unregistered-users="vm.unregisteredUsers" registered-students="vm.registeredStudents" registered-teachers="vm.registeredTeachers"></register-user>
+			<div class="col-md-12">
+				<div ng-if="vm.registerUser" class="fadeInOut well">
+					<h3 align="center">Register User</h3>
+					<register-user form-register-user="vm.formRegisterUser" intake-id="{{vm.intake._id}}" unregistered-users="vm.unregisteredUsers" registered-students="vm.registeredStudents" registered-teachers="vm.registeredTeachers"></register-user>
+				</div>
 			</div>
 		</div>
 		<!-- Teachers table -->
 		<div class="row">
 			<div class="col-md-12">
 				<h4>Teachers</h4>
-				<registration-table users="vm.registeredTeachers"></registration-table>
+				<registration-table ng-if="vm.registeredTeachers.length > 0" users="vm.registeredTeachers"></registration-table>
+				<p ng-if="vm.registeredTeachers.length < 1">There are no teachers currently registered for this intake!</p>
 			</div>
 		</div>
 		<!-- Students table -->
 		<div class="row">
 			<div class="col-md-12">
 				<h4>Students</h4>
-				<registration-table users="vm.registeredStudents"></registration-table>
+				<registration-table ng-if="vm.registeredStudents.length > 0" users="vm.registeredStudents"></registration-table>
+				<p ng-if="vm.registeredStudents.length < 1">There are no students currently registered for this intake!</p>
 			</div>
 		</div>
 	</div>
