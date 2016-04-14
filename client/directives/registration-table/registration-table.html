@@ -1,0 +1,20 @@
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+    	<th>Image</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat = "user in users">
+      <td>image</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.totalPoints}}</td>
+    </tr>
+	</tbody>
+</table>

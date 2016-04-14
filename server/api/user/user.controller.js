@@ -38,3 +38,47 @@ exports.getMe = function (req, res) {
     res.status(200).json(user);
   });
 };
+
+exports.getUsersNotInIntake = function (req, res) {
+  console.log(req.params);
+  var intakeId = req.params.intakeId;
+  User
+    .find()
+    .populate({
+      path: '_registrations',
+    })
+    .exec(function (err, users) {
+
+      if (err) { return handleError(res, err); }
+      console.log(users);
+      users = _.filter(users, function (user) {
+        // return false if has intake in
+        var noIntake = _.every(user._registrations, function (reg) {
+          if (reg._intake.toString() === intakeId) {
+            return false;
+          } else {
+            return true;
+          }
+        });
+        return noIntake;
+      });
+
+      res.status(200).json(users);
+    })
+};
+
+exports.getUsersInIntake = function (req, res) {
+  User.find(function (err, users) {
+    if (err) { return handleError(res, err); }
+    res.status(200).json(users);
+  });
+};
+
+exports.getAllUsers = function (req, res) {
+  User.find(function (err, users) {
+    if (err) { return handleError(res, err); }
+    res.status(200).json(users);
+  });
+};
+
+
