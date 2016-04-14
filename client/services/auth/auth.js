@@ -101,11 +101,10 @@ angular.module('cfaDashboard')
       return _user;
     };
 
-    this.getUsers = function (intakeId) {
-      var intakeId = intakeId || '';
-      console.log(intakeId);
+    this.getUsers = function () {
+      
       var deferred = $q.defer();
-      $http.get('/api/users/' + intakeId)
+      $http.get('/api/users')
         .then(function (res) {
           deferred.resolve(res);
         })

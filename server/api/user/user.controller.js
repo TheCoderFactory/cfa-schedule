@@ -68,10 +68,12 @@ exports.getUsersNotInIntake = function (req, res) {
 };
 
 exports.getUsersInIntake = function (req, res) {
-  User.find(function (err, users) {
-    if (err) { return handleError(res, err); }
-    res.status(200).json(users);
-  });
+  var intakeRegistrations = req.registrations;
+  console.log('POPULATED REGS: ' + intakeRegistrations[0]);
+  
+  
+
+  
 };
 
 exports.getAllUsers = function (req, res) {

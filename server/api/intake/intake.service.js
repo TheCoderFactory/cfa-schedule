@@ -19,11 +19,14 @@ exports.hasIntake = function (req, res, next) {
 exports.getRegistrations = function (req, res, next) {
 	var intakeId = req.body.intakeId || req.params.intakeId;
 
-	Registration.find({_intake: intakeId}, function (err, registrations) {
-		if (err) { return next(err); }
-    if (!registrations) { return res.send(401); }
-		console.log('COMING FROM GET REG INTAKE SERVICE: ' + registrations);
-		req.registrations = registrations;
-		next()
-	});
+	Registration
+		.find({_intake: intakeId})
+		.populate('_user')
+		.exec(function (err, registrations) {
+			if (err) { return next(err); }
+	    if (!registrations) { return res.send(401); }
+			console.log('COMING FROM GET REG INTAKE SERVICE: ' + registrations);
+			req.registrations = registrations;
+			next()
+		});
 };

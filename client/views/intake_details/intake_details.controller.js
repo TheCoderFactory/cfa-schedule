@@ -9,37 +9,9 @@ angular.module('cfaDashboard')
     vm.createScheduleItem = false;
     vm.formRegisterUser = {};
     
-    vm.registeredStudents = [
+    vm.registeredStudents = [];
+    vm.registeredTeachers = [];
 
-      {
-        image: 'image.png',
-        firstName: 'Simon',
-        lastName: 'Angell',
-        email: 'simon@example.com',
-        totalPoints: 200
-      },
-      {
-        image: 'image.png',
-        firstName: 'Simon',
-        lastName: 'Angell',
-        email: 'simon@example.com',
-        totalPoints: 200
-      },
-      {
-        image: 'image.png',
-        firstName: 'Simon',
-        lastName: 'Angell',
-        email: 'simon@example.com',
-        totalPoints: 200
-      },
-      {
-        image: 'image.png',
-        firstName: 'Simon',
-        lastName: 'Angell',
-        email: 'simon@example.com',
-        totalPoints: 200
-      },
-    ]
 
     vm.toggleCreateScheduleItem = function () {
       if (vm.createScheduleItem === true) {
@@ -73,9 +45,18 @@ angular.module('cfaDashboard')
     });
 
     //Get registered students and teachers for intake
-    Auth.getUsers($routeParams.id)
-      .then(function (users) {
-        console.log(users);
+    RegistrationService.getIntakeRegistrations($routeParams.id)
+      .then(function (registrations) {
+        var registrations = registrations.data;
+        console.log(registrations);
+        // sort registrations into teachers and students
+        _.each(registrations, function (registration) {
+          if (registration.role === 'Teacher') {
+            vm.registeredTeachers.push(registration._user);
+          } else {
+            vm.registeredStudents.push(registration._user);
+          }
+        });
       })
       .catch(function (err) {
         vm.error = err;

@@ -7,6 +7,6 @@ var auth = require('../../auth/auth.service');
 var intakeService = require('../intake/intake.service.js');
 
 router.post('/create', auth.isAuthenticated(), intakeService.hasIntake , controller.create);
-
+router.get('/:intakeId',auth.isAuthenticated(), controller.intakeRegistrations);
 
 module.exports = router;

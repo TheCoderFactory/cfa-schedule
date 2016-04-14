@@ -17,5 +17,17 @@ angular.module('cfaDashboard')
     		return deferred.promise;
     }
 
+    service.getIntakeRegistrations = function (intakeId) {
+      var deferred = $q.defer();
+      $http.get('/api/registrations/' + intakeId)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    }
+
     return service;
   }]);

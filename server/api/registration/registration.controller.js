@@ -20,22 +20,42 @@ exports.create = function (req, res) {
 	
 	var registration = new Registration ({
 		role: req.body.role,
-		_intake: req.intake._id
+		_intake: req.intake._id,
+		_user: req.body.userId
 	});
 	console.log('THIS IS THE REG BEFORE SAVE: ' + registration);
 
 	registration.save(function (err, registration) {
 		if (err) { return handleError(res, err); }
 		console.log(registration);		
-		// add registration to the user
+		// add registration to the user as well
 		User.findOne({ _id:req.body.userId }, function (err, user) {
 			user._registrations.push(registration._id);
 			user.save(function (err, user) {
 				if (err) { return handleError(res, err); }
-				res.json(user);
+				Registration.findOne({_id: registration._id})
+					.populate('_user')
+					.exec(function (err, registration) {
+						if (err) { return handleError(res, err); }
+						res.json(registration);
+					})
+				
 			});
 		});
 
 	});
+};
+
+exports.intakeRegistrations = function (req, res) {
+	var intakeId = req.params.intakeId;
+
+	Registration
+		.find({_intake: intakeId})
+		.populate('_user')
+		.exec(function (err, registrations) {
+			if (err) { return next(err); }
+	    if (!registrations) { return res.send(401); }
+			res.json(registrations);
+		});
 };
 
