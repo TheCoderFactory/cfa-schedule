@@ -7,7 +7,7 @@ angular.module('cfaDashboard')
 			templateUrl: 'directives/register-user/register-user.html',
 			scope: {
 				intakeId: '@',
-				users: '=',
+				unregisteredUsers: '=',
 				formRegisterUser: '=',
 				registeredStudents: '=',
 				registeredTeachers: '='
