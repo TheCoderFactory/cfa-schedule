@@ -10,6 +10,7 @@ angular.module('cfaDashboard')
     vm.formRegisterUser = {};
     
     vm.registeredStudents = [
+
       {
         image: 'image.png',
         firstName: 'Simon',

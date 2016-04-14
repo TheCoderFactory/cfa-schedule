@@ -8,7 +8,6 @@ var errorHandler = require('../../error/error-handling');
 var User = require('../user/user.model.js');
 
 
-
 function handleError (res, err) {
   console.log(err);
   return res.status(500).send(err);
