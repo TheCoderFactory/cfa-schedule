@@ -77,10 +77,18 @@ exports.getUsersInIntake = function (req, res) {
 };
 
 exports.getAllUsers = function (req, res) {
-  User.find(function (err, users) {
-    if (err) { return handleError(res, err); }
-    res.status(200).json(users);
-  });
+  User
+    .find()
+    .populate({
+      path: '_registrations',
+      populate: {
+        path: '_intake'
+      }
+    })
+    .exec(function (err, users) {
+      if (err) { return handleError(res, err); }
+      res.status(200).json(users);
+    });
 };
 
 

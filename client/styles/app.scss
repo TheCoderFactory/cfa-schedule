@@ -10,6 +10,20 @@ body {
 	border-radius: 50px;
 }
 
+.circleHeading {
+	display: inline-flex;
+	float: left;
+	padding-right: 5px;
+}
+
+.circleTable {
+	width: 20px;
+	height: 20px;
+	display: inline-flex;
+	margin-left: 4px;
+	cursor: pointer;
+}
+
 .trashHover {
 	background-color: #ffe6e6 !important;
 }
@@ -28,11 +42,7 @@ body {
 	cursor: pointer;
 }
 
-.circleHeading {
-	display: inline-flex;
-	float: left;
-	padding-right: 5px;
-}
+
 
 .intakeHeading {
 	align-items: center !important;
