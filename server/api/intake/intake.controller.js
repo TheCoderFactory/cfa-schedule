@@ -26,14 +26,15 @@ exports.create = function (req, res) {
       colour: req.body.colour,
       terms: req.body.terms
 
-    }, function (err, intake) {
-      if (err) 
-        errorHandler.handle(res, err, 404);
-      else {
-        intake.edited = true;
-        res.json(intake);
-      }
-    });
+      }, 
+      function (err, intake) {
+        if (err) 
+          errorHandler.handle(res, err, 404);
+        else {
+          intake.edited = true;
+          res.json(intake);
+        }
+      });
   } else {
     var intake = new Intake ({
       name: req.body.name,

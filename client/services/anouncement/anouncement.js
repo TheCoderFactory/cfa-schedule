@@ -5,9 +5,10 @@ angular.module('cfaDashboard')
 
 		var service = {};
 
-		service.createAnouncement = function () {
+		service.createAnouncement = function (formAnouncementData) {
+			console.log(formAnouncementData);
 			var deferred = $q.defer();
-			$http.post('/api/anouncements/', formAnouncementData)
+			$http.post('/api/anouncements', formAnouncementData)
 				.then(function (res) {
 					deferred.resolve(res);
 				})	
@@ -15,7 +16,7 @@ angular.module('cfaDashboard')
 					deferred.reject(err.data);
 				});
 
-			return $q.promise;
+			return deferred.promise;
 		};
 
 		service.editAnouncement = function (anouncement) {
@@ -29,7 +30,7 @@ angular.module('cfaDashboard')
 					deferred.reject(err.data);
 				});
 
-			return $q.promise;
+			return deferred.promise;
 		};
 
 		service.deleteAnouncement = function (anouncement) {
@@ -43,12 +44,12 @@ angular.module('cfaDashboard')
 					deferred.reject(err.data);
 				});
 
-			return $q.promise;
+			return deferred.promise;
 		}
 
 		service.getAllAnouncements = function () {
 			var deferred = $q.defer();
-			$http.get('/api/anouncements/')
+			$http.get('/api/anouncements')
 				.then(function (res) {
 					deferred.resolve(res);
 				})
@@ -56,9 +57,9 @@ angular.module('cfaDashboard')
 					deferred.reject(err.data);
 				})
 
-			return $q.promise;
+			return deferred.promise;
 		}
 
-
+		return service;
 
 	}]);

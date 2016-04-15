@@ -1,1 +1,44 @@
 <h1>Anouncements</h1>
+
+<div class="row">
+	<div class="col-md-6">
+		<h1 ng-if="vm.formAnouncementData._id === undefined">Create Intake</h1>
+		<h1 ng-if="vm.formAnouncementData._id !== undefined">Edit Intake</h1> 
+
+		<form ng-submit="vm.createAnouncement()">
+		  <div class="row">
+		  	
+		  	<!-- Title -->
+			  <div class="form-group col-md-6">
+			    <label for="anouncementTitleInput">Title</label>
+			    <input ng-model="vm.formAnouncementData.title" type="text" class="form-control" id="anouncementTitleInput" placeholder="Title" required>
+			  </div>
+
+				<!-- Type -->
+			  <div class="form-group col-md-6">
+			    <label for="anouncementTypeInput">Type</label>
+			    <input ng-model="vm.formAnouncementData.type" type="text" class="form-control" id="anouncementTypeInput" placeholder="Type" required>
+			  </div>			  
+			
+			</div>
+
+			<!-- Description -->
+			<div class="row">
+				<div class="col-md-12">
+					<label for="anouncementDescriptionInput">Description</label>
+					<textarea ng-model="vm.formAnouncementData.description" class="form-control" id="anouncementDescriptionInput" placeholder="Description" required></textarea>
+				</div>
+			</div>
+
+			<hr>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<button ng-if="vm.formAnouncementData._id === undefined" type="submit" class="btn btn-lg btn-block">Create Anouncement</button>
+				  <button ng-if="vm.formAnouncementData._id !== undefined" type="submit" class="btn btn-lg btn-block">Save Changes</button>
+			  </div>
+		  </div>
+
+		</form>
+	</div>
+</div>
