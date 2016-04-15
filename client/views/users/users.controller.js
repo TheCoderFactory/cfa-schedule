@@ -5,6 +5,7 @@ angular.module('cfaDashboard')
 		var vm = this;
 		vm.teacherUsers = [];
 		vm.studentUsers = [];
+		vm.unregisteredUsers = [];
 
 		// call db to get all users
 		Auth.getUsers()
@@ -23,6 +24,10 @@ angular.module('cfaDashboard')
 						return reg.role === 'Student';
 					})) {
 						vm.studentUsers.push(user);
+					}
+
+					if(user._registrations === null) {
+						vm.unregisteredUsers.push(user);
 					}
 				});
 			})
