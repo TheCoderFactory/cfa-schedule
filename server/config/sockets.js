@@ -8,6 +8,7 @@ module.exports = function (io) {
     socket.ip = (socket.handshake.address) ? socket.handshake.address : null;
 
     // sockets inserts
+    require('../api/discipline/discipline.socket.js').register(socket);
     require('../api/award/award.socket.js').register(socket);
 
     socket.on('disconnect', function () {

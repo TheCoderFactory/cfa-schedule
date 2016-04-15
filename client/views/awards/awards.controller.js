@@ -20,9 +20,8 @@ angular.module('cfaDashboard')
     };
 
     vm.onEditClick = function(award) {
-      console.log('Edit Click');
+      console.log('editClick');
       award.isEditing = true;
-      // award.editAward = award;
     };
 
     vm.editAward = function (award, awardData) {

@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .service('AwardService', ['$rootScope', '$q', '$http', function ($rootScope, $q, $http) {
+  .service('DisciplineService', ['$rootScope', '$q', '$http', function ($rootScope, $q, $http) {
 
-    this.createAward = function (data) {
+		this.createDiscipline = function (data) {
     	var deferred = $q.defer();
-      $http.post('/api/awards', {
+      $http.post('/api/disciplines', {
     		name: data.name,
-    		value: data.value,
+    		description: data.description,
     	}).then(function (res) {
     			console.log('Successful Creation')
 	        deferred.resolve(res);
@@ -18,9 +18,9 @@ angular.module('cfaDashboard')
 	      return deferred.promise;
     }
 
-    this.getAwards = function () {
+    this.getDisciplines = function () {
     	var deferred = $q.defer();
-			$http.get('/api/awards')
+			$http.get('/api/disciplines')
 	      .then(function (res) {
 	        deferred.resolve(res);
 	      })
@@ -30,9 +30,9 @@ angular.module('cfaDashboard')
 	      return deferred.promise;
     }
 
-   	this.deleteAward = function (id) {
+   	this.deleteDiscipline = function (id) {
    		var deferred = $q.defer();
-   		$http.delete('/api/awards/' + id)
+   		$http.delete('/api/disciplines/' + id)
 	      .then(function (res) {
 	        deferred.resolve(res);
 	      })
@@ -42,13 +42,13 @@ angular.module('cfaDashboard')
 	      return deferred.promise;
 		}	
 
-		this.editAward = function(id, awardData){
-			// console.log('Editing: ' + award.name);
-			// console.log('With: ' + awardData.name + ' ' + awardData.value);
+		this.editDiscipline = function(discipline, disciplineData){
+			console.log('Editing: ' + discipline.name);
+			console.log('With: ' + disciplineData.name + ' ' + disciplineData.description);
 			var deferred = $q.defer();
-			$http.put('/api/awards/' + id,
-				{ name: awardData.name, 
-					value: awardData.value
+			$http.put('/api/disciplines/' + discipline._id,
+				{ name: disciplineData.name, 
+					description: disciplineData.description
 				}).then(function (res) {
 	        deferred.resolve(res);
 	      })
@@ -57,5 +57,4 @@ angular.module('cfaDashboard')
 	      });
 	      return deferred.promise;
 		}
-
   }]);

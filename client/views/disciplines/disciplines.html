@@ -1,0 +1,61 @@
+<div class="col-md-6">
+	<h1>Disciplines</h1>
+	<div class="row" ng-repeat="discipline in vm.disciplines">
+		<div ng-if="!discipline.isEditing" class="panel panel-default">
+		  <div class="panel-heading">{{discipline.name}}
+	  		<div class="pull-right">
+		  		<a href="" ng-click="vm.onEditClick(discipline)">Edit</a> |
+		  		<a href="" ng-click="vm.deleteDiscipline(discipline._id)">Remove</a>
+	  		</div>
+			</div>
+			<div ng-if="discipline.description" class="panel-body">{{discipline.description}}</div>
+			<div ng-if="!discipline.description" class="panel-body"><i>No Description Provided</i></div>
+		</div>
+	  <!-- Form to Edit an Discipline -->
+	  <div ng-if="discipline.isEditing">
+		  <form ng-if="discipline.isEditing" ng-submit="editDiscipline">
+			  <input class="form-control"
+			      ng-value="discipline.name"
+			      ng-model="vm.disciplineData.name"/>
+			  <!-- Description -->
+  			<textarea 
+  				ng-value="discipline.description" 
+  				ng-model="$scope.disciplineData.description" class="form-control" rows="5">
+  			</textarea>
+			</form>
+			<!-- Buttons to Edit an Discipline -->
+			<button ng-if="discipline.isEditing"
+				class="btn btn-primary"
+				ng-click="vm.editDiscipline(discipline, vm.disciplineData)">
+				Save
+			</button>
+			<button ng-if="discipline.isEditing"
+				class="btn btn-default"
+				ng-click="vm.onCancelClick(discipline)">
+				Cancel
+			</button>
+			<br>
+		</div>
+		<br>
+	</div>
+</div>
+<div class="col-md-6">
+	<h1>Create an Discipline</h1>
+	<form ng-submit="vm.createDiscipline()">
+	  <!-- Name -->
+	  <div class="form-group col-md-12">
+	    <label for="nameInput">Name</label>
+	    <input ng-model="vm.disciplineData.name" type="text" class="form-control" id="nameInput" placeholder="Name" required>
+	  </div>
+	  <!-- Description -->
+	 	<div class="form-group col-md-12">
+	 	  <label for="comment">Description</label>
+  		<textarea ng-model="vm.disciplineData.description" class="form-control" rows="5" id="descriptionInput"></textarea>
+		</div>
+	 	<div class="form-group col-md-6">
+		  <button class="btn btn-primary" type="submit">
+		  	New Discipline
+			</button>
+		</div>
+	</form>
+</div>
