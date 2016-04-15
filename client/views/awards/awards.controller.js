@@ -25,7 +25,7 @@ angular.module('cfaDashboard')
     };
 
     vm.editAward = function (award, awardData) {
-      console.log('editAward being called');
+      console.log('editAward being called: ' + award);
       AwardService.editAward(award, awardData);
       vm.awardData = {}; //Clear Cache
       vm.getAwards();

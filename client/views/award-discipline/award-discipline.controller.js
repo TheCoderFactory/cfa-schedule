@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('StudentAwardsCtrl', function () {
+  .controller('AwardDisciplineCtrl', function () {
 
     angular.extend(this, {
-      name: 'StudentAwardsCtrl'
+      name: 'AwardDisciplineCtrl'
     });
 
   });

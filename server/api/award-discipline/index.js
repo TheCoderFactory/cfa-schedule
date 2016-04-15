@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var controller = require('./student-award.controller');
+var controller = require('./award-discipline.controller');
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);

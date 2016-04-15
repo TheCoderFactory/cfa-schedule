@@ -43,8 +43,8 @@ angular.module('cfaDashboard')
 		}	
 
 		this.editDiscipline = function(discipline, disciplineData){
-			console.log('Editing: ' + discipline.name);
-			console.log('With: ' + disciplineData.name + ' ' + disciplineData.description);
+			// console.log('Editing: ' + discipline.name);
+			// console.log('With: ' + disciplineData.name + ' ' + disciplineData.description);
 			var deferred = $q.defer();
 			$http.put('/api/disciplines/' + discipline._id,
 				{ name: disciplineData.name, 

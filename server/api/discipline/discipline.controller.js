@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Discipline = require('./discipline.model');
 
 function handleError (res, err) {
+  console.log(res);
   return res.status(500).send(err);
 }
 

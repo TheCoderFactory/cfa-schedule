@@ -3,6 +3,8 @@
 var express = require('express');
 var router = express.Router();
 var controller = require('./discipline.controller');
+var auth = require('../../auth/auth.service');
+
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);

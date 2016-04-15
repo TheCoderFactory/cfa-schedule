@@ -1,5 +1,5 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .service('StudentAward', function () {
+  .service('AwardDiscipline', function () {
   });
