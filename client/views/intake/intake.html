@@ -88,11 +88,11 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr ng-class="termItem" ng-click="vm.editTerm(term)" ng-repeat = "term in vm.formIntakeData.terms">
+					    <tr ng-class="rowItem" ng-click="vm.editTerm(term)" ng-repeat = "term in vm.formIntakeData.terms">
 					      <td>{{term.name}}</td>
 					      <td>{{term.start | date: 'longDate'}}</td>
 					      <td>{{term.end | date: 'longDate'}}</td>
-					      <td><span ng-mouseover="termItem = 'trashHover'" ng-mouseleave="termItem = ''" ng-click="vm.removeTerm($event, term)" class="glyphicon glyphicon-trash"></span></td>
+					      <td><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''" ng-click="vm.removeTerm($event, term)" class="glyphicon glyphicon-trash"></span></td>
 					    </tr>
 				   </tbody>
 				   <p align="center" ng-if="vm.formIntakeData.terms.length === 0">Please add at least one term for this intake</p>

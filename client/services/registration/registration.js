@@ -17,6 +17,21 @@ angular.module('cfaDashboard')
     		return deferred.promise;
     }
 
+    service.unregisterUser = function (registration) {
+      var registrationId = registration._id;
+      var userId = registration._user._id;
+
+      var deferred = $q.defer();
+      $http.delete('/api/registrations/delete/' + registrationId + '/' + userId)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    }
+
     service.getIntakeRegistrations = function (intakeId) {
       var deferred = $q.defer();
       $http.get('/api/registrations/' + intakeId)

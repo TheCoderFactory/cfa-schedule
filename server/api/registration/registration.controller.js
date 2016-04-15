@@ -23,11 +23,9 @@ exports.create = function (req, res) {
 		_intake: req.intake._id,
 		_user: req.body.userId
 	});
-	console.log('THIS IS THE REG BEFORE SAVE: ' + registration);
 
 	registration.save(function (err, registration) {
 		if (err) { return handleError(res, err); }
-		console.log(registration);		
 		// add registration to the user as well
 		User.findOne({ _id:req.body.userId }, function (err, user) {
 			user._registrations.push(registration._id);
@@ -44,6 +42,24 @@ exports.create = function (req, res) {
 		});
 
 	});
+};
+
+exports.delete = function (req, res) {
+	var registrationId = req.params.registrationId;
+	var userId = req.params.userId;
+	Registration
+		.remove({_id: registrationId}, function (err) {
+			if (err) { return handleError(res, err); }
+			//Remove from registration from user model too
+			User
+				.findOne({_id: userId}, function (err, user) {
+					user._registrations.remove(registrationId);
+					user.save(function (err, user) {
+						if (err) { return handleError(res, err); }
+						res.send(registrationId);
+					})
+				})
+		});
 };
 
 exports.intakeRegistrations = function (req, res) {

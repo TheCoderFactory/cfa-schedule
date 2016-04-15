@@ -6,15 +6,17 @@
       <th>Last Name</th>
       <th>Email</th>
       <th>Points</th>
+      <th>Unregister</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat = "user in users">
+    <tr ng-class="rowItem" ng-repeat = "registration in registrations">
       <td>image</td>
-      <td>{{user.firstName}}</td>
-      <td>{{user.lastName}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.totalPoints}}</td>
+      <td>{{registration._user.firstName}}</td>
+      <td>{{registration._user.lastName}}</td>
+      <td>{{registration._user.email}}</td>
+      <td>{{registration._user.totalPoints}}</td>
+      <td><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="unregisterUser(registration)" class="glyphicon glyphicon-trash"></span></td>
     </tr>
 	</tbody>
 </table>

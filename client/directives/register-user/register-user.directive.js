@@ -33,9 +33,9 @@ angular.module('cfaDashboard')
 							console.log(registration.data);
 							//sort by role and add to controller
 							if (registration.data.role === 'Teacher') {
-								scope.registeredTeachers.push(registration.data._user);
+								scope.registeredTeachers.push(registration.data);
 							} else {
-								scope.registeredStudents.push(registration.data._user);
+								scope.registeredStudents.push(registration.data);
 							}
 							// purge form
 							scope.formRegisterUser = {};

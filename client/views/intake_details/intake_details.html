@@ -26,7 +26,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h4>Teachers</h4>
-				<registration-table ng-if="vm.registeredTeachers.length > 0" users="vm.registeredTeachers"></registration-table>
+				<registration-table ng-if="vm.registeredTeachers.length > 0" registrations="vm.registeredTeachers" unregistered-users="vm.unregisteredUsers"></registration-table>
 				<p ng-if="vm.registeredTeachers.length < 1">There are no teachers currently registered for this intake!</p>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h4>Students</h4>
-				<registration-table ng-if="vm.registeredStudents.length > 0" users="vm.registeredStudents"></registration-table>
+				<registration-table ng-if="vm.registeredStudents.length > 0" registrations="vm.registeredStudents" unregistered-users="vm.unregisteredUsers"></registration-table>
 				<p ng-if="vm.registeredStudents.length < 1">There are no students currently registered for this intake!</p>
 			</div>
 		</div>

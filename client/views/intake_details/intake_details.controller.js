@@ -52,9 +52,9 @@ angular.module('cfaDashboard')
         // sort registrations into teachers and students
         _.each(registrations, function (registration) {
           if (registration.role === 'Teacher') {
-            vm.registeredTeachers.push(registration._user);
+            vm.registeredTeachers.push(registration);
           } else {
-            vm.registeredStudents.push(registration._user);
+            vm.registeredStudents.push(registration);
           }
         });
       })
