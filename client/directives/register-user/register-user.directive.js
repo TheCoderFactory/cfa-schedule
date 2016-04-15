@@ -20,8 +20,7 @@ angular.module('cfaDashboard')
 				} else {
 					scope.showIntakesList = true;
 				}
-
-
+				
 				// Get all users not registered in intake, if intakeId attr, else return all users
 
 				scope.registerUser = function () {
