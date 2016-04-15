@@ -6,5 +6,9 @@ var controller = require('./anouncement.controller');
 var auth = require('../../auth/auth.service');
 
 router.get('/', auth.isAuthenticated(), controller.getAnouncements);
+router.post('/', auth.isAuthenticated(), controller.create);
+router.put('/:anouncementId', auth.isAuthenticated(), controller.update)
+router.delete('/:anouncementId', auth.isAuthenticated(), controller.delete)
+
 
 module.exports = router;
