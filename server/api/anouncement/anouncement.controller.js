@@ -34,7 +34,7 @@ exports.getAnouncements = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  Anouncement.findByIdAndUpdate({_id: req.body._id}, 
+  Anouncement.findByIdAndUpdate(req.body._id, 
     {
       title: req.body.title,
       description: req.body.description,
@@ -47,5 +47,9 @@ exports.update = function (req, res) {
 };
 
 exports.delete = function (req, res) {
-
+  Anouncement.remove({_id: req.params.anouncementId}, function (err) {
+    if (err) { errorHandler.handle(res, err, 404); }
+    res.send('Anouncement deleted!');
+  });
 };
+
