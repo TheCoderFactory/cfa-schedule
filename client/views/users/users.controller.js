@@ -26,7 +26,7 @@ angular.module('cfaDashboard')
 						vm.studentUsers.push(user);
 					}
 
-					if(user._registrations === null) {
+					if(user._registrations === null || user._registrations.length < 1) {
 						vm.unregisteredUsers.push(user);
 					}
 				});
