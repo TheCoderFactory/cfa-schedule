@@ -64,11 +64,13 @@
 	</div>
 
 	<!-- Intake: if this is on the intake page then use that intake id -->
-	<div ng-if="showIntakeList" class="form-group col-md-6">
-		<label for="scheduleItemIntake">Intake</label>
-		<input ng-model="formScheduledItem.intake" type="text" class="form-control" id="scheduleItemIntake" placeholder="Name" required>
+	<div class="row">
+		<div ng-if="showIntakeSelector" class="col-md-12">
+			<hr>
+				<intake-selector intakes="vm.intakes" show-intakes-click="vm.showIntakesClick" form-data-intakes=vm.formScheduledItem._intakes></intake-selector>
+			<hr>
+		</div>
 	</div>
-
 	<button type="submit" class="btn btn-lg btn-block">Create Schedule Item</button>
 	
 </form>

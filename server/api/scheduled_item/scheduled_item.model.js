@@ -11,7 +11,7 @@ var ScheduledItemSchema = new Schema({
   type: {type: String, required: true},
   location: {type: String, required: true},
   _hostId: { type: mongoose.Schema.Types.ObjectId, ref:'User'},
-  _intakeId: [{type: mongoose.Schema.Types.ObjectId, ref:'Intake'}]
+  _intakes: [{type: mongoose.Schema.Types.ObjectId, ref:'Intake'}]
 });
 
 module.exports = mongoose.model('ScheduledItem', ScheduledItemSchema);

@@ -8,7 +8,8 @@ angular.module('cfaDashboard')
 				scope: { 
 					formScheduledItem: '=',
 					scheduledItems: '=',
-					itakeId: '@'
+					itakeId: '@',
+					showIntakeSelector: '='
 				}, 
 				link: function (scope, elem, attrs) {
 					

@@ -23,7 +23,7 @@ exports.create = function (req, res) {
       start:req.body.start,
       end: req.body.end,
       type: req.body.type,
-      _intakeId: req.body.intakeId,
+      _intakes: [req.body.intakeId],
       _hostId: req.body.hostId
 
     }, function (err, scheduledItem) {
@@ -41,7 +41,7 @@ exports.create = function (req, res) {
       start:req.body.start,
       end: req.body.end,
       type: req.body.type,
-      _intakeId: req.body.intakeId,
+      _intakes: [req.body.intakeId],
       _hostId: req.body.hostId
 
     });
@@ -60,7 +60,7 @@ exports.create = function (req, res) {
 
 // Get all scheduled items for an intake
 exports.getIntakeItems = function (req, res) {
-  ScheduledItem.find({_intakeId: req.params.intakeId}, function (err, scheduledItems) {
+  ScheduledItem.find({_intakes: req.params.intakeId}, function (err, scheduledItems) {
     if (err) { return handleError(res, err); }
     res.status(200).json(scheduledItems);
   });
