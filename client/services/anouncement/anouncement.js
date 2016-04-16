@@ -6,7 +6,6 @@ angular.module('cfaDashboard')
 		var service = {};
 
 		service.createAnouncement = function (formAnouncementData) {
-			console.log(formAnouncementData);
 			var deferred = $q.defer();
 			$http.post('/api/anouncements', formAnouncementData)
 				.then(function (res) {
@@ -51,6 +50,7 @@ angular.module('cfaDashboard')
 			var deferred = $q.defer();
 			$http.get('/api/anouncements')
 				.then(function (res) {
+					console.log(res);
 					deferred.resolve(res);
 				})
 				.catch(function (err) {

@@ -1,4 +1,5 @@
 <div class="row">
+	<!-- Create Anouncement -->
 	<div class="col-md-6">
 		<h1 ng-if="vm.formAnouncementData._id === undefined">Create Intake</h1>
 		<h1 ng-if="vm.formAnouncementData._id !== undefined">Edit Intake</h1> 
@@ -29,7 +30,18 @@
 			</div>
 
 			<hr>
+			<!--Add Intakes  -->
+				<p ng-if="!vm.showIntakesClick" align="center"><a ng-click="vm.showIntakes()">Select Intakes</a> (anouncement will default to all intakes otherwise)</p>
+				<!-- Intake Circles -->
+				<div class="row">
+					<div align="center" class="col-md-12">
+						<div ng-repeat="intake in vm.intakes" ng-if="vm.showIntakesClick" uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="vm.addRemoveIntake(intake._id)"  ng-style="{'background': intake.colour}" ng-class="{circleSelected: vm.formAnouncementData._intakes.indexOf(intake._id) > -1}" class="circle circleAnouncement"></div>
+					</div>
+				</div>
+				<p ng-if="vm.showIntakesClick" align="center"><a ng-click="vm.showIntakes()">Hide Intakes</a></p>
+			<hr>
 
+			<!-- Submit -->
 			<div class="row">
 				<div class="col-md-12">
 					<button ng-if="vm.formAnouncementData._id === undefined" type="submit" class="btn btn-lg btn-block">Create Anouncement</button>
@@ -40,6 +52,7 @@
 		</form>
 	</div>
 
+	<!-- Anouncement list -->
 	<div class="col-md-offset-1 col-md-5">
 		<h1>Anouncements</h1>
 		<div class="row" ng-repeat="anouncement in vm.anouncements | orderBy:reverse">
@@ -59,6 +72,11 @@
 			  <div class="panel-body anouncementPanel">
 				  <p><strong>Type: </strong>{{anouncement.type}}</p> 
 			 		<p>{{anouncement.description}}</p>
+			 		<div class="row">
+				 		<div class="col-md-12">
+							<div ng-repeat="intake in anouncement._intakes" uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="vm.addRemoveIntake(intake._id)"  ng-style="{'background': intake.colour}" class="circle circleAnouncement"></div>
+						</div>
+					</div>
 			  </div>
 			</div>
 		</div>

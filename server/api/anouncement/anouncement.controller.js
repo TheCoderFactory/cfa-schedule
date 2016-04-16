@@ -12,25 +12,36 @@ function handleError (res, err) {
 }
 
 exports.create = function (req,res) {
-  console.log(req.body);
+  // Note - if _intakes is an empty array, then it is for all intakes
   var anouncement = new Anouncement ({
     title: req.body.title,
     description: req.body.description,
-    type: req.body.type
+    type: req.body.type,
+    _intakes: req.body._intakes
   });
 
   anouncement.save(function (err, anouncement) {
     if (err) { errorHandler.handle(res, err, 404); }
-    res.json(anouncement);
+    Anouncement
+      .findById(anouncement._id)
+      .populate('_intakes')
+      .exec(function (err, anouncement) {
+        if (err) { errorHandler.handle(res, err, 404); }
+        res.json(anouncement);
+      });
   });
 };
 
 exports.getAnouncements = function (req, res) {
-  Anouncement.find(function (err, anouncements) {
-    if (err) { errorHandler.handle(res, err, 404); }
-    if (!anouncements) { errorHandler.handle(res, 'no anouncements!', 404); }
-    res.json(anouncements);
-  });
+  Anouncement
+    .find()
+    .populate('_intakes')
+    .exec(function (err, anouncements) {
+      console.log(anouncements);
+      if (err) { errorHandler.handle(res, err, 404); }
+      if (!anouncements) { errorHandler.handle(res, 'no anouncements!', 404); }
+      res.json(anouncements);
+    });
 };
 
 exports.update = function (req, res) {

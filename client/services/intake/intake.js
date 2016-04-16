@@ -22,7 +22,7 @@ angular.module('cfaDashboard')
         return deferred.promise;
     }
 
-    service.showAllIntakes = function () {
+    service.getAllIntakes = function () {
       var deferred = $q.defer();
       $http.get('/api/intakes')
         .then(function (res) {
