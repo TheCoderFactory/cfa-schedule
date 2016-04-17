@@ -1,0 +1,33 @@
+<div class="col-md-6">
+	<div class="row">
+	  <ul class="nav navbar-nav">
+	    <li><a href="/awards">Awards</a></li>
+	    <li><a href="/disciplines">Disciplines</a></li>
+	  </ul>
+	</div>
+	<div class="row">
+		<h1>Create an Award Disciplines</h1>
+		<form ng-submit="vm.createAwardDiscipline()">
+			<!-- Test -->
+			<div class="form-group col-md-6">
+		    <label for="nameInput">Name</label>
+		    <input ng-model="vm.awardDisciplineData.name" type="text" class="form-control" id="nameInput" placeholder="Name" required>
+		  </div>
+		  <!-- Awards -->
+		  <div class="form-group col-md-12">
+				<select ng-model="vm.awardDisciplineData.award" ng-options="y.name for (x, y) in vm.awards">
+				</select>
+		  </div>
+		  <!-- Disciplines -->
+		  <div class="form-group col-md-12">
+				<select ng-model="vm.awardDisciplineData.discipline" ng-options="y.name for (x, y) in vm.disciplines">
+				</select>
+		  </div>
+		 	<div class="form-group col-md-6">
+			  <button class="btn btn-primary" type="submit">
+			  	New Award Discipline
+				</button>
+			</div>
+		</form>
+		</div>
+</div>
