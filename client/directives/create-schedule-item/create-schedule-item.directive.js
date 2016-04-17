@@ -14,12 +14,14 @@ angular.module('cfaDashboard')
 					intakes: '='
 				}, 
 				link: function (scope, elem, attrs) {
-					scope.formScheduledItem._intakes = [];
+					
 
 					if (attrs.intakeId) {
 						scope.showIntakesList = false;
+						scope.formScheduledItem._intakes = [attrs.intakeId];
 					} else {
 						scope.showIntakesList = true;
+						scope.formScheduledItem._intakes = [];
 					}
 					
 					scope.createScheduledItem = function () {
@@ -40,7 +42,7 @@ angular.module('cfaDashboard')
 							});
 						// purge form
 						scope.formScheduledItem = {};
-						scope.showIntakes = false;
+						if(!attrs.intakeId) { scope.showIntakes = false; }
 					}
 	
 					// for date picker -->

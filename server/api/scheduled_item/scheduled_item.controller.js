@@ -37,10 +37,13 @@ exports.create = function (req, res) {
 
 // Get all scheduled items for an intake
 exports.getIntakeItems = function (req, res) {
-  ScheduledItem.find({_intakes: req.params.intakeId}, function (err, scheduledItems) {
-    if (err) { return handleError(res, err); }
-    res.status(200).json(scheduledItems);
-  });
+  ScheduledItem
+    .find({_intakes: req.params.intakeId})
+    .populate('_intakes')
+    .exec(function (err, scheduledItems) {
+      if (err) { return handleError(res, err); }
+      res.status(200).json(scheduledItems);
+    });
 };
 
 // Get all scheduled items
@@ -52,13 +55,4 @@ exports.getAllItems = function (req, res) {
       if (err) { return handleError(res, err); }
       res.status(200).json(scheduledItems);
     });
-};
-
-exports.getItem = function (req, res) {
-  Scheduled_item.create(req.body, function (err, scheduled_item) {
-    if (err) { return handleError(res, err); }
-    res.status(201).json({
-      scheduled_item: _.omit(scheduled_item.toObject(), ['passwordHash', 'salt'])
-    });
-  });
 };
