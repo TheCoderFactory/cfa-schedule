@@ -51,14 +51,14 @@
 			<div class="col-md-12">
 				<div ng-if="vm.createScheduleItem" class="fadeInOut well">
 					<h3 align="center">Create Scheduled Item</h3>
-					<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems"></create-schedule-item>
+					<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems" show-create-scheduled-itm="vm.showCreateScheduledItem"></create-schedule-item>
 				</div>
 			</div>
 		</div>
 		<!-- Schedule items list -->
 		<div class="row">
 			<div class="col-md-12">
-				<scheduled-items scheduled-items="vm.scheduledItems"></scheduled-items>
+				<scheduled-items scheduled-items="vm.scheduledItems" show-create-scheduled-itm="vm.showCreateScheduledItem"></scheduled-items>
 			</div>
 		</div>
 	</div>

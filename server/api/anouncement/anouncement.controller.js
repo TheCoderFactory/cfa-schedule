@@ -48,7 +48,6 @@ exports.getAnouncements = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  console.log('Anouncement: ' + util.inspect(req.body, false, null));
   Anouncement.findByIdAndUpdate(req.body._id, 
     {
       title: req.body.title,

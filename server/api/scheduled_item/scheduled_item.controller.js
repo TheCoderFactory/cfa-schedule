@@ -35,6 +35,25 @@ exports.create = function (req, res) {
   });
 };
 
+exports.update = function (req, res) {
+  ScheduledItem.findByIdAndUpdate(req.body._id, 
+    {
+      name: req.body.name,
+      description: req.body.description,
+      location: req.body.location,
+      start:req.body.start,
+      end: req.body.end,
+      type: req.body.type,
+      _intakes: req.body._intakes,
+      _hostId: req.body.hostId
+    },
+    function (err, scheduledItem) {
+      if (err) { errorHandler.handle(res, err, 404); }
+      console.log(scheduledItem);
+      res.json(scheduledItem);
+    });
+}
+
 // Get all scheduled items for an intake
 exports.getIntakeItems = function (req, res) {
   ScheduledItem
@@ -56,3 +75,11 @@ exports.getAllItems = function (req, res) {
       res.status(200).json(scheduledItems);
     });
 };
+
+exports.delete = function (req, res) {
+  ScheduledItem.remove({_id: req.params.scheduledItemId}, function (err) {
+    if (err) { errorHandler.handle(res, err, 404); }
+    res.send('Scheduled Item deleted!');
+  });
+};
+

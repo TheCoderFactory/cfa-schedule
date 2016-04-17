@@ -8,7 +8,8 @@ var auth = require('../../auth/auth.service');
 
 router.get('/:intakeId', auth.isAuthenticated(), controller.getIntakeItems);
 router.get('/', auth.isAuthenticated(), controller.getAllItems);
-router.post('/create', auth.isAuthenticated(), controller.create);
-
+router.post('/', auth.isAuthenticated(), controller.create);
+router.put('/', auth.isAuthenticated(), controller.update);
+router.delete('/:scheduledItemId', auth.isAuthenticated(), controller.delete)
 
 module.exports = router;
