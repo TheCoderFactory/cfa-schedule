@@ -9,10 +9,13 @@ angular.module('cfaDashboard')
 					formScheduledItem: '=',
 					scheduledItems: '=',
 					itakeId: '@',
-					showIntakeSelector: '='
+					showIntakeSelector: '=',
+					showIntakes: '=',
+					intakes: '='
 				}, 
 				link: function (scope, elem, attrs) {
-					
+					scope.formScheduledItem._intakes = [];
+
 					if (attrs.intakeId) {
 						scope.showIntakesList = false;
 					} else {
@@ -20,11 +23,16 @@ angular.module('cfaDashboard')
 					}
 					
 					scope.createScheduledItem = function () {
+						//if intake is left empty, fill it with all current intakes
+						if(!scope.formScheduledItem._intakes || scope.formScheduledItem._intakes.length < 1) {
+							scope.formScheduledItem._intakes = scope.intakes;
+						}
+
 						scope.formScheduledItem.hostId = Auth.getUser()._id;
-						scope.formScheduledItem.intakeId = attrs.intakeId;
+						console.log(scope.formScheduledItem);
+						// scope.formScheduledItem._intakes.push(attrs.intakeId);
 						ScheduledItemService.createScheduledItem(scope.formScheduledItem)
 							.then(function (scheduledItems) {
-								console.log(scheduledItems);
 								scope.scheduledItems.push(scheduledItems.data);
 							})
 							.catch(function (err) {
@@ -32,8 +40,7 @@ angular.module('cfaDashboard')
 							});
 						// purge form
 						scope.formScheduledItem = {};
-						console.log(scope.formScheduledItem);
-
+						scope.showIntakes = false;
 					}
 	
 					// for date picker -->

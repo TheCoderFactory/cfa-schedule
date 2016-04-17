@@ -4,6 +4,7 @@
 			{{scheduledItem.name}} ({{scheduledItem.type}})
 		</div>
 		<div class="panel-body">
+			
 			<div class="row">
 				<div class="col-md-6">
 					<strong>Start: </strong>{{scheduledItem.start | date: 'MMM d, y h:mm a'}}
@@ -12,6 +13,7 @@
 					<strong>End: </strong>{{scheduledItem.end | date: 'MMM d, y h:mm a'}}
 				</div>
 			</div>
+			
 			<div class="row">
 				<div class="col-md-6">
 					<strong>Location: </strong>{{scheduledItem.location}}
@@ -20,12 +22,18 @@
 					<strong>Host: </strong>{{scheduledItem.host}}
 				</div>
 			</div>
+			
 			<div class="row">
 				<div class="col-md-12">
-					<strong>Description: </strong>
-					{{scheduledItem.description}}
+					<p><strong>Description: </strong>
+					{{scheduledItem.description}}</p>
 				</div>
+			</div>
+		
+			<div class="row">
+				<div class="col-md-12">
+					<div ng-repeat="intake in scheduledItem._intakes" uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="gotoIntake(intake._id)"  ng-style="{'background': intake.colour}" class="circle circleAnouncementList"></div>
+				</div>
+			</div>
 		</div>
-	</div>
-
 </div>

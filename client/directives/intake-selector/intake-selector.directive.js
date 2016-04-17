@@ -13,15 +13,6 @@ angular.module('cfaDashboard')
 
 			link: function (scope, elem, attrs) {
 				scope.showIntakes = false;
-				
-				// Get all intakes on load -->
-				IntakeService.getAllIntakes()
-					.then(function (intakes) {
-						scope.intakes = intakes.data;
-					})
-					.catch(function (err) {
-						scope.error = err;
-					});	
 
 				scope.showIntakesClick = function () {
 					if(!scope.intakes) {

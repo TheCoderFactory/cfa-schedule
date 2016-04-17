@@ -9,6 +9,15 @@ angular.module('cfaDashboard')
 		vm.anouncements = [];
 		vm.showIntakes = false;
 
+		// Get all intakes on load -->
+		IntakeService.getAllIntakes()
+			.then(function (intakes) {
+				vm.intakes = intakes.data;
+			})
+			.catch(function (err) {
+				vm.error = err;
+			});	
+
 		vm.gotoIntake = function (intakeId) {
 			$location.path('/intakes/' + intakeId);
 		};
@@ -26,6 +35,7 @@ angular.module('cfaDashboard')
 			if(!vm.formAnouncementData._intakes || vm.formAnouncementData._intakes.length < 1) {
 				vm.formAnouncementData._intakes = vm.intakes;
 			}
+			console.log(vm.formAnouncementData);
 			AnouncementService.createAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
 					vm.anouncements.push(anouncement.data);

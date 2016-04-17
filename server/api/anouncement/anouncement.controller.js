@@ -15,7 +15,7 @@ function handleError (res, err) {
 }
 
 exports.create = function (req,res) {
-  // Note - if _intakes is an empty array, then it is for all intakes
+  
   var anouncement = new Anouncement ({
     title: req.body.title,
     description: req.body.description,
