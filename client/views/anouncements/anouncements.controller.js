@@ -5,8 +5,9 @@ angular.module('cfaDashboard')
 		
 		var vm = this;
 		vm.formAnouncementData = {};
+		vm.formAnouncementData._intakes = [];
 		vm.anouncements = [];
-		vm.showIntakesClick = false;
+		vm.showIntakes = false;
 
 		vm.gotoIntake = function (intakeId) {
 			$location.path('/intakes/' + intakeId);
@@ -29,7 +30,7 @@ angular.module('cfaDashboard')
 				.then(function (anouncement) {
 					vm.anouncements.push(anouncement.data);
 					vm.formAnouncementData = {};
-					vm.showIntakesClick = false;
+					vm.showIntakes = false;
 
 				})
 				.catch(function (err) {
@@ -38,10 +39,11 @@ angular.module('cfaDashboard')
 		};
 
 		vm.editAnouncement = function () {
+			console.log('editing');
 			AnouncementService.editAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
 					vm.formAnouncementData = {};
-					vm.showIntakesClick = false;
+					vm.showIntakes = false;
 
 				})
 				.catch(function (err) {
@@ -55,14 +57,14 @@ angular.module('cfaDashboard')
 				.then(function (intakes) {
 					vm.intakes = intakes.data;
 					vm.formAnouncementData = anouncement;
-					vm.showIntakesClick = true;
+					vm.showIntakes = true;
 				})
 				.catch(function (err) {
 					scope.error = err;
 				});	
 			} else {
 				vm.formAnouncementData = anouncement;
-				vm.showIntakesClick = true;
+				vm.showIntakes = true;
 			}
 		};
 

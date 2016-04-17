@@ -5,6 +5,9 @@ var _ = require('lodash');
 var authService = require('../../auth/auth.service');
 var Anouncement = require('./anouncement.model');
 var errorHandler = require('../../error/error-handling');
+var util = require('util');
+
+
 
 function handleError (res, err) {
   console.log(err);
@@ -45,14 +48,17 @@ exports.getAnouncements = function (req, res) {
 };
 
 exports.update = function (req, res) {
+  console.log('Anouncement: ' + util.inspect(req.body, false, null));
   Anouncement.findByIdAndUpdate(req.body._id, 
     {
       title: req.body.title,
       description: req.body.description,
-      type: req.body.type 
+      type: req.body.type,
+      _intakes: req.body._intakes
     },
     function (err, anouncement) {
       if (err) { errorHandler.handle(res, err, 404); }
+      console.log(anouncement);
       res.json(anouncement);
     });
 };

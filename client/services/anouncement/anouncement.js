@@ -19,9 +19,8 @@ angular.module('cfaDashboard')
 		};
 
 		service.editAnouncement = function (anouncement) {
-			var anouncementId = anouncement._id;
 			var deferred = $q.defer();
-			$http.put('/api/anouncements/' + anouncementId)
+			$http.put('/api/anouncements', anouncement)
 				.then(function (res) {
 					deferred.resolve(res);
 				})
