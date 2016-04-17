@@ -5,6 +5,7 @@ var config = require('./config/environment');
 module.exports = function (app) {
 
   // API
+  app.use('/api/award-disciplines', require('./api/award-discipline'));
   app.use('y', require('./api/award-discipline'));
   app.use('/api/disciplines', require('./api/discipline'));
   app.use('/api/awards', require('./api/award'));

@@ -9,15 +9,13 @@ angular.module('cfaDashboard')
 	  vm.disciplines = [];
 
     AwardService.getAwards().then(function(res) {
-    	  //console.log(res.data);
-				for (var x in res.data) {
+			for (var x in res.data) {
 				    vm.awards.push(res.data[x]);
 				}
     });
 
     DisciplineService.getDisciplines().then(function(res) {
-    	  //console.log(res.data);
-				for (var x in res.data) {
+			for (var x in res.data) {
 				    vm.disciplines.push(res.data[x]);
 				}
     });
@@ -47,4 +45,5 @@ angular.module('cfaDashboard')
         });
     };
 
+    vm.getAwardDisciplines();
   }]);

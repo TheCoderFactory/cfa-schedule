@@ -4,13 +4,11 @@ angular.module('cfaDashboard')
   .service('AwardDisciplineService', ['$rootScope', '$q', '$http', function ($rootScope, $q, $http) {
   
   	this.createAwardDiscipline = function (data) {
-  		console.log('createAwardDiscipline' + ' ' + data.award.name 
-  			+ ' ' + data.discipline.name + ' ' + data.name )
     	var deferred = $q.defer();
-      $http.post('/api/award-discipline', {
-      	name: data.name
+      $http.post('/api/award-disciplines', {
+      	award: data.award,
+      	discipline: data.discipline
     	}).then(function (res) {
-    			console.log('Successful Creation')
 	        deferred.resolve(res);
 	      })
 	      .catch(function (err) {
@@ -21,7 +19,7 @@ angular.module('cfaDashboard')
 
     this.getAwardDisciplines = function () {
     	var deferred = $q.defer();
-			$http.get('/api/award-discipline')
+			$http.get('/api/award-disciplines')
 	      .then(function (res) {
 	        deferred.resolve(res);
 	      })
@@ -33,7 +31,7 @@ angular.module('cfaDashboard')
 
    	this.deleteAwardDiscipline = function (id) {
    		var deferred = $q.defer();
-   		$http.delete('/api/award-discipline/' + id)
+   		$http.delete('/api/award-disciplines/' + id)
 	      .then(function (res) {
 	        deferred.resolve(res);
 	      })
