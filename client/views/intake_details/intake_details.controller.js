@@ -6,18 +6,18 @@ angular.module('cfaDashboard')
     var vm = this;
     vm.formScheduledItem = {};
     vm.scheduledItems = [];
-    vm.createScheduleItem = false;
+    vm.showCreateScheduledItem = false;
     vm.formRegisterUser = {};
     
     vm.registeredStudents = [];
     vm.registeredTeachers = [];
 
 
-    vm.toggleCreateScheduleItem = function () {
-      if (vm.createScheduleItem === true) {
-        vm.createScheduleItem = false;
+    vm.toggleShowCreateScheduledItem = function () {
+      if (vm.showCreateScheduledItem === true) {
+        vm.showCreateScheduledItem = false;
       }else {
-        vm.createScheduleItem = true;
+        vm.showCreateScheduledItem = true;
       }
     };
 

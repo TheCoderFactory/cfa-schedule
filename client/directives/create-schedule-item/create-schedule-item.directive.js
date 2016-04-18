@@ -8,33 +8,70 @@ angular.module('cfaDashboard')
 				scope: { 
 					formScheduledItem: '=',
 					scheduledItems: '=',
-					itakeId: '@'
+					itakeId: '@',
+					showIntakeSelector: '=',
+					showIntakes: '=',
+					showCreateScheduledItem: '=',
+					intakes: '='
 				}, 
 				link: function (scope, elem, attrs) {
 					
-					if (attrs.intakeId) {
-						scope.showIntakesList = false;
-					} else {
-						scope.showIntakesList = true;
-					}
+					scope.purgeForm = function () {
+						
+						if (attrs.intakeId) {
+							scope.formScheduledItem = {};
+							scope.showIntakesList = false;
+							scope.formScheduledItem._intakes = [attrs.intakeId];
+						} else {
+							scope.formScheduledItem = {};
+							scope.showIntakesList = true;
+							scope.formScheduledItem._intakes = [];
+						}
+					};
+
+					if(scope.formScheduledItem._id === undefined) {
+						scope.purgeForm();
+					} 
+					
+
+					scope.submitScheduledItemForm = function () {
+						if(scope.formScheduledItem._id === undefined) {
+							scope.createScheduledItem();
+						} else {
+							scope.editScheduledItem();
+						}
+					};
 					
 					scope.createScheduledItem = function () {
+						//if intake is left empty, fill it with all current intakes
+						if(!scope.formScheduledItem._intakes || scope.formScheduledItem._intakes.length < 1) {
+							scope.formScheduledItem._intakes = scope.intakes;
+						}
+
 						scope.formScheduledItem.hostId = Auth.getUser()._id;
-						scope.formScheduledItem.intakeId = attrs.intakeId;
+						console.log(scope.formScheduledItem);
+						// scope.formScheduledItem._intakes.push(attrs.intakeId);
 						ScheduledItemService.createScheduledItem(scope.formScheduledItem)
 							.then(function (scheduledItems) {
-								console.log(scheduledItems);
 								scope.scheduledItems.push(scheduledItems.data);
+								scope.purgeForm();
 							})
 							.catch(function (err) {
 								scope.error = err;
 							});
-						// purge form
-						scope.formScheduledItem = {};
-						console.log(scope.formScheduledItem);
-
 					}
-	
+
+					scope.editScheduledItem = function () {
+						ScheduledItemService.editScheduledItem(scope.formScheduledItem)
+							.then(function (scheduledItem) {
+								scope.showCreateScheduledItem = false;
+								scope.purgeForm();
+							})
+							.catch(function (err) {
+								scope.error = err;
+							});
+					}
+
 					// for date picker -->
 					scope.startDatePickerIsOpen = false;
 			    scope.endDatePickerIsOpen = false;

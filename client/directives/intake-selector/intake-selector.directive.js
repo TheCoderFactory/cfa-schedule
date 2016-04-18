@@ -7,37 +7,28 @@ angular.module('cfaDashboard')
 			templateUrl: 'directives/intake-selector/intake-selector.html',
 			scope: {
 				formDataIntakes: '=',
-				showIntakesClick: '=',
+				showIntakes: '=',
 				intakes: '='
 			},
 
 			link: function (scope, elem, attrs) {
-				scope.showIntakesClick = false;
-				
-				// Get all intakes on load -->
-				IntakeService.getAllIntakes()
-					.then(function (intakes) {
-						scope.intakes = intakes.data;
-					})
-					.catch(function (err) {
-						scope.error = err;
-					});	
+				scope.showIntakes = false;
 
-				scope.showIntakes = function () {
+				scope.showIntakesClick = function () {
 					if(!scope.intakes) {
 						IntakeService.getAllIntakes()
 						.then(function (intakes) {
 							scope.intakes = intakes.data;
-							scope.showIntakesClick = true;
+							scope.showIntakes = true;
 						})
 						.catch(function (err) {
 							scope.error = err;
 						});	
 					} else {
-						if(scope.showIntakesClick) {
-							scope.showIntakesClick = false;
+						if(scope.showIntakes) {
+							scope.showIntakes = false;
 						} else {
-							scope.showIntakesClick = true;
+							scope.showIntakes = true;
 						}
 					}
 				};

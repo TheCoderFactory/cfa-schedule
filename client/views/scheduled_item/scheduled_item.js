@@ -3,8 +3,8 @@
 angular.module('cfaDashboard')
 	.config(function ($routeProvider) {
 		$routeProvider
-			.when('/scheduledItem', {
-				templateUrl: 'views/schduled_item/schduled_item.html',
+			.when('/scheduledItems', {
+				templateUrl: 'views/scheduled_item/scheduled_item.html',
         controller: 'ScheduledItemCtrl',
         controllerAs: 'vm'
 			});

@@ -5,8 +5,24 @@ angular.module('cfaDashboard')
 		
 		var vm = this;
 		vm.formAnouncementData = {};
+		vm.formAnouncementData._intakes = [];
 		vm.anouncements = [];
-		vm.showIntakesClick = false;
+		vm.showIntakes = false;
+
+		// Get all intakes on load -->
+		IntakeService.getAllIntakes()
+			.then(function (intakes) {
+				vm.intakes = intakes.data;
+			})
+			.catch(function (err) {
+				vm.error = err;
+			});	
+
+		vm.resetForm = function () {
+			vm.formAnouncementData = {};
+			vm.formAnouncementData._intakes = [];
+			vm.showIntakes = false;
+		};
 
 		vm.gotoIntake = function (intakeId) {
 			$location.path('/intakes/' + intakeId);
@@ -25,11 +41,11 @@ angular.module('cfaDashboard')
 			if(!vm.formAnouncementData._intakes || vm.formAnouncementData._intakes.length < 1) {
 				vm.formAnouncementData._intakes = vm.intakes;
 			}
+			console.log(vm.formAnouncementData);
 			AnouncementService.createAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
 					vm.anouncements.push(anouncement.data);
-					vm.formAnouncementData = {};
-					vm.showIntakesClick = false;
+					vm.resetForm();
 
 				})
 				.catch(function (err) {
@@ -38,11 +54,10 @@ angular.module('cfaDashboard')
 		};
 
 		vm.editAnouncement = function () {
+			console.log('editing');
 			AnouncementService.editAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
-					vm.formAnouncementData = {};
-					vm.showIntakesClick = false;
-
+					vm.resetForm();
 				})
 				.catch(function (err) {
 					vm.error = err;
@@ -55,14 +70,14 @@ angular.module('cfaDashboard')
 				.then(function (intakes) {
 					vm.intakes = intakes.data;
 					vm.formAnouncementData = anouncement;
-					vm.showIntakesClick = true;
+					vm.showIntakes = true;
 				})
 				.catch(function (err) {
 					scope.error = err;
 				});	
 			} else {
 				vm.formAnouncementData = anouncement;
-				vm.showIntakesClick = true;
+				vm.showIntakes = true;
 			}
 		};
 

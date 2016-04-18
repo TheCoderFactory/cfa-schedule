@@ -7,7 +7,7 @@ var auth = require('../../auth/auth.service');
 
 router.post('/', auth.isAuthenticated(), controller.create);
 router.get('/', auth.isAuthenticated(), controller.getAnouncements);
-router.put('/:anouncementId', auth.isAuthenticated(), controller.update)
+router.put('/', auth.isAuthenticated(), controller.update)
 router.delete('/:anouncementId', auth.isAuthenticated(), controller.delete)
 
 

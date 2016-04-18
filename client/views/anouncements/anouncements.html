@@ -1,8 +1,8 @@
 <div class="row">
 	<!-- Create Anouncement -->
 	<div class="col-md-6">
-		<h1 ng-if="vm.formAnouncementData._id === undefined">Create Intake</h1>
-		<h1 ng-if="vm.formAnouncementData._id !== undefined">Edit Intake</h1> 
+		<h1 ng-if="vm.formAnouncementData._id === undefined">Create Anouncement</h1>
+		<h1 ng-if="vm.formAnouncementData._id !== undefined">Edit Anouncement</h1> 
 
 		<form ng-submit="vm.submitAnouncementForm()">
 		  <div class="row">
@@ -29,8 +29,9 @@
 				</div>
 			</div>
 
+			<!-- intake selection -->
 			<hr>
-				<intake-selector intakes="vm.intakes" show-intakes-click="vm.showIntakesClick" form-data-intakes=vm.formAnouncementData._intakes></intake-selector>
+				<intake-selector intakes="vm.intakes" show-intakes="vm.showIntakes" form-data-intakes=vm.formAnouncementData._intakes></intake-selector>
 			<hr>
 
 			<!-- Submit -->

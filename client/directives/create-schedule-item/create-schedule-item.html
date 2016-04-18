@@ -1,4 +1,8 @@
-<form ng-submit="createScheduledItem()">
+<form ng-submit="submitScheduledItemForm()">
+	
+	<h2 align="center" ng-if="formScheduledItem._id === undefined">Create Scheduled Item</h2>
+	<h2 align="center" ng-if="formScheduledItem._id !== undefined">Edit Scheduled Item</h2> 
+	
 	<!-- Name -->
 	<div class="form-group col-md-6">
 		<label for="scheduleItemName">Name</label>
@@ -39,15 +43,15 @@
 
 	<!-- End Date -->
 	<div class="col-md-6">
-		<label for="scheduleItemStart">End</label>
+		<label for="scheduleItemEnd">End</label>
 		<div class="input-group">
 		  <input ng-model="formScheduledItem.end" type="text"
 		  uib-datepicker-popup="mediumDate"
-		  is-open="startDatePickerIsOpen"
+		  is-open="endDatePickerIsOpen"
 		  ng-click="valuationDatePickerOpen()"
-			class="form-control" id="scheduleItemStart">
+			class="form-control" id="scheduleItemEnd">
 		  <span class="input-group-btn">
-		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
+		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'end')">
 		      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
 		    </button>
 		  </span>
@@ -64,11 +68,13 @@
 	</div>
 
 	<!-- Intake: if this is on the intake page then use that intake id -->
-	<div ng-if="showIntakeList" class="form-group col-md-6">
-		<label for="scheduleItemIntake">Intake</label>
-		<input ng-model="formScheduledItem.intake" type="text" class="form-control" id="scheduleItemIntake" placeholder="Name" required>
+	<div class="row">
+		<div ng-if="showIntakeSelector" class="col-md-12">
+			<hr>
+				<intake-selector intakes="intakes" show-intakes="showIntakes" form-data-intakes=formScheduledItem._intakes></intake-selector>
+			<hr>
+		</div>
 	</div>
-
-	<button type="submit" class="btn btn-lg btn-block">Create Schedule Item</button>
-	
+	<button ng-if="formScheduledItem._id === undefined" type="submit" class="btn btn-lg btn-block">Create Schedule Item</button>
+	<button ng-if="formScheduledItem._id !== undefined" type="submit" class="btn btn-lg btn-block">Edit Schedule Item</button>
 </form>

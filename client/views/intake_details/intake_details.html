@@ -45,20 +45,19 @@
 
 	<div class="col-md-6">
 		<h3>Scheduled items</h3>
-		<p><a ng-click="vm.toggleCreateScheduleItem()">Create Schedule Item</a></p>
+		<p><a ng-click="vm.toggleShowCreateScheduledItem()">Create Schedule Item</a></p>
 		<!-- Create schedule item -->
 		<div class="row">
 			<div class="col-md-12">
-				<div ng-if="vm.createScheduleItem" class="fadeInOut well">
-					<h3 align="center">Create Scheduled Item</h3>
-					<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems"></create-schedule-item>
+				<div ng-if="vm.showCreateScheduledItem" class="fadeInOut well">
+					<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems" show-create-scheduled-item="vm.showCreateScheduledItem" show-intakes="vm.showIntakes"></create-schedule-item>
 				</div>
 			</div>
 		</div>
 		<!-- Schedule items list -->
 		<div class="row">
 			<div class="col-md-12">
-				<scheduled-items scheduled-items="vm.scheduledItems"></scheduled-items>
+				<scheduled-items scheduled-items="vm.scheduledItems" form-scheduled-item = "vm.formScheduledItem" show-create-scheduled-item="vm.showCreateScheduledItem" show-intakes="vm.showIntakes"></scheduled-items>
 			</div>
 		</div>
 	</div>
