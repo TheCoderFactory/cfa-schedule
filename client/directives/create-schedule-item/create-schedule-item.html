@@ -43,15 +43,15 @@
 
 	<!-- End Date -->
 	<div class="col-md-6">
-		<label for="scheduleItemStart">End</label>
+		<label for="scheduleItemEnd">End</label>
 		<div class="input-group">
 		  <input ng-model="formScheduledItem.end" type="text"
 		  uib-datepicker-popup="mediumDate"
-		  is-open="startDatePickerIsOpen"
+		  is-open="endDatePickerIsOpen"
 		  ng-click="valuationDatePickerOpen()"
-			class="form-control" id="scheduleItemStart">
+			class="form-control" id="scheduleItemEnd">
 		  <span class="input-group-btn">
-		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
+		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'end')">
 		      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
 		    </button>
 		  </span>
