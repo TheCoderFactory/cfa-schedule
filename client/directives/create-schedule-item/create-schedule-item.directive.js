@@ -11,18 +11,36 @@ angular.module('cfaDashboard')
 					itakeId: '@',
 					showIntakeSelector: '=',
 					showIntakes: '=',
+					showCreateScheduledItem: '=',
 					intakes: '='
 				}, 
 				link: function (scope, elem, attrs) {
 					
+					scope.purgeForm = function () {
+						
+						if (attrs.intakeId) {
+							scope.formScheduledItem = {};
+							scope.showIntakesList = false;
+							scope.formScheduledItem._intakes = [attrs.intakeId];
+						} else {
+							scope.formScheduledItem = {};
+							scope.showIntakesList = true;
+							scope.formScheduledItem._intakes = [];
+						}
+					};
 
-					if (attrs.intakeId) {
-						scope.showIntakesList = false;
-						scope.formScheduledItem._intakes = [attrs.intakeId];
-					} else {
-						scope.showIntakesList = true;
-						scope.formScheduledItem._intakes = [];
-					}
+					if(scope.formScheduledItem._id === undefined) {
+						scope.purgeForm();
+					} 
+					
+
+					scope.submitScheduledItemForm = function () {
+						if(scope.formScheduledItem._id === undefined) {
+							scope.createScheduledItem();
+						} else {
+							scope.editScheduledItem();
+						}
+					};
 					
 					scope.createScheduledItem = function () {
 						//if intake is left empty, fill it with all current intakes
@@ -36,15 +54,24 @@ angular.module('cfaDashboard')
 						ScheduledItemService.createScheduledItem(scope.formScheduledItem)
 							.then(function (scheduledItems) {
 								scope.scheduledItems.push(scheduledItems.data);
+								scope.purgeForm();
 							})
 							.catch(function (err) {
 								scope.error = err;
 							});
-						// purge form
-						scope.formScheduledItem = {};
-						if(!attrs.intakeId) { scope.showIntakes = false; }
 					}
-	
+
+					scope.editScheduledItem = function () {
+						ScheduledItemService.editScheduledItem(scope.formScheduledItem)
+							.then(function (scheduledItem) {
+								scope.showCreateScheduledItem = false;
+								scope.purgeForm();
+							})
+							.catch(function (err) {
+								scope.error = err;
+							});
+					}
+
 					// for date picker -->
 					scope.startDatePickerIsOpen = false;
 			    scope.endDatePickerIsOpen = false;

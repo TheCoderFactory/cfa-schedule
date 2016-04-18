@@ -22,7 +22,7 @@ angular.module('cfaDashboard')
         return deferred.promise;
     };
 
-    service.updateScheduledItem = function (scheduledItem) {
+    service.editScheduledItem = function (scheduledItem) {
       var deferred = $q.defer();
       $http.put('/api/scheduled_items', scheduledItem)
         .then(function (res) {

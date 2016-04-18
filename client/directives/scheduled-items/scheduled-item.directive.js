@@ -7,7 +7,9 @@ angular.module('cfaDashboard')
         templateUrl: 'directives/scheduled-items/scheduled-items.html',
         scope: {
         	scheduledItems: '=',
-          showCreateScheduledItem: '='
+          showCreateScheduledItem: '=',
+          formScheduledItem: '=',
+          edit: '='
         },
   
         link: function (scope, elem, attrs) {
@@ -28,10 +30,11 @@ angular.module('cfaDashboard')
               });
           };
 
-          scope.editClicked = function (scheduledItem) {
+          scope.editScheduledItemClicked = function (scheduledItem) {
             // show form
             scope.showCreateScheduledItem = true;
             // populate form
+            scope.formScheduledItem = scheduledItem;
           }
         }
       };

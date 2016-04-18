@@ -18,6 +18,12 @@ angular.module('cfaDashboard')
 				vm.error = err;
 			});	
 
+		vm.resetForm = function () {
+			vm.formAnouncementData = {};
+			vm.formAnouncementData._intakes = [];
+			vm.showIntakes = false;
+		};
+
 		vm.gotoIntake = function (intakeId) {
 			$location.path('/intakes/' + intakeId);
 		};
@@ -39,8 +45,7 @@ angular.module('cfaDashboard')
 			AnouncementService.createAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
 					vm.anouncements.push(anouncement.data);
-					vm.formAnouncementData = {};
-					vm.showIntakes = false;
+					vm.resetForm();
 
 				})
 				.catch(function (err) {
@@ -52,9 +57,7 @@ angular.module('cfaDashboard')
 			console.log('editing');
 			AnouncementService.editAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
-					vm.formAnouncementData = {};
-					vm.showIntakes = false;
-
+					vm.resetForm();
 				})
 				.catch(function (err) {
 					vm.error = err;

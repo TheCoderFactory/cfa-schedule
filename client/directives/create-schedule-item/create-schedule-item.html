@@ -1,4 +1,8 @@
-<form ng-submit="createScheduledItem()">
+<form ng-submit="submitScheduledItemForm()">
+	
+	<h2 align="center" ng-if="formScheduledItem._id === undefined">Create Scheduled Item</h2>
+	<h2 align="center" ng-if="formScheduledItem._id !== undefined">Edit Scheduled Item</h2> 
+	
 	<!-- Name -->
 	<div class="form-group col-md-6">
 		<label for="scheduleItemName">Name</label>
@@ -71,6 +75,6 @@
 			<hr>
 		</div>
 	</div>
-	<button type="submit" class="btn btn-lg btn-block">Create Schedule Item</button>
-	
+	<button ng-if="formScheduledItem._id === undefined" type="submit" class="btn btn-lg btn-block">Create Schedule Item</button>
+	<button ng-if="formScheduledItem._id !== undefined" type="submit" class="btn btn-lg btn-block">Edit Schedule Item</button>
 </form>
