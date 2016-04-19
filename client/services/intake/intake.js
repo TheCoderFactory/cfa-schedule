@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .service('IntakeService', ['$rootScope', '$cookieStore', '$q', '$http', function ($rootScope, $cookieStore, $q, $http) {
-
+  .service('IntakeService', ['$q', '$http', function ($q, $http) {
+    
     var service = {};
 
     service.createIntake = function (formIntakeData, _id) {
@@ -22,7 +22,7 @@ angular.module('cfaDashboard')
         return deferred.promise;
     }
 
-    service.showAllIntakes = function () {
+    service.getAllIntakes = function () {
       var deferred = $q.defer();
       $http.get('/api/intakes')
         .then(function (res) {

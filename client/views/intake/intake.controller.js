@@ -88,8 +88,8 @@ angular.module('cfaDashboard')
         });
     };
 
-    vm.showAllIntakes = function () {
-      IntakeService.showAllIntakes()
+    vm.getAllIntakes = function () {
+      IntakeService.getAllIntakes()
         .then(function (intakes) {
           console.log(intakes);
           vm.intakes = intakes.data;
@@ -103,5 +103,5 @@ angular.module('cfaDashboard')
       vm.formIntakeData = intake;
     }
 
-    vm.showAllIntakes();
+    vm.getAllIntakes();
   }]);

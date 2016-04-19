@@ -12,12 +12,13 @@ angular.module('cfaDashboard')
       /**
        * User credentials
        */
-      user: { email: 'test@test.com', password: 'test' },
+      user: { email: 'test@test.com', password: 'test', admin: false },
 
       /**
        * Signup
        */
       signup: function () {
+        vm.user._registrations = [];
         Auth.signup(vm.user)
           .then(function () {
             $location.path('/');

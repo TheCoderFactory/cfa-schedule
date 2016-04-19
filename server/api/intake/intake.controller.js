@@ -16,8 +16,7 @@ function handleError (res, err) {
  * @param req
  * @param res
  */
-exports.create = function (req, res) {
-  
+exports.createEdit = function (req, res) {
 
   // Check if intake already exists --> either way send back the object
   if (req.body._id) {
@@ -27,14 +26,15 @@ exports.create = function (req, res) {
       colour: req.body.colour,
       terms: req.body.terms
 
-    }, function (err, intake) {
-      if (err) 
-        errorHandler.handle(res, err, 404);
-      else {
-        intake.edited = true;
-        res.json(intake);
-      }
-    });
+      }, 
+      function (err, intake) {
+        if (err) 
+          errorHandler.handle(res, err, 404);
+        else {
+          intake.edited = true;
+          res.json(intake);
+        }
+      });
   } else {
     var intake = new Intake ({
       name: req.body.name,

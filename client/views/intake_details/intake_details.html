@@ -1,1 +1,67 @@
-<h1>{{vm.intake.data.name}}</h1>
+
+<h1 class="intakeHeading"><div class="circle circleHeading" ng-style="{'background': vm.intake.colour}" ></div> {{vm.intake.name}}</h1>
+
+<div class="row">
+	<div class="col-md-6">
+		<!-- Intake Meta details -->
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Terms</h3>
+				<term-table terms="vm.intake.terms"></term-table>
+			</div>
+		</div>
+		<!-- Students -->
+		<h3>Users</h3>
+		<p><a ng-click="vm.toggleRegisterUser()">Register a User</a></p>
+		<!-- Register User form -->
+		<div class="row">
+			<div class="col-md-12">
+				<div ng-if="vm.registerUser" class="fadeInOut well">
+					<h3 align="center">Register User</h3>
+					<register-user form-register-user="vm.formRegisterUser" intake-id="{{vm.intake._id}}" unregistered-users="vm.unregisteredUsers" registered-students="vm.registeredStudents" registered-teachers="vm.registeredTeachers"></register-user>
+				</div>
+			</div>
+		</div>
+		<!-- Teachers table -->
+		<div class="row">
+			<div class="col-md-12">
+				<h4>Teachers</h4>
+				<registration-table ng-if="vm.registeredTeachers.length > 0" registrations="vm.registeredTeachers" unregistered-users="vm.unregisteredUsers"></registration-table>
+				<p ng-if="vm.registeredTeachers.length < 1">There are no teachers currently registered for this intake!</p>
+			</div>
+		</div>
+		<!-- Students table -->
+		<div class="row">
+			<div class="col-md-12">
+				<h4>Students</h4>
+				<registration-table ng-if="vm.registeredStudents.length > 0" registrations="vm.registeredStudents" unregistered-users="vm.unregisteredUsers"></registration-table>
+				<p ng-if="vm.registeredStudents.length < 1">There are no students currently registered for this intake!</p>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Schedule items stuff -->
+
+	<div class="col-md-6">
+		<h3>Scheduled items</h3>
+		<p><a ng-click="vm.toggleShowCreateScheduledItem()">Create Schedule Item</a></p>
+		<!-- Create schedule item -->
+		<div class="row">
+			<div class="col-md-12">
+				<div ng-if="vm.showCreateScheduledItem" class="fadeInOut well">
+					<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems" show-create-scheduled-item="vm.showCreateScheduledItem" show-intakes="vm.showIntakes"></create-schedule-item>
+				</div>
+			</div>
+		</div>
+		<!-- Schedule items list -->
+		<div class="row">
+			<div class="col-md-12">
+				<scheduled-items scheduled-items="vm.scheduledItems" form-scheduled-item = "vm.formScheduledItem" show-create-scheduled-item="vm.showCreateScheduledItem" show-intakes="vm.showIntakes"></scheduled-items>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	

@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped table-hover ">
+		  <thead>
+		    <tr>
+		      <th>First Name</th>
+		      <th>Last Name</th>
+		      <th>Email</th>
+		      <th>Registered Intakes</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr ng-class="termItem" ng-repeat = "user in users">
+		      <td>{{user.firstName}}</td>
+		      <td>{{user.lastName}}</td>
+		      <td>{{user.email}}</td>
+		      <td>
+		      	<div ng-repeat="registration in user._registrations" ng-if="registration.role === userType" uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(registration._intake._id)"  ng-style="{'background': registration._intake.colour}" class="circle circleTable"></div>
+		      </td>
+		      
+		    </tr>
+	   	</tbody>
+		</table>
+	</div>
+</div>

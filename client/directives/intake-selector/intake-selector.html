@@ -1,0 +1,13 @@
+<div class="row">
+	<div class="col-md-12">
+		<!--Add Intakes  -->
+		<p ng-if="!showIntakes" align="center"><a ng-click="showIntakesClick()">Select Intakes</a> (will default to all intakes otherwise)</p>
+		<!-- Intake Circles -->
+		<div class="row">
+			<div ng-if="showIntakes" align="center" class="col-md-12">
+				<div ng-repeat="intake in intakes"  uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="addRemoveIntake(intake)"  ng-style="{'background': intake.colour}" ng-class="{circleSelected: intakeIncluded(intake)}" class="circle circleSelector"></div>
+			</div>
+		</div>
+		<p ng-if="showIntakes" align="center"><a ng-click="showIntakesClick()">Hide Intakes</a></p>
+	</div>
+</div>
