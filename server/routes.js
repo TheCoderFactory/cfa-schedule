@@ -7,7 +7,7 @@ var auth = require('./auth/auth.service');
 module.exports = function (app) {
 
   // API
-  app.use('/api/award-disciplines', auth.isAuthenticated(), require('./api/award-discipline'));
+  app.use('/api/award-disciplines', require('./api/award-discipline'));
   app.use('/api/disciplines', require('./api/discipline'));
   app.use('/api/awards', require('./api/award'));
   app.use('/api/users', require('./api/user'));
