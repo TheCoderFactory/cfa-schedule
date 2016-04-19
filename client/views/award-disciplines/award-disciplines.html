@@ -29,6 +29,13 @@
 	<div class="row">
 		<h1>Assign an Award</h1>
 		<form ng-submit="vm.createAwardDiscipline()">
+			<!-- Registrations -->
+		  <div class="form-group col-md-12">
+<!-- 		  	<label for="registrationInput">Registrations</label>
+				<select class="form-control" ng-model="vm.awardDisciplineData._registration" >
+				<option ng-repeat="registration in vm.registrations">{{registration._user}}</option>
+				</select> -->
+		  </div>
 		  <!-- Awards -->
 		  <div class="form-group col-md-12">
 		  	<label for="awardInput">Award</label>

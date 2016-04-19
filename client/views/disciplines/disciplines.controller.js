@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('DisciplinesCtrl', ['DisciplineService', function (DisciplineService) {
+  .controller('DisciplinesCtrl', ['DisciplineService', 'Auth', function (DisciplineService, Auth) {
 
   	var vm = this;
 	  vm.disciplineData = {};

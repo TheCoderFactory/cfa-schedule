@@ -16,7 +16,7 @@ function handleError (res, err) {
 exports.index = function (req, res) {
   AwardDiscipline
     .find()
-    .populate('_award _discipline')
+    .populate('_registration _award _discipline')
     .exec(function (err, awardDisciplines) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(awardDisciplines);

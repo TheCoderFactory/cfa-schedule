@@ -1,12 +1,18 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('AwardDisciplinesCtrl', ['AwardDisciplineService', 'AwardService', 'DisciplineService', function (AwardDisciplineService, AwardService, DisciplineService, $scope) {
+  .controller('AwardDisciplinesCtrl', ['AwardDisciplineService', 'AwardService', 'DisciplineService', 'RegistrationService', 'Auth',
+    function (AwardDisciplineService, AwardService, DisciplineService, RegistrationService, $scope, Auth) {
 
   	var vm = this;
 	  vm.awardDisciplineData = {};
 	  vm.awards = [];
 	  vm.disciplines = [];
+    //vm.registrations = [];
+
+    // RegistrationService.getIntakeRegistrations().then(function(res) {
+    //   vm.registrations = res.data;
+    // });
 
     AwardService.getAwards().then(function(res) {
 			vm.awards = res.data;

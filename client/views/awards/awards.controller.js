@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('AwardsCtrl', ['AwardService', function (AwardService) {
+  .controller('AwardsCtrl', ['AwardService', 'Auth', function (AwardService, Auth) {
 	  
 	  var vm = this;
 	  vm.awardData = {};
