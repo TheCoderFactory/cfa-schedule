@@ -4,12 +4,14 @@
   <div ng-if="!intake" class="row">
   	<div class="form-group col-md-12">
 	  	<label for="awardInput">Intake</label>
-			<select class="form-control">
-				<option ng-repeat="intake in intakes" ng-model="intake" value="intake" ng-change="getIntakeRegistrations(intake)">{{intake.name}}</option>
+			<select class="form-control" ng-model="selectedIntake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(selectedIntake)">
 			</select>
+
+			<!-- <select class="form-control">
+				<option ng-repeat="intake in intakes" ng-model="intake" value="intake" ng-click="getIntakeRegistrations(intake)">{{intake.name}}</option>
+			</select> -->
 	  </div>
   </div>
-
   <!-- registered users from intake -->
   <div ng-if="registrations" class="row">
   	<div class="form-group col-md-12">

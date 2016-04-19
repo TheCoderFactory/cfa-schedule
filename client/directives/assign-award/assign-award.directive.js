@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('assignAward', ['$http', '$q', 'AwardService', 'DisciplineService', 'RegistrationService', 'IntakeService', function ($http, $q, AwardService, DisciplineService, RegistrationService, IntakeService) {
+	.directive('assignAward', ['$http', '$q', 'AwardService', 'DisciplineService', 'RegistrationService', 'IntakeService', 'AwardDisciplineService', function ($http, $q, AwardService, DisciplineService, RegistrationService, IntakeService, AwardDisciplineService) {
 			return {
 				restict: 'E',
 				templateUrl: 'directives/assign-award/assign-award.html',
@@ -43,8 +43,9 @@ angular.module('cfaDashboard')
 
 			    // get registrations from selected intake
 			    scope.getIntakeRegistrations = function (selectedIntake) {
-			    	var intakeId = intake._id || selectedIntake._Id;
-			    	RegistrationService.getIntakeRegistrations(intakeId)
+			    	console.log(selectedIntake);
+			    	var intake = intake || selectedIntake;
+			    	RegistrationService.getIntakeRegistrations(intake._id)
 			    		.then(function (registrations) {
 			    			scope.registrations = registrations.data;
 			    		})	
@@ -54,6 +55,7 @@ angular.module('cfaDashboard')
 			    }
 
 			    scope.createAwardDiscipline = function(){
+			    	
 			    	AwardDisciplineService.createAwardDiscipline(scope.awardDisciplineData)
 			    		.then(function (awardDiscipline) {
 			    			scope.awardDisciplines.push(awardDiscipline);
