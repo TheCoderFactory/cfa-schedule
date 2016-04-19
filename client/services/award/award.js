@@ -41,6 +41,8 @@ angular.module('cfaDashboard')
 		}	
 
 		this.editAward = function(award, data){
+			console.log('Editing: ' + award.name);
+			console.log('With: ' + awardData.name + ' ' + awardData.value);
 			var deferred = $q.defer();
 			$http.put('/api/awards/' + award._id, data).then(function (res) {
 	        deferred.resolve(res);
