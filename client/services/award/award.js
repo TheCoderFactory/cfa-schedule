@@ -5,17 +5,15 @@ angular.module('cfaDashboard')
 
     this.createAward = function (data) {
     	var deferred = $q.defer();
-      $http.post('/api/awards', {
-    		name: data.name,
-    		value: data.value,
-    	}).then(function (res) {
-    			console.log('Successful Creation')
-	        deferred.resolve(res);
-	      })
-	      .catch(function (err) {
-	        deferred.reject(err.data);
-	      });
-	      return deferred.promise;
+      $http.post('/api/awards', data)
+      	.then(function (res) {
+	    			console.log('Successful Creation')
+		        deferred.resolve(res);
+		      })
+		      .catch(function (err) {
+		        deferred.reject(err.data);
+		      });
+		      return deferred.promise;
     }
 
     this.getAwards = function () {
@@ -42,14 +40,11 @@ angular.module('cfaDashboard')
 	      return deferred.promise;
 		}	
 
-		this.editAward = function(award, awardData){
+		this.editAward = function(award, data){
 			console.log('Editing: ' + award.name);
 			console.log('With: ' + awardData.name + ' ' + awardData.value);
 			var deferred = $q.defer();
-			$http.put('/api/awards/' + award._id,
-				{ name: awardData.name, 
-					value: awardData.value
-				}).then(function (res) {
+			$http.put('/api/awards/' + award._id, data).then(function (res) {
 	        deferred.resolve(res);
 	      })
 	      .catch(function (err) {

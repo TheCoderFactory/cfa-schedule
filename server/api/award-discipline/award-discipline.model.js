@@ -4,12 +4,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var AwardDisciplineSchema = new Schema({
-  award: {
+  _award: {
       type: Schema.ObjectId,
       ref: 'Award',
       required: true
   },
-  discipline: {
+  _discipline: {
       type: Schema.ObjectId,
       ref: 'Discipline',
       required: true

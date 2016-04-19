@@ -9,15 +9,12 @@ angular.module('cfaDashboard')
 	  vm.disciplines = [];
 
     AwardService.getAwards().then(function(res) {
-			for (var x in res.data) {
-				    vm.awards.push(res.data[x]);
-				}
+			vm.awards = res.data;
+
     });
 
     DisciplineService.getDisciplines().then(function(res) {
-			for (var x in res.data) {
-				    vm.disciplines.push(res.data[x]);
-				}
+      vm.disciplines = res.data;
     });
 
 

@@ -5,16 +5,14 @@ angular.module('cfaDashboard')
   
   	this.createAwardDiscipline = function (data) {
     	var deferred = $q.defer();
-      $http.post('/api/award-disciplines', {
-      	award: data.award,
-      	discipline: data.discipline
-    	}).then(function (res) {
-	        deferred.resolve(res);
-	      })
-	      .catch(function (err) {
-	        deferred.reject(err.data);
-	      });
-	      return deferred.promise;
+      $http.post('/api/award-disciplines', data)
+	      .then(function (res) {
+		        deferred.resolve(res);
+		      })
+		      .catch(function (err) {
+		        deferred.reject(err.data);
+		      });
+		      return deferred.promise;
     }
 
     this.getAwardDisciplines = function () {

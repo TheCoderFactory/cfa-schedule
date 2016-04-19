@@ -14,10 +14,15 @@ function handleError (res, err) {
  * @param res
  */
 exports.index = function (req, res) {
-  AwardDiscipline.find(function (err, awardDisciplines) {
-    if (err) { return handleError(res, err); }
-    return res.status(200).json(awardDisciplines);
-  });
+  AwardDiscipline
+    .find()
+    .populate('_award _discipline')
+    .exec(function (err, awardDisciplines) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(awardDisciplines);
+    });
+
+    
 };
 
 /**

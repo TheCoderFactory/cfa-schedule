@@ -18,9 +18,8 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				<p>Made</p>
-				<p>{{awardDiscipline.award.name}}</p>
-				<p>{{awardDiscipline.discipline.name}}</p>
+				<p>{{awardDiscipline._award.name}}</p>
+				<p>{{awardDiscipline._discipline.name}}</p>
 			</div>
 		</div>
 	</div>
@@ -33,13 +32,13 @@
 		  <!-- Awards -->
 		  <div class="form-group col-md-12">
 		  	<label for="awardInput">Award</label>
-				<select class="form-control" ng-model="vm.awardDisciplineData.award" ng-options="y.name for (x, y) in vm.awards">
+				<select class="form-control" ng-model="vm.awardDisciplineData._award" ng-options="y.name for (x, y) in vm.awards">
 				</select>
 		  </div>
 		  <!-- Disciplines -->
 		  <div class="form-group col-md-12">
 		  	<label for="disciplineInput">Discipline</label>
-				<select class="form-control" ng-model="vm.awardDisciplineData.discipline" ng-options="y.name for (x, y) in vm.disciplines">
+				<select class="form-control" ng-model="vm.awardDisciplineData._discipline" ng-options="y.name for (x, y) in vm.disciplines">
 				</select>
 		  </div>
 		 	<div class="form-group col-md-6">

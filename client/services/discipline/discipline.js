@@ -5,17 +5,15 @@ angular.module('cfaDashboard')
 
 		this.createDiscipline = function (data) {
     	var deferred = $q.defer();
-      $http.post('/api/disciplines', {
-    		name: data.name,
-    		description: data.description,
-    	}).then(function (res) {
-    			console.log('Successful Creation')
-	        deferred.resolve(res);
-	      })
-	      .catch(function (err) {
-	        deferred.reject(err.data);
-	      });
-	      return deferred.promise;
+      $http.post('/api/disciplines', data)
+	      .then(function (res) {
+	    			console.log('Successful Creation')
+		        deferred.resolve(res);
+		      })
+		      .catch(function (err) {
+		        deferred.reject(err.data);
+		      });
+		      return deferred.promise;
     }
 
     this.getDisciplines = function () {
@@ -42,19 +40,17 @@ angular.module('cfaDashboard')
 	      return deferred.promise;
 		}	
 
-		this.editDiscipline = function(discipline, disciplineData){
+		this.editDiscipline = function(discipline, data){
 			// console.log('Editing: ' + discipline.name);
 			// console.log('With: ' + disciplineData.name + ' ' + disciplineData.description);
 			var deferred = $q.defer();
-			$http.put('/api/disciplines/' + discipline._id,
-				{ name: disciplineData.name, 
-					description: disciplineData.description
-				}).then(function (res) {
-	        deferred.resolve(res);
-	      })
-	      .catch(function (err) {
-	        deferred.reject(err.data);
-	      });
-	      return deferred.promise;
+			$http.put('/api/disciplines/' + discipline._id, data)
+				.then(function (res) {
+		        deferred.resolve(res);
+		      })
+		      .catch(function (err) {
+		        deferred.reject(err.data);
+		      });
+		      return deferred.promise;
 		}
   }]);
