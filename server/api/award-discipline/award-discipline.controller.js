@@ -48,7 +48,10 @@ exports.show = function (req, res) {
 exports.create = function (req, res) {
   AwardDiscipline.create(req.body, function (err, awardDiscipline) {
     if (err) { return handleError(res, err); }
-    return res.status(201).json(awardDiscipline);
+    awardDiscipline.populate('_award _discipline', function (err, awardDiscipline) {
+      if (err) { return handleError(res, err); }
+      return res.status(201).json(awardDiscipline);
+    });
   });
 };
 
