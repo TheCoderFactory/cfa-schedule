@@ -58,7 +58,7 @@ angular.module('cfaDashboard')
 			    	
 			    	AwardDisciplineService.createAwardDiscipline(scope.awardDisciplineData)
 			    		.then(function (awardDiscipline) {
-			    			scope.awardDisciplines.push(awardDiscipline);
+			    			scope.awardDisciplines.push(awardDiscipline.data);
 			    			scope.awardDisciplineData = {};
 			    		})
 			    		.catch(function (err) {
