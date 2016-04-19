@@ -1,0 +1,51 @@
+
+<div class="container ">
+	<div class="row">
+		<ul class="nav navbar-nav">
+		  <li><a href="/awards">Awards</a></li>
+		  <li><a href="/disciplines">Disciplines</a></li>
+		</ul>
+	</div>
+</div>
+<br>
+<div class="col-md-6">
+	<h1>Assigned Awards</h1>
+	<div class="row" ng-repeat="awardDiscipline in vm.awardDisciplines">
+		<div class="panel panel-default">
+		  <div class="panel-heading">Award
+				<div class="pull-right">
+		  		<a href="" ng-click="vm.deleteAwardDiscipline(awardDiscipline._id)">Remove</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<p>{{awardDiscipline._award.name}}</p>
+				<p>{{awardDiscipline._discipline.name}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-5 col-md-offset-1">
+	<div class="row">
+		<h1>Assign an Award</h1>
+		<form ng-submit="vm.createAwardDiscipline()">
+		  <!-- Awards -->
+		  <div class="form-group col-md-12">
+		  	<label for="awardInput">Award</label>
+				<select class="form-control" ng-model="vm.awardDisciplineData._award" ng-options="y.name for (x, y) in vm.awards">
+				</select>
+		  </div>
+		  <!-- Disciplines -->
+		  <div class="form-group col-md-12">
+		  	<label for="disciplineInput">Discipline</label>
+				<select class="form-control" ng-model="vm.awardDisciplineData._discipline" ng-options="y.name for (x, y) in vm.disciplines">
+				</select>
+		  </div>
+		 	<div class="form-group col-md-6">
+			  <button class="btn btn-primary" type="submit">
+			  	New Award Discipline
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
