@@ -8,11 +8,8 @@ angular.module('cfaDashboard')
 	  vm.awards = [];
 	  vm.disciplines = [];
 
-    AwardService.getAwards().then(function(res) {
-			vm.awards = res.data;
 
-    });
-
+    
     DisciplineService.getDisciplines().then(function(res) {
       vm.disciplines = res.data;
     });
@@ -21,11 +18,6 @@ angular.module('cfaDashboard')
     angular.extend(this, {
       name: 'AwardDisciplinesCtrl'
     });
-
-    vm.createAwardDiscipline = function(){
-    	AwardDisciplineService.createAwardDiscipline(vm.awardDisciplineData);
-    	vm.getAwardDisciplines();
-    };
 
     vm.deleteAwardDiscipline = function (id) {
       AwardDisciplineService.deleteAwardDiscipline(id);

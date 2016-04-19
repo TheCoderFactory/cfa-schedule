@@ -27,25 +27,6 @@
 
 <div class="col-md-5 col-md-offset-1">
 	<div class="row">
-		<h1>Assign an Award</h1>
-		<form ng-submit="vm.createAwardDiscipline()">
-		  <!-- Awards -->
-		  <div class="form-group col-md-12">
-		  	<label for="awardInput">Award</label>
-				<select class="form-control" ng-model="vm.awardDisciplineData._award" ng-options="y.name for (x, y) in vm.awards">
-				</select>
-		  </div>
-		  <!-- Disciplines -->
-		  <div class="form-group col-md-12">
-		  	<label for="disciplineInput">Discipline</label>
-				<select class="form-control" ng-model="vm.awardDisciplineData._discipline" ng-options="y.name for (x, y) in vm.disciplines">
-				</select>
-		  </div>
-		 	<div class="form-group col-md-6">
-			  <button class="btn btn-primary" type="submit">
-			  	New Award Discipline
-				</button>
-			</div>
-		</form>
+		<assign-award award-disciplines="vm.awardDisciplines"></assign-award>
 	</div>
 </div>

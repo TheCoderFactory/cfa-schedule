@@ -1,0 +1,46 @@
+<h1>Assign an Award</h1>
+<form ng-submit="createAwardDiscipline()">
+  <!-- Select Intakes if not given -->
+  <div ng-if="!intake" class="row">
+  	<div class="form-group col-md-12">
+	  	<label for="awardInput">Intake</label>
+			<select class="form-control">
+				<option ng-repeat="intake in intakes" ng-model="intake" value="intake" ng-change="getIntakeRegistrations(intake)">{{intake.name}}</option>
+			</select>
+	  </div>
+  </div>
+
+  <!-- registered users from intake -->
+  <div ng-if="registrations" class="row">
+  	<div class="form-group col-md-12">
+	  	<label for="awardInput">For</label>
+			<select class="form-control" ng-model="awardDisciplineData._registration">
+				<option ng-repeat="registration in registrations" value="registration">{{registration._user.firstName}} {{registration._user.lastName}}</option>
+			</select>
+	  </div>
+  </div>
+
+  <!-- Awards -->
+  <div class="row">
+	  <div class="form-group col-md-12">
+	  	<label for="awardInput">Award</label>
+			<select class="form-control" ng-model="awardDisciplineData._award" ng-options="y.name for (x, y) in awards">
+			</select>
+	  </div>
+  </div>
+  <!-- Disciplines -->
+  <div class="row">
+	  <div class="form-group col-md-12">
+	  	<label for="disciplineInput">Discipline</label>
+			<select class="form-control" ng-model="awardDisciplineData._discipline" ng-options="y.name for (x, y) in disciplines">
+			</select>
+	  </div>
+  </div>
+  <div class="row">
+	 	<div class="form-group col-md-6">
+		  <button class="btn btn-primary" type="submit">
+		  	New Award Discipline
+			</button>
+		</div>
+	</div>
+</form>
