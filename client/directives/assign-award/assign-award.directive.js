@@ -12,6 +12,8 @@ angular.module('cfaDashboard')
 				}, 
 				link: function (scope, elem, attrs) {
 
+					scope.awardDisciplineData = {};
+
 					// get intakes if intake wasnt given
 					if(!scope.intake) {
 						IntakeService.getAllIntakes()
@@ -58,6 +60,7 @@ angular.module('cfaDashboard')
 			    	
 			    	AwardDisciplineService.createAwardDiscipline(scope.awardDisciplineData)
 			    		.then(function (awardDiscipline) {
+			    			console.log(awardDiscipline.data);
 			    			scope.awardDisciplines.push(awardDiscipline.data);
 			    			scope.awardDisciplineData = {};
 			    		})

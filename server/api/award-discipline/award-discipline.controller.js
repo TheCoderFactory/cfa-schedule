@@ -16,7 +16,7 @@ function handleError (res, err) {
 exports.index = function (req, res) {
   AwardDiscipline
     .find()
-    .populate('_award _discipline')
+    .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}})
     .exec(function (err, awardDisciplines) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(awardDisciplines);
@@ -48,10 +48,12 @@ exports.show = function (req, res) {
 exports.create = function (req, res) {
   AwardDiscipline.create(req.body, function (err, awardDiscipline) {
     if (err) { return handleError(res, err); }
-    awardDiscipline.populate('_award _discipline', function (err, awardDiscipline) {
-      if (err) { return handleError(res, err); }
-      return res.status(201).json(awardDiscipline);
-    });
+    awardDiscipline
+      .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}},  
+        function (err, awardDiscipline) {
+          if (err) { return handleError(res, err); }
+          return res.status(201).json(awardDiscipline);
+        });
   });
 };
 

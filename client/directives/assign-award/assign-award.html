@@ -17,11 +17,11 @@
   	<div class="form-group col-md-12">
 	  	<label for="awardInput">For</label>
 			<select class="form-control" ng-model="awardDisciplineData._registration">
-				<option ng-repeat="registration in registrations" value="registration">{{registration._user.firstName}} {{registration._user.lastName}}</option>
+				<option ng-repeat="registration in registrations" value="{{registration._id}}">{{registration._user.firstName}} {{registration._user.lastName}}</option>
 			</select>
+
 	  </div>
   </div>
-
   <!-- Awards -->
   <div class="row">
 	  <div class="form-group col-md-12">
