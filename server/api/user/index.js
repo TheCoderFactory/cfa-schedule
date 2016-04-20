@@ -9,8 +9,8 @@ var intake = require('../intake/intake.service');
 router.get('/me', auth.isAuthenticated(), controller.getMe);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.get('/exclude/:intakeId', auth.isAuthenticated(), controller.getUsersNotInIntake);
-// router.get('/:intakeId', auth.isAuthenticated(), intake.getRegistrations, controller.getUsersInIntake);
 router.get('/', auth.isAuthenticated(), controller.getAllUsers);
+router.get('/:userId', auth.isAuthenticated(), controller.getUser);
 
 
 module.exports = router;

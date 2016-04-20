@@ -10,7 +10,7 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr ng-class="termItem" ng-repeat = "user in users">
+		    <tr ng-class="termItem" ng-repeat = "user in users" ng-click="gotoUserPage(user._id)">
 		      <td>{{user.firstName}}</td>
 		      <td>{{user.lastName}}</td>
 		      <td>{{user.email}}</td>

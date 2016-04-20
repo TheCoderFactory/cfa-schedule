@@ -16,6 +16,10 @@ angular.module('cfaDashboard')
 					console.log('/intakes/' + intakeId);
 					$location.path('/intakes/' + intakeId);
 				}
+
+				scope.gotoUserPage = function (userId) {
+					$location.path('/users/' + userId);
+				}
 			}
 
 			

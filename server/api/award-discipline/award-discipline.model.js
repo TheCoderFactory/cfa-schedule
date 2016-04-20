@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var _ = require('lodash');
 
 var AwardDisciplineSchema = new Schema({
   _registration: {
@@ -20,5 +21,6 @@ var AwardDisciplineSchema = new Schema({
       required: true
   }
 });
+
 
 module.exports = mongoose.model('AwardDiscipline', AwardDisciplineSchema);

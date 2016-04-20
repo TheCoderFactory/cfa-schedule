@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var AwardDiscipline = require('./award-discipline.model');
+var User = require('../user/user.model');
 
 function handleError (res, err) {
   return res.status(500).send(err);
@@ -92,3 +93,17 @@ exports.destroy = function (req, res) {
     });
   });
 };
+
+exports.userAwardDisciplines = function (req, res) {
+  User.findById(req.params.userId, function (err, user) {
+    if (err) { return handleError(res, err); }
+    var registrationIds = user._registrations;
+    AwardDiscipline
+      .find({_registration: { $in: registrationIds}})
+      .populate('_award _discipline')
+      .exec(function(err, registrationAwardDisciplines) {
+        if (err) { return handleError(res, err); }
+        return res.json(registrationAwardDisciplines);
+      });
+  });
+}

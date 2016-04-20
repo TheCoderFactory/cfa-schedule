@@ -39,6 +39,17 @@ exports.getMe = function (req, res) {
   });
 };
 
+exports.getUser = function (req, res) {
+  User.findById(req.params.userId)
+    .populate({path: '_registrations', populate: {path: '_intake'}})
+    .exec(function (err, user) {
+      if (err) { return handleError(res, err); }
+      if (!user) { return res.json(401); }
+      res.status(200).json(user);
+    });
+};
+
+
 exports.getUsersNotInIntake = function (req, res) {
   console.log(req.params);
   var intakeId = req.params.intakeId;
@@ -70,9 +81,6 @@ exports.getUsersNotInIntake = function (req, res) {
 exports.getUsersInIntake = function (req, res) {
   var intakeRegistrations = req.registrations;
   console.log('POPULATED REGS: ' + intakeRegistrations[0]);
-  
-  
-
   
 };
 
