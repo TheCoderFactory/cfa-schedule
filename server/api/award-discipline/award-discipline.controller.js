@@ -100,7 +100,7 @@ exports.userAwardDisciplines = function (req, res) {
     var registrationIds = user._registrations;
     AwardDiscipline
       .find({_registration: { $in: registrationIds}})
-      .populate('_award _discipline')
+      .populate('_award _discipline _registration')
       .exec(function(err, registrationAwardDisciplines) {
         if (err) { return handleError(res, err); }
         return res.json(registrationAwardDisciplines);

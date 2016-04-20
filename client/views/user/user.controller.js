@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.controller('UserCtrl', ['$routeParams', '$location', 'Auth', 'AwardDisciplineService', function ($routeParams, $location, Auth, AwardDisciplineService) {
+	.controller('UserCtrl', ['$routeParams', '$location', 'Auth', function ($routeParams, $location, Auth) {
 		var vm = this;
 		console.log($routeParams);
 		vm.userId = $routeParams.userId;
@@ -10,12 +10,7 @@ angular.module('cfaDashboard')
 			.then(function (user) {
 				vm.user = user.data;
 				console.log(vm.user);
-				return AwardDisciplineService.getUserAwardDisciplines(user.data._id);
-			})
-			.then(function (awardDisciplines) {
-				vm.awardDisciplines = awardDisciplines.data;
-				console.log(awardDisciplines.data);
-			})
+			}) 
 			.catch(function (err) {
 				vm.error = err;
 			});

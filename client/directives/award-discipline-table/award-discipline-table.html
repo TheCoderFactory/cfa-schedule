@@ -30,7 +30,7 @@
       <td>{{awardDiscipline._award.name}}</td>
       <td>{{awardDiscipline._discipline.name}}</td>
       <td>{{awardDiscipline._award.value}}</td>
-      <td>{{awardDiscipline._registration._user.firstName}} {{awardDiscipline._registration._user.firstName}}</td>
+      <td><a ng-href="/users/{{awardDiscipline._registration._user._id}}" >{{awardDiscipline._registration._user.firstName}} {{awardDiscipline._registration._user.firstName}}</a></td>
       <td>
       	<div uib-popover="{{awardDiscipline._registration._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(awardDiscipline._registration._intake._id)"  ng-style="{'background': awardDiscipline._registration._intake.colour}" class="circle circleTable"></div>
 		  </td>
