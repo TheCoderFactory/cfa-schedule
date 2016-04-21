@@ -44,9 +44,6 @@ angular.module('cfaDashboard')
 					}
 				};
 				
-				scope.hideAwards = function (disciplineId) {
-					
-				};
 			}
 		};
 }]);

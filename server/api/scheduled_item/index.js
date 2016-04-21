@@ -6,10 +6,10 @@ var controller = require('./scheduled_item.controller');
 var auth = require('../../auth/auth.service');
 
 
-router.get('/:intakeId', auth.isAuthenticated(), controller.getIntakeItems);
-router.get('/', auth.isAuthenticated(), controller.getAllItems);
-router.post('/', auth.isAuthenticated(), controller.create);
-router.put('/', auth.isAuthenticated(), controller.update);
-router.delete('/:scheduledItemId', auth.isAuthenticated(), controller.delete)
+router.get('/:intakeId', controller.getIntakeItems);
+router.get('/', controller.getAllItems);
+router.post('/', controller.create);
+router.put('/', controller.update);
+router.delete('/:scheduledItemId', controller.delete)
 
 module.exports = router;
