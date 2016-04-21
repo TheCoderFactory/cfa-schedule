@@ -75,3 +75,14 @@ exports.intakeRegistrations = function (req, res) {
 		});
 };
 
+exports.getPoints = function (req, res) {
+	Registration
+		.findById(req.params.registrationId)
+		.populate({path: ' _awardDisciplines', populate: {path: '_award _discipline'}})
+		.exec(function (err, registration) {
+			if (err) { return handleError(res, err); }
+			res.json(registration.getPoints());
+		});
+
+};
+

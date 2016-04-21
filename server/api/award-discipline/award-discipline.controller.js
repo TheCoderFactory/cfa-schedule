@@ -3,11 +3,7 @@
 var _ = require('lodash');
 var AwardDiscipline = require('./award-discipline.model');
 var User = require('../user/user.model');
-<<<<<<< HEAD
 var Registration = require('../registration/registration.model');
-
-=======
->>>>>>> a78ecef6071352a9644ee72ee408092700b1ee51
 
 function handleError (res, err) {
   return res.status(500).send(err);
