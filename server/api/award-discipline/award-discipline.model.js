@@ -23,5 +23,4 @@ var AwardDisciplineSchema = new Schema({
 });
 
 
-
 module.exports = mongoose.model('AwardDiscipline', AwardDisciplineSchema);
