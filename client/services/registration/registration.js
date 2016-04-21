@@ -57,5 +57,18 @@ angular.module('cfaDashboard')
         return deferred.promise;
     }
 
+    service.getDisciplineAwards = function (registrationId, disciplineId) {
+      var deferred = $q.defer();
+      console.log('/api/registrations/awards/' + registrationId + '/' + disciplineId);
+      $http.get('/api/registrations/awards/' + registrationId + '/' + disciplineId)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    }
+
     return service;
   }]);

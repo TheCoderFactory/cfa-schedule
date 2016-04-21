@@ -9,9 +9,13 @@
 	</div>
 </div>
 
+<h2>Intake Points</h2>
 <!-- Points table -->
-<!-- <div class="row">
-	<user-points-table registration-id="{{vm.userId}}"></user-points-table>
-</div> -->
-
+<div ng-repeat="registration in vm.user._registrations">
+	<div class="row">
+		<div class="col-md-6">
+			<user-points-table registration="registration"></user-points-table>
+		</div>
+	</div>
+</div>
 

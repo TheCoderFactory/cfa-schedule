@@ -14,6 +14,7 @@ var RegistrationsSchema = new Schema({
 });
 
 RegistrationsSchema.methods.getPoints = function () {
+	var totalPoints = 0;
 	var awardDisciplines = this._awardDisciplines.toObject();
 	var groupedAwardDisciplines = _.groupBy(awardDisciplines, 
 		function (awardDiscipline) {
@@ -25,14 +26,29 @@ RegistrationsSchema.methods.getPoints = function () {
 		var disciplinePoint = arrayOfAwards[0]._discipline.toObject();
 		// total up points
 		_.forEach(arrayOfAwards, function (awardDiscipline) {
-					console.log(awardDiscipline._award);
 			points += parseInt(awardDiscipline._award.value);
 		});
 		// set discipline points
 		disciplinePoint.points = points;
+		// add to total points
+		totalPoints += points;
 		return disciplinePoint;
 	});
-	return disciplinePoints;
+
+	return {
+		disciplines: disciplinePoints,
+		totalPoints: totalPoints
+	};
+};
+
+RegistrationsSchema.methods.getDisciplineAwards = function (disciplineId) {
+	var awardDisciplines = this._awardDisciplines.toObject();
+	var disciplineAwards = _.filter(awardDisciplines, function (awardDiscipline) {
+		console.log(awardDiscipline._discipline._id + '|' + disciplineId);
+		return awardDiscipline._discipline._id == disciplineId;
+	});
+	console.log(disciplineAwards);
+	return disciplineAwards;
 };
 
 module.exports = mongoose.model('Registration', RegistrationsSchema);

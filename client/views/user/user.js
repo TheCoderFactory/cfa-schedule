@@ -6,6 +6,12 @@ angular.module('cfaDashboard')
 			.when('/users/:userId', {
 				templateUrl: 'views/user/user.html',
 				controller: 'UserCtrl',
-				controllerAs: 'vm'
+				controllerAs: 'vm',
+				resolve: {
+					userDetails: ['$route','Auth', function ($route, Auth) {
+						console.log($route.current.params.userId);
+						return Auth.getUserDetails($route.current.params.userId);
+					}] 
+				}
 			});
 	});

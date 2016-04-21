@@ -1,39 +1,19 @@
-<!-- <div class="row">
-	<div class="col-md-12">
-		<table class="table table-striped table-hover ">
-		  <thead>
-		    <tr>
-		      <th ng-repeat="discipline in disciplines">{{discipline}}</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr ng-class="termItem" ng-repeat = "user in users" ng-click="gotoUserPage(user._id)">
-		      <td>{{user.firstName}}</td>
-		      <td>{{user.lastName}}</td>
-		      <td>{{user.email}}</td>
-		      
-		      
-		    </tr>
-	   	</tbody>
-		</table>
-	</div>
-</div>
- -->
-<div ng-repeat="regObj in groupedAwardsDisciplines">
 	
-	<!-- repeat for each registration -->
-	<div ng-repeat="(registrationId, disArray) in regObj">
-		<h2>{{registrationId}}</h2>
-		{{disObj}}
-		<div ng-repeat="disObj in disArraydisObj" class="panel panel-default">
-			<div class="panel-heading">
-				{{disciplineId}}
-			</div>
-			<div class="panel-body">
-				<p ng-repeat="awardDiscipline in awardDisciplineArray">{{awardDiscipline._award.name}} ({{awardDiscipline._award.value}})</p>
-				
-			</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-href="/intake/{{registration._intake._id}}"  ng-style="{'background': registration._intake.colour}" class="circle circleTable"></div>
+			{{registration._intake.name}}
 		</div>
-	
+		
+		<div class="panel-body">
+			<div ng-repeat="discipline in disciplines">
+				<p >Total <a ng-click="showHideAwards(registration._id, discipline._id)" uib-popover="{{discipline.description}} (click to see awards)" popover-trigger="mouseenter">{{discipline.name}}</a> points: {{discipline.points}}</p>
+				<div ng-if="showAwardsFor.indexOf(discipline._id) !== -1">
+					<p ng-repeat="awardDiscopline in disciplineAwards[discipline._id] ">{{awardDiscopline._award.name}} ({{awardDiscopline._award.value}} points)</p>
+				</div>
+			</div>
+			<p><strong>Total points: {{totalPoints}}</strong>
+		</div>
 	</div>
+
 

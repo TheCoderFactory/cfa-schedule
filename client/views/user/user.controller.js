@@ -1,28 +1,12 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.controller('UserCtrl', ['$routeParams', '$location', 'Auth', 'RegistrationService', function ($routeParams, $location, Auth, RegistrationService) {
+	.controller('UserCtrl', ['$location', 'userDetails', function ($location, userDetails) {
 		var vm = this;
-		console.log($routeParams);
-		vm.userId = $routeParams.userId;
+		vm.user = userDetails.data;
 
-		Auth.getUserDetails(vm.userId)
-			.then(function (user) {
-				vm.user = user.data;
-				if (vm.user._registrations) {
-					console.log(vm.user._registrations);
-					return RegistrationService.getPoints(vm.user._registrations[0]._id);
-				}
-			})
-			.then(function (points) {
-				console.log(points);
-			}) 
-			.catch(function (err) {
-				vm.error = err;
-			});
-
-			vm.openIntake = function (intakeId) {
-				console.log('/intakes/' + intakeId);
-				$location.path('/intakes/' + intakeId);
-			};
+		vm.openIntake = function (intakeId) {
+			console.log('/intakes/' + intakeId);
+			$location.path('/intakes/' + intakeId);
+		};
 	}]);

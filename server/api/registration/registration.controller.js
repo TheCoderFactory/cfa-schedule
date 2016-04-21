@@ -83,6 +83,16 @@ exports.getPoints = function (req, res) {
 			if (err) { return handleError(res, err); }
 			res.json(registration.getPoints());
 		});
-
 };
+
+exports.getDisciplineAwards = function (req, res) {
+	console.log(req.params);
+	Registration
+		.findById(req.params.registrationId)
+		.populate({path: ' _awardDisciplines', populate: {path: '_award _discipline'}})
+		.exec(function (err, registration) {
+			if (err) { return handleError(res, err); }
+			res.json(registration.getDisciplineAwards(req.params.disciplineId));
+		});
+}
 

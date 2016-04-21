@@ -107,7 +107,7 @@ angular.module('cfaDashboard')
         .then(function (res) {
           deferred.resolve(res);
         })
-        .catch(function () {
+        .catch(function (err) {
           deferred.reject(err.data);
         });
         return deferred.promise;
