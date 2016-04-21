@@ -12,8 +12,9 @@
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
     <!-- build:css app.css -->
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/sandstone/bootstrap.min.css">
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css">
     <!-- endinject -->
 
     <link rel="stylesheet" href="styles/css/app.css">
@@ -23,13 +24,12 @@
   </head>
   <body>
 
-    <strong>cfaDashboard</strong>
-
     <nav-bar></nav-bar>
 
-    <div ng-view></div>
+    <div class="container" ng-view></div>
 
     <script src="socket.io/socket.io.js"></script>
+
 
     <!-- build:js app.js -->
 
@@ -38,22 +38,62 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-socket-io/socket.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <!-- endinject -->
 
     <!-- inject:js -->
     <script src="app.js"></script>
-    <script src="views/signup/signup.js"></script>
-    <script src="views/signup/signup.controller.js"></script>
-    <script src="views/login/login.js"></script>
-    <script src="views/login/login.controller.js"></script>
-    <script src="views/home/home.js"></script>
-    <script src="views/home/home.controller.js"></script>
-    <script src="services/auth/auth.js"></script>
-    <script src="services/socket/socket.service.js"></script>
+    <script src="directives/assign-award/assign-award.directive.js"></script>
+    <script src="directives/award-discipline-table/award-discipline-table.directive.js"></script>
+    <script src="directives/create-schedule-item/create-schedule-item.directive.js"></script>
+    <script src="directives/intake-selector/intake-selector.directive.js"></script>
     <script src="directives/nav-bar/nav-bar.directive.js"></script>
-    <!-- endinject -->
-
-    <!-- endbuild -->
+    <script src="directives/register-user/register-user.directive.js"></script>
+    <script src="directives/registration-table/registration-table.directive.js"></script>
+    <script src="directives/scheduled-items/scheduled-item.directive.js"></script>
+    <script src="directives/student-table/student-table.directive.js"></script>
+    <script src="directives/term-table/term-table.directive.js"></script>
+    <script src="directives/user-points-table/user-points-table.directive.js"></script>
+    <script src="directives/users-table/users-table.directive.js"></script>
+    <script src="services/anouncement/anouncement.js"></script>
+    <script src="services/auth/auth.js"></script>
+    <script src="services/intake/intake.js"></script>
+    <script src="services/registration/registration.js"></script>
+    <script src="services/scheduled_item/scheduled_item.js"></script>
+    <script src="services/socket/socket.service.js"></script>
+    <script src="views/anouncements/anouncements.controller.js"></script>
+    <script src="views/anouncements/anouncements.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="views/home/home.js"></script>
+    <script src="views/scheduled_item/scheduled_item.controller.js"></script>
+    <script src="views/intake/intake.controller.js"></script>
+    <script src="views/intake/intake.js"></script>
+    <script src="views/intake_details/intake_details.controller.js"></script>
+    <script src="views/intake_details/intake_details.js"></script>
+    <script src="views/login/login.controller.js"></script>
+    <script src="views/login/login.js"></script>
+    <script src="views/scheduled_item/scheduled_item.controller.js"></script>
+    <script src="views/scheduled_item/scheduled_item.js"></script>
+    <script src="views/signup/signup.controller.js"></script>
+    <script src="views/signup/signup.js"></script>
+    <script src="views/user/user.controller.js"></script>
+    <script src="views/user/user.js"></script>
+    <script src="views/users/users.controller.js"></script>
+    <script src="views/users/users.js"></script>
+    <script src="views/disciplines/disciplines.js"></script>
+    <script src="views/disciplines/disciplines.controller.js"></script>
+    <script src="views/awards/awards.js"></script>
+    <script src="views/awards/awards.controller.js"></script>
+    <script src="views/award-disciplines/award-disciplines.js"></script>
+    <script src="views/award-disciplines/award-disciplines.controller.js"></script>
+    <script src="services/discipline/discipline.js"></script>
+    <script src="services/award-discipline/award-discipline.js"></script>
+    <script src="services/award/award.js"></script>
+    <script src="services/auth/auth.js"></script>
+    <script src="filters/range/range.js"></script>
 
   </body>
 </html>

@@ -1,0 +1,80 @@
+<form ng-submit="submitScheduledItemForm()">
+	
+	<h2 align="center" ng-if="formScheduledItem._id === undefined">Create Scheduled Item</h2>
+	<h2 align="center" ng-if="formScheduledItem._id !== undefined">Edit Scheduled Item</h2> 
+	
+	<!-- Name -->
+	<div class="form-group col-md-6">
+		<label for="scheduleItemName">Name</label>
+		<input ng-model="formScheduledItem.name" type="text" class="form-control" id="scheduleItemName" placeholder="Name" required>
+	</div>
+
+	<!-- Location -->
+	<div class="form-group col-md-6">
+		<label for="scheduleItemLocation">Location</label>
+		<input ng-model="formScheduledItem.location" type="text" class="form-control" id="scheduleItemLocation" placeholder="Location" required>
+	</div>
+
+	<!-- Description -->
+	<div class="form-group col-md-12">
+		<label for="scheduleItemDescription">Description</label>
+		<textarea ng-model="formScheduledItem.description" class="form-control" id="scheduleItemDescription" placeholder="Description" required></textarea>
+	</div>
+
+	<!-- Start Date -->
+	<div class="col-md-6">
+		<label for="scheduleItemStart">Start</label>
+		<div class="input-group">
+		  <input ng-model="formScheduledItem.start" type="text"
+		  uib-datepicker-popup="mediumDate"
+		  is-open="startDatePickerIsOpen"
+		  ng-click="valuationDatePickerOpen()"
+			class="form-control" id="scheduleItemStart">
+		  <span class="input-group-btn">
+		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
+		      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+		    </button>
+		  </span>
+		</div>
+		<!-- Time -->
+		<uib-timepicker ng-model="formScheduledItem.start" ng-change="changed()" hour-step="1" minute-step="5" show-meridian="true"></uib-timepicker>
+	
+	</div>
+
+	<!-- End Date -->
+	<div class="col-md-6">
+		<label for="scheduleItemEnd">End</label>
+		<div class="input-group">
+		  <input ng-model="formScheduledItem.end" type="text"
+		  uib-datepicker-popup="mediumDate"
+		  is-open="endDatePickerIsOpen"
+		  ng-click="valuationDatePickerOpen()"
+			class="form-control" id="scheduleItemEnd">
+		  <span class="input-group-btn">
+		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'end')">
+		      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+		    </button>
+		  </span>
+		</div>
+		<!-- Time -->
+		<uib-timepicker ng-model="formScheduledItem.end" ng-change="changed()" hour-step="1" minute-step="5" show-meridian="true"></uib-timepicker>
+	
+	</div>
+
+	<!-- Type -->
+	<div class="form-group col-md-6">
+		<label for="scheduleItemType">Type</label>
+		<input ng-model="formScheduledItem.type" type="text" class="form-control" id="scheduleItemType" placeholder="Name" required>
+	</div>
+
+	<!-- Intake: if this is on the intake page then use that intake id -->
+	<div class="row">
+		<div ng-if="showIntakeSelector" class="col-md-12">
+			<hr>
+				<intake-selector intakes="intakes" show-intakes="showIntakes" form-data-intakes=formScheduledItem._intakes></intake-selector>
+			<hr>
+		</div>
+	</div>
+	<button ng-if="formScheduledItem._id === undefined" type="submit" class="btn btn-lg btn-block">Create Schedule Item</button>
+	<button ng-if="formScheduledItem._id !== undefined" type="submit" class="btn btn-lg btn-block">Edit Schedule Item</button>
+</form>

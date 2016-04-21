@@ -5,7 +5,8 @@ var router = express.Router();
 var controller = require('./intake.controller');
 var auth = require('../../auth/auth.service');
 
-router.get('/intake', auth.isAuthenticated(), controller.create);
-router.post('/create-intake', controller.create);
+router.get('/', auth.isAuthenticated(), controller.getIntakes);
+router.get('/:id', auth.isAuthenticated(), controller.getIntake);
+router.post('/create', auth.isAuthenticated(), controller.createEdit);
 
 module.exports = router;

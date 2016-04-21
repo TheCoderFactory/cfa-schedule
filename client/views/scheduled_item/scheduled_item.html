@@ -1,0 +1,15 @@
+<h1>Scheduled Items</h1>
+
+<!-- Create schedule item -->
+<div class="row">
+	<div class="col-md-6">
+		<div class="well">
+			<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems" show-intake-selector="true" show-intakes='vm.showIntakes' intakes='vm.intakes' show-create-scheduled-item="vm.showCreateScheduledItem"></create-schedule-item>
+		</div>
+	</div>
+
+<!-- Schedule items list -->
+	<div class="col-md-6">
+		<scheduled-items scheduled-items="vm.scheduledItems" form-scheduled-item = "vm.formScheduledItem" show-create-scheduled-item="vm.showCreateScheduledItem"></scheduled-items>
+	</div>
+</div>
