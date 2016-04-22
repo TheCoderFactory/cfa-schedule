@@ -22,9 +22,7 @@ exports.index = function (req, res) {
     .exec(function (err, awardDisciplines) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(awardDisciplines);
-    });
-
-    
+    });  
 };
 
 /**
@@ -50,21 +48,26 @@ exports.show = function (req, res) {
 exports.create = function (req, res) {
   AwardDiscipline.create(req.body, function (err, awardDiscipline) {
     if (err) { return handleError(res, err); }
-    // add to registration array
+    // Add to registration array
     Registration.findById(awardDiscipline._registration, function (err, registration) {
       if (err) { return handleError(res, err); }
       console.log('ADid: ' + awardDiscipline._id);
-      registration._awardDisciplines.push(awardDiscipline._id);
-      registration.save(function (err) {
-        if (err) { return handleError(res, err); }
-        // populate and send back to view
-        awardDiscipline
-          .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}},  
-            function (err, awardDiscipline) {
-              if (err) { return handleError(res, err); }
-              return res.status(201).json(awardDiscipline);
-            });
-        });
+      //Check that the registration is a student
+      if (registration.role=='Student') {
+        registration._awardDisciplines.push(awardDiscipline._id);
+        registration.save(function (err) {
+          if (err) { return handleError(res, err); }
+          // populate and send back to view
+          awardDiscipline
+            .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}},  
+              function (err, awardDiscipline) {
+                if (err) { return handleError(res, err); }
+                return res.status(201).json(awardDiscipline);
+              });
+          });
+      } else {
+        console.log('Error: Registration is not a student');
+      }
     });
   });
 };

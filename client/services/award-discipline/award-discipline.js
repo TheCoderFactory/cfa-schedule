@@ -57,7 +57,7 @@ angular.module('cfaDashboard')
 			service.summeriseDisciplines = function (registrationAwards) {
 				// group the given registration awards by disciplines
 				var disciplineAwards = disciplineGroup(registrationAwards);
-				console.log(disciplineAwards);
+				//console.log(disciplineAwards);
 				//for each discipline create an object
 				// var disciplineSummary = []
 				// _.each(disciplineAwards, function ()
