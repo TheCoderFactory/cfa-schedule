@@ -2,5 +2,5 @@
 <h1 align="center">Welcome {{vm.userDetails.firstName}}, please select an intake!</h1>
 
 <div class="welcomeDashboardCircles" align="center">
-  <div ng-repeat="registration in vm.userDetails._registrations"  uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(registration._intake._id)"  ng-style="{'background': registration._intake.colour}" class="circle circleWelcomeDashboard"></div>
+  <div ng-repeat="registration in vm.userDetails._registrations"  uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-click="vm.gotoIntake(registration._intake._id)"  ng-style="{'background': registration._intake.colour}" class="circle circleWelcomeDashboard"></div>
 </div>

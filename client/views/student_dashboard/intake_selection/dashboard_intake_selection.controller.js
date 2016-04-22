@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('DashboardIntakeSelectionCtrl', ['userDetails', function (userDetails) {
+  .controller('DashboardIntakeSelectionCtrl', ['$location', 'userDetails', function ($location, userDetails) {
     var vm = this;
-    console.log(vm.userDetails);
+    
     vm.userDetails = userDetails;
 
+    vm.gotoIntake = function (intakeId) {
+    	$location.path('/dashboard/' + intakeId + '/summary');
+    };
   }]);

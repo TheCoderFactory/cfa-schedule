@@ -104,6 +104,7 @@ angular.module('cfaDashboard')
 
     this.getUserDetails = function (userId) {
       var deferred = $q.defer();
+      
       $http.get('api/users/' + userId)
         .then(function (res) {
           deferred.resolve(res);
