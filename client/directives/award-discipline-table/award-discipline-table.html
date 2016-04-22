@@ -19,22 +19,26 @@
     <tr>
     	<th>Award</th>
       <th>Discipline</th>
-      <th>Points</th>
-      <th>User</th>
-      <th>Intake</th>
-      <th>Remove</th>
+      <th class="text-center">Points</th>
+      <th class="text-center">User</th>
+      <th class="text-center">Intake</th>
+      <th class="text-center">Remove</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-class="rowItem" ng-repeat = "awardDiscipline in awardDisciplines">
+    <tr ng-class="rowItem" ng-repeat="awardDiscipline in awardDisciplines">
       <td>{{awardDiscipline._award.name}}</td>
       <td>{{awardDiscipline._discipline.name}}</td>
-      <td>{{awardDiscipline._award.value}}</td>
-      <td><a ng-href="/users/{{awardDiscipline._registration._user._id}}" >{{awardDiscipline._registration._user.firstName}} {{awardDiscipline._registration._user.firstName}}</a></td>
-      <td>
+      <td class="text-center">{{awardDiscipline._award.value}}</td>
+      <td class="text-center">
+        <a ng-href="/users/{{awardDiscipline._registration._user._id}}" >{{awardDiscipline._registration._user.firstName}} {{awardDiscipline._registration._user.firstName}}</a>
+      </td>
+      <td class="text-center">
       	<div uib-popover="{{awardDiscipline._registration._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(awardDiscipline._registration._intake._id)"  ng-style="{'background': awardDiscipline._registration._intake.colour}" class="circle circleTable"></div>
 		  </td>
-      <td><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="deleteAwardDiscipline(awardDiscipline._id)" class="glyphicon glyphicon-trash"></span></td>
+      <td class="text-center">
+        <a><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="deleteAwardDiscipline(awardDiscipline._id)" class="glyphicon glyphicon-trash"></span></a>
+      </td>
     </tr>
 	</tbody>
 </table>

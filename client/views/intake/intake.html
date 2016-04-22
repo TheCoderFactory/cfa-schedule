@@ -100,7 +100,6 @@
 		   </div>
 	   </div>
 			<hr>
-		  
 		  <button ng-if="vm.formIntakeData._id === undefined" type="submit" class="btn btn-lg btn-block">Create Intake</button>
 		  <button ng-if="vm.formIntakeData._id !== undefined" type="submit" class="btn btn-lg btn-block">Save Changes</button>
 		</form>
@@ -112,12 +111,14 @@
 		<div class="row" ng-repeat="intake in vm.intakes | orderBy:reverse">
 			<div class="panel panel-default">
 			  <div class="panel-body intakePanel">
-			    <div class="col-xs-10">
-				    <h3 class="panel-title intakePanelElement"><a href="/intakes/{{intake._id}}">{{intake.name}}</a></h3>
-				    <div class="intakePanelElement">(<a ng-click="vm.editIntake(intake)">Edit</a>)</div>
+			  	<div class="col-xs-2">
+			    	<div class="circle pull-left intakePanelElement" ng-style="{'background': intake.colour}" ></div>
 			    </div>
-			    <div class="col-xs-2">
-			    	<div class="circle pull-right intakePanelElement" ng-style="{'background': intake.colour}" ></div>
+			    <div class="col-xs-10">
+				    <h3 class="panel-title intakePanelElement">
+				    	<a href="/intakes/{{intake._id}}">{{intake.name}}</a>
+							<a ng-click="vm.editIntake(intake)" class="pull-right">Edit</a>
+				    </h3>
 			    </div>
 			  </div>
 			</div>
