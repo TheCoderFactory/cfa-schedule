@@ -10,27 +10,46 @@ angular.module('cfaDashboard')
         resolve: {
         	userDetails: function ($cookieStore, $q, $location, Auth) {
  						var deferred = $q.defer();
-        		var userId = Auth.getUser()._id;
+        		var user = Auth.getUser();
+            
         		// temp fix - when refreshing intake selection page no access to user details
-        		if(!userId) {$location.path('/'); deferred.reject()}
-        		Auth.getUserDetails(userId)
+        		if(!user) {$location.path('/'); deferred.reject()}
+            
+            Auth.getUserDetails(user._id)
         			.then(function (userDetails) {
-        				if (userDetails.data._registrations.length > 1) {
-        					// continue and send user details
-        					deferred.resolve(userDetails.data);
-        				} else if (userDetails.data._registrations.length === 1){
-        					// redirect to summary
-        					deferred.reject();
-        					$location.path('/dashboard/' + userDetails.data._registrations[0]._id + '/summary');
-        				} else {
-        					// redurect to root
-        					deferred.reject();
-        					$location.path('/');
-        				}
-        				
+                // Check if the use is admin --> if so show all intakes
+                if (user.admin = true) {
+                  // continue and send user details
+                  deferred.resolve(userDetails.data);
+                } else {
+                  // not admin check registrations
+                  if (userDetails.data._registrations.length > 1) {
+                    // continue and send user details
+                    deferred.resolve(userDetails.data);
+                  } else if (userDetails.data._registrations.length === 1){
+                    // redirect to summary
+                    deferred.reject();
+                    $location.path('/dashboard/' + userDetails.data._registrations[0]._id + '/summary');
+                  } else {
+                    // redurect to root
+                    deferred.reject();
+                    $location.path('/');
+                  }
+                }
         			});
         			return deferred.promise;
-        	}
+        	}, 
+          allIntakes: function ($q, Auth, IntakeService) {
+            var deferred = $q.defer();
+            var user = Auth.getUser();
+            
+            // Check if the use is admin --> if so show all intakes
+            if (user.admin = true) {
+              return IntakeService.getAllIntakes();
+            } else {
+              deferred.resolve();
+            }
+          }
         }
 			});
 	});
