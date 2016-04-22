@@ -39,3 +39,14 @@ exports.signToken = function (id) {
   );
 
 };
+
+exports.adminOnly = function (req, res, next) {
+  if(req.user.admin === false){
+    // not allowed!
+    return res.send(401);
+  } else {
+    // no worries!
+    next();
+  }
+  
+};

@@ -1,0 +1,21 @@
+<h1>{{vm.user.firstName}} {{vm.user.lastName}}</h1>
+<!-- intake circles -->
+<div ng-repeat="registration in vm.user._registrations" uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-click="vm.openIntake(registration._intake._id)"  ng-style="{'background': registration._intake.colour}" class="circle circleTable"></div>
+
+<!-- Meta data -->
+<div class="row">
+	<div class="col-md-6">
+			
+	</div>
+</div>
+
+<h2>Intake Points</h2>
+<!-- Points table -->
+<div ng-repeat="registration in vm.user._registrations">
+	<div class="row">
+		<div class="col-md-6">
+			<user-points-table registration="registration"></user-points-table>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,53 @@
+<div ng-repeat="scheduledItem in scheduledItems">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-xs-10">
+					{{scheduledItem.name}} 
+					(<a ng-click="editScheduledItemClicked(scheduledItem)">Edit</a>)
+				</div>
+				<div class="col-xs-2">
+					<span ng-click="deleteScheduledItem(scheduledItem._id)" class="glyphicon glyphicon-trash pull-right"></span>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			
+			<div class="row">
+				<div class="col-md-12">
+					<p><strong>{{scheduledItem.type}}</strong></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<strong>Start: </strong>{{scheduledItem.start | date: 'MMM d, y h:mm a'}}
+				</div>
+				<div class="col-md-6">
+					<strong>End: </strong>{{scheduledItem.end | date: 'MMM d, y h:mm a'}}
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<strong>Location: </strong>{{scheduledItem.location}}
+				</div>
+				<div class="col-md-6">
+					<strong>Host: </strong>{{scheduledItem.host}}
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<p><strong>Description: </strong>
+					{{scheduledItem.description}}</p>
+				</div>
+			</div>
+		
+			<div class="row">
+				<div class="col-md-12">
+					<div ng-repeat="intake in scheduledItem._intakes" uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="gotoIntake(intake._id)"  ng-style="{'background': intake.colour}" class="circle circleAnouncementList"></div>
+				</div>
+			</div>
+		</div>
+</div>
