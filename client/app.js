@@ -51,6 +51,7 @@ angular.module('cfaDashboard', [
 
     $rootScope.$on('$routeChangeStart', function (event, next) {
       Auth.isReadyLogged().catch(function () {
+        console.log(next);
         if (next.authenticate) {
           $location.path('/');
         }

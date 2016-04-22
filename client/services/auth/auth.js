@@ -5,6 +5,7 @@ angular.module('cfaDashboard')
 
     var _user = {};
     var _ready = $q.defer();
+    
 
     if ($cookieStore.get('token')) {
       $http.get('/api/users/me')
