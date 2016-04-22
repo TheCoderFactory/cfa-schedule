@@ -50,24 +50,20 @@ exports.create = function (req, res) {
     if (err) { return handleError(res, err); }
     // Add to registration array
     Registration.findById(awardDiscipline._registration, function (err, registration) {
-      if (err) { return handleError(res, err); }
+      if (err || registration.role != 'Student') { return handleError(res, err); }
       console.log('ADid: ' + awardDiscipline._id);
       //Check that the registration is a student
-      if (registration.role=='Student') {
-        registration._awardDisciplines.push(awardDiscipline._id);
-        registration.save(function (err) {
-          if (err) { return handleError(res, err); }
-          // populate and send back to view
-          awardDiscipline
-            .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}},  
-              function (err, awardDiscipline) {
-                if (err) { return handleError(res, err); }
-                return res.status(201).json(awardDiscipline);
-              });
-          });
-      } else {
-        console.log('Error: Registration is not a student');
-      }
+      registration._awardDisciplines.push(awardDiscipline._id);
+      registration.save(function (err) {
+        if (err) { return handleError(res, err); }
+        // populate and send back to view
+        awardDiscipline
+          .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}},  
+            function (err, awardDiscipline) {
+              if (err) { return handleError(res, err); }
+              return res.status(201).json(awardDiscipline);
+            });
+        });
     });
   });
 };
