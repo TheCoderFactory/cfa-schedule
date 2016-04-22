@@ -2,8 +2,6 @@
  * Base structure
  */
 
-/* Move down content because we have a fixed navbar that is 50px tall */
-
 
 
 /*
@@ -33,7 +31,7 @@
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 51px;
+    top: 0;
     bottom: 0;
     left: 0;
     z-index: 1000;

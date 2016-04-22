@@ -22,11 +22,11 @@
     <!-- endbuild -->
 
   </head>
-  <body>
+  <body ng-controller="MainCtrl">
 
-    <nav-bar></nav-bar>
-
-    <div ng-view></div>
+    <nav-bar container="container"></nav-bar>
+    
+    <div ng-class="{'container' : container}" ng-view></div>
 
     <script src="socket.io/socket.io.js"></script>
 
@@ -46,6 +46,7 @@
 
     <!-- inject:js -->
     <script src="app.js"></script>
+    <script src="main.controller.js"></script>
     <script src="directives/assign-award/assign-award.directive.js"></script>
     <script src="directives/award-discipline-table/award-discipline-table.directive.js"></script>
     <script src="directives/create-schedule-item/create-schedule-item.directive.js"></script>

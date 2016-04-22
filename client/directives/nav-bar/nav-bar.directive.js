@@ -5,6 +5,7 @@ angular.module('cfaDashboard')
       return {
         restrict: 'E',
         templateUrl: 'directives/nav-bar/nav-bar.html',
+        scope: { container: '='},
         link: function (scope, elem, attrs) {
         	
         	// get refresh event
@@ -12,8 +13,10 @@ angular.module('cfaDashboard')
                 scope.intakeId = $routeParams.intakeId;
                 if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
                     scope.showSideBar = true;
+                    scope.container = false;
                 } else {
                     scope.showSideBar = false;
+                    scope.container = true;
                 }
             });
 
@@ -21,8 +24,10 @@ angular.module('cfaDashboard')
         	$rootScope.$on("$routeChangeStart", function (event, next, current) {
         		if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
         			scope.showSideBar = true;
+                    scope.container = false;
         		} else {
         			scope.showSideBar = false;
+                    scope.container = true;
         		}
         	});
 
