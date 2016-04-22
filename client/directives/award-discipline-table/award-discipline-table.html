@@ -37,7 +37,9 @@
       	<div uib-popover="{{awardDiscipline._registration._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(awardDiscipline._registration._intake._id)"  ng-style="{'background': awardDiscipline._registration._intake.colour}" class="circle circleTable"></div>
 		  </td>
       <td class="text-center">
-        <a><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="deleteAwardDiscipline(awardDiscipline._id)" class="glyphicon glyphicon-trash"></span></a>
+        <div class="pointerHover">
+          <span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="deleteAwardDiscipline(awardDiscipline._id)" class="glyphicon glyphicon-trash"></span>
+        </div>
       </td>
     </tr>
 	</tbody>
