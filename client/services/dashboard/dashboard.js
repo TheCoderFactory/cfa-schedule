@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.service('DashboardService', ['$q', 'IntakeService', 'ScheduledItemService', 'AnouncementService', 'RegistrationService', function ($q, IntakeService, ScheduledItemService, AnouncementService, RegistrationService) {
+	.service('DashboardService', ['$q', 'IntakeService', 'ScheduledItemService', 'AnouncementService', 'RegistrationService', 'DisciplineService', function ($q, IntakeService, ScheduledItemService, AnouncementService, RegistrationService, DisciplineService) {
 		var service = {};
 		
 		service.settings = {};
@@ -18,25 +18,30 @@ angular.module('cfaDashboard')
           return ScheduledItemService.getScheduledItems(intakeId);
         })
         .then(function (scheduledItems) {
-        	service.settings.scheduledItems = scheduledItems.data;
+        	if(scheduledItems) {service.settings.scheduledItems = scheduledItems.data; }
         	return AnouncementService.getIntakeAnouncements(intakeId);
         })
         .then(function (anouncements) {
-        	service.settings.anouncements = anouncements.data;
+        	if(anouncements) { service.settings.anouncements = anouncements.data; }
         	return RegistrationService.getIntakeRegistrations(intakeId);
         })
         .then(function (registrations) {
-        	service.settings.registrations = registrations.data;
+        	if(registrations) { service.settings.registrations = registrations.data; }
         	return RegistrationService.getIntakePoints(intakeId);
         })
         .then(function (awardPoints) {
-        	service.settings.points = awardPoints.data;
+        	if(awardPoints) { service.settings.points = awardPoints.data;}
+        	return DisciplineService.getDisciplines();
+        })
+        .then(function (disciplines) {
+        	if(disciplines) { service.settings.disciplines = disciplines.data; }
         	return deferred.resolve();
         })
-        .finally(function () {
+        .finally(function (disciplines) {
         	return deferred.resolve();
         })
         .catch(function (err) {
+        	console.log(err);
         	return deferred.reject(err);
         });
       } else {

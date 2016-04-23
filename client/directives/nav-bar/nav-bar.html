@@ -31,7 +31,7 @@
           <a href="/login">login</a>
         </li>
         <li ng-if="Auth.isLogged()">
-          <a href="#" ng-click="Auth.logout()">{{Auth.getUser().email}}</a>
+          <a href="#" ng-click="Auth.logout()">{{Auth.getUser().firstName}} {{Auth.getUser().lastName}}</a>
         </li>
         <li>
           <a href="" ng-click="Auth.logout()">logout</a>
@@ -46,36 +46,47 @@
 <!-- Dashboad horizontal nav bar: only for student dashboard pages -->
 <nav ng-if="settings.dashboardNavs" class="navbar navbar-inverse navbar-fixed-top dashboardNav">
   <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">{{settings.intake.name}}</a>
+      
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <p class="navbar-brand">CFA</p>
+      <clock></clock>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Help</a></li>
+        <li ng-if="!Auth.isLogged()">
+          <a href="/signup">signup</a>
+        </li>
+        <li ng-if="!Auth.isLogged()">
+          <a href="/login">login</a>
+        </li>
+        <li ng-if="Auth.isLogged()">
+          <a href="#" ng-click="Auth.logout()">{{Auth.getUser().firstName}} {{Auth.getUser().lastName}}</a>
+        </li>
+        <li>
+          <a href="" ng-click="Auth.logout()">logout</a>
+        </li>
       </ul>
-      <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form>
-    </div>
-  </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
 
 
 <!-- Dashboard Sidebar: only for student dashboard pages -->
   <div ng-if="settings.dashboardNavs" class="col-sm-3 col-md-2 sidebar">
-    <div>
-      {{Auth.getUser().firstName}} {{Auth.getUser().lastName}}
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="navbar-brand" href="#">{{settings.intake.name}}</p>
+      </div>
     </div>
-    <hr>
     <ul class="nav nav-sidebar">
       <li><a ng-href="/dashboard/{{settings.intake._id}}/summary">Summary</a></li>
       <li><a ng-href="/dashboard/{{settings.intake._id}}/scheduledItems">Scheduled Items</a></li>

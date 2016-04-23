@@ -2,8 +2,15 @@
 @import "../views/disciplines/disciplines";
 @import "../views/awards/awards";
 @import "../views/student_dashboard/student_dashboard";
+
+
 body {
   font-family: sans-serif;
+}
+
+.clock {
+  font-size:40px;
+  margin-left: 100px;
 }
 
 .circle {
