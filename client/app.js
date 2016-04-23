@@ -67,7 +67,9 @@ angular.module('cfaDashboard', [
     // get the intakeID for nav bar links
     $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
         if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
+          // check if a new intake dashboard has been accessed
           if(DashboardService.settings.intake._id !== $routeParams.intakeId){
+            // get all information for dashboard here -->
             IntakeService.getIntake($routeParams.intakeId)
             .then(function (intake) {
               DashboardService.settings.intake = intake.data;
