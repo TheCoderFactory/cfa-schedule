@@ -44,7 +44,39 @@ angular.module('cfaDashboard', [
 
     };
   })
+  .run(function ($rootScope, $location, $routeParams, DashboardService, IntakeService) {
+    // get refresh event
+    $rootScope.$watch('$location.path()', function (){
+        
+        if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
+          DashboardService.showDashboardLayout();
+        } else {
+           DashboardService.hideDashboardLayout();
+        }
+    });
 
+    // watch url and change navbars when on dashboard/
+    $rootScope.$on("$routeChangeStart", function (event, next, current) {
+      if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
+        DashboardService.showDashboardLayout();
+      } else {
+        DashboardService.hideDashboardLayout();
+      }
+    });
+
+    // get the intakeID for nav bar links
+    $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
+        if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
+          if(DashboardService.settings.intake._id !== $routeParams.intakeId){
+            IntakeService.getIntake($routeParams.intakeId)
+            .then(function (intake) {
+              DashboardService.settings.intake = intake.data;
+            });
+          }
+        } 
+    });
+
+  })
   .run(function ($rootScope, $location, Auth) {
 
     $rootScope.Auth = Auth;

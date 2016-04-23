@@ -63,6 +63,7 @@ angular.module('cfaDashboard')
      * Logout
      */
     this.logout = function () {
+      console.log('logging out');
       $cookieStore.remove('token');
       _user = {};
     };

@@ -1,5 +1,5 @@
 <!-- Top horizontal nave bar for admin -->
-<nav ng-if="!showSideBar" class="navbar navbar-default navbar-static-top">
+<nav ng-if="!settings.dashboardNavs" class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -41,15 +41,43 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<!-- Dashboard Sidebar: only for student dashboard pages -->
-  <div ng-if="showSideBar" class="col-sm-3 col-md-2 sidebar">
-    <div>
-      Logo
-    </div>
 
+
+<!-- Dashboad horizontal nav bar: only for student dashboard pages -->
+<nav ng-if="settings.dashboardNavs" class="navbar navbar-inverse navbar-fixed-top dashboardNav">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">{{settings.intake.name}}</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Dashboard Sidebar: only for student dashboard pages -->
+  <div ng-if="settings.dashboardNavs" class="col-sm-3 col-md-2 sidebar">
+    <div>
+      {{Auth.getUser().firstName}} {{Auth.getUser().lastName}}
+    </div>
+    <hr>
     <ul class="nav nav-sidebar">
-<!--       <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
- -->      <li><a ng-href="/dashboard/{{intakeId}}/summary">Summary</a></li>
+      <li><a ng-href="/dashboard/{{intakeId}}/summary">Summary</a></li>
       <li><a ng-href="/dashboard/{{intakeId}}/scheduledItems">Scheduled Items</a></li>
       <li><a ng-href="/dashboard/{{intakeId}}/leaderboard">Leaderboard</a></li>
       <li><a ng-href="/dashboard/{{intakeId}}/anouncements">Anouncements</a></li>
@@ -57,5 +85,8 @@
     <ul class="nav nav-sidebar">
       <li><a ng-href="/dashboard/{{intakeId}}/contact">Contact</a></li>
     </ul>
-    
+
+    <ul class="nav nav-sidebar" ng-if="Auth.getUser().admin">
+      <li><a ng-href="/">BACK TO ADMIN</a></li>
+    </ul>
   </div>

@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('DashboardIntakeSelectionCtrl', ['$location', 'userDetails', 'allIntakes', function ($location, userDetails, allIntakes) {
+  .controller('DashboardIntakeSelectionCtrl', ['$location', 'userDetails', 'allIntakes', 'DashboardService', function ($location, userDetails, allIntakes, DashboardService) {
     var vm = this;
     
-    vm.userDetails = userDetails;
+    vm.settings = DashboardService.settings;
+
+    vm.settings.userDetails = userDetails;
 
     vm.allIntakes = allIntakes.data;
 

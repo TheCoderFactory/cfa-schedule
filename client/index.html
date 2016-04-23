@@ -22,11 +22,11 @@
     <!-- endbuild -->
 
   </head>
-  <body ng-controller="MainCtrl">
+  <body ng-class="{'bodyOffset' : settings.bodyOffset}" ng-controller="MainCtrl">
 
-    <nav-bar container="container"></nav-bar>
+    <nav-bar></nav-bar>
     
-    <div ng-class="{'container' : container}" ng-view></div>
+    <div ng-class="{'container' : settings.container}" ng-view></div>
 
     <script src="socket.io/socket.io.js"></script>
 
@@ -61,6 +61,7 @@
     <script src="directives/users-table/users-table.directive.js"></script>
     <script src="services/anouncement/anouncement.js"></script>
     <script src="services/auth/auth.js"></script>
+    <script src="services/dashboard/dashboard.js"></script>
     <script src="services/intake/intake.js"></script>
     <script src="services/registration/registration.js"></script>
     <script src="services/scheduled_item/scheduled_item.js"></script>
