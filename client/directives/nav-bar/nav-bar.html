@@ -77,13 +77,13 @@
     </div>
     <hr>
     <ul class="nav nav-sidebar">
-      <li><a ng-href="/dashboard/{{intakeId}}/summary">Summary</a></li>
-      <li><a ng-href="/dashboard/{{intakeId}}/scheduledItems">Scheduled Items</a></li>
-      <li><a ng-href="/dashboard/{{intakeId}}/leaderboard">Leaderboard</a></li>
-      <li><a ng-href="/dashboard/{{intakeId}}/anouncements">Anouncements</a></li>
+      <li><a ng-href="/dashboard/{{settings.intake._id}}/summary">Summary</a></li>
+      <li><a ng-href="/dashboard/{{settings.intake._id}}/scheduledItems">Scheduled Items</a></li>
+      <li><a ng-href="/dashboard/{{settings.intake._id}}/leaderboard">Leaderboard</a></li>
+      <li><a ng-href="/dashboard/{{settings.intake._id}}/anouncements">Anouncements</a></li>
     </ul>
     <ul class="nav nav-sidebar">
-      <li><a ng-href="/dashboard/{{intakeId}}/contact">Contact</a></li>
+      <li><a ng-href="/dashboard/{{settings.intake._id}}/contact">Contact</a></li>
     </ul>
 
     <ul class="nav nav-sidebar" ng-if="Auth.getUser().admin">

@@ -3,6 +3,7 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var _ = require('lodash');
 
 var UserSchema = new Schema({
   firstName: {type: String, required: true},
@@ -83,6 +84,21 @@ UserSchema.methods = {
     if (!password || !this.salt) { return ''; }
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+
+  // check intake registration
+  registrationCheck: function (intakeIdForCheck) {
+    var registrations = this._registrations.toObject();
+    console.log(registrations);
+    if (registrations.length < 1) {return false; }
+    var intakeIds = _.map(registrations, '_intake'); 
+    console.log(intakeIds);
+    console.log(intakeIdForCheck);
+    return _.some(intakeIds, function (intakeId) {
+      if(intakeId == intakeIdForCheck){
+        return true;
+      }
+    });
   }
 
 };

@@ -3,13 +3,16 @@
 angular.module('cfaDashboard')
   .service('Auth', function ($rootScope, $cookieStore, $q, $http) {
 
+    var service = this;
     var _user = {};
     var _ready = $q.defer();
     
-
+    console.log($cookieStore.get('token'));
+    
     if ($cookieStore.get('token')) {
       $http.get('/api/users/me')
         .then(function (res) {
+          console.log(res);
           _user = res.data;
         })
         .finally(function () {
@@ -19,6 +22,7 @@ angular.module('cfaDashboard')
       _ready.resolve();
     }
 
+    console.log(_user);
     /**
      * Signup
      *
@@ -30,6 +34,7 @@ angular.module('cfaDashboard')
       $http.post('/api/users', user)
         .then(function (res) {
           _user = res.data.user;
+          service.setCurrentUser(_user);
           $cookieStore.put('token', res.data.token);
           deferred.resolve();
         })
@@ -50,6 +55,7 @@ angular.module('cfaDashboard')
       $http.post('/auth/local', user)
         .then(function (res) {
           _user = res.data.user;
+          service.setCurrentUser(_user);
           $cookieStore.put('token', res.data.token);
           deferred.resolve();
         })
@@ -63,7 +69,7 @@ angular.module('cfaDashboard')
      * Logout
      */
     this.logout = function () {
-      console.log('logging out');
+      service.removeCurrentUser();
       $cookieStore.remove('token');
       _user = {};
     };
@@ -94,14 +100,34 @@ angular.module('cfaDashboard')
       return def.promise;
     };
 
-    /**
-     * Returns the user
-     *
-     * @returns {object}
-     */
+   
+    // methods -->
+
+    
     this.getUser = function () {
-      return _user;
+
+      if(service._user) {
+        return service._user;
+      } else if($cookieStore.get('user')) {
+        service.setCurrentUser($cookieStore.get('user'));
+        return service._user;
+      } else {
+        return {};
+      }
     };
+
+    this.setCurrentUser = function(u){
+       service._user = u;
+       $cookieStore.put('user', u);
+    };
+
+    this.removeCurrentUser = function(){
+        service._user = null;
+        $cookieStore.remove('user');
+    }
+
+    // USER SERVER REQUESTS -->
+
 
     this.getUserDetails = function (userId) {
       var deferred = $q.defer();
@@ -131,6 +157,18 @@ angular.module('cfaDashboard')
     this.getUnregisteredUsers = function (intakeId) {
       var deferred = $q.defer();
       $http.get('/api/users/exclude/' + intakeId)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    };
+
+    this.checkRegistration = function (userId, intakeId) {
+      var deferred = $q.defer();
+      $http.get('/api/users/checkRegistration/' + userId + '/' + intakeId)
         .then(function (res) {
           deferred.resolve(res);
         })
