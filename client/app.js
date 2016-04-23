@@ -45,6 +45,7 @@ angular.module('cfaDashboard', [
     };
   })
   .run(function ($rootScope, $location, $routeParams, $route,  DashboardService, IntakeService, Auth) {
+    
     // get refresh event
     $rootScope.$watch('$location.path()', function (){
         
@@ -55,20 +56,11 @@ angular.module('cfaDashboard', [
         }
     });
 
-    
     // get the intakeID for nav bar links
     $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
         if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
           // render layout
           DashboardService.showDashboardLayout();
-          // check if a new intake dashboard has been accessed
-          if(DashboardService.settings.intake._id !== $routeParams.intakeId){
-            // get all information for dashboard here -->
-            IntakeService.getIntake($routeParams.intakeId)
-            .then(function (intake) {
-              DashboardService.settings.intake = intake.data;
-            });
-          }
         } else {
           // not dashboard url - hide layout - do nothing else
           DashboardService.hideDashboardLayout();

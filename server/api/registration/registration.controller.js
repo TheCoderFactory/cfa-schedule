@@ -37,10 +37,8 @@ exports.create = function (req, res) {
 						if (err) { return handleError(res, err); }
 						res.json(registration);
 					})
-				
 			});
 		});
-
 	});
 };
 
@@ -73,6 +71,22 @@ exports.intakeRegistrations = function (req, res) {
 	    if (!registrations) { return res.send(401); }
 			res.json(registrations);
 		});
+};
+
+exports.getPointsForMultiple = function (req, res) {
+	var registrationPoints = {};
+	var intakeId = req.params.intakeId;
+	Registration
+		.find({_intake: intakeId})
+		.populate({path: ' _awardDisciplines', populate: {path: '_award _discipline'}})
+		.exec(function (err, registrations) {
+			if (err) { return next(err); }
+	     registrations.forEach(function (registration) {
+	     	registrationPoints[registration._id] = registration.getPoints();
+	    });
+	     return res.json(registrationPoints);
+		});
+		
 };
 
 exports.getPoints = function (req, res) {

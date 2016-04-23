@@ -44,6 +44,18 @@ angular.module('cfaDashboard')
         return deferred.promise;
     }
 
+    service.getIntakePoints = function (intakeId) {
+      var deferred = $q.defer();
+      $http.get('/api/registrations/intakePoints/' + intakeId)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    }
+
     service.getPoints = function (registrationId) {
       var deferred = $q.defer();
       console.log('/api/registrations/points/' + registrationId);

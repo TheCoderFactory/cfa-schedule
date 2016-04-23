@@ -7,6 +7,7 @@ var auth = require('../../auth/auth.service');
 
 router.post('/', controller.create);
 router.get('/', controller.getAnouncements);
+router.get('/:intakeId', controller.getIntakeAnouncements);
 router.put('/', controller.update)
 router.delete('/:anouncementId', controller.delete)
 

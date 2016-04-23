@@ -105,9 +105,9 @@ exports.checkRegistration = function (req, res) {
     .populate('_registrations')
     .exec(function (err, user) {
       if (err) { return handleError(res, err); }
-      if(user.admin) {res.send('you are admin, do whatever you like!');}
+      if(user.admin) {return res.send('you are admin, do whatever you like!');}
       if (user.registrationCheck(req.params.intakeId)) {
-        res.send('All good, you are registered!');
+        return res.send('All good, you are registered!');
       } else {
         if (err) { return handleError(res, 'Not registered in this intake!'); }
       }

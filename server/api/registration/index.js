@@ -9,6 +9,7 @@ var intakeService = require('../intake/intake.service.js');
 router.post('/create', intakeService.hasIntake , controller.create);
 router.get('/:intakeId', controller.intakeRegistrations);
 router.get('/points/:registrationId', controller.getPoints);
+router.get('/intakePoints/:intakeId', controller.getPointsForMultiple);
 router.get('/awards/:registrationId/:disciplineId', controller.getDisciplineAwards);
 router.delete('/delete/:registrationId/:userId', controller.delete);
 
