@@ -20,7 +20,11 @@ angular.module('cfaDashboard')
       login: function () {
         Auth.login(vm.user)
           .then(function () {
-            $location.path('/');
+            if(Auth.getUser().admin) {
+              $location.path('/intakes');
+            } else {
+              $location.path('/dashboard/intakeSelection');
+            }
           })
           .catch(function (err) {
             vm.error = err;

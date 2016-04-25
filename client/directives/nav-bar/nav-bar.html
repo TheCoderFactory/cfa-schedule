@@ -14,12 +14,16 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul ng-if="Auth.getUser().admin" class="nav navbar-nav">
         <li><a href="/intakes">Intakes</a></li>
         <li><a href="/users">Users</a></li>
         <li><a href="/scheduledItems">Schedule Item</a></li>
         <li><a href="/anouncements">Anouncements</a></li>
         <li><a href="/award-disciplines">Awards</a></li>
+        <li><a href="/dashboard/intakeSelection">Student Dashboards</a></li>
+      </ul>
+
+      <ul ng-if="!Auth.getUser().admin" class="nav navbar-nav">
         <li><a href="/dashboard/intakeSelection">Student Dashboards</a></li>
       </ul>
       
@@ -34,7 +38,7 @@
           <a href="#" ng-click="Auth.logout()">{{Auth.getUser().firstName}} {{Auth.getUser().lastName}}</a>
         </li>
         <li>
-          <a href="" ng-click="Auth.logout()">logout</a>
+          <a ng-if="Auth.isLogged()" ng-click="Auth.logout()">logout</a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -18,7 +18,7 @@ angular.module('cfaDashboard')
             Auth.getUserDetails(user._id)
         			.then(function (userDetails) {
                 // Check if the use is admin --> if so show all intakes
-                if (user.admin = true) {
+                if (user.admin === true) {
                   // continue and send user details
                   deferred.resolve(userDetails.data);
                 } else {
@@ -29,7 +29,7 @@ angular.module('cfaDashboard')
                   } else if (userDetails.data._registrations.length === 1){
                     // redirect to summary
                     deferred.reject();
-                    $location.path('/dashboard/' + userDetails.data._registrations[0]._id + '/summary');
+                    $location.path('/dashboard/' + userDetails.data._registrations[0]._intake._id + '/summary');
                   } else {
                     // redurect to root
                     deferred.reject();
@@ -44,7 +44,7 @@ angular.module('cfaDashboard')
             var user = Auth.getUser();
             
             // Check if the use is admin --> if so show all intakes
-            if (user.admin = true) {
+            if (user.admin === true) {
               return IntakeService.getAllIntakes();
             } else {
               deferred.resolve();

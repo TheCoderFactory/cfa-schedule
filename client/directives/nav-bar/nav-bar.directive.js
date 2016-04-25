@@ -8,10 +8,9 @@ angular.module('cfaDashboard')
         scope: { },
         link: function (scope, elem, attrs) {
         	
-            scope.Auth = Auth;
-        	scope.settings = DashboardService.settings;
-            
-            scope.intakeId = $routeParams.intakeId;
+          scope.Auth = Auth;
+          scope.settings = DashboardService.settings;
+          scope.intakeId = $routeParams.intakeId;
 
         }
       };

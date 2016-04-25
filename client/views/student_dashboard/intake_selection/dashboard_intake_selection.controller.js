@@ -8,7 +8,10 @@ angular.module('cfaDashboard')
 
     vm.settings.userDetails = userDetails;
 
-    vm.allIntakes = allIntakes.data;
+    if (allIntakes) {
+    	vm.allIntakes = allIntakes.data;
+    }
+    
 
     vm.gotoIntake = function (intakeId) {
     	$location.path('/dashboard/' + intakeId + '/summary');

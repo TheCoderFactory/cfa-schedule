@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.use('/api/award-disciplines', auth.isAuthenticated(), require('./api/award-discipline'));
   app.use('/api/disciplines', auth.isAuthenticated(), require('./api/discipline'));
   app.use('/api/awards', auth.isAuthenticated(), require('./api/award'));
-  app.use('/api/users', auth.isAuthenticated(), auth.adminOnly, require('./api/user'));
+  app.use('/api/users', auth.isAuthenticated(), require('./api/user'));
   app.use('/api/scheduled_items', require('./api/scheduled_item'));
   app.use('/api/intakes', auth.isAuthenticated(), require('./api/intake'));
   app.use('/api/registrations', auth.isAuthenticated(), require('./api/registration'));

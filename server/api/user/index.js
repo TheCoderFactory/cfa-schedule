@@ -7,7 +7,7 @@ var auth = require('../../auth/auth.service');
 var intake = require('../intake/intake.service');
 
 router.get('/me', controller.getMe);
-router.post('/', controller.create);
+router.post('/', auth.adminOnly, controller.create);
 router.get('/exclude/:intakeId', controller.getUsersNotInIntake);
 router.get('/', controller.getAllUsers);
 router.get('/:userId', controller.getUser);

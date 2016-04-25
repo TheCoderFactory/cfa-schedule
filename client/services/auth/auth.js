@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .service('Auth', function ($rootScope, $cookieStore, $q, $http) {
+  .service('Auth', function ($rootScope, $cookieStore, $q, $http, $location) {
 
     var service = this;
     var _user = {};
@@ -72,6 +72,7 @@ angular.module('cfaDashboard')
       service.removeCurrentUser();
       $cookieStore.remove('token');
       _user = {};
+      $location.path('/login');
     };
 
     /**

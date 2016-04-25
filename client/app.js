@@ -83,4 +83,16 @@ angular.module('cfaDashboard', [
       });
     });
 
+    // dont allow non -admin to view admin pages
+    $rootScope.$on('$routeChangeStart', function (event, next) {
+      if(Auth.isLogged()) {
+        if (!Auth.getUser().admin) {
+          if(next.$$route.originalPath.indexOf('dashboard') < 1 && next.$$route.originalPath.indexOf('login') < 1) {
+            console.log('adsasd');
+            $location.path('/dashboard/intakeSelection');
+          } 
+        }
+      }
+    });
+
   });
