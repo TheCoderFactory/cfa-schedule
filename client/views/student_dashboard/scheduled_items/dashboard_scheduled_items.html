@@ -1,7 +1,10 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">Scheduled Items</h1>
 
-  
-  <h2 class="sub-header">Section title</h2>
-  
+  <div style="display:inline-block; min-height:290px;">
+    <uib-datepicker ng-click="scheduledItems(date)" ng-model="vm.date" class="well well-sm" datepicker-options="options"></uib-datepicker>
+  </div>
+
+  <h2 class="sub-header">{{vm.date | date: 'EEEE, MMMM d'}} Schedule</h2>
+  <daily-schedule-table date="vm.date"></daily-schedule-table>
 </div>
