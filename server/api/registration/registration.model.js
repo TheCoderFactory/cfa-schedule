@@ -20,7 +20,10 @@ RegistrationsSchema.methods.getPoints = function () {
 		function (awardDiscipline) {
 			return awardDiscipline._discipline._id
 		});
-	var disciplinePoints = _.map(groupedAwardDisciplines, function (arrayOfAwards, disciplineId) {
+	
+	var disciplinePoints = {};
+
+	_.forEach(groupedAwardDisciplines, function (arrayOfAwards, disciplineId) {
 		var points = 0;
 		// initially get all discipline details -> will all be the same
 		var disciplinePoint = arrayOfAwards[0]._discipline.toObject();
@@ -32,13 +35,11 @@ RegistrationsSchema.methods.getPoints = function () {
 		disciplinePoint.points = points;
 		// add to total points
 		totalPoints += points;
-		return disciplinePoint;
+		disciplinePoints[disciplinePoint._id] = disciplinePoint;
 	});
 
-	return {
-		disciplines: disciplinePoints,
-		totalPoints: totalPoints
-	};
+	disciplinePoints.totalPoints = totalPoints;	
+	return disciplinePoints;
 };
 
 RegistrationsSchema.methods.getDisciplineAwards = function (disciplineId) {

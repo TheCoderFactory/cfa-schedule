@@ -10,7 +10,10 @@ angular.module('cfaDashboard')
 		service.getDashboardData = function (intakeId) {
 			var deferred = $q.defer();
 			// check if a new intake dashboard has been accessed
+      console.log(intakeId);
+      console.log(service.settings.intake._id);
       if(service.settings.intake._id !== intakeId){
+        console.log('getting it all...');
         // get all information for dashboard here -->
         IntakeService.getIntake(intakeId)
         .then(function (intake) {
@@ -67,6 +70,20 @@ angular.module('cfaDashboard')
 			service.settings.bodyOffset = false;
 			// hide dashboard nav bars
 			service.settings.dashboardNavs = false;
+		};
+
+		
+
+		service.rankedRegistrations = function () {
+			var ranked = _.sortBy(service.settings.registrations, function (registration) {
+    		if(service.settings.points[registration._id].totalPoints) {
+    			console.log(service.settings.points[registration._id]);
+    			return -1 * service.settings.points[registration._id].totalPoints;
+    		} else {
+    			return 0;
+    		}
+    	});
+    	return ranked;
 		};
 
 

@@ -62,7 +62,8 @@ angular.module('cfaDashboard', [
           // render layout
           DashboardService.showDashboardLayout();
         } else {
-          // not dashboard url - hide layout - do nothing else
+          // not dashboard url - hide layout - and clear dashboard settings
+          DashboardService.settings.intake = {};
           DashboardService.hideDashboardLayout();
         }
     });
