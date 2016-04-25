@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover ">
+<table ng-if="selectedScheduledItems.length > 0" class="table table-hover ">
   <thead>
     <tr>
       <th>Start/Finish</th>
@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-class="rowItem" ng-repeat = "scheduledItem in selectedScheduledItems">
+    <tr ng-class="{'active' : scheduledItem === selectedScheduledItem}" ng-click="selectScheduledItem(scheduledItem)" ng-class="rowItem" ng-repeat = "scheduledItem in selectedScheduledItems">
       <td>
         <p>{{scheduledItem.start | date: 'shortTime'}}</p>
         <p>{{scheduledItem.end | date: 'shortTime'}}</p>
@@ -18,3 +18,4 @@
 	</tbody>
 </table>
 
+<p ng-if="selectedScheduledItems.length < 1"><i>Sorry, there are no scheduled items currently scheduled for this day</i></p>

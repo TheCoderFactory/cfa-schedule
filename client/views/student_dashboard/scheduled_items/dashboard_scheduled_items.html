@@ -1,10 +1,17 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">Scheduled Items</h1>
 
-  <div style="display:inline-block; min-height:290px;">
-    <uib-datepicker ng-click="scheduledItems(date)" ng-model="vm.date" class="well well-sm" datepicker-options="options"></uib-datepicker>
+  <div class="row">
+  	<div class="col-md-4">
+		  <div style="display:inline-block; min-height:290px;">
+		    <uib-datepicker ng-model="vm.date" class="well well-sm" datepicker-options="options"></uib-datepicker>
+		  </div>
+	  </div>
+	  <div ng-if="vm.selectedScheduledItems.length > 0" class="col-md-8">
+	  	<scheduled-item-info default-item="vm.selectedScheduledItems[0]" selected-scheduled-item="vm.selectedScheduledItem"></scheduled-item-info>
+	  </div>
   </div>
 
   <h2 class="sub-header">{{vm.date | date: 'EEEE, MMMM d'}} Schedule</h2>
-  <daily-schedule-table date="vm.date"></daily-schedule-table>
+  <daily-schedule-table date="vm.date" selected-scheduled-item="vm.selectedScheduledItem" selected-scheduled-items="vm.selectedScheduledItems"></daily-schedule-table>
 </div>
