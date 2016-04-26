@@ -23,9 +23,11 @@ angular.module('cfaDashboard')
 
     vm.onEditClick = function(discipline) {
       discipline.isEditing = true;
+      vm.disciplineData = discipline;
     };
 
     vm.editDiscipline = function (discipline, disciplineData) {
+      disciplineData.isEditing = false;
       DisciplineService.editDiscipline(discipline, disciplineData);
       vm.disciplineData = {}; //Clear Cache
       vm.getDisciplines();

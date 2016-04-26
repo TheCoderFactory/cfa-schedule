@@ -17,13 +17,11 @@
 	  <div ng-if="discipline.isEditing">
 		  <form ng-if="discipline.isEditing" ng-submit="editDiscipline">
 			  <input class="form-control"
-			      ng-value="discipline.name"
 			      ng-model="vm.disciplineData.name"/>
 			  <!-- Description -->
   			<textarea 
   				name="editDescription"
   				ng-model="vm.disciplineData.description" class="form-control" rows="4">
-
   			</textarea>
 			</form>
 			<!-- Buttons to Edit an Discipline -->
