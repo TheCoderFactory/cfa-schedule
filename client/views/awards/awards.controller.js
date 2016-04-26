@@ -12,11 +12,13 @@ angular.module('cfaDashboard')
 
     vm.createAward = function(){
     	AwardService.createAward(vm.awardData);
+      vm.awardData = {}; //Clear Cache
     	vm.getAwards();
     };
 
     vm.onCancelClick = function(award) {
       award.isEditing = false;
+      vm.awardData = {}; //Clear Cache
     };
 
     vm.onEditClick = function(award) {

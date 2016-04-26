@@ -12,11 +12,13 @@ angular.module('cfaDashboard')
 
     vm.createDiscipline = function(){
     	DisciplineService.createDiscipline(vm.disciplineData);
+      vm.disciplineData = {}; //Clear Cache
     	vm.getDisciplines();
     };
 
     vm.onCancelClick = function(discipline) {
       discipline.isEditing = false;
+      vm.disciplineData = {}; //Clear Cache
     };
 
     vm.onEditClick = function(discipline) {
