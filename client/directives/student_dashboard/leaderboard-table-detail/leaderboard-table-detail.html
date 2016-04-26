@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-if="registration.role === 'Student'" ng-class="rowItem" ng-repeat = "registration in rankedRegistrations">
+    <tr ng-click="getAwardDetails(registration)" ng-if="registration.role === 'Student'" ng-class="rowItem" ng-repeat = "registration in rankedRegistrations">
       <td ng-if="$index > 0">{{$index + 1}}</td>
       <td ng-if="$index === 0"><span class="glyphicon glyphicon-king"></span></td>
       <td>{{registration._user.image}}</td>

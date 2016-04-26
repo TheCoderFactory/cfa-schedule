@@ -88,7 +88,6 @@ angular.module('cfaDashboard', [
       if(Auth.isLogged()) {
         if (!Auth.getUser().admin) {
           if(next.$$route.originalPath.indexOf('dashboard') < 1 && next.$$route.originalPath.indexOf('login') < 1) {
-            console.log('adsasd');
             $location.path('/dashboard/intakeSelection');
           } 
         }

@@ -16,7 +16,7 @@ angular.module('cfaDashboard')
 			RegistrationService.getPoints(scope.registration._id)
 				.then(function (registrationPoints) {
 					console.log(registrationPoints.data);
-					scope.disciplines = registrationPoints.data.disciplines;
+					scope.disciplines = registrationPoints.data;
 					scope.totalPoints = registrationPoints.data.totalPoints;
 				})
 				.catch(function (err) {

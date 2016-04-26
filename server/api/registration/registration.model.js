@@ -52,4 +52,13 @@ RegistrationsSchema.methods.getDisciplineAwards = function (disciplineId) {
 	return disciplineAwards;
 };
 
+RegistrationsSchema.methods.getAllAwards = function () {
+	var awardDisciplines = this._awardDisciplines.toObject();
+	var disciplineAwards = _.groupBy(awardDisciplines, function (awardDiscipline) {
+		return awardDiscipline._discipline._id;
+	});
+	console.log(disciplineAwards);
+	return disciplineAwards;
+};
+
 module.exports = mongoose.model('Registration', RegistrationsSchema);

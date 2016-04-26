@@ -1,6 +1,12 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  <h1 class="page-header">Leaderboard</h1>
+  <h1 ng-if="!vm.awardDetails" class="page-header">Leaderboard</h1>
 
-  <leaderboard-table-detail></leaderboard-table-detail>
+  <leaderboard-table-detail ng-if="!vm.awardDetails" select-registration="vm.selectRegistration" award-details="vm.awardDetails"></leaderboard-table-detail>
   
+  <div ng-if="vm.awardDetails">
+	  <h2 class="section-header">{{vm.selectRegistration._user.firstName}} {{vm.selectRegistration._user.lastName}} Awards</h2>
+	  <p><a ng-click="vm.clearAwardDetails()">(Back to leader board)</a></p>
+	  <registration-award-details award-details="vm.awardDetails"></registration-award-details>
+	</div>
+
 </div>

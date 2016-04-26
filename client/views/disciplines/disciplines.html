@@ -20,9 +20,10 @@
 			  <!-- Description -->
   			<textarea 
   				name="editDescription"
+  				ng-value="discipline.description"
   				ng-model="vm.disciplineData.description" class="form-control" rows="4">
-
   			</textarea>
+  			{{vm.disciplineData}}
 			</form>
 			<!-- Buttons to Edit an Discipline -->
 			<button ng-if="discipline.isEditing"

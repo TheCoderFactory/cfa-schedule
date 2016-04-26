@@ -71,8 +71,19 @@ angular.module('cfaDashboard')
 
     service.getDisciplineAwards = function (registrationId, disciplineId) {
       var deferred = $q.defer();
-      console.log('/api/registrations/awards/' + registrationId + '/' + disciplineId);
       $http.get('/api/registrations/awards/' + registrationId + '/' + disciplineId)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    };
+
+    service.getAllAwards = function (registrationId) {
+      var deferred = $q.defer();
+      $http.get('/api/registrations/awards/' + registrationId)
         .then(function (res) {
           deferred.resolve(res);
         })

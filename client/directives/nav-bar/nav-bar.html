@@ -35,7 +35,7 @@
           <a href="/login">login</a>
         </li>
         <li ng-if="Auth.isLogged()">
-          <a href="#" ng-click="Auth.logout()">{{Auth.getUser().firstName}} {{Auth.getUser().lastName}}</a>
+          <a ng-href="/users/{{Auth.getUser()._id}}">{{Auth.getUser().firstName}} {{Auth.getUser().lastName}}</a>
         </li>
         <li>
           <a ng-if="Auth.isLogged()" ng-click="Auth.logout()">logout</a>
@@ -73,7 +73,7 @@
           <a href="/login">login</a>
         </li>
         <li ng-if="Auth.isLogged()">
-          <a href="#" ng-click="Auth.logout()">{{Auth.getUser().firstName}} {{Auth.getUser().lastName}}</a>
+          <a ng-href="/users/{{Auth.getUser()._id}}">{{Auth.getUser().firstName}} {{Auth.getUser().lastName}}</a>
         </li>
         <li>
           <a href="" ng-click="Auth.logout()">logout</a>

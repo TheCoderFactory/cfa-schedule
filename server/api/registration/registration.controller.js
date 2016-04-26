@@ -99,6 +99,7 @@ exports.getPoints = function (req, res) {
 		});
 };
 
+// gets a registrations awards for a particular discipline
 exports.getDisciplineAwards = function (req, res) {
 	console.log(req.params);
 	Registration
@@ -107,6 +108,18 @@ exports.getDisciplineAwards = function (req, res) {
 		.exec(function (err, registration) {
 			if (err) { return handleError(res, err); }
 			res.json(registration.getDisciplineAwards(req.params.disciplineId));
+		});
+};
+
+// gets a registrations awards for all discipline
+exports.getAllAwards = function (req, res) {
+	console.log(req.params);
+	Registration
+		.findById(req.params.registrationId)
+		.populate({path: ' _awardDisciplines', populate: {path: '_award _discipline'}})
+		.exec(function (err, registration) {
+			if (err) { return handleError(res, err); }
+			res.json(registration.getAllAwards());
 		});
 }
 
