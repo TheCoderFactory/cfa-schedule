@@ -61,7 +61,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "start": "gulp serve server/server.js",
+    "start": "node server/server.js",
     "test": "gulp test"
   }
 }
