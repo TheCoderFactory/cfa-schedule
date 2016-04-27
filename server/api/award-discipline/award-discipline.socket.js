@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var AwardDiscipline = require('./award-discipline.model');
 var Registration = require('../registration/registration.model');
 
@@ -10,9 +11,12 @@ exports.register = function (socket) {
 			.findById(AwardDiscipline._registration)
 			.populate({path: ' _awardDisciplines', populate: {path: '_award _discipline'}})
 			.exec(function (err, registration) {
-				console.log(registration.getPoints());
 				var registrationPoints = {};
-				registrationPoints['newAwardDiscipline'] = AwardDiscipline;
+				console.log(registration._awardDisciplines);
+				registrationPoints['newAwardDiscipline'] = _.find(registration._awardDisciplines, function (awardDiscipline) {
+					return awardDiscipline._id = AwardDiscipline._id;
+				});
+				registrationPoints['regFor'] = registration;
 				registrationPoints['newPoints'] = registration.getPoints();
 				
 				socket.emit('AwardDiscipline:save', registrationPoints);

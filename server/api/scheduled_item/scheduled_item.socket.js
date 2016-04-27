@@ -9,6 +9,7 @@ exports.register = function (socket) {
   });
 
   ScheduledItem.schema.post('remove', function (doc) {
+    console.log(doc);
     socket.emit('ScheduledItem:remove', doc);
   });
 

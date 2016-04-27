@@ -5,7 +5,7 @@ angular.module('cfaDashboard')
     var vm = this;
 
     vm.settings = DashboardService.settings;
-
+    console.log(vm.settings);
     vm.leader = DashboardService.rankedRegistrations()[0]._user;
 
     // update current scheduled Item every minute

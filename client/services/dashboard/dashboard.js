@@ -89,9 +89,11 @@ angular.module('cfaDashboard')
     });
     // add/remove anouncements
     Socket.on('ScheduledItem:remove', function (scheduledItem) {
+      console.log('scheduledItem');
       if(service.settings.intake._id) {
         // only display notification on intake page
         if(scheduledItem._intakes.indexOf(service.settings.intake._id) > 0) {
+
           Notification.success('Deleted Scheduled item: ' + scheduledItem.name);
           service.settings.scheduledItems = _.without(service.settings.scheduledItems, scheduledItem);
         }
@@ -103,13 +105,21 @@ angular.module('cfaDashboard')
     // watches should update leaderboard and summary
     // show notification
     Socket.on('AwardDiscipline:save', function (registrationPoints) {
-      var registrationId = _.keys(registrationPoints.newPoints)[0];
-      console.log(registrationId);
-      
-      if(service.settings.points && service.settings.registrations) {
-        var user = service.settings.registrations[registrationId]._user;
-        Notification.success(user.firstName + ' ' + user.lastName + 'was awarded ');
-        service.settings.points[registrationId] = registrationPoints.newPoints;
+      var awardedRegistration = registrationPoints.regFor;
+      console.log(registrationPoints.newAwardDiscipline);
+
+      if(service.settings.intake._id) {
+        var awardedRegistration = _.find(service.settings.registrations, function (registration) {
+          console.log(registration);
+          console.log(registrationPoints.regFor._id);
+          return registration._id === registrationPoints.regFor._id;
+        });
+        var userName = awardedRegistration._user.firstName + ' ' + awardedRegistration._user.lastName;
+        var award = registrationPoints.newAwardDiscipline._award.name;
+        var awardPoints = registrationPoints.newAwardDiscipline._award.value;
+        var discipline = registrationPoints.newAwardDiscipline._discipline.name;
+        Notification.success(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
+        service.settings.points[awardedRegistration._id] = registrationPoints.newPoints;
       }
     });
     // // add/remove anouncements
