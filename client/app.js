@@ -6,7 +6,8 @@ angular.module('cfaDashboard', [
   'ngAnimate',
   'btford.socket-io',
   'ui.bootstrap',
-  'colorpicker.module'
+  'colorpicker.module',
+  'ui-notification'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
 

@@ -53,7 +53,6 @@ exports.create = function (req, res) {
     // add to registration array
     Registration.findById(awardDiscipline._registration, function (err, registration) {
       if (err) { return handleError(res, err); }
-      console.log('ADid: ' + awardDiscipline._id);
       registration._awardDisciplines.push(awardDiscipline._id);
       registration.save(function (err) {
         if (err) { return handleError(res, err); }

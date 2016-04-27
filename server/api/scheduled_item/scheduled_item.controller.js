@@ -36,23 +36,31 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  ScheduledItem.findByIdAndUpdate(req.body._id, 
-    {
-      name: req.body.name,
-      description: req.body.description,
-      location: req.body.location,
-      start:req.body.start,
-      end: req.body.end,
-      type: req.body.type,
-      _intakes: req.body._intakes,
-      _hostId: req.body.hostId
-    },
-    function (err, scheduledItem) {
-      if (err) { errorHandler.handle(res, err, 404); }
-      console.log(scheduledItem);
-      res.json(scheduledItem);
-    });
-}
+  ScheduledItem.findOne({_id: req.body._id}, function (err, scheduledItem) {
+    
+      scheduledItem.name = req.body.name,
+      scheduledItem.description = req.body.description,
+      scheduledItem.location = req.body.location,
+      scheduledItem.start =req.body.start,
+      scheduledItem.end = req.body.end,
+      scheduledItem.type = req.body.type,
+      scheduledItem._intakes = req.body._intakes,
+      scheduledItem.host = req.body.host
+    
+
+    scheduledItem.save(function (err, scheduledItem) {
+        console.log(scheduledItem);
+        if (err) { errorHandler.handle(res, err, 404); }
+        ScheduledItem
+          .findById(scheduledItem._id)
+          .populate('_intakes')
+          .exec(function (err, scheduledItem) {
+            if (err) { errorHandler.handle(res, err, 404); }
+            res.json(scheduledItem);
+          });
+      });
+  });  
+};
 
 // Get all scheduled items for an intake
 exports.getIntakeItems = function (req, res) {
