@@ -20,7 +20,7 @@ exports.create = function (req, res) {
     end: req.body.end,
     type: req.body.type,
     _intakes: req.body._intakes,
-    _hostId: req.body.hostId
+    host: req.body.host
   });
 
   scheduledItem.save(function (err, scheduledItem) {

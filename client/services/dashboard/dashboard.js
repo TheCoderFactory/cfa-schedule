@@ -87,12 +87,12 @@ angular.module('cfaDashboard')
 		};
 
         
-        service.getCurrentScheduledItems = function () {
-            var currentItems = _.filter(service.settings.scheduledItems, function (scheduledItem) {
-                return moment().isBetween(scheduledItem.start, scheduledItem.end);
-            });
-            return currentItems;
-        }
+    service.getCurrentScheduledItems = function () {
+      var currentItems = _.filter(service.settings.scheduledItems, function (scheduledItem) {
+        return moment().isBetween(scheduledItem.start, scheduledItem.end);
+      });
+      return currentItems;
+    }
 
 		return service;
-	}]);
+}]);

@@ -4,6 +4,7 @@
       <th>Start/Finish</th>
     	<th>Class</th>
       <th>Location</th>
+      <th>Host</th>
     </tr>
   </thead>
   <tbody>
@@ -13,7 +14,8 @@
         <p>{{scheduledItem.end | date: 'shortTime'}}</p>
       </td>
       <td>{{scheduledItem.type}} - {{scheduledItem.name}}</td>
-      <td>Teacher</td>
+      <td>{{scheduledItem.location}}</td>
+      <td>{{scheduledItem.host}}</td>
     </tr>
 	</tbody>
 </table>

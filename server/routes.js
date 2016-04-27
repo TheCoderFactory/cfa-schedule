@@ -11,7 +11,7 @@ module.exports = function (app) {
   app.use('/api/disciplines', auth.isAuthenticated(), require('./api/discipline'));
   app.use('/api/awards', auth.isAuthenticated(), require('./api/award'));
   app.use('/api/users', auth.isAuthenticated(), require('./api/user'));
-  app.use('/api/scheduled_items', require('./api/scheduled_item'));
+  app.use('/api/scheduled_items', auth.isAuthenticated(), require('./api/scheduled_item'));
   app.use('/api/intakes', auth.isAuthenticated(), require('./api/intake'));
   app.use('/api/registrations', auth.isAuthenticated(), require('./api/registration'));
   app.use('/api/anouncements', auth.isAuthenticated(), require('./api/anouncement'));

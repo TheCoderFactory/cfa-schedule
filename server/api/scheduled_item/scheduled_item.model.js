@@ -10,7 +10,7 @@ var ScheduledItemSchema = new Schema({
   end: {type: Date, required: true},
   type: {type: String, required: true},
   location: {type: String, required: true},
-  _hostId: { type: mongoose.Schema.Types.ObjectId, ref:'User'},
+  host: {type: String, required: true},
   _intakes: [{type: mongoose.Schema.Types.ObjectId, ref:'Intake'}]
 });
 
