@@ -33,10 +33,8 @@ server.listen(config.port, config.ip, function () {
 
 });
 
-var path = 'cfa-schedule'
-
 if('production' == app.get('env')) {
-  app.use(express.static(path.join(__dirname, '/dist')));
+  app.use(express.static('cfa-schedule/dist'));
 }
 
 module.exports = server;
