@@ -3,8 +3,7 @@
     <tr>
       <th>Rank</th>
     	<th>Image</th>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th>Name</th>
       <th ng-repeat="discipline in settings.disciplines">{{discipline.name}}</th>
       <th>Total</th>
     </tr>
@@ -14,8 +13,7 @@
       <td ng-if="$index > 0">{{$index + 1}}</td>
       <td ng-if="$index === 0"><span class="glyphicon glyphicon-king"></span></td>
       <td>{{registration._user.image}}</td>
-      <td>{{registration._user.firstName}}</td>
-      <td>{{registration._user.lastName}}</td>
+      <td>{{registration._user.firstName}} {{registration._user.lastName}}</td>
       <td ng-repeat="discipline in settings.disciplines">{{settings.points[registration._id][discipline._id].points}}</td>
       <td>{{settings.points[registration._id].totalPoints}}</td>
     </tr>

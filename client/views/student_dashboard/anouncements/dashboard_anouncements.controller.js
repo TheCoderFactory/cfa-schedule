@@ -5,4 +5,6 @@ angular.module('cfaDashboard')
     var vm = this;
 
     vm.settings = DashboardService.settings;
+
+    vm.anouncements = _.sortBy(vm.settings.anouncements, 'updatedAt');
   }]);

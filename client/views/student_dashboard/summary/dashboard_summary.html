@@ -1,20 +1,32 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  <h1 class="page-header">Summary</h1>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6">
+      <h3>Recent Anouncements</h3>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {{vm.latestAnouncement.title}}
+          </div>
+
+          <div class="panel-body anouncementPanel">
+            <p><strong>Type: </strong>{{vm.latestAnouncement.type}}</p> 
+            <p>{{vm.latestAnouncement.description}}</p>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col-xs-6 col-sm-6">
+      <h3>Right Now</h3>
+      <scheduled-item-info ng-if="vm.currentScheduledItems.length > 0" ng-repeat="scheduledItem in vm.currentScheduledItems" default-item="scheduledItem" selected-scheduled-item="scheduledItem"></scheduled-item-info>
+      <p ng-if="vm.currentScheduledItems.length < 1"><i>Have a break, there are not items scheduled right now!</i></p>
+    </div>    
+  </div>
 
   <div class="row">
     <div class="col-xs-6 col-sm-6">
       <h4><span class="glyphicon glyphicon-king"></span> {{vm.leader.firstName}} {{vm.leader.lastName}}</h4>
       <span class="text-muted">Something else</span>
     </div>
-    <div class="col-xs-6 col-sm-6">
-      <h3>Right Now</h3>
-      <scheduled-item-info ng-if="vm.currentScheduledItems.length > 0" ng-repeat="scheduledItem in vm.currentScheduledItems" default-item="scheduledItem" selected-scheduled-item="scheduledItem"></scheduled-item-info>
-      <p ng-if="vm.currentScheduledItems.length < 1"><i>Have a break, there are not items scheduled right now!</i></p>
-    </div>
-    
-  </div>
 
-  <div class="row">
     <div class="col-xs-6 col-sm-6">
       
     </div>
@@ -22,6 +34,6 @@
 
   <h2 class="sub-header">Students</h2>
 
-  <student-table students="vm.settings.students"></student-table>
+  <student-table students="vm.settings.registrations"></student-table>
   
 </div>
