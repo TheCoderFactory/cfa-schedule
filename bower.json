@@ -1,5 +1,5 @@
 {
-  "name": "cfaDashboard",
+  "name": "cfa_dashboard",
   "version": "0.1.0",
   "dependencies": {
     "angular": "~1.4.7",
