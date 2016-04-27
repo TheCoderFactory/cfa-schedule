@@ -3,6 +3,6 @@
 module.exports = {
   ip: process.env.IP || undefined,
   mongo: {
-    uri: 'mongodb://localhost/cfa-schedule'
+    uri: process.env.MONGODB_URI
   }
 };
