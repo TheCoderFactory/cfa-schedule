@@ -14,6 +14,22 @@ angular.module('cfaDashboard')
 
 					scope.awardDisciplineData = {};
 
+
+					// get registrations from selected intake
+			    scope.getIntakeRegistrations = function (selectedIntake) {
+			    	console.log(selectedIntake);
+			    	var intake = scope.intake || selectedIntake;
+			    	RegistrationService.getIntakeRegistrations(intake._id)
+			    		.then(function (registrations) {
+			    			scope.registrations = _.filter(registrations.data, function (registration) {
+			    				return registration.role === 'Student';
+			    			});
+			    		})	
+			    		.catch(function (err) {
+			    			scope.error = err;
+			    		})
+			    }
+
 					// get intakes if intake wasnt given
 					if(!scope.intake) {
 						IntakeService.getAllIntakes()
@@ -46,27 +62,16 @@ angular.module('cfaDashboard')
 			        scope.error = err;
 			      });
 
-			    // get registrations from selected intake
-			    scope.getIntakeRegistrations = function (selectedIntake) {
-			    	console.log(selectedIntake);
-			    	var intake = intake || selectedIntake;
-			    	RegistrationService.getIntakeRegistrations(intake._id)
-			    		.then(function (registrations) {
-			    			scope.registrations = _.filter(registrations.data, function (registration) {
-			    				return registration.role === 'Student';
-			    			});
-			    		})	
-			    		.catch(function (err) {
-			    			scope.error = err;
-			    		})
-			    }
+
 
 			    scope.createAwardDiscipline = function(){
 			    	
 			    	AwardDisciplineService.createAwardDiscipline(scope.awardDisciplineData)
 			    		.then(function (awardDiscipline) {
 			    			console.log(awardDiscipline.data);
-			    			scope.awardDisciplines.push(awardDiscipline.data);
+			    			if(!scope.intake) {
+			    				scope.awardDisciplines.push(awardDiscipline.data);
+			    			}
 			    			scope.awardDisciplineData = {};
 			    		})
 			    		.catch(function (err) {
