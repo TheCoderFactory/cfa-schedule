@@ -12,6 +12,11 @@ angular.module('cfaDashboard')
 			},
 			link: function (scope, elem, attrs) {
 				
+				scope.$watch('DashboardService.settings.scheduledItems', function () {
+					console.log('watched scheduledItems');
+					scope.selectedScheduledItems = scope.scheduledItems();
+				});
+
 				scope.$watch('date', function () {
 					scope.selectedScheduledItems = scope.scheduledItems();
 				});
@@ -20,8 +25,8 @@ angular.module('cfaDashboard')
 					
 					// select items that are on selected day
 					var dateItems = _.filter(DashboardService.settings.scheduledItems, function (scheduledItem) {
-						var selectedDate = moment(scope.date);
-						var startDate = moment(scheduledItem.start);
+					var selectedDate = moment(scope.date);
+					var startDate = moment(scheduledItem.start);
 
 						return selectedDate.diff(startDate, 'hours') < 25;
 					});

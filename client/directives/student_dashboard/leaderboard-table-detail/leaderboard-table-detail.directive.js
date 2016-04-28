@@ -17,6 +17,7 @@ angular.module('cfaDashboard')
 				scope.rankedRegistrations = DashboardService.rankedRegistrations();
 
 				scope.$watch('DashboardService.settings', function () {
+					console.log('Dashboard settings changed from leaderboard-table-detail');
 					scope.rankedRegistrations = DashboardService.rankedRegistrations();
 				}, true);
 				

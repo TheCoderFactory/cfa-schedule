@@ -79,11 +79,17 @@ angular.module('cfaDashboard')
     // add/remove scheduled items
       // run this function whenever a scheduled item is created. Check if it belongs to intake, if so add it to the settings
     Socket.on('ScheduledItem:save', function (scheduledItem) {
+      console.log(scheduledItem);
       if(service.settings.intake._id) {
         // only display notification on intake page
-        if(scheduledItem._intakes.indexOf(service.settings.intake._id) > 0) {
+        if(scheduledItem._intakes.indexOf(service.settings.intake._id) > -1) {
           Notification.success('New Scheduled item: ' + scheduledItem.name);
-          service.settings.scheduledItems[scheduledItem] = scheduledItem;
+          if (service.settings.scheduledItems.indexOf(scheduledItem) > 0) {
+            service.settings.scheduledItems[scheduledItem] = scheduledItem;
+          } else {
+            service.settings.scheduledItems.push(scheduledItem);
+          }
+          
         }
       }
     });
@@ -104,31 +110,24 @@ angular.module('cfaDashboard')
     // get points of reg back - update in settings.points
     // watches should update leaderboard and summary
     // show notification
-    Socket.on('AwardDiscipline:save', function (registrationPoints) {
-      var awardedRegistration = registrationPoints.regFor;
-      console.log(registrationPoints.newAwardDiscipline);
-
+    Socket.on('AwardDiscipline:save', function (registrationPointsDetails) {
+      console.log('socket working');
       if(service.settings.intake._id) {
-        var awardedRegistration = _.find(service.settings.registrations, function (registration) {
-          console.log(registration);
-          console.log(registrationPoints.regFor._id);
-          return registration._id === registrationPoints.regFor._id;
-        });
-        var userName = awardedRegistration._user.firstName + ' ' + awardedRegistration._user.lastName;
-        var award = registrationPoints.newAwardDiscipline._award.name;
-        var awardPoints = registrationPoints.newAwardDiscipline._award.value;
-        var discipline = registrationPoints.newAwardDiscipline._discipline.name;
+        var registration = registrationPointsDetails.newAwardDiscipline._registration;
+        var user = registration._user;
+        var userName = user.firstName + ' ' + user.lastName;
+
+        var award = registrationPointsDetails.newAwardDiscipline._award.name;
+        var awardPoints = registrationPointsDetails.newAwardDiscipline._award.value;
+        var discipline = registrationPointsDetails.newAwardDiscipline._discipline.name;
+        
+        console.log(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
         Notification.success(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
-        service.settings.points[awardedRegistration._id] = registrationPoints.newPoints;
+        
+        service.settings.points[registration._id] = registrationPointsDetails.newPoints;
       }
     });
-    // // add/remove anouncements
-    // Socket.on('ScheduledItem:remove', function (scheduledItem) {
-    //   if(service.settings.scheduledItems) {
-    //     Notification.success(scheduledItem.name);
-    //     service.settings.scheduledItems = _.without(service.settings.scheduledItems, scheduledItem);
-    //   }
-    // });
+   
 
 
 
