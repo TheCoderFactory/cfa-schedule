@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.service('DashboardService', ['$q', 'Socket', 'Notification', 'IntakeService', 'ScheduledItemService', 'AnouncementService', 'RegistrationService', 'DisciplineService', function ($q, Socket, Notification, IntakeService, ScheduledItemService, AnouncementService, RegistrationService, DisciplineService) {
+	.service('DashboardService', ['$q', '$rootScope', 'Socket', 'Notification', 'IntakeService', 'ScheduledItemService', 'AnouncementService', 'RegistrationService', 'DisciplineService', function ($q, $rootScope, Socket, Notification, IntakeService, ScheduledItemService, AnouncementService, RegistrationService, DisciplineService) {
 		var service = {};
 		
 		service.settings = {};
@@ -84,18 +84,21 @@ angular.module('cfaDashboard')
         // only display notification on intake page
         if(scheduledItem._intakes.indexOf(service.settings.intake._id) > -1) {
           Notification.success('New Scheduled item: ' + scheduledItem.name);
-          if (service.settings.scheduledItems.indexOf(scheduledItem) > 0) {
+          
+          if (service.settings.scheduledItems.indexOf(scheduledItem) > -1) {
+            console.log(scheduledItem);
             service.settings.scheduledItems[scheduledItem] = scheduledItem;
           } else {
+            console.log(scheduledItem);
             service.settings.scheduledItems.push(scheduledItem);
           }
-          
+          $rootScope.$broadcast('ScheduledItemChanged');
         }
       }
     });
     // add/remove anouncements
     Socket.on('ScheduledItem:remove', function (scheduledItem) {
-      console.log('scheduledItem');
+      
       if(service.settings.intake._id) {
         // only display notification on intake page
         if(scheduledItem._intakes.indexOf(service.settings.intake._id) > 0) {
