@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('assignAward', ['$http', '$q', 'AwardService', 'DisciplineService', 'RegistrationService', 'IntakeService', 'AwardDisciplineService', function ($http, $q, AwardService, DisciplineService, RegistrationService, IntakeService, AwardDisciplineService) {
+	.directive('assignAward', ['$http', '$q', 'Auth', 'AwardService', 'DisciplineService', 'RegistrationService', 'IntakeService', 'AwardDisciplineService', function ($http, $q, Auth, AwardService, DisciplineService, RegistrationService, IntakeService, AwardDisciplineService) {
 			return {
 				restict: 'E',
 				templateUrl: 'directives/assign-award/assign-award.html',
@@ -24,6 +24,13 @@ angular.module('cfaDashboard')
 			    			scope.registrations = _.filter(registrations.data, function (registration) {
 			    				return registration.role === 'Student';
 			    			});
+			    			// additionally remove reg of student logged on
+			    			
+			    			if(!Auth.getUser().admin) {
+			    				scope.registrations = _.filter(registrations.data, function (registration) {
+				    				return registration._user._id !== Auth.getUser()._id;
+				    			});
+			    			}
 			    		})	
 			    		.catch(function (err) {
 			    			scope.error = err;
