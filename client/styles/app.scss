@@ -1,8 +1,16 @@
 @import "../views/award-disciplines/award-disciplines";
 @import "../views/disciplines/disciplines";
 @import "../views/awards/awards";
+@import "../views/student_dashboard/student_dashboard";
+
+
 body {
   font-family: sans-serif;
+}
+
+.clock {
+  font-size:40px;
+  margin-left: 100px;
 }
 
 .circle {
@@ -49,6 +57,17 @@ body {
 	text-align: center;
 	vertical-align: middle;
 }
+.circleIntakeSelectionDashboard {
+	width: 100px;
+	height: 100px;
+	margin-left: 20px;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.selectIntakes {
+	text-align: center !important;
+}
 
 .trashHover {
 	background-color: #ffe6e6 !important;
@@ -67,8 +86,6 @@ body {
 	margin-top: 10px !important;
 	cursor: pointer;
 }
-
-
 
 .intakeHeading {
 	align-items: center !important;

@@ -49,7 +49,6 @@ angular.module('cfaDashboard')
 			var deferred = $q.defer();
 			$http.get('/api/anouncements')
 				.then(function (res) {
-					console.log(res);
 					deferred.resolve(res);
 				})
 				.catch(function (err) {
@@ -57,7 +56,20 @@ angular.module('cfaDashboard')
 				})
 
 			return deferred.promise;
-		}
+		};
+
+		service.getIntakeAnouncements = function (intakeId) {
+			var deferred = $q.defer();
+			$http.get('/api/anouncements/' + intakeId)
+				.then(function (res) {
+					deferred.resolve(res);
+				})
+				.catch(function (err) {
+					deferred.reject(err.data);
+				})
+
+			return deferred.promise;
+		};
 
 		return service;
 

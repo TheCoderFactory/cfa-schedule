@@ -29,12 +29,12 @@ angular.module('cfaDashboard')
       DisciplineService.editDiscipline(discipline, disciplineData);
       vm.disciplineData = {}; //Clear Cache
       vm.getDisciplines();
-    }
+    };
 
     vm.deleteDiscipline = function (id) {
       DisciplineService.deleteDiscipline(id);
       vm.getDisciplines();
-    }
+    };
 
     vm.getDisciplines = function () {
       DisciplineService.getDisciplines()

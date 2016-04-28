@@ -6,7 +6,8 @@ angular.module('cfaDashboard', [
   'ngAnimate',
   'btford.socket-io',
   'ui.bootstrap',
-  'colorpicker.module'
+  'colorpicker.module',
+  'ui-notification'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -44,17 +45,54 @@ angular.module('cfaDashboard', [
 
     };
   })
+  .run(function ($rootScope, $location, $routeParams, $route,  DashboardService, IntakeService, Auth) {
+    
+    // get refresh event
+    $rootScope.$watch('$location.path()', function (){
+        
+        if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
+          DashboardService.showDashboardLayout();
+        } else {
+           DashboardService.hideDashboardLayout();
+        }
+    });
 
+    // get the intakeID for nav bar links
+    $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
+        if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
+          // render layout
+          DashboardService.showDashboardLayout();
+        } else {
+          // not dashboard url - hide layout - and clear dashboard settings
+          DashboardService.settings.intake = {};
+          DashboardService.hideDashboardLayout();
+        }
+    });
+
+  })
   .run(function ($rootScope, $location, Auth) {
 
     $rootScope.Auth = Auth;
 
     $rootScope.$on('$routeChangeStart', function (event, next) {
       Auth.isReadyLogged().catch(function () {
+        console.log(next);
         if (next.authenticate) {
+          console.log(next);
           $location.path('/');
         }
       });
+    });
+
+    // dont allow non -admin to view admin pages
+    $rootScope.$on('$routeChangeStart', function (event, next) {
+      if(Auth.isLogged()) {
+        if (!Auth.getUser().admin) {
+          if(next.$$route.originalPath.indexOf('dashboard') < 1 && next.$$route.originalPath.indexOf('login') < 1) {
+            $location.path('/dashboard/intakeSelection');
+          } 
+        }
+      }
     });
 
   });

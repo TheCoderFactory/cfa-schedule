@@ -8,8 +8,8 @@ var auth = require('../../auth/auth.service');
 
 router.get('/:intakeId', controller.getIntakeItems);
 router.get('/', controller.getAllItems);
-router.post('/', controller.create);
-router.put('/', controller.update);
-router.delete('/:scheduledItemId', controller.delete)
+router.post('/', auth.adminOnly, controller.create);
+router.put('/', auth.adminOnly, controller.update);
+router.delete('/:scheduledItemId', auth.adminOnly, controller.delete)
 
 module.exports = router;

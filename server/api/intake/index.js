@@ -7,6 +7,8 @@ var auth = require('../../auth/auth.service');
 
 router.get('/', controller.getIntakes);
 router.get('/:id', controller.getIntake);
-router.post('/create', controller.createEdit);
+router.post('/create', auth.adminOnly, controller.createEdit);
+
+
 
 module.exports = router;
