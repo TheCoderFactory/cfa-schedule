@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('assignAward', ['$http', '$q', 'AwardService', 'DisciplineService', 'RegistrationService', 'IntakeService', 'AwardDisciplineService', function ($http, $q, AwardService, DisciplineService, RegistrationService, IntakeService, AwardDisciplineService) {
+	.directive('assignAward', ['$http', '$q', 'Auth', 'AwardService', 'DisciplineService', 'RegistrationService', 'IntakeService', 'AwardDisciplineService', function ($http, $q, Auth, AwardService, DisciplineService, RegistrationService, IntakeService, AwardDisciplineService) {
 			return {
 				restict: 'E',
 				templateUrl: 'directives/assign-award/assign-award.html',
@@ -14,6 +14,29 @@ angular.module('cfaDashboard')
 
 					scope.awardDisciplineData = {};
 
+
+					// get registrations from selected intake
+			    scope.getIntakeRegistrations = function (selectedIntake) {
+			    	console.log(selectedIntake);
+			    	var intake = scope.intake || selectedIntake;
+			    	RegistrationService.getIntakeRegistrations(intake._id)
+			    		.then(function (registrations) {
+			    			scope.registrations = _.filter(registrations.data, function (registration) {
+			    				return registration.role === 'Student';
+			    			});
+			    			// additionally remove reg of student logged on
+			    			
+			    			if(!Auth.getUser().admin) {
+			    				scope.registrations = _.filter(registrations.data, function (registration) {
+				    				return registration._user._id !== Auth.getUser()._id;
+				    			});
+			    			}
+			    		})	
+			    		.catch(function (err) {
+			    			scope.error = err;
+			    		})
+			    }
+
 					// get intakes if intake wasnt given
 					if(!scope.intake) {
 						IntakeService.getAllIntakes()
@@ -23,6 +46,9 @@ angular.module('cfaDashboard')
 							.catch(function (err) {
 								scope.error = err;
 							});
+					} else {
+						// intake given then just get registrations
+						scope.getIntakeRegistrations();
 					}
 					
 					// Get awards
@@ -43,25 +69,16 @@ angular.module('cfaDashboard')
 			        scope.error = err;
 			      });
 
-			    // get registrations from selected intake
-			    scope.getIntakeRegistrations = function (selectedIntake) {
-			    	console.log(selectedIntake);
-			    	var intake = intake || selectedIntake;
-			    	RegistrationService.getIntakeRegistrations(intake._id)
-			    		.then(function (registrations) {
-			    			scope.registrations = registrations.data;
-			    		})	
-			    		.catch(function (err) {
-			    			scope.error = err;
-			    		})
-			    }
+
 
 			    scope.createAwardDiscipline = function(){
 			    	
 			    	AwardDisciplineService.createAwardDiscipline(scope.awardDisciplineData)
 			    		.then(function (awardDiscipline) {
 			    			console.log(awardDiscipline.data);
-			    			scope.awardDisciplines.push(awardDiscipline.data);
+			    			if(!scope.intake) {
+			    				scope.awardDisciplines.push(awardDiscipline.data);
+			    			}
 			    			scope.awardDisciplineData = {};
 			    		})
 			    		.catch(function (err) {
