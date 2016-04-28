@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('DashboardSummaryCtrl', ['$interval', 'DashboardService',function ($interval, DashboardService) {
+  .controller('DashboardSummaryCtrl', ['$interval', '$rootScope', 'DashboardService',function ($interval, $rootScope, DashboardService) {
     var vm = this;
 
     vm.settings = DashboardService.settings;
@@ -16,6 +16,8 @@ angular.module('cfaDashboard')
     
     vm.currentScheduledItems = DashboardService.getCurrentScheduledItems();
 
-    vm.latestAnouncement = _.sortBy(vm.settings.anouncements, 'updatedAt')[0];
-    console.log(vm.settings);
+    $rootScope.$on('AnouncementChanged', function (anouncement) {
+      vm.latestAnouncement = _.sortBy(vm.settings.anouncements, 'updatedAt').reverse()[0];
+    });
+
   }]);

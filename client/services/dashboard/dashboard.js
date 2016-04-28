@@ -24,7 +24,7 @@ angular.module('cfaDashboard')
         	if (scheduledItems) {
             service.settings.scheduledItems = scheduledItems.data;
           } else {
-            service.settings.scheduledItems = {};
+            service.settings.scheduledItems = [];
           }
         	return AnouncementService.getIntakeAnouncements(intakeId);
         })
@@ -32,7 +32,7 @@ angular.module('cfaDashboard')
         	if (anouncements) { 
             service.settings.anouncements = anouncements.data;
           } else {
-            service.settings.anouncements = {};
+            service.settings.anouncements = [];
           }
         	return RegistrationService.getIntakeRegistrations(intakeId);
         })
@@ -40,7 +40,7 @@ angular.module('cfaDashboard')
         	if (registrations) { 
             service.settings.registrations = registrations.data;
           } else {
-            service.settings.registrations = {};
+            service.settings.registrations = [];
           }
         	return RegistrationService.getIntakePoints(intakeId);
         })
@@ -56,7 +56,7 @@ angular.module('cfaDashboard')
         	if (disciplines) {
            service.settings.disciplines = disciplines.data;
           } else {
-            service.settings.disciplines = {};
+            service.settings.disciplines = [];
           }
         	return deferred.resolve();
         })
@@ -96,6 +96,7 @@ angular.module('cfaDashboard')
         }
       }
     });
+
     // add/remove anouncements
     Socket.on('ScheduledItem:remove', function (scheduledItem) {
       
@@ -131,6 +132,26 @@ angular.module('cfaDashboard')
       }
     });
    
+   // add anouncement
+   Socket.on('Anouncement:save', function (anouncement) {
+      console.log(anouncement);
+      if(service.settings.intake._id) {
+        // only display notification on intake page
+        if(anouncement._intakes.indexOf(service.settings.intake._id) > -1) {
+          
+          Notification.success('New Anouncement item: ' + anouncement.title);
+          
+          if (service.settings.anouncements.indexOf(anouncement) > -1) {
+            console.log(anouncement);
+            service.settings.anouncements[anouncement] = anouncement;
+          } else {
+            console.log(anouncement);
+            service.settings.anouncements.push(anouncement);
+          }
+          $rootScope.$broadcast('AnouncementChanged');
+        }
+      }
+    });
 
 
 
