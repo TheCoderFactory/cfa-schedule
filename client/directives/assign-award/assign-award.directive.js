@@ -23,6 +23,9 @@ angular.module('cfaDashboard')
 							.catch(function (err) {
 								scope.error = err;
 							});
+					} else {
+						// intake given then just get registrations
+						scope.getIntakeRegistrations();
 					}
 					
 					// Get awards
@@ -49,7 +52,9 @@ angular.module('cfaDashboard')
 			    	var intake = intake || selectedIntake;
 			    	RegistrationService.getIntakeRegistrations(intake._id)
 			    		.then(function (registrations) {
-			    			scope.registrations = registrations.data;
+			    			scope.registrations = _.filter(registrations.data, function (registration) {
+			    				return registration.role === 'Student';
+			    			});
 			    		})	
 			    		.catch(function (err) {
 			    			scope.error = err;

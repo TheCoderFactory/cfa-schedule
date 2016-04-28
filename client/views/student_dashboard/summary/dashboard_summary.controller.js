@@ -16,6 +16,8 @@ angular.module('cfaDashboard')
     
     vm.currentScheduledItems = DashboardService.getCurrentScheduledItems();
 
+    vm.latestAnouncement = _.sortBy(vm.settings.anouncements, 'updatedAt').reverse()[0];
+    
     $rootScope.$on('AnouncementChanged', function (anouncement) {
       vm.latestAnouncement = _.sortBy(vm.settings.anouncements, 'updatedAt').reverse()[0];
     });

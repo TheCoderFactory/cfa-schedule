@@ -6,7 +6,7 @@ angular.module('cfaDashboard')
 
     vm.settings = DashboardService.settings;
 
-    vm.anouncements = _.sortBy(vm.settings.anouncements, 'updatedAt');
+    vm.anouncements = _.sortBy(vm.settings.anouncements, 'updatedAt').reverse();
 
     $rootScope.$on('AnouncementChanged', function (anouncement) {
       vm.settings = DashboardService.settings;
