@@ -40,7 +40,17 @@ exports.getAnouncements = function (req, res) {
     .find()
     .populate('_intakes')
     .exec(function (err, anouncements) {
-      console.log(anouncements);
+      if (err) { errorHandler.handle(res, err, 404); }
+      if (!anouncements) { errorHandler.handle(res, 'no anouncements!', 404); }
+      res.json(anouncements);
+    });
+};
+
+exports.getIntakeAnouncements = function (req, res) {
+  Anouncement
+    .find({_intakes: req.params.intakeId})
+    .populate('_intakes')
+    .exec(function (err, anouncements) {
       if (err) { errorHandler.handle(res, err, 404); }
       if (!anouncements) { errorHandler.handle(res, 'no anouncements!', 404); }
       res.json(anouncements);
@@ -57,7 +67,6 @@ exports.update = function (req, res) {
     },
     function (err, anouncement) {
       if (err) { errorHandler.handle(res, err, 404); }
-      console.log(anouncement);
       res.json(anouncement);
     });
 };

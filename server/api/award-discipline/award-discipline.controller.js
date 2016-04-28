@@ -4,6 +4,7 @@ var _ = require('lodash');
 var AwardDiscipline = require('./award-discipline.model');
 var User = require('../user/user.model');
 var Registration = require('../registration/registration.model');
+var emtr = require('../../events.js');
 
 function handleError (res, err) {
   return res.status(500).send(err);
@@ -53,15 +54,15 @@ exports.create = function (req, res) {
     // add to registration array
     Registration.findById(awardDiscipline._registration, function (err, registration) {
       if (err) { return handleError(res, err); }
-      console.log('ADid: ' + awardDiscipline._id);
       registration._awardDisciplines.push(awardDiscipline._id);
-      registration.save(function (err) {
+      registration.save(function (err, registration) {
         if (err) { return handleError(res, err); }
         // populate and send back to view
         awardDiscipline
           .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}},  
             function (err, awardDiscipline) {
               if (err) { return handleError(res, err); }
+              emtr.emit('AwardDiscipline:created', awardDiscipline);
               return res.status(201).json(awardDiscipline);
             });
         });

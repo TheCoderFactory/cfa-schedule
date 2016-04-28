@@ -37,10 +37,8 @@ exports.create = function (req, res) {
 						if (err) { return handleError(res, err); }
 						res.json(registration);
 					})
-				
 			});
 		});
-
 	});
 };
 
@@ -75,6 +73,22 @@ exports.intakeRegistrations = function (req, res) {
 		});
 };
 
+exports.getPointsForMultiple = function (req, res) {
+	var registrationPoints = {};
+	var intakeId = req.params.intakeId;
+	Registration
+		.find({_intake: intakeId})
+		.populate({path: ' _awardDisciplines', populate: {path: '_award _discipline'}})
+		.exec(function (err, registrations) {
+			if (err) { return next(err); }
+	     registrations.forEach(function (registration) {
+	     	registrationPoints[registration._id] = registration.getPoints();
+	    });
+	     return res.json(registrationPoints);
+		});
+		
+};
+
 exports.getPoints = function (req, res) {
 	Registration
 		.findById(req.params.registrationId)
@@ -85,6 +99,7 @@ exports.getPoints = function (req, res) {
 		});
 };
 
+// gets a registrations awards for a particular discipline
 exports.getDisciplineAwards = function (req, res) {
 	console.log(req.params);
 	Registration
@@ -93,6 +108,18 @@ exports.getDisciplineAwards = function (req, res) {
 		.exec(function (err, registration) {
 			if (err) { return handleError(res, err); }
 			res.json(registration.getDisciplineAwards(req.params.disciplineId));
+		});
+};
+
+// gets a registrations awards for all discipline
+exports.getAllAwards = function (req, res) {
+	console.log(req.params);
+	Registration
+		.findById(req.params.registrationId)
+		.populate({path: ' _awardDisciplines', populate: {path: '_award _discipline'}})
+		.exec(function (err, registration) {
+			if (err) { return handleError(res, err); }
+			res.json(registration.getAllAwards());
 		});
 }
 

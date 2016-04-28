@@ -9,4 +9,6 @@ var IntakeSchema = new Schema({
   terms: [{name: String, start: Date, end: Date}]
 });
 
+
+
 module.exports = mongoose.model('Intake', IntakeSchema);

@@ -1,0 +1,14 @@
+
+
+<div ng-repeat="(disciplineId, awardsofDiscipline) in awardDetails" class="panel panel-default">
+	<div class="panel-heading">
+		{{awardsofDiscipline[0]._discipline.name}}
+	</div>
+	
+	<div class="panel-body">
+		<div ng-repeat="awardDiscipline in awardsofDiscipline">
+			<p>{{awardDiscipline._award.name}} ({{awardDiscipline._award.value}})</p>
+		</div>
+	</div>
+</div>
+

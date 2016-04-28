@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/sandstone/bootstrap.min.css">
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-notification/dist/angular-ui-notification.css">
     <!-- endinject -->
 
     <link rel="stylesheet" href="styles/css/app.css">
@@ -22,11 +23,11 @@
     <!-- endbuild -->
 
   </head>
-  <body>
+  <body ng-class="{'bodyOffset' : settings.bodyOffset}" ng-controller="MainCtrl">
 
     <nav-bar></nav-bar>
-
-    <div class="container" ng-view></div>
+    
+    <div ng-class="{'container' : settings.container}" ng-view></div>
 
     <script src="socket.io/socket.io.js"></script>
 
@@ -42,10 +43,13 @@
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-ui-notification/dist/angular-ui-notification.js"></script>
     <!-- endinject -->
 
     <!-- inject:js -->
     <script src="app.js"></script>
+    <script src="main.controller.js"></script>
     <script src="directives/assign-award/assign-award.directive.js"></script>
     <script src="directives/award-discipline-table/award-discipline-table.directive.js"></script>
     <script src="directives/create-schedule-item/create-schedule-item.directive.js"></script>
@@ -54,12 +58,18 @@
     <script src="directives/register-user/register-user.directive.js"></script>
     <script src="directives/registration-table/registration-table.directive.js"></script>
     <script src="directives/scheduled-items/scheduled-item.directive.js"></script>
-    <script src="directives/student-table/student-table.directive.js"></script>
+    <script src="directives/student_dashboard/clock/clock.directive.js"></script>
+    <script src="directives/student_dashboard/daily-schedule-table/daily-schedule-table.directive.js"></script>
+    <script src="directives/student_dashboard/leaderboard-table-detail/leaderboard-table-detail.directive.js"></script>
+    <script src="directives/student_dashboard/registration-award-details/registration-award-details.directive.js"></script>
+    <script src="directives/student_dashboard/scheduled-item-info/scheduled-item-info.directive.js"></script>
+    <script src="directives/student_dashboard/student-table/student-table.directive.js"></script>
     <script src="directives/term-table/term-table.directive.js"></script>
     <script src="directives/user-points-table/user-points-table.directive.js"></script>
     <script src="directives/users-table/users-table.directive.js"></script>
     <script src="services/anouncement/anouncement.js"></script>
     <script src="services/auth/auth.js"></script>
+    <script src="services/dashboard/dashboard.js"></script>
     <script src="services/intake/intake.js"></script>
     <script src="services/registration/registration.js"></script>
     <script src="services/scheduled_item/scheduled_item.js"></script>
@@ -79,6 +89,18 @@
     <script src="views/scheduled_item/scheduled_item.js"></script>
     <script src="views/signup/signup.controller.js"></script>
     <script src="views/signup/signup.js"></script>
+    <script src="views/student_dashboard/anouncements/dashboard_anouncements.controller.js"></script>
+    <script src="views/student_dashboard/anouncements/dashboard_anouncements.js"></script>
+    <script src="views/student_dashboard/contact/dashboard_contact.controller.js"></script>
+    <script src="views/student_dashboard/contact/dashboard_contact.js"></script>
+    <script src="views/student_dashboard/intake_selection/dashboard_intake_selection.controller.js"></script>
+    <script src="views/student_dashboard/intake_selection/dashboard_intake_selection.js"></script>
+    <script src="views/student_dashboard/leaderboard/dashboard_leaderboard.controller.js"></script>
+    <script src="views/student_dashboard/leaderboard/dashboard_leaderboard.js"></script>
+    <script src="views/student_dashboard/scheduled_items/dashboard_scheduled_items.controller.js"></script>
+    <script src="views/student_dashboard/scheduled_items/dashboard_scheduled_items.js"></script>
+    <script src="views/student_dashboard/summary/dashboard_summary.controller.js"></script>
+    <script src="views/student_dashboard/summary/dashboard_summary.js"></script>
     <script src="views/user/user.controller.js"></script>
     <script src="views/user/user.js"></script>
     <script src="views/users/users.controller.js"></script>

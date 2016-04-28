@@ -99,4 +99,22 @@ exports.getAllUsers = function (req, res) {
     });
 };
 
+exports.checkRegistration = function (req, res) {
+  User
+    .findOne({_id: req.params.userId})
+    .populate('_registrations')
+    .exec(function (err, user) {
+      console.log('Checking reg' + user.admin);
+      if (err) { return handleError(res, err); }
+      if(user.admin) {return res.send('you are admin, do whatever you like!');}
+      
+      if (user.registrationCheck(req.params.intakeId)) {
+        return res.send('All good, you are registered!');
+      } else {
+        return handleError(res, 'Not registered in this intake!'); 
+      }
+      
+    });
+};
+
 
