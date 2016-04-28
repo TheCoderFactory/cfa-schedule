@@ -1,5 +1,5 @@
 {
-  "name": "cfaDashboard",
+  "name": "cfa_dashboard",
   "version": "0.1.0",
   "dependencies": {
     "angular": "~1.4.7",
@@ -18,6 +18,6 @@
     "angular-scenario": "~1.4.7"
   },
   "resolutions": {
-    "angular": "1.5.3"
+    "angular": "1.5.5"
   }
 }

@@ -33,5 +33,8 @@ server.listen(config.port, config.ip, function () {
 
 });
 
+if('production' == app.get('env')) {
+  app.use(express.static('cfa-schedule/dist'));
+}
 
 module.exports = server;
