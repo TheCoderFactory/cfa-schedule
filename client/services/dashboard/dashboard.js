@@ -97,80 +97,7 @@ angular.module('cfaDashboard')
     }
   });
 
-  // add/remove anouncements
-  Socket.on('ScheduledItem:remove', function (scheduledItem) {
 
-    if(service.settings.intake._id) {
-      // only display notification on intake page
-      if(scheduledItem._intakes.indexOf(service.settings.intake._id) > 0) {
-
-        Notification.success('Deleted Scheduled item: ' + scheduledItem.name);
-        service.settings.scheduledItems = _.without(service.settings.scheduledItems, scheduledItem);
-        >>>>>>> 476faf800d7c2d78bb45324b74eb862d3f7b31aa
-      }
-      return RegistrationService.getIntakeRegistrations(intakeId);
-    })
-  .then(function (registrations) {
-    if (registrations) { 
-      service.settings.registrations = registrations.data;
-    } else {
-      service.settings.registrations = {};
-    }
-    return RegistrationService.getIntakePoints(intakeId);
-  })
-  .then(function (awardPoints) {
-    if (awardPoints) { 
-      service.settings.points = awardPoints.data;
-    } else {
-      service.settings.points = {};
-    }
-    return DisciplineService.getDisciplines();
-  })
-  .then(function (disciplines) {
-    if (disciplines) {
-      service.settings.disciplines = disciplines.data;
-    } else {
-      service.settings.disciplines = {};
-    }
-    return deferred.resolve();
-  })
-  .finally(function (disciplines) {
-    return deferred.resolve();
-  })
-  .catch(function (err) {
-    console.log(err);
-    return deferred.reject(err);
-  });
-  } else {
-    // all ready got data, resolve promise
-    deferred.resolve();
-  }
-  return deferred.promise;
-};
-
-// socket watchers -->
-
-// add/remove scheduled items
-// run this function whenever a scheduled item is created. Check if it belongs to intake, if so add it to the settings
-Socket.on('ScheduledItem:save', function (scheduledItem) {
-  console.log(scheduledItem);
-  if(service.settings.intake._id) {
-    // only display notification on intake page
-    if(scheduledItem._intakes.indexOf(service.settings.intake._id) > -1) {
-      Notification.success('New Scheduled item: ' + scheduledItem.name);
-
-      if (service.settings.scheduledItems.indexOf(scheduledItem) > -1) {
-        console.log(scheduledItem);
-        service.settings.scheduledItems[scheduledItem] = scheduledItem;
-      } else {
-        console.log(scheduledItem);
-        service.settings.scheduledItems.push(scheduledItem);
-      }
-      $rootScope.$broadcast('ScheduledItemChanged');
-    }
-  }
-});
-// add/remove anouncements
 Socket.on('ScheduledItem:remove', function (scheduledItem) {
 
   if(service.settings.intake._id) {
@@ -180,7 +107,8 @@ Socket.on('ScheduledItem:remove', function (scheduledItem) {
       Notification.success('Deleted Scheduled item: ' + scheduledItem.name);
       service.settings.scheduledItems = _.without(service.settings.scheduledItems, scheduledItem);
     }
-  });
+  }
+});
 
 // add anouncement
 Socket.on('Anouncement:save', function (anouncement) {
@@ -204,50 +132,6 @@ Socket.on('Anouncement:save', function (anouncement) {
 });
 
 
-
-
-
-service.showDashboardLayout = function () {
-  // remove container class from ng-view
-  service.settings.container = false;
-  // add body position class to body
-  service.settings.bodyOffset = true;
-  // show dashboard nav bars
-  service.settings.dashboardNavs = true;
-};
-
-service.hideDashboardLayout = function () {
-  // add container class from ng-view
-  service.settings.container = true;
-  // remove body position class to body
-  service.settings.bodyOffset = false;
-  // hide dashboard nav bars
-  service.settings.dashboardNavs = false;
-};
-
-
-
-service.rankedRegistrations = function () {
-  var ranked = _.sortBy(service.settings.registrations, function (registration) {
-    if(service.settings.points[registration._id].totalPoints) {
-      console.log(service.settings.points[registration._id]);
-      return -1 * service.settings.points[registration._id].totalPoints;
-    } else {
-      return 0;
-    }
-  });
-  return ranked;
-};
-
-
-service.getCurrentScheduledItems = function () {
-  var currentItems = _.filter(service.settings.scheduledItems, function (scheduledItem) {
-    return moment().isBetween(scheduledItem.start, scheduledItem.end);
-  });
-  return currentItems;
-}
-});
-
 // points added 
 // get points of reg back - update in settings.points
 // watches should update leaderboard and summary
@@ -269,10 +153,6 @@ Socket.on('AwardDiscipline:save', function (registrationPointsDetails) {
     service.settings.points[registration._id] = registrationPointsDetails.newPoints;
   }
 });
-
-
-
-
 
 
 service.showDashboardLayout = function () {
