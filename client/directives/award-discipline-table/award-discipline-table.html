@@ -1,18 +1,6 @@
 <h1>Assigned Awards</h1>
-<!-- 	<div class="row" ng-repeat="awardDiscipline in vm.awardDisciplines">
-		<div class="panel panel-default">
-		  <div class="panel-heading">Award
-				<div class="pull-right">
-		  		<a href="" ng-click="vm.deleteAwardDiscipline(awardDiscipline._id)">Remove</a>
-				</div>
-			</div>
-			<div class="panel-body">
-				<p>{{awardDiscipline._award.name}}</p>
-				<p>{{awardDiscipline._discipline.name}}</p>
-			</div>
-		</div>
-	</div>
- -->
+<!-- intake filter -->
+<div ng-repeat="intake in intakes"  uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="addRemoveIntake(intake)"  ng-style="{'background': intake.colour}" ng-class="{circleSelected: intakeIncluded(intake)}" class="circle circleSelector"></div>
 
 <table class="table table-striped table-hover ">
   <thead>
@@ -26,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-class="rowItem" ng-repeat = "awardDiscipline in awardDisciplines">
+    <tr ng-if="intakeIncluded(awardDiscipline._registration._intake)" ng-class="rowItem" ng-repeat = "awardDiscipline in awardDisciplines">
       <td>{{awardDiscipline._award.name}}</td>
       <td>{{awardDiscipline._discipline.name}}</td>
       <td>{{awardDiscipline._award.value}}</td>

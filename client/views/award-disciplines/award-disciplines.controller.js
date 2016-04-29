@@ -7,4 +7,5 @@ angular.module('cfaDashboard')
   	var vm = this;
 	  vm.awardDisciplineData = {};
 
+    
   }]);
