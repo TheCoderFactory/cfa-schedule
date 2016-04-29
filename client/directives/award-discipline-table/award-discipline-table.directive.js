@@ -12,6 +12,21 @@ angular.module('cfaDashboard')
 					
 					scope.filteredIntakes = [];
 
+					scope.$watch('awardDisciplines', function () {
+						console.log('awardDisciplines changed');
+						scope.updateSelector();
+					}, true);
+
+					scope.updateSelector = function () {
+						scope.intakesSelection = _.filter(scope.intakes, function (intake) {
+	    				// check if intake is in any of the registraions of disciplines
+	    				return _.some(scope.awardDisciplines, function (awardDiscipline) {
+	    					return awardDiscipline._registration._intake._id === intake._id;
+	    				});
+	    			});
+	    			 scope.filteredIntakes = scope.intakes;
+					};
+
 					scope.deleteAwardDiscipline = function (awardDisciplineId) {
 			      AwardDisciplineService.deleteAwardDiscipline(awardDisciplineId);
 			      scope.awardDisciplines = _.filter(scope.awardDisciplines, function (awardDiscipline) {
@@ -23,17 +38,6 @@ angular.module('cfaDashboard')
 			    	$location.path('/intakes/' + intakeId);
 			    };
 
-			    scope.getIntakes = function () {
-			    	IntakeService.getAllIntakes()
-			    		.then(function (intakes) {
-			    			scope.intakes = intakes.data;
-			    			scope.filteredIntakes = scope.intakes;
-			    		})
-			    		.catch(function (err) {
-			          scope.error = err;
-			        });
-			    }();
-
 			    scope.getAwardDisciplines = function () {
 			      AwardDisciplineService.getAwardDisciplines()
 			        .then(function (awardDisciplines) {
@@ -41,6 +45,17 @@ angular.module('cfaDashboard')
 			          console.log(awardDisciplines.data);
 			        })
 			        .catch(function (err) {
+			          scope.error = err;
+			        });
+			    }();
+
+			    scope.getIntakes = function () {
+			    	IntakeService.getAllIntakes()
+			    		.then(function (intakes) {
+			    			scope.intakes = intakes.data;
+			    			scope.updateSelector();
+			    		})
+			    		.catch(function (err) {
 			          scope.error = err;
 			        });
 			    }();

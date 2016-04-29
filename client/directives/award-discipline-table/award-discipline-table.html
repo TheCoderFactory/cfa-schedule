@@ -1,6 +1,6 @@
 <h1>Assigned Awards</h1>
 <!-- intake filter -->
-<div ng-repeat="intake in intakes"  uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="addRemoveIntake(intake)"  ng-style="{'background': intake.colour}" ng-class="{circleSelected: intakeIncluded(intake)}" class="circle circleSelector"></div>
+<div ng-repeat="intake in intakesSelection"  uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="addRemoveIntake(intake)"  ng-style="{'background': intake.colour}" ng-class="{circleSelected: intakeIncluded(intake)}" class="circle circleSelector"></div>
 
 <table class="table table-striped table-hover ">
   <thead>
