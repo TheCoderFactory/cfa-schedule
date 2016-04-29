@@ -28,4 +28,12 @@ angular.module('cfaDashboard')
         vm.error = err;
       }); 
 
+      vm.createScheduledItemShow = function () {
+        if (vm.showCreateScheduledItem) {
+          vm.showCreateScheduledItem = false;
+        } else {
+          vm.showCreateScheduledItem = true;
+        }
+      };
+
   }]);

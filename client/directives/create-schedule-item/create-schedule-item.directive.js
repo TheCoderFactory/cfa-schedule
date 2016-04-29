@@ -55,6 +55,7 @@ angular.module('cfaDashboard')
 							.then(function (scheduledItems) {
 								scope.scheduledItems.push(scheduledItems.data);
 								scope.purgeForm();
+								scope.date = scheduledItem.data.start;
 							})
 							.catch(function (err) {
 								scope.error = err;
@@ -66,6 +67,7 @@ angular.module('cfaDashboard')
 							.then(function (scheduledItem) {
 								scope.showCreateScheduledItem = false;
 								scope.purgeForm();
+								scope.date = scheduledItem.data.start;
 							})
 							.catch(function (err) {
 								scope.error = err;
