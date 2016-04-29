@@ -67,7 +67,7 @@ exports.intakeRegistrations = function (req, res) {
 		.find({_intake: intakeId})
 		.populate('_user')
 		.exec(function (err, registrations) {
-			if (err) { return next(err); }
+			if (err) { handleError(res, err); }
 	    if (!registrations) { return res.send(401); }
 			res.json(registrations);
 		});

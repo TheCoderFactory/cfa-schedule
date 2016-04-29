@@ -91,3 +91,17 @@ exports.delete = function (req, res) {
   });
 };
 
+exports.removeIntakeFromItem = function (req, res) {
+  ScheduledItem.findOne({_id: req.params.scheduledItemId}, function (err, scheduledItem) {
+    // remove intake from scheduleditems intakes
+    console.log(scheduledItem);
+    scheduledItem._intakes = _.filter(scheduledItem._intakes, function (storedIntakeId) {
+      return storedIntakeId != req.params.intakeId;
+    });
+    scheduledItem.save(function(err, scheduledItem) {
+      if (err) { errorHandler.handle(res, err, 404); }
+      res.send('Scheduled Item deleted for this intake!');
+    })
+  })
+}
+ 
