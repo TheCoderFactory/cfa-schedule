@@ -6,6 +6,11 @@ angular.module('cfaDashboard')
 			.when('/anouncements', {
 				templateUrl: 'views/anouncements/anouncements.html',
 				controller: 'AnouncementsCtrl',
-				controllerAs: 'vm'
+				controllerAs: 'vm',
+        resolve: {
+          anouncements: ['AnouncementService', function (AnouncementService) {
+            return AnouncementService.getAllAnouncements();
+          }]
+        }
 			});
 	}]);
