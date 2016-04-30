@@ -1,3 +1,4 @@
+<h1>Anouncements</h1>
 <div class="row">
 	<!-- Create Anouncement -->
 	<div class="col-md-6">
@@ -45,10 +46,15 @@
 		</form>
 	</div>
 
-	<!-- Anouncement list -->
+	
+
 	<div class="col-md-offset-1 col-md-5">
-		<h1>Anouncements</h1>
-		<div class="row" ng-repeat="anouncement in vm.anouncements">
+	<!-- intake filter -->
+		<div ng-repeat="intake in vm.intakesSelection"  uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="vm.addRemoveIntake(intake)"  ng-style="{'background': intake.colour}" ng-class="{circleSelected: vm.intakeIncluded(intake)}" class="circle circleSelector"></div>
+		<hr>
+
+		<!-- Anouncement list -->
+		<div ng-if="vm.anyIntakesIncluded(anouncement._intakes)" class="row" ng-repeat="anouncement in vm.anouncements">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">

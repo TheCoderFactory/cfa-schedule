@@ -10,9 +10,9 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr ng-class="termItem" ng-repeat = "user in users" ng-click="gotoUserPage(user._id)">
-		      <td>{{user.firstName}}</td>
-		      <td>{{user.lastName}}</td>
+		    <tr ng-class="termItem" ng-repeat = "user in users">
+		      <td><a ng-click="gotoUserPage(user._id)">{{user.firstName}}</a></td>
+		      <td><a ng-click="gotoUserPage(user._id)">{{user.lastName}}</a></td>
 		      <td>{{user.email}}</td>
 		      <td>
 		      	<div ng-repeat="registration in user._registrations" ng-if="registration.role === userType" uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(registration._intake._id)"  ng-style="{'background': registration._intake.colour}" class="circle circleTable"></div>

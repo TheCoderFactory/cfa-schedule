@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.controller('AnouncementsCtrl', ['$location', 'AnouncementService', 'IntakeService', function ($location, AnouncementService, IntakeService) {
+	.controller('AnouncementsCtrl', ['$scope', '$location', 'AnouncementService', 'IntakeService', 'anouncements', function ($scope, $location, AnouncementService, IntakeService, anouncements) {
 		
 		var vm = this;
 		vm.formAnouncementData = {};
 		vm.formAnouncementData._intakes = [];
-		vm.anouncements = [];
+		vm.anouncements = anouncements.data;
 		vm.showIntakes = false;
 
 		// Get all intakes on load -->
@@ -17,6 +17,35 @@ angular.module('cfaDashboard')
 			.catch(function (err) {
 				vm.error = err;
 			});	
+
+		$scope.$watch('awardDisciplines', function () {
+			console.log('awardDisciplines changed');
+			vm.anouncementIntakes();
+		}, true);
+
+		// get all intakes of current anouncements
+    vm.anouncementIntakes = function () {
+      var intakes = [];
+      _.each(vm.anouncements, function (anouncement) {
+        _.each(anouncement._intakes, function (intake) {
+            intakes.push(intake)
+        });
+      });
+      vm.intakesSelection = _.uniq(intakes, '_id');
+      vm.filteredIntakes = vm.intakesSelection;
+    };
+
+    // add anouncement to intake filter
+    vm.addAnouncementIntakesToFilter = function (anouncementIntakes) {
+    	_.each(anouncementIntakes, function (intake) {
+    		var intakeAlreadyInFilter = _.some(vm.intakesSelection, function (intakeSelection) {
+    			return intake._id === intakeSelection._id;
+    		});
+    		if(!intakeAlreadyInFilter) {
+    			vm.intakesSelection.push(intake);
+    		}
+    	});
+    };
 
 		vm.resetForm = function () {
 			vm.formAnouncementData = {};
@@ -45,8 +74,7 @@ angular.module('cfaDashboard')
 			AnouncementService.createAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
 					vm.anouncements.push(anouncement.data);
-					vm.resetForm();
-
+					vm.resetForm()
 				})
 				.catch(function (err) {
 					vm.error = err;
@@ -58,6 +86,7 @@ angular.module('cfaDashboard')
 			AnouncementService.editAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
 					vm.resetForm();
+					vm.anouncementIntakes();
 				})
 				.catch(function (err) {
 					vm.error = err;
@@ -73,7 +102,7 @@ angular.module('cfaDashboard')
 					vm.showIntakes = true;
 				})
 				.catch(function (err) {
-					scope.error = err;
+					vm.error = err;
 				});	
 			} else {
 				vm.formAnouncementData = anouncement;
@@ -86,25 +115,37 @@ angular.module('cfaDashboard')
 			AnouncementService.deleteAnouncement(anouncement)
 				.then(function (msg) {
 					vm.anouncements = _.without(vm.anouncements, anouncement);
-					console.log(msg);
+					// update intake filter
+					vm.anouncementIntakes();
 				})
 				.catch(function (err) {
 					vm.error = err;
 				})
 		}
 
-		vm.getAllAnouncements = function () {
-			AnouncementService.getAllAnouncements()
-				.then(function (anouncements) {
-					console.log(anouncements);
-					vm.anouncements = anouncements.data;
-				})
-				.catch(function (err) {
-					vm.error = err;
+		vm.addRemoveIntake = function (intakeClicked) {
+			if (vm.intakeIncluded(intakeClicked)) {
+				vm.filteredIntakes = _.filter(vm.filteredIntakes, function (intake) {
+					return intakeClicked._id !== intake._id;
 				});
-		}
+			} else {
+				vm.filteredIntakes.push(intakeClicked);
+			}
+		};
 
-		// get all anouncements on load
-		vm.getAllAnouncements();
+		vm.intakeIncluded = function (intakeTest) {
+			return _.some(vm.filteredIntakes, function (intake) {
+				return intakeTest._id === intake._id;
+			});
+		};
+
+		vm.anyIntakesIncluded = function (intakeTests) {
+      return _.some(vm.filteredIntakes, function (intake) {
+        return _.some(intakeTests, function (intakeTest) {
+          return intakeTest._id === intake._id;
+        })
+      });
+    };
+		
 	}]);
 

@@ -1,4 +1,8 @@
-<div ng-repeat="scheduledItem in scheduledItems">
+<!-- intake filter -->
+<div ng-if="!hideIntakeSelector" ng-repeat="intake in intakesSelection"  uib-popover="{{intake.name}}" popover-trigger="mouseenter" ng-click="addRemoveIntake(intake)"  ng-style="{'background': intake.colour}" ng-class="{circleSelected: intakeIncluded(intake)}" class="circle circleSelector"></div>
+<hr>
+<!-- scheduled item list -->
+<div ng-if="anyIntakesIncluded(scheduledItem._intakes)" ng-repeat="scheduledItem in scheduledItems">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="row">

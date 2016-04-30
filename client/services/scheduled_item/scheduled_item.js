@@ -72,5 +72,17 @@ angular.module('cfaDashboard')
         return deferred.promise;
     };
 
+    service.removeIntakeFromScheduledItem = function (scheduledItemId, intakeId) {
+      var deferred = $q.defer();
+      $http.delete('/api/scheduled_items/' + scheduledItemId + '/' + intakeId)
+        .then(function (res) {
+          deferred.resolve(res);
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+        return deferred.promise;
+    };
+
     return service;
   }]);
