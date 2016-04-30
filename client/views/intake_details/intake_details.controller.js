@@ -18,6 +18,7 @@ angular.module('cfaDashboard')
         vm.showCreateScheduledItem = false;
       }else {
         vm.showCreateScheduledItem = true;
+        vm.registerUser = false;
       }
     };
 
@@ -26,6 +27,7 @@ angular.module('cfaDashboard')
         vm.registerUser = false;
       }else {
         vm.registerUser = true;
+        vm.showCreateScheduledItem = false;
       }
     };
 

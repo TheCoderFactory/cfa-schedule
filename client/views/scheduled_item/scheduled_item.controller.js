@@ -36,4 +36,9 @@ angular.module('cfaDashboard')
         }
       };
 
+      vm.viewAllScheduledItems = function () {
+        console.log('view all');
+        vm.selectedScheduledItems = vm.scheduledItems;
+      };
+
   }]);

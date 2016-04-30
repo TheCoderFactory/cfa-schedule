@@ -2,6 +2,7 @@
   <div class="row">
     <ul class="nav navbar-nav">
       <li><a ng-click="vm.createScheduledItemShow()">Create Schedule Item</a></li>
+      <li><a ng-click="vm.viewAllScheduledItems()">View All Scheduled Items</a></li>
     </ul>
   </div>
 </div>
@@ -18,12 +19,15 @@
 
   <div ng-if="!vm.showCreateScheduledItem" class="col-md-4">
     
-  <scheduled-item-day-picker date="vm.date" all-scheduled-items="vm.scheduledItems" selected-scheduled-items="vm.selectedSheduledItems"></scheduled-item-day-picker>
+  <scheduled-item-day-picker date="vm.date" all-scheduled-items="vm.scheduledItems" selected-scheduled-items="vm.selectedScheduledItems"></scheduled-item-day-picker>
     
   </div>
 
 <!-- Schedule items list -->
 	<div class="col-md-6">
-		<scheduled-items date="vm.date" scheduled-items="vm.selectedSheduledItems" form-scheduled-item = "vm.formScheduledItem" show-create-scheduled-item="vm.showCreateScheduledItem"></scheduled-items>
+		<scheduled-items date="vm.date" scheduled-items="vm.selectedScheduledItems" form-scheduled-item = "vm.formScheduledItem" show-create-scheduled-item="vm.showCreateScheduledItem"></scheduled-items>
+
+    <p ng-if="vm.selectedScheduledItems.length < 1"><i>There are no items scheduled for any intakes on this day!</i></p>
 	</div>
+
 </div>

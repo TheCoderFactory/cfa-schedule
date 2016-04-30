@@ -13,10 +13,28 @@ angular.module('cfaDashboard')
         },
   
         link: function (scope, elem, attrs) {
-        	scope.gotoIntake = function (intakeId) {
+        	
+          scope.onIntakePage = function () {
+            if ($routeParams.intakeId) {
+              scope.hideIntakeSelector = true;
+            } else {
+              scope.hideIntakeSelector = false;
+            }
+          }();
+
+          scope.filteredIntakes = [];
+
+          scope.$watch('scheduledItems', function () {
+            console.log('scheduledItems changed');
+            scope.scheduledItemIntakes();
+          }, true);
+
+
+          scope.gotoIntake = function (intakeId) {
   					$location.path('/intakes/' + intakeId);
   				};
         
+          // if this is an intake page, only remove scheduled item for that intake otherwise remove completely
           scope.deleteScheduledItem = function (scheduledItemId) {
             console.log($routeParams);
             if($routeParams.intakeId) {
@@ -42,7 +60,6 @@ angular.module('cfaDashboard')
                 scope.error = err;
               });
             }
-
             
           };
 
@@ -51,7 +68,44 @@ angular.module('cfaDashboard')
             scope.showCreateScheduledItem = true;
             // populate form
             scope.formScheduledItem = scheduledItem;
-          }
+          };
+
+          // get all intakes of current scheduled items
+          scope.scheduledItemIntakes = function () {
+            var intakes = [];
+            _.each(scope.scheduledItems, function (scheduledItem) {
+              _.each(scheduledItem._intakes, function (intake) {
+                  intakes.push(intake)
+              });
+            });
+            scope.intakesSelection = _.uniq(intakes, '_id');
+            scope.filteredIntakes = scope.intakesSelection;
+          };
+
+          scope.addRemoveIntake = function (intakeClicked) {
+            if (scope.intakeIncluded(intakeClicked)) {
+              scope.filteredIntakes = _.filter(scope.filteredIntakes, function (intake) {
+                return intakeClicked._id !== intake._id;
+              });
+            } else {
+              scope.filteredIntakes.push(intakeClicked);
+            }
+          };
+
+          scope.intakeIncluded = function (intakeTest) {
+            return _.some(scope.filteredIntakes, function (intake) {
+              return intakeTest._id === intake._id;
+            });
+          };
+
+          scope.anyIntakesIncluded = function (intakeTests) {
+            return _.some(scope.filteredIntakes, function (intake) {
+              return _.some(intakeTests, function (intakeTest) {
+                return intakeTest._id === intake._id;
+              })
+            });
+          };
+
         }
       };
     }]);

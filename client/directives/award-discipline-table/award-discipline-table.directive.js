@@ -24,7 +24,7 @@ angular.module('cfaDashboard')
 	    					return awardDiscipline._registration._intake._id === intake._id;
 	    				});
 	    			});
-	    			 scope.filteredIntakes = scope.intakes;
+	    			 scope.filteredIntakes = scope.intakesSelection;
 					};
 
 					scope.deleteAwardDiscipline = function (awardDisciplineId) {
@@ -61,20 +61,20 @@ angular.module('cfaDashboard')
 			    }();
 
 			    scope.addRemoveIntake = function (intakeClicked) {
-					if (scope.intakeIncluded(intakeClicked)) {
-						scope.filteredIntakes = _.filter(scope.filteredIntakes, function (intake) {
-							return intakeClicked._id !== intake._id;
-						});
-					} else {
-						scope.filteredIntakes.push(intakeClicked);
-					}
-				};
+						if (scope.intakeIncluded(intakeClicked)) {
+							scope.filteredIntakes = _.filter(scope.filteredIntakes, function (intake) {
+								return intakeClicked._id !== intake._id;
+							});
+						} else {
+							scope.filteredIntakes.push(intakeClicked);
+						}
+					};
 
-				scope.intakeIncluded = function (intakeTest) {
-					return _.some(scope.filteredIntakes, function (intake) {
-						return intakeTest._id === intake._id;
-					});
-				};
+					scope.intakeIncluded = function (intakeTest) {
+						return _.some(scope.filteredIntakes, function (intake) {
+							return intakeTest._id === intake._id;
+						});
+					};
 
 				}				
 			};
