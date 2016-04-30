@@ -66,6 +66,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<scheduled-items scheduled-items="vm.selectedScheduledItems" form-scheduled-item = "vm.formScheduledItem" show-create-scheduled-item="vm.showCreateScheduledItem" show-intakes="vm.showIntakes"></scheduled-items>
+
+				<p ng-if="vm.selectedScheduledItems.length < 1"><i>There are no items scheduled for {{vm.intake.name}} on this day!</i></p>
 			</div>
 		</div>
 	</div>
