@@ -38,10 +38,13 @@ angular.module('cfaDashboard')
     // add anouncement to intake filter
     vm.addAnouncementIntakesToFilter = function (anouncementIntakes) {
     	_.each(anouncementIntakes, function (intake) {
-    		if (!vm.intakesSelection[intake]) {
+    		var intakeAlreadyInFilter = _.some(vm.intakesSelection, function (intakeSelection) {
+    			return intake._id === intakeSelection._id;
+    		});
+    		if(!intakeAlreadyInFilter) {
     			vm.intakesSelection.push(intake);
     		}
-    	})
+    	});
     };
 
 		vm.resetForm = function () {
@@ -72,7 +75,6 @@ angular.module('cfaDashboard')
 				.then(function (anouncement) {
 					vm.anouncements.push(anouncement.data);
 					vm.resetForm()
-					vm.addAnouncementIntakesToFilter(anouncement.data._intakes);
 				})
 				.catch(function (err) {
 					vm.error = err;
@@ -84,6 +86,7 @@ angular.module('cfaDashboard')
 			AnouncementService.editAnouncement(vm.formAnouncementData)
 				.then(function (anouncement) {
 					vm.resetForm();
+					vm.anouncementIntakes();
 				})
 				.catch(function (err) {
 					vm.error = err;
