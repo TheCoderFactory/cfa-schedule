@@ -67,6 +67,8 @@ angular.module('cfaDashboard')
           scope.editScheduledItemClicked = function (scheduledItem) {
             // show form
             scope.showCreateScheduledItem = true;
+            // store pre edit data in canse of canel
+            var preEditScheduledItem = scheduledItem;
             // populate form
             scope.formScheduledItem = scheduledItem;
           };
