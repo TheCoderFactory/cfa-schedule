@@ -12,7 +12,6 @@ angular.module('cfaDashboard')
     vm.registeredStudents = [];
     vm.registeredTeachers = [];
 
-
     vm.toggleShowCreateScheduledItem = function () {
       if (vm.showCreateScheduledItem === true) {
         vm.showCreateScheduledItem = false;

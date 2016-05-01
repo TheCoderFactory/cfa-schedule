@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .directive('scheduledItems', ['$location', '$routeParams', 'ScheduledItemService', function ($location, $routeParams, ScheduledItemService) {
+  .directive('scheduledItems', ['$rootScope', '$location', '$routeParams', 'ScheduledItemService', function ($rootScope, $location, $routeParams, ScheduledItemService) {
       return {
         restrict: 'E',
         templateUrl: 'directives/scheduled-items/scheduled-items.html',
@@ -25,7 +25,7 @@ angular.module('cfaDashboard')
           scope.filteredIntakes = [];
 
           scope.$watch('scheduledItems', function () {
-            console.log('scheduledItems changed');
+            console.log('scheduled items changed');
             scope.scheduledItemIntakes();
           }, true);
 
@@ -43,6 +43,7 @@ angular.module('cfaDashboard')
                 scope.scheduledItems = _.filter(scope.scheduledItems, function (schItem) {
                   return scheduledItemId !== schItem._id;
                 });
+                $rootScope.$emit('scheduledItems changed');
                 console.log(msg);
               })
               .catch(function (err) {
@@ -54,6 +55,7 @@ angular.module('cfaDashboard')
                 scope.scheduledItems = _.filter(scope.scheduledItems, function (schItem) {
                   return scheduledItemId !== schItem._id;
                 });
+                $rootScope.$emit('scheduledItems changed');
                 console.log(msg);
               })
               .catch(function (err) {

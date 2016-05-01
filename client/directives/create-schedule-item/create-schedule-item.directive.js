@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('createScheduleItem', ['$http', '$q', 'ScheduledItemService', 'Auth', function ($http, $q, ScheduledItemService, Auth) {
+	.directive('createScheduleItem', ['$rootScope', '$http', '$q', 'ScheduledItemService', 'Auth', function ($rootScope, $http, $q, ScheduledItemService, Auth) {
 			return {
 				restict: 'E',
 				templateUrl: 'directives/create-schedule-item/create-schedule-item.html',
@@ -47,15 +47,14 @@ angular.module('cfaDashboard')
 						if(!scope.formScheduledItem._intakes || scope.formScheduledItem._intakes.length < 1) {
 							scope.formScheduledItem._intakes = scope.intakes;
 						}
-
 						scope.formScheduledItem.hostId = Auth.getUser()._id;
-						console.log(scope.formScheduledItem);
+						
 						// scope.formScheduledItem._intakes.push(attrs.intakeId);
 						ScheduledItemService.createScheduledItem(scope.formScheduledItem)
-							.then(function (scheduledItems) {
-								scope.scheduledItems.push(scheduledItems.data);
+							.then(function (scheduledItem) {
+								scope.scheduledItems.push(scheduledItem.data);
+								$rootScope.$emit('scheduledItems changed');
 								scope.purgeForm();
-								scope.date = scheduledItem.data.start;
 							})
 							.catch(function (err) {
 								scope.error = err;
@@ -67,7 +66,6 @@ angular.module('cfaDashboard')
 							.then(function (scheduledItem) {
 								scope.showCreateScheduledItem = false;
 								scope.purgeForm();
-								scope.date = scheduledItem.data.start;
 							})
 							.catch(function (err) {
 								scope.error = err;

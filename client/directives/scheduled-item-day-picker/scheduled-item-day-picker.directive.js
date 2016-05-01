@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-.directive('scheduledItemDayPicker', [function () {
+.directive('scheduledItemDayPicker', ['$rootScope',function ($rootScope) {
   return {
     restrict: 'E',
     templateUrl: 'directives/scheduled-item-day-picker/scheduled-item-day-picker.html',
@@ -12,8 +12,16 @@ angular.module('cfaDashboard')
     },
     link: function (scope, elem, attrs) {
 
+      scope.$watch('allScheduledItems', function () {
+        scope.selectedScheduledItems = scope.scheduledItems();
+      }, true);
+
+      $rootScope.$on('scheduledItem changed', function () {
+        console.log('scheduled items changed');
+        scope.selectedScheduledItems = scope.scheduledItems();
+      });
+
       scope.$watch('date', function () {
-        console.log('date watched');
         scope.selectedScheduledItems = scope.scheduledItems();
       });
 
@@ -32,6 +40,8 @@ angular.module('cfaDashboard')
         var sortedDateItems = _.sortBy(dateItems, 'start');
         return sortedDateItems;
       };
+
+
 
     }
 

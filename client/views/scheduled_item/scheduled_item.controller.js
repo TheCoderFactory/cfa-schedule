@@ -9,6 +9,7 @@ angular.module('cfaDashboard')
     vm.scheduledItems = [];
     vm.showIntakes = false;
 
+    
     //Get all scheduled items
     ScheduledItemService.getScheduledItems()
       .then(function (scheduledItems) {
