@@ -13,11 +13,12 @@
 <div class="row">
 	<div ng-if="vm.showCreateScheduledItem" class="col-md-6">
 		<div class="well">
-			<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems" show-intake-selector="true" show-intakes='vm.showIntakes' intakes='vm.intakes' show-create-scheduled-item="vm.showCreateScheduledItem"></create-schedule-item>
+      <create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems" show-intake-selector="true" show-intakes='vm.showIntakes' intakes='vm.intakes' show-create-scheduled-item="vm.showCreateScheduledItem"></create-schedule-item>
 		</div>
 	</div>
 
-  <div ng-if="!vm.showCreateScheduledItem" class="col-md-4">
+<!-- used ng hide here because ng-if was not allowing the directive attributes to link up -->
+  <div ng-hide="vm.showCreateScheduledItem" class="col-md-4">
     
   <scheduled-item-day-picker date="vm.date" all-scheduled-items="vm.scheduledItems" selected-scheduled-items="vm.selectedScheduledItems"></scheduled-item-day-picker>
     
@@ -25,9 +26,10 @@
 
 <!-- Schedule items list -->
 	<div class="col-md-6">
-		<scheduled-items date="vm.date" scheduled-items="vm.selectedScheduledItems" form-scheduled-item = "vm.formScheduledItem" show-create-scheduled-item="vm.showCreateScheduledItem"></scheduled-items>
-
+		<scheduled-items date="vm.date" selected-scheduled-items="vm.selectedScheduledItems" scheduled-items="vm.scheduledItems" form-scheduled-item = "vm.formScheduledItem" show-create-scheduled-item="vm.showCreateScheduledItem"></scheduled-items>
+    
     <p ng-if="vm.selectedScheduledItems.length < 1"><i>There are no items scheduled for any intakes on this day!</i></p>
+
 	</div>
 
 </div>
