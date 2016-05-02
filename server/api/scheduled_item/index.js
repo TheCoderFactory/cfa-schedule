@@ -11,5 +11,6 @@ router.get('/', controller.getAllItems);
 router.post('/', auth.adminOnly, controller.create);
 router.put('/', auth.adminOnly, controller.update);
 router.delete('/:scheduledItemId', auth.adminOnly, controller.delete)
+router.delete('/:scheduledItemId/:intakeId', auth.adminOnly, controller.removeIntakeFromItem)
 
 module.exports = router;

@@ -1,20 +1,31 @@
 'use strict';
 
 angular.module('cfaDashboard')
-.directive('dailyScheduleTable', ['$rootScope', 'DashboardService', function ($rootScope, DashboardService) {
+.directive('scheduledItemDayPicker', ['$rootScope',function ($rootScope) {
   return {
     restrict: 'E',
-    templateUrl: 'directives/student_dashboard/daily-schedule-table/daily-schedule-table.html',
+    templateUrl: 'directives/scheduled-item-day-picker/scheduled-item-day-picker.html',
     scope: {
-      date: '=', 
-      selectedScheduledItem: '=',
-      selectedScheduledItems: '='
+      selectedScheduledItems: '=',
+      date: '=',
+      allScheduledItems: '='
     },
     link: function (scope, elem, attrs) {
 
-      $rootScope.$on('ScheduledItemChanged', function () {
+      scope.$watch('allScheduledItems', function () {
+        console.log('scheduled items watched');
         scope.selectedScheduledItems = scope.scheduledItems();
-      })
+      }, true);
+
+      scope.$watch('allScheduledItems.length', function () {
+        console.log('scheduled items watched length');
+        scope.selectedScheduledItems = scope.scheduledItems();
+      }, true);
+
+      $rootScope.$on('scheduledItem changed', function () {
+        console.log('scheduled items changed');
+        scope.selectedScheduledItems = scope.scheduledItems();
+      });
 
       scope.$watch('date', function () {
         scope.selectedScheduledItems = scope.scheduledItems();
@@ -23,7 +34,7 @@ angular.module('cfaDashboard')
       scope.scheduledItems = function () {
 
         // select items that are on selected day
-        var dateItems = _.filter(DashboardService.settings.scheduledItems, function (scheduledItem) {
+        var dateItems = _.filter(scope.allScheduledItems, function (scheduledItem) {
           var selectedDate = moment(scope.date);
           var startDate = moment(scheduledItem.start);
           var endDate = moment(scheduledItem.end);
@@ -36,9 +47,7 @@ angular.module('cfaDashboard')
         return sortedDateItems;
       };
 
-      scope.selectScheduledItem = function (scheduledItem) {
-        scope.selectedScheduledItem = scheduledItem;
-      };
+
 
     }
 

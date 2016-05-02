@@ -12,12 +12,12 @@ angular.module('cfaDashboard')
     vm.registeredStudents = [];
     vm.registeredTeachers = [];
 
-
     vm.toggleShowCreateScheduledItem = function () {
       if (vm.showCreateScheduledItem === true) {
         vm.showCreateScheduledItem = false;
       }else {
         vm.showCreateScheduledItem = true;
+        vm.registerUser = false;
       }
     };
 
@@ -26,11 +26,12 @@ angular.module('cfaDashboard')
         vm.registerUser = false;
       }else {
         vm.registerUser = true;
+        vm.showCreateScheduledItem = false;
       }
     };
 
     //Get intake data
-    IntakeService.getIntake($routeParams.id)
+    IntakeService.getIntake($routeParams.intakeId)
       .then(function (intake) {
         vm.intake = intake.data;
         console.log(vm.intake);
@@ -45,7 +46,7 @@ angular.module('cfaDashboard')
     });
 
     //Get registered students and teachers for intake
-    RegistrationService.getIntakeRegistrations($routeParams.id)
+    RegistrationService.getIntakeRegistrations($routeParams.intakeId)
       .then(function (registrations) {
         var registrations = registrations.data;
         console.log(registrations);
@@ -63,7 +64,7 @@ angular.module('cfaDashboard')
       });
 
     //Get intakes scheduled items for directive -->pass intake Id to only get this intakes items
-    ScheduledItemService.getScheduledItems($routeParams.id)
+    ScheduledItemService.getScheduledItems($routeParams.intakeId)
       .then(function (scheduledItems) {
         vm.scheduledItems = scheduledItems.data;
         console.log(scheduledItems);
@@ -73,7 +74,7 @@ angular.module('cfaDashboard')
       });
 
     // Get users for directive --> return only users that are not already registered
-    Auth.getUnregisteredUsers($routeParams.id)
+    Auth.getUnregisteredUsers($routeParams.intakeId)
       .then(function (users) {
         vm.unregisteredUsers = users.data;
       })

@@ -58,17 +58,17 @@ exports.getIntakeAnouncements = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  Anouncement.findByIdAndUpdate(req.body._id, 
-    {
-      title: req.body.title,
-      description: req.body.description,
-      type: req.body.type,
-      _intakes: req.body._intakes
-    },
-    function (err, anouncement) {
+  Anouncement.findOne({_id: req.body._id}, function (err, anouncement) {
+    anouncement.title = req.body.title,
+    anouncement.description = req.body.description,
+    anouncement.type = req.body.type,
+    anouncement._intakes = req.body._intakes
+
+    anouncement.save(function (err, anouncement) {
       if (err) { errorHandler.handle(res, err, 404); }
       res.json(anouncement);
     });
+  });
 };
 
 exports.delete = function (req, res) {

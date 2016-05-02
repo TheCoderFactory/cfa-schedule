@@ -5,7 +5,6 @@
       <th>First Name</th>
       <th>Last Name</th>
       <th>Email</th>
-      <th>Points</th>
       <th>Unregister</th>
     </tr>
   </thead>
@@ -15,7 +14,6 @@
       <td>{{registration._user.firstName}}</td>
       <td>{{registration._user.lastName}}</td>
       <td>{{registration._user.email}}</td>
-      <td>{{registration._user.totalPoints}}</td>
       <td><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="unregisterUser(registration)" class="glyphicon glyphicon-trash"></span></td>
     </tr>
 	</tbody>

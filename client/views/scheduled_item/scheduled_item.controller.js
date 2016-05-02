@@ -9,6 +9,7 @@ angular.module('cfaDashboard')
     vm.scheduledItems = [];
     vm.showIntakes = false;
 
+    
     //Get all scheduled items
     ScheduledItemService.getScheduledItems()
       .then(function (scheduledItems) {
@@ -27,5 +28,18 @@ angular.module('cfaDashboard')
       .catch(function (err) {
         vm.error = err;
       }); 
+
+      vm.createScheduledItemShow = function () {
+        if (vm.showCreateScheduledItem) {
+          vm.showCreateScheduledItem = false;
+        } else {
+          vm.showCreateScheduledItem = true;
+        }
+      };
+
+      vm.viewAllScheduledItems = function () {
+        console.log('view all');
+        vm.selectedScheduledItems = vm.scheduledItems;
+      };
 
   }]);
