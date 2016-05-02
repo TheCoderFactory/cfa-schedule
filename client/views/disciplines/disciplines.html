@@ -1,3 +1,11 @@
+<div class="container ">
+	<div class="row">
+		<ul class="nav navbar-nav">
+		  <li><a href="/award-disciplines">Back</a></li>
+		</ul>
+	</div>
+</div>
+
 <div class="col-md-6">
 	<h1>Disciplines</h1>
 	<div class="row" ng-repeat="discipline in vm.disciplines">
@@ -15,15 +23,12 @@
 	  <div ng-if="discipline.isEditing">
 		  <form ng-if="discipline.isEditing" ng-submit="editDiscipline">
 			  <input class="form-control"
-			      ng-value="discipline.name"
 			      ng-model="vm.disciplineData.name"/>
 			  <!-- Description -->
   			<textarea 
   				name="editDescription"
-  				ng-value="discipline.description"
   				ng-model="vm.disciplineData.description" class="form-control" rows="4">
   			</textarea>
-  			{{vm.disciplineData}}
 			</form>
 			<!-- Buttons to Edit an Discipline -->
 			<button ng-if="discipline.isEditing"
@@ -42,7 +47,7 @@
 	</div>
 </div>
 <div class="col-md-6">
-	<h1>Create an Discipline</h1>
+	<h1>Create a Discipline</h1>
 	<form ng-submit="vm.createDiscipline()">
 	  <!-- Name -->
 	  <div class="form-group col-md-12">
@@ -60,11 +65,4 @@
 			</button>
 		</div>
 	</form>
-</div>
-<div class="col-md-12">
-  <a href="/award-disciplines">
-  	<button class="btn btn-default pull-right" type="submit">
-  		Back
-  	</button>
-	</a>
 </div>
