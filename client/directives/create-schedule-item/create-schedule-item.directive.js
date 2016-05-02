@@ -44,6 +44,11 @@ angular.module('cfaDashboard')
 						}
 						scope.showCreateScheduledItem = false;
 					};
+
+					scope.cancelForm = function () {
+						scope.purgeForm();
+						scope.showCreateScheduledItem = false;
+					};
 					
 					scope.createScheduledItem = function () {
 						//if intake is left empty, fill it with all current intakes
@@ -80,6 +85,7 @@ angular.module('cfaDashboard')
 								console.log(scope.scheduledItems);
 								scope.purgeForm();
 								scope.showCreateScheduledItem = false;
+								console.log(scope.formScheduledItem);
 							})
 							.catch(function (err) {
 								scope.error = err;

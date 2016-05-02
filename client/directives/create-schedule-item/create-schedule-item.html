@@ -80,6 +80,17 @@
 			<hr>
 		</div>
 	</div>
-	<button ng-if="formScheduledItem._id === undefined" type="submit" class="btn btn-lg btn-block">Create Schedule Item</button>
-	<button ng-if="formScheduledItem._id !== undefined" type="submit" class="btn btn-lg btn-block">Edit Schedule Item</button>
+
+	
+	<div class="row">
+		
+		<!-- create edit buttons -->
+		<button ng-if="formScheduledItem._id === undefined" type="submit" class="btn btn-lg btn-block">Create Schedule Item</button>
+		<button ng-if="formScheduledItem._id !== undefined" type="submit" class="btn btn-lg btn-block">Edit Schedule Item</button>
+
+		<!-- cancel buttons -->
+		<button ng-click="cancelForm()" class="btn btn-lg btn-block">Cancel</button>
+	</div>
+
+
 </form>

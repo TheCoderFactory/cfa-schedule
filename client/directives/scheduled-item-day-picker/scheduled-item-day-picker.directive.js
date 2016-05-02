@@ -17,16 +17,6 @@ angular.module('cfaDashboard')
         scope.selectedScheduledItems = scope.scheduledItems();
       }, true);
 
-      scope.$watch('allScheduledItems.length', function () {
-        console.log('scheduled items watched length');
-        scope.selectedScheduledItems = scope.scheduledItems();
-      }, true);
-
-      $rootScope.$on('scheduledItem changed', function () {
-        console.log('scheduled items changed');
-        scope.selectedScheduledItems = scope.scheduledItems();
-      });
-
       scope.$watch('date', function () {
         scope.selectedScheduledItems = scope.scheduledItems();
       });

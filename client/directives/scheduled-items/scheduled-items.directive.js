@@ -68,10 +68,9 @@ angular.module('cfaDashboard')
             // show form
             scope.showCreateScheduledItem = true;
             // populate form
-
-            // var preEditScheduledItem = angular.copy(scheduledItem);
-            // scope.formScheduledItem = preEditScheduledItem;
-            scope.formScheduledItem = scheduledItem;
+            var preEditScheduledItem = angular.copy(scheduledItem);
+            scope.formScheduledItem = preEditScheduledItem;
+            // scope.formScheduledItem = scheduledItem;
           };
 
           // get all intakes of current scheduled items
