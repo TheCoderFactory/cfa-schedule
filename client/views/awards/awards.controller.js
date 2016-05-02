@@ -23,7 +23,7 @@ angular.module('cfaDashboard')
 
     vm.onEditClick = function(award) {
       award.isEditing = true;
-      vm.awardData = award;
+      vm.awardData = shallowCopy(award);
     };
 
     vm.editAward = function (award, awardData) {
@@ -47,6 +47,16 @@ angular.module('cfaDashboard')
           vm.error = err;
         });
     };
+
+    function shallowCopy(obj) {
+      var objCopy = {};
+      for(var i in obj) {
+          if(obj.hasOwnProperty(i)) {
+              objCopy[i] = obj[i];
+          }
+      }
+      return objCopy;
+    }
 
     vm.getAwards();
   }]);
