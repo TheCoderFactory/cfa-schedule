@@ -27,6 +27,7 @@ angular.module('cfaDashboard')
 							scope.formScheduledItem = {};
 							scope.showIntakesList = true;
 							scope.formScheduledItem._intakes = [];
+							console.log(scope.formScheduledItem);
 						}
 					};
 
@@ -68,6 +69,7 @@ angular.module('cfaDashboard')
 							.then(function (scheduledItem) {
 								scope.showCreateScheduledItem = false;
 								scope.purgeForm();
+
 							})
 							.catch(function (err) {
 								scope.error = err;
