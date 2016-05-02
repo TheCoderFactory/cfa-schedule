@@ -72,8 +72,6 @@ angular.module('cfaDashboard')
 					scope.editScheduledItem = function () {
 						ScheduledItemService.editScheduledItem(scope.formScheduledItem)
 							.then(function (editedScheduledItem) {
-								console.log(editedScheduledItem.data);
-								console.log(scope.scheduledItems);
 								// render new schduled item
 								scope.scheduledItems = _.map(scope.scheduledItems, function (scheduledItem) {
 									if (scheduledItem._id === editedScheduledItem.data._id) {
@@ -82,10 +80,8 @@ angular.module('cfaDashboard')
 										return scheduledItem;
 									}
 								});
-								console.log(scope.scheduledItems);
 								scope.purgeForm();
 								scope.showCreateScheduledItem = false;
-								console.log(scope.formScheduledItem);
 							})
 							.catch(function (err) {
 								scope.error = err;
