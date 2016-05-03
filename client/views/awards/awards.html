@@ -20,20 +20,19 @@
 		</div>
 	  <!-- Form to Edit an Award -->
 	  <div ng-if="award.isEditing">
-		  <form ng-if="award.isEditing" ng-submit="editAward">
-			  <input class="form-control"
-			      ng-model="vm.awardData.name" />
+		  <form>
+			  <input class="form-control" ng-model="vm.awardData.name"/>
 			 	<select class="form-control" ng-model="vm.awardData.value">
 					<option ng-repeat="n in [] | range:15" value="{{$index+1}}">{{$index+1}}</option>
 				</select>
 			</form>
 			<!-- Buttons to Edit an Award -->
-			<button ng-if="award.isEditing"
+			<button
 				class="btn btn-primary"
 				ng-click="vm.editAward(award, vm.awardData)">
 				Save
 			</button>
-			<button ng-if="award.isEditing"
+			<button
 				class="btn btn-default"
 				ng-click="vm.onCancelClick(award)">
 				Cancel

@@ -21,22 +21,20 @@
 		</div>
 	  <!-- Form to Edit an Discipline -->
 	  <div ng-if="discipline.isEditing">
-		  <form ng-if="discipline.isEditing" ng-submit="editDiscipline">
-			  <input class="form-control"
-			      ng-model="vm.disciplineData.name"/>
+		  <form>
+			  <input class="form-control" ng-model="vm.disciplineData.name"/>
 			  <!-- Description -->
   			<textarea 
-  				name="editDescription"
   				ng-model="vm.disciplineData.description" class="form-control" rows="4">
   			</textarea>
 			</form>
 			<!-- Buttons to Edit an Discipline -->
-			<button ng-if="discipline.isEditing"
+			<button
 				class="btn btn-primary"
 				ng-click="vm.editDiscipline(discipline, vm.disciplineData)">
 				Save
 			</button>
-			<button ng-if="discipline.isEditing"
+			<button 
 				class="btn btn-default"
 				ng-click="vm.onCancelClick(discipline)">
 				Cancel

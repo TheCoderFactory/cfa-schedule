@@ -23,7 +23,7 @@ angular.module('cfaDashboard')
 
     vm.onEditClick = function(discipline) {
       discipline.isEditing = true;
-      vm.disciplineData = discipline;
+      vm.disciplineData =  shallowCopy(discipline);
     };
 
     vm.editDiscipline = function (discipline, disciplineData) {
@@ -47,6 +47,16 @@ angular.module('cfaDashboard')
           vm.error = err;
         });
     };
+
+    function shallowCopy(obj) {
+      var objCopy = {};
+      for(var i in obj) {
+          if(obj.hasOwnProperty(i)) {
+              objCopy[i] = obj[i];
+          }
+      }
+      return objCopy;
+    }
 
     vm.getDisciplines();
   }]);

@@ -12,6 +12,6 @@ router.get('/exclude/:intakeId', controller.getUsersNotInIntake);
 router.get('/', controller.getAllUsers);
 router.get('/:userId', controller.getUser);
 router.get('/checkRegistration/:userId/:intakeId', controller.checkRegistration);
-
+router.put('/:id', controller.update);
 
 module.exports = router;
