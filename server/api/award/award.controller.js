@@ -75,7 +75,6 @@ exports.update = function (req, res) {
  * @param res
  */
 exports.destroy = function (req, res) {
-
   Award.findById(req.params.id, function (err, award) {
     if (err) { return handleError(res, err); }
     if (!award) { return res.status(404).end(); }
