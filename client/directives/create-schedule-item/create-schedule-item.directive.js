@@ -27,6 +27,7 @@ angular.module('cfaDashboard')
 							scope.formScheduledItem = {};
 							scope.showIntakesList = true;
 							scope.formScheduledItem._intakes = [];
+							console.log(scope.formScheduledItem);
 						}
 					};
 
@@ -41,6 +42,11 @@ angular.module('cfaDashboard')
 						} else {
 							scope.editScheduledItem();
 						}
+						scope.showCreateScheduledItem = false;
+					};
+
+					scope.cancelForm = function () {
+						scope.purgeForm();
 						scope.showCreateScheduledItem = false;
 					};
 					
@@ -65,9 +71,17 @@ angular.module('cfaDashboard')
 
 					scope.editScheduledItem = function () {
 						ScheduledItemService.editScheduledItem(scope.formScheduledItem)
-							.then(function (scheduledItem) {
-								scope.showCreateScheduledItem = false;
+							.then(function (editedScheduledItem) {
+								// render new schduled item
+								scope.scheduledItems = _.map(scope.scheduledItems, function (scheduledItem) {
+									if (scheduledItem._id === editedScheduledItem.data._id) {
+										return editedScheduledItem.data;
+									} else {
+										return scheduledItem;
+									}
+								});
 								scope.purgeForm();
+								scope.showCreateScheduledItem = false;
 							})
 							.catch(function (err) {
 								scope.error = err;

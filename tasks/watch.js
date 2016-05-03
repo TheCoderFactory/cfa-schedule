@@ -33,7 +33,8 @@ module.exports = function () {
   watch([
     'client/styles/**/*.scss',
     'client/views/**/*.scss',
-    'client/directives/**/*.scss'
+    'client/directives/**/*.scss',
+    'client/views/student_dashboard/student_dashboard.scss'
   ], function () {
     gulp.src('client/styles/app.scss')
       .pipe(plumber())
