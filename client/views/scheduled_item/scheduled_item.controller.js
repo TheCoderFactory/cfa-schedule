@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('ScheduledItemCtrl', ['ScheduledItemService', 'IntakeService', function (ScheduledItemService, IntakeService) {
+  .controller('ScheduledItemCtrl', ['$scope', 'ScheduledItemService', 'IntakeService', function ($scope, ScheduledItemService, IntakeService) {
     var vm = this;
     
     vm.formScheduledItem = {};
@@ -9,12 +9,10 @@ angular.module('cfaDashboard')
     vm.scheduledItems = [];
     vm.showIntakes = false;
 
-    
     //Get all scheduled items
     ScheduledItemService.getScheduledItems()
       .then(function (scheduledItems) {
         vm.scheduledItems = scheduledItems.data;
-        console.log(scheduledItems);
       })  
       .catch(function (err) {
         vm.error = err;

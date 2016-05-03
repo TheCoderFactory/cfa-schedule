@@ -44,6 +44,11 @@ angular.module('cfaDashboard')
 						}
 						scope.showCreateScheduledItem = false;
 					};
+
+					scope.cancelForm = function () {
+						scope.purgeForm();
+						scope.showCreateScheduledItem = false;
+					};
 					
 					scope.createScheduledItem = function () {
 						//if intake is left empty, fill it with all current intakes
@@ -66,10 +71,17 @@ angular.module('cfaDashboard')
 
 					scope.editScheduledItem = function () {
 						ScheduledItemService.editScheduledItem(scope.formScheduledItem)
-							.then(function (scheduledItem) {
-								scope.showCreateScheduledItem = false;
+							.then(function (editedScheduledItem) {
+								// render new schduled item
+								scope.scheduledItems = _.map(scope.scheduledItems, function (scheduledItem) {
+									if (scheduledItem._id === editedScheduledItem.data._id) {
+										return editedScheduledItem.data;
+									} else {
+										return scheduledItem;
+									}
+								});
 								scope.purgeForm();
-
+								scope.showCreateScheduledItem = false;
 							})
 							.catch(function (err) {
 								scope.error = err;

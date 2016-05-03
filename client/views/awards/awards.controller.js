@@ -2,30 +2,32 @@
 
 angular.module('cfaDashboard')
   .controller('AwardsCtrl', ['AwardService', function (AwardService) {
-	  
-	  var vm = this;
-	  vm.awardData = {};
+    
+    var vm = this;
+    vm.awardData = {};
 
     angular.extend(vm, {
       name: 'AwardsCtrl'
     });
 
     vm.createAward = function(){
-    	AwardService.createAward(vm.awardData);
-    	vm.getAwards();
+      AwardService.createAward(vm.awardData);
+      vm.awardData = {}; //Clear Cache
+      vm.getAwards();
     };
 
     vm.onCancelClick = function(award) {
       award.isEditing = false;
+      vm.awardData = {}; //Clear Cache
     };
 
     vm.onEditClick = function(award) {
-      console.log('editClick');
       award.isEditing = true;
+      vm.awardData = award;
     };
 
     vm.editAward = function (award, awardData) {
-      console.log('editAward being called: ' + award);
+      awardData.isEditing = false;
       AwardService.editAward(award, awardData);
       vm.awardData = {}; //Clear Cache
       vm.getAwards();
