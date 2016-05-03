@@ -27,7 +27,7 @@ angular.module('cfaDashboard')
     }
 
 		vm.openIntake = function (intakeId) {
-			// console.log('/intakes/' + intakeId);
-			// $location.path('/intakes/' + intakeId);
+			console.log('/intakes/' + intakeId);
+			$location.path('/intakes/' + intakeId);
 		};
 	}]);

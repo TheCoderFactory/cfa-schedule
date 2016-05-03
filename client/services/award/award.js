@@ -7,7 +7,6 @@ angular.module('cfaDashboard')
     	var deferred = $q.defer();
       $http.post('/api/awards', data)
       	.then(function (res) {
-	    			console.log('Successful Creation')
 		        deferred.resolve(res);
 		      })
 		      .catch(function (err) {
