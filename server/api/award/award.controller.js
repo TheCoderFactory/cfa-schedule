@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Award = require('./award.model');
+var AwardDiscipline = require('../award-discipline/award-discipline.model');
 
 function handleError (res, err) {
   console.log(res);
@@ -77,9 +78,17 @@ exports.destroy = function (req, res) {
   Award.findById(req.params.id, function (err, award) {
     if (err) { return handleError(res, err); }
     if (!award) { return res.status(404).end(); }
-    award.remove(function (err) {
+    AwardDiscipline.find({_award: award._id}, function (err, awardDiscipline){
       if (err) { return handleError(res, err); }
-      return res.status(204).end();
-    });
+      if (!awardDiscipline) { return res.status(404).end(); }
+      if (_.isEmpty(awardDiscipline)) {
+        award.remove(function (err) {
+          if (err) { return handleError(res, err); }
+          return res.json({removed:true});
+        });        
+      } else {
+        return res.json({removed:false});
+      }
+    })
   });
 };
