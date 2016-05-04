@@ -9,7 +9,7 @@ exports.register = function (socket) {
   });
 
   ScheduledItem.schema.post('remove', function (doc) {
-    console.log(doc);
+    console.log('REMOVED SHEDULED ITEM CLIENT');
     socket.emit('ScheduledItem:remove', doc);
   });
 

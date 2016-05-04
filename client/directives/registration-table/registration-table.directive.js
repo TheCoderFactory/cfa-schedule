@@ -19,9 +19,6 @@ angular.module('cfaDashboard')
 						.then(function () {
 							scope.unregisterUser(registration);
 						})
-						.catch(function () {
-							// do nothing
-						})
 				};
 
 

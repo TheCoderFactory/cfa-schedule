@@ -85,8 +85,9 @@ exports.getAllItems = function (req, res) {
 };
 
 exports.delete = function (req, res) {
-  ScheduledItem.remove({_id: req.params.scheduledItemId}, function (err) {
+  ScheduledItem.findOne({_id: req.params.scheduledItemId}, function (err, scheduledItem) {
     if (err) { errorHandler.handle(res, err, 404); }
+    scheduledItem.remove();
     res.send('Scheduled Item deleted!');
   });
 };

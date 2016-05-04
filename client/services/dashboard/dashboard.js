@@ -10,10 +10,7 @@ angular.module('cfaDashboard')
   service.getDashboardData = function (intakeId) {
     var deferred = $q.defer();
     // check if a new intake dashboard has been accessed
-    console.log(intakeId);
-    console.log(service.settings.intake._id);
     if (service.settings.intake._id !== intakeId){
-      console.log('getting it all...');
       // get all information for dashboard here -->
       IntakeService.getIntake(intakeId)
         .then(function (intake) {
@@ -64,7 +61,6 @@ angular.module('cfaDashboard')
         return deferred.resolve();
       })
       .catch(function (err) {
-        console.log(err);
         return deferred.reject(err);
       });
     } else {
@@ -79,17 +75,14 @@ angular.module('cfaDashboard')
   // add/remove scheduled items
   // run this function whenever a scheduled item is created. Check if it belongs to intake, if so add it to the settings
   Socket.on('ScheduledItem:save', function (scheduledItem) {
-    console.log(scheduledItem);
     if(service.settings.intake._id) {
       // only display notification on intake page
       if(scheduledItem._intakes.indexOf(service.settings.intake._id) > -1) {
-        Notification.success('New Scheduled item: ' + scheduledItem.name);
+        Notification.info('New Scheduled item: ' + scheduledItem.name);
 
         if (service.settings.scheduledItems.indexOf(scheduledItem) > -1) {
-          console.log(scheduledItem);
           service.settings.scheduledItems[scheduledItem] = scheduledItem;
         } else {
-          console.log(scheduledItem);
           service.settings.scheduledItems.push(scheduledItem);
         }
         $rootScope.$broadcast('ScheduledItemChanged');
@@ -99,12 +92,12 @@ angular.module('cfaDashboard')
 
 
 Socket.on('ScheduledItem:remove', function (scheduledItem) {
-
+  console.log('REMOVED SHEDULED ITEM CLIENT');
   if(service.settings.intake._id) {
     // only display notification on intake page
-    if(scheduledItem._intakes.indexOf(service.settings.intake._id) > 0) {
+    if(scheduledItem._intakes.indexOf(service.settings.intake._id) > -1) {
 
-      Notification.success('Deleted Scheduled item: ' + scheduledItem.name);
+      Notification.warning('Deleted Scheduled item: ' + scheduledItem.name);
       service.settings.scheduledItems = _.without(service.settings.scheduledItems, scheduledItem);
     }
   }
@@ -117,7 +110,7 @@ Socket.on('Anouncement:save', function (anouncement) {
     // only display notification on intake page
     if(anouncement._intakes.indexOf(service.settings.intake._id) > -1) {
 
-      Notification.success('New Anouncement item: ' + anouncement.title);
+      Notification.info('New Anouncement item: ' + anouncement.title);
 
       if (service.settings.anouncements.indexOf(anouncement) > -1) {
         console.log(anouncement);
@@ -148,7 +141,7 @@ Socket.on('AwardDiscipline:save', function (registrationPointsDetails) {
     var discipline = registrationPointsDetails.newAwardDiscipline._discipline.name;
 
     console.log(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
-    Notification.success(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
+    Notification.info(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
 
     service.settings.points[registration._id] = registrationPointsDetails.newPoints;
   }
