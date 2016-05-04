@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('registrationTable', ['$uibModal', 'RegistrationService', function ($uibModal, RegistrationService) {
+	.directive('registrationTable', ['ModalService', 'RegistrationService', function (ModalService, RegistrationService) {
 		return {
 			restrict: 'E',
 			templateUrl: 'directives/registration-table/registration-table.html',
@@ -15,28 +15,13 @@ angular.module('cfaDashboard')
 				scope.unregisterAlertMessage = 'Are you sure you want unregister this user?';
 
 				scope.unregisterAlert = function (registration) {
-					
-					scope.removeRegistration = registration;
-
-					var modalInstance = $uibModal.open({
-			      animation: true,
-			      templateUrl: '../../modals/small_alert.html',
-			      controller: 'smallAlertCtrl',
-			      size: 'sm',
-			      resolve: {
-			        message: function () {
-			          return scope.unregisterAlertMessage;
-			        }
-			      }
-			    });
-
-					// if result resolved unregister user
-			    modalInstance.result.then(function (selectedItem) {
-			      scope.unregisterUser(scope.removeRegistration);
-			    })
-			    .catch(function () {
-			    	console.log('unregister canceled');
-			    });
+					ModalService.alert(scope.unregisterAlertMessage)
+						.then(function () {
+							scope.unregisterUser(registration);
+						})
+						.catch(function () {
+							// do nothing
+						})
 				};
 
 
