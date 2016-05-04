@@ -90,9 +90,7 @@ angular.module('cfaDashboard')
     }
   });
 
-
 Socket.on('ScheduledItem:remove', function (scheduledItem) {
-  console.log('REMOVED SHEDULED ITEM CLIENT');
   if(service.settings.intake._id) {
     // only display notification on intake page
     if(scheduledItem._intakes.indexOf(service.settings.intake._id) > -1) {
@@ -110,16 +108,26 @@ Socket.on('Anouncement:save', function (anouncement) {
     // only display notification on intake page
     if(anouncement._intakes.indexOf(service.settings.intake._id) > -1) {
 
-      Notification.info('New Anouncement item: ' + anouncement.title);
+      Notification.info('New Anouncement: ' + anouncement.title);
 
       if (service.settings.anouncements.indexOf(anouncement) > -1) {
-        console.log(anouncement);
         service.settings.anouncements[anouncement] = anouncement;
       } else {
-        console.log(anouncement);
         service.settings.anouncements.push(anouncement);
       }
       $rootScope.$broadcast('AnouncementChanged');
+    }
+  }
+});
+
+// remove anouncement
+Socket.on('Anouncement:remove', function (anouncement) {
+  if(service.settings.intake._id) {
+    // only display notification on intake page
+    if(anouncement._intakes.indexOf(service.settings.intake._id) > -1) {
+
+      Notification.warning('Deleted Anouncement: ' + anouncement.title);
+      service.settings.anouncements = _.without(service.settings.scheduledItems, anouncement);
     }
   }
 });
@@ -129,24 +137,42 @@ Socket.on('Anouncement:save', function (anouncement) {
 // get points of reg back - update in settings.points
 // watches should update leaderboard and summary
 // show notification
-Socket.on('AwardDiscipline:save', function (registrationPointsDetails) {
-  console.log('socket working');
+Socket.on('AwardDiscipline:changed', function (registrationPointsDetails) {
   if(service.settings.intake._id) {
-    var registration = registrationPointsDetails.newAwardDiscipline._registration;
+    var registration = registrationPointsDetails.awardDiscipline._registration;
     var user = registration._user;
     var userName = user.firstName + ' ' + user.lastName;
 
-    var award = registrationPointsDetails.newAwardDiscipline._award.name;
-    var awardPoints = registrationPointsDetails.newAwardDiscipline._award.value;
-    var discipline = registrationPointsDetails.newAwardDiscipline._discipline.name;
+    var award = registrationPointsDetails.awardDiscipline._award.name;
+    var awardPoints = registrationPointsDetails.awardDiscipline._award.value;
+    var discipline = registrationPointsDetails.awardDiscipline._discipline.name;
 
-    console.log(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
-    Notification.info(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
-
+    if (registrationPointsDetails.new) {
+      Notification.info(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
+    } else {
+      Notification.warning(userName + ' \'s ' + award + 'valued at ' + awardPoints + ' points for ' + discipline + 'has been removed!');
+    }
+    
     service.settings.points[registration._id] = registrationPointsDetails.newPoints;
   }
 });
 
+// remove award-discipline
+Socket.on('AwardDiscipline:remove', function (registrationPointsDetails) {
+  if(service.settings.intake._id) {
+    var registration = registrationPointsDetails.removedAwardDiscipline._registration;
+    var user = registration._user;
+    var userName = user.firstName + ' ' + user.lastName;
+
+    var award = registrationPointsDetails.removedAwardDiscipline._award.name;
+    var awardPoints = registrationPointsDetails.removedAwardDiscipline._award.value;
+    var discipline = registrationPointsDetails.removedAwardDiscipline._discipline.name;
+
+    Notification.warning(userName + ' \'s ' + award + 'valued at ' + awardPoints + ' points for ' + discipline + 'has been removed!');
+
+    service.settings.points[registration._id] = registrationPointsDetails.newPoints;
+  }
+});
 
 service.showDashboardLayout = function () {
   // remove container class from ng-view

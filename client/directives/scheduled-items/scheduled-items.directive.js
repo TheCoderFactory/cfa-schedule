@@ -26,7 +26,6 @@ angular.module('cfaDashboard')
           scope.filteredIntakes = [];
 
           scope.$watch('selectedScheduledItems', function () {
-            console.log('scheduled items changed');
             scope.scheduledItemIntakes();
           }, true);
 
@@ -44,7 +43,6 @@ angular.module('cfaDashboard')
                 scope.scheduledItems = _.filter(scope.scheduledItems, function (schItem) {
                   return scheduledItemId !== schItem._id;
                 });
-                console.log(msg);
               })
               .catch(function (err) {
                 scope.error = err;
@@ -76,8 +74,6 @@ angular.module('cfaDashboard')
           // get all intakes of current scheduled items
           scope.scheduledItemIntakes = function () {
             var intakes = [];
-            console.log(scope.scheduledItems);
-            console.log(scope.selectedScheduledItems);
             _.each(scope.selectedScheduledItems, function (scheduledItem) {
               _.each(scheduledItem._intakes, function (intake) {
                   intakes.push(intake)
@@ -85,7 +81,6 @@ angular.module('cfaDashboard')
             });
             scope.intakesSelection = _.uniq(intakes, '_id');
             scope.filteredIntakes = scope.intakesSelection;
-            console.log(scope.intakesSelection);
           };
 
           scope.addRemoveIntake = function (intakeClicked) {
