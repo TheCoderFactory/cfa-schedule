@@ -62,7 +62,7 @@ exports.create = function (req, res) {
           .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}},  
             function (err, awardDiscipline) {
               if (err) { return handleError(res, err); }
-              emtr.emit('AwardDiscipline:created', awardDiscipline);
+              emtr.emit('AwardDiscipline:changed', awardDiscipline, true);
               return res.status(201).json(awardDiscipline);
             });
         });
@@ -100,13 +100,25 @@ exports.destroy = function (req, res) {
   AwardDiscipline.findById(awardDisciplineId, function (err, awardDiscipline) {
     if (err) { return handleError(res, err); }
     if (!awardDiscipline) { return res.status(404).end(); }
+    
     awardDiscipline.remove(function (err) {
       if (err) { return handleError(res, err); }
+      
       // Remove from registration as well
+      
       Registration.findOne({_id: awardDiscipline._registration}, function (err, registration) {
         registration._awardDisciplines.remove(awardDisciplineId);
+        // save registration
         registration.save(function (err) {
-          return res.status(204).end();
+          if (err) { return handleError(res, err); }
+          // populate award discipline before emitting event
+          awardDiscipline
+            .populate({path: '_award _discipline _registration', populate: {path: '_user _intake'}},  
+              function (err, awardDiscipline) {
+                if (err) { return handleError(res, err); }
+                emtr.emit('AwardDiscipline:changed', awardDiscipline, false);
+                return res.status(204).end();
+              });
         });
       });
     });

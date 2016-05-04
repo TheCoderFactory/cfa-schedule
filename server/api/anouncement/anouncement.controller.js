@@ -78,9 +78,13 @@ exports.update = function (req, res) {
 };
 
 exports.delete = function (req, res) {
-  Anouncement.remove({_id: req.params.anouncementId}, function (err) {
+  Anouncement.findOne({_id: req.params.anouncementId}, function (err, anouncement) {
     if (err) { errorHandler.handle(res, err, 404); }
-    res.send('Anouncement deleted!');
+    anouncement.remove(function (err) {
+      if (err) { errorHandler.handle(res, err, 404); }
+      res.send('Anouncement deleted!');
+    });
+    
   });
 };
 

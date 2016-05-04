@@ -27,7 +27,6 @@ angular.module('cfaDashboard')
 							scope.formScheduledItem = {};
 							scope.showIntakesList = true;
 							scope.formScheduledItem._intakes = [];
-							console.log(scope.formScheduledItem);
 						}
 					};
 
