@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('AwardsCtrl', ['AwardService', function (AwardService) {
+  .controller('AwardsCtrl', ['ModalService', 'AwardService', function (ModalService, AwardService) {
     
     var vm = this;
     vm.awardData = {};
@@ -34,9 +34,17 @@ angular.module('cfaDashboard')
     }
 
     vm.deleteAward = function (id) {
-      AwardService.deleteAward(id);
-      vm.getAwards();
-    }
+      AwardService.deleteAward(id)
+        .then(function (res) {
+          if (!res.data.removed) {
+            ModalService.alert('Cannot delete an award that has already been assigned, fool!');
+          }
+          vm.getAwards();
+        })
+        .catch(function (err) {
+          vm.error = err;
+        });
+    };
 
     vm.getAwards = function () {
       AwardService.getAwards()

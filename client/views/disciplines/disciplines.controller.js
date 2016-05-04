@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('DisciplinesCtrl', ['DisciplineService', 'Auth', function (DisciplineService, Auth) {
+  .controller('DisciplinesCtrl', ['ModalService', 'DisciplineService', 'Auth', function (ModalService, DisciplineService, Auth) {
 
     var vm = this;
     vm.disciplineData = {};
@@ -34,9 +34,17 @@ angular.module('cfaDashboard')
     }
 
     vm.deleteDiscipline = function (id) {
-      DisciplineService.deleteDiscipline(id);
-      vm.getDisciplines();
-    }
+      DisciplineService.deleteDiscipline(id)
+        .then(function (res) {
+          if(!res.data.removed) {
+            ModalService.alert('Cannot delete a discipline that has already been assigned, fool!');
+          }
+          vm.getDisciplines();
+        })
+        .catch(function (err) {
+          vm.error = err;
+        });
+    };
 
     vm.getDisciplines = function () {
       DisciplineService.getDisciplines()
