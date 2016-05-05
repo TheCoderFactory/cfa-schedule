@@ -48,7 +48,7 @@
 	</div>
 
 	<!-- Create schedule item -->
-	<div ng-if="vm.showCreateScheduledItem" class="col-md-6">
+	<div ng-show="vm.showCreateScheduledItem" class="col-md-6">
 		<div class="fadeInOut well">
 			<create-schedule-item form-scheduled-item = "vm.formScheduledItem" intake-id="{{vm.intake._id}}" scheduled-items="vm.scheduledItems" show-create-scheduled-item="vm.showCreateScheduledItem" show-intakes="vm.showIntakes"></create-schedule-item>
 		</div>

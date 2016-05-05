@@ -7,22 +7,18 @@ var emtr = require('../../events.js');
 
 exports.register = function (socket) {
 
-  AwardDiscipline.schema.post('remove', function (AwardDiscipline) {
-    socket.emit('AwardDiscipline:remove', AwardDiscipline);
-  });
-
-  emtr.on('AwardDiscipline:created', function (awardDiscipline) {
-  	
+  emtr.on('AwardDiscipline:changed', function (awardDiscipline, addedAwardDiscipline) {
+  	console.log('remove/added ' + addedAwardDiscipline + ': ' + awardDiscipline);
   	Registration
 			.findOne({_id: awardDiscipline._registration._id})
 			.populate({path: ' _awardDisciplines', populate: {path: '_award _discipline'}})
 			.exec(function (err, registration) {
 				if(err) {console.log(err);}
-				console.log('This is the registration on event: ' + registration)
 				var registrationPointsDetails = {};
-		  	registrationPointsDetails['newAwardDiscipline'] = awardDiscipline;
+        registrationPointsDetails['new'] = addedAwardDiscipline;
+        registrationPointsDetails['awardDiscipline'] = awardDiscipline;
 				registrationPointsDetails['newPoints'] = registration.getPoints();
-				socket.emit('AwardDiscipline:save', registrationPointsDetails);
+				socket.emit('AwardDiscipline:changed', registrationPointsDetails);
 			});
   	
   });

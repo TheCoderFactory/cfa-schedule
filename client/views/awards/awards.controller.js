@@ -1,40 +1,50 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('AwardsCtrl', ['AwardService', function (AwardService) {
-	  
-	  var vm = this;
-	  vm.awardData = {};
+  .controller('AwardsCtrl', ['ModalService', 'AwardService', function (ModalService, AwardService) {
+    
+    var vm = this;
+    vm.awardData = {};
 
     angular.extend(vm, {
       name: 'AwardsCtrl'
     });
 
     vm.createAward = function(){
-    	AwardService.createAward(vm.awardData);
-    	vm.getAwards();
+      AwardService.createAward(vm.awardData);
+      vm.awardData = {}; //Clear Cache
+      vm.getAwards();
     };
 
     vm.onCancelClick = function(award) {
       award.isEditing = false;
+      vm.awardData = {}; //Clear Cache
     };
 
     vm.onEditClick = function(award) {
-      console.log('editClick');
       award.isEditing = true;
+      vm.awardData = shallowCopy(award);
     };
 
     vm.editAward = function (award, awardData) {
-      console.log('editAward being called: ' + award);
+      awardData.isEditing = false;
       AwardService.editAward(award, awardData);
       vm.awardData = {}; //Clear Cache
       vm.getAwards();
     }
 
     vm.deleteAward = function (id) {
-      AwardService.deleteAward(id);
-      vm.getAwards();
-    }
+      AwardService.deleteAward(id)
+        .then(function (res) {
+          if (!res.data.removed) {
+            ModalService.alert('Cannot delete an award that has already been assigned, fool!');
+          }
+          vm.getAwards();
+        })
+        .catch(function (err) {
+          vm.error = err;
+        });
+    };
 
     vm.getAwards = function () {
       AwardService.getAwards()
@@ -45,6 +55,16 @@ angular.module('cfaDashboard')
           vm.error = err;
         });
     };
+
+    function shallowCopy(obj) {
+      var objCopy = {};
+      for(var i in obj) {
+          if(obj.hasOwnProperty(i)) {
+              objCopy[i] = obj[i];
+          }
+      }
+      return objCopy;
+    }
 
     vm.getAwards();
   }]);

@@ -4,6 +4,7 @@ var _ = require('lodash');
 
 var authService = require('../../auth/auth.service');
 var Registration = require('./registration.model');
+var AwardDiscipline = require('../award-discipline/award-discipline.model');
 var errorHandler = require('../../error/error-handling');
 var User = require('../user/user.model.js');
 
@@ -48,15 +49,18 @@ exports.delete = function (req, res) {
 	Registration
 		.remove({_id: registrationId}, function (err) {
 			if (err) { return handleError(res, err); }
-			//Remove from registration from user model too
-			User
-				.findOne({_id: userId}, function (err, user) {
-					user._registrations.remove(registrationId);
-					user.save(function (err, user) {
-						if (err) { return handleError(res, err); }
-						res.send(registrationId);
-					})
-				})
+			// Remove all award-disciplines for that registration
+			AwardDiscipline.remove({_registration: registrationId}, function (err) {
+				//Remove from registration from user model too
+				User
+					.findOne({_id: userId}, function (err, user) {
+						user._registrations.remove(registrationId);
+						user.save(function (err, user) {
+							if (err) { return handleError(res, err); }
+							res.send(registrationId);
+						});
+					});
+			});
 		});
 };
 

@@ -1,3 +1,11 @@
+<div class="container ">
+	<div class="row">
+		<ul class="nav navbar-nav">
+		  <li><a href="/award-disciplines">Back</a></li>
+		</ul>
+	</div>
+</div>
+
 <div class="col-md-6">
 	<h1>Awards</h1>
 	<div class="row" ng-repeat="award in vm.awards">
@@ -12,28 +20,26 @@
 		</div>
 	  <!-- Form to Edit an Award -->
 	  <div ng-if="award.isEditing">
-		  <form ng-if="award.isEditing" ng-submit="editAward">
-			  <input class="form-control"
-			      ng-value="award.name"
-			      ng-model="vm.awardData.name" />
+		  <form>
+			  <input class="form-control" ng-model="vm.awardData.name"/>
 			 	<select class="form-control" ng-model="vm.awardData.value">
 					<option ng-repeat="n in [] | range:15" value="{{$index+1}}">{{$index+1}}</option>
 				</select>
 			</form>
 			<!-- Buttons to Edit an Award -->
-			<button ng-if="award.isEditing"
-			class="btn btn-primary"
-			ng-click="vm.editAward(award, vm.awardData)">
+			<button
+				class="btn btn-primary"
+				ng-click="vm.editAward(award, vm.awardData)">
 				Save
 			</button>
-			<button ng-if="award.isEditing"
-			class="btn btn-default"
-			ng-click="vm.onCancelClick(award)">
+			<button
+				class="btn btn-default"
+				ng-click="vm.onCancelClick(award)">
 				Cancel
 			</button>
 			<br>
 		</div>
-					<br>
+		<br>
 	</div>
 </div>
 <div class="col-md-6">
@@ -49,7 +55,7 @@
 	  <div class="form-group col-md-6">
 	    <label for="valueInput">Value</label>
 	    <select class="form-control" ng-model="vm.awardData.value">
-				<option  ng-repeat="n in [] | range:15" value="{{$index+1}}">{{$index+1}}</option>
+				<option ng-repeat="n in [] | range:15" value="{{$index+1}}">{{$index+1}}</option>
 			</select>
 	  </div>
 	 	<div class="form-group col-md-6">
@@ -58,11 +64,4 @@
 			</button>
 		</div>
 	</form>
-</div>
-<div class="col-md-12">
-  <a href="/award-disciplines">
-  	<button class="btn btn-default pull-right" type="submit">
-  		Back
-  	</button>
-	</a>
 </div>

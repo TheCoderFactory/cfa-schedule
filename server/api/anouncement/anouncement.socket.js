@@ -9,7 +9,6 @@ exports.register = function (socket) {
   });
 
   Anouncement.schema.post('remove', function (doc) {
-    console.log(doc);
     socket.emit('Anouncement:remove', doc);
   });
 

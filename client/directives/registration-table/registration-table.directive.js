@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('registrationTable', ['RegistrationService', function (RegistrationService) {
+	.directive('registrationTable', ['ModalService', 'RegistrationService', function (ModalService, RegistrationService) {
 		return {
 			restrict: 'E',
 			templateUrl: 'directives/registration-table/registration-table.html',
@@ -11,6 +11,16 @@ angular.module('cfaDashboard')
 			},
 
 			link: function (scope, elem, attrs) {
+
+				scope.unregisterAlertMessage = 'Are you sure you want unregister this user?';
+
+				scope.unregisterAlert = function (registration) {
+					ModalService.alert(scope.unregisterAlertMessage)
+						.then(function () {
+							scope.unregisterUser(registration);
+						})
+				};
+
 
 				scope.unregisterUser = function (registration) {
 					console.log(registration);

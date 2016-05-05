@@ -1,39 +1,49 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('DisciplinesCtrl', ['DisciplineService', 'Auth', function (DisciplineService, Auth) {
+  .controller('DisciplinesCtrl', ['ModalService', 'DisciplineService', 'Auth', function (ModalService, DisciplineService, Auth) {
 
-  	var vm = this;
-	  vm.disciplineData = {};
+    var vm = this;
+    vm.disciplineData = {};
 
     angular.extend(this, {
       name: 'DisciplinesCtrl'
     });
 
     vm.createDiscipline = function(){
-    	DisciplineService.createDiscipline(vm.disciplineData);
-    	vm.getDisciplines();
-    };
-
-    vm.onCancelClick = function(discipline) {
-      discipline.isEditing = false;
-    };
-
-    vm.onEditClick = function(discipline) {
-      console.log('editClick');
-      discipline.isEditing = true;
-    };
-
-    vm.editDiscipline = function (discipline, disciplineData) {
-      console.log('editDiscipline called');
-      DisciplineService.editDiscipline(discipline, disciplineData);
+      DisciplineService.createDiscipline(vm.disciplineData);
       vm.disciplineData = {}; //Clear Cache
       vm.getDisciplines();
     };
 
-    vm.deleteDiscipline = function (id) {
-      DisciplineService.deleteDiscipline(id);
+    vm.onCancelClick = function(discipline) {
+      discipline.isEditing = false;
+      vm.disciplineData = {}; //Clear Cache
+    };
+
+    vm.onEditClick = function(discipline) {
+      discipline.isEditing = true;
+      vm.disciplineData =  shallowCopy(discipline);
+    };
+
+    vm.editDiscipline = function (discipline, disciplineData) {
+      disciplineData.isEditing = false;
+      DisciplineService.editDiscipline(discipline, disciplineData);
+      vm.disciplineData = {}; //Clear Cache
       vm.getDisciplines();
+    }
+
+    vm.deleteDiscipline = function (id) {
+      DisciplineService.deleteDiscipline(id)
+        .then(function (res) {
+          if(!res.data.removed) {
+            ModalService.alert('Cannot delete a discipline that has already been assigned, fool!');
+          }
+          vm.getDisciplines();
+        })
+        .catch(function (err) {
+          vm.error = err;
+        });
     };
 
     vm.getDisciplines = function () {
@@ -45,6 +55,16 @@ angular.module('cfaDashboard')
           vm.error = err;
         });
     };
+
+    function shallowCopy(obj) {
+      var objCopy = {};
+      for(var i in obj) {
+          if(obj.hasOwnProperty(i)) {
+              objCopy[i] = obj[i];
+          }
+      }
+      return objCopy;
+    }
 
     vm.getDisciplines();
   }]);

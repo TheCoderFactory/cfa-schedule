@@ -66,15 +66,25 @@ exports.update = function (req, res) {
 
     anouncement.save(function (err, anouncement) {
       if (err) { errorHandler.handle(res, err, 404); }
-      res.json(anouncement);
+      Anouncement
+        .findById(anouncement._id)
+        .populate('_intakes')
+        .exec(function (err, anouncement) {
+          if (err) { errorHandler.handle(res, err, 404); }
+          res.json(anouncement);
+        });
     });
   });
 };
 
 exports.delete = function (req, res) {
-  Anouncement.remove({_id: req.params.anouncementId}, function (err) {
+  Anouncement.findOne({_id: req.params.anouncementId}, function (err, anouncement) {
     if (err) { errorHandler.handle(res, err, 404); }
-    res.send('Anouncement deleted!');
+    anouncement.remove(function (err) {
+      if (err) { errorHandler.handle(res, err, 404); }
+      res.send('Anouncement deleted!');
+    });
+    
   });
 };
 
