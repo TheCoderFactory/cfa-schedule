@@ -90,129 +90,152 @@ angular.module('cfaDashboard')
     }
   });
 
-Socket.on('ScheduledItem:remove', function (scheduledItem) {
-  if(service.settings.intake._id) {
-    // only display notification on intake page
-    if(scheduledItem._intakes.indexOf(service.settings.intake._id) > -1) {
+  Socket.on('ScheduledItem:remove', function (scheduledItem) {
+    if(service.settings.intake._id) {
+      // only display notification on intake page
+      if(scheduledItem._intakes.indexOf(service.settings.intake._id) > -1) {
 
-      Notification.warning('Deleted Scheduled item: ' + scheduledItem.name);
-      service.settings.scheduledItems = _.without(service.settings.scheduledItems, scheduledItem);
-    }
-  }
-});
-
-// add anouncement
-Socket.on('Anouncement:save', function (anouncement) {
-  console.log(anouncement);
-  if(service.settings.intake._id) {
-    // only display notification on intake page
-    if(anouncement._intakes.indexOf(service.settings.intake._id) > -1) {
-
-      Notification.info('New Anouncement: ' + anouncement.title);
-
-      if (service.settings.anouncements.indexOf(anouncement) > -1) {
-        service.settings.anouncements[anouncement] = anouncement;
-      } else {
-        service.settings.anouncements.push(anouncement);
+        Notification.warning('Deleted Scheduled item: ' + scheduledItem.name);
+        service.settings.scheduledItems = _.without(service.settings.scheduledItems, scheduledItem);
       }
-      $rootScope.$broadcast('AnouncementChanged');
     }
-  }
-});
+  });
 
-// remove anouncement
-Socket.on('Anouncement:remove', function (anouncement) {
-  if(service.settings.intake._id) {
-    // only display notification on intake page
-    if(anouncement._intakes.indexOf(service.settings.intake._id) > -1) {
+  // add anouncement
+  Socket.on('Anouncement:save', function (anouncement) {
+    if(service.settings.intake._id) {
+      // only display notification on intake page
+      if(anouncement._intakes.indexOf(service.settings.intake._id) > -1) {
 
-      Notification.warning('Deleted Anouncement: ' + anouncement.title);
-      service.settings.anouncements = _.without(service.settings.scheduledItems, anouncement);
+        Notification.info('New Anouncement: ' + anouncement.title);
+
+        if (service.settings.anouncements.indexOf(anouncement) > -1) {
+          service.settings.anouncements[anouncement] = anouncement;
+        } else {
+          service.settings.anouncements.push(anouncement);
+        }
+        $rootScope.$broadcast('AnouncementChanged');
+      }
     }
-  }
-});
+  });
+
+  // remove anouncement
+  Socket.on('Anouncement:remove', function (anouncement) {
+    if(service.settings.intake._id) {
+      // only display notification on intake page
+      if(anouncement._intakes.indexOf(service.settings.intake._id) > -1) {
+
+        Notification.warning('Deleted Anouncement: ' + anouncement.title);
+        service.settings.anouncements = _.without(service.settings.scheduledItems, anouncement);
+      }
+    }
+  });
 
 
-// points added 
-// get points of reg back - update in settings.points
-// watches should update leaderboard and summary
-// show notification
-Socket.on('AwardDiscipline:changed', function (registrationPointsDetails) {
-  if(service.settings.intake._id) {
-    var registration = registrationPointsDetails.awardDiscipline._registration;
-    var user = registration._user;
-    var userName = user.firstName + ' ' + user.lastName;
+  // points added 
+  // get points of reg back - update in settings.points
+  // watches should update leaderboard and summary
+  // show notification
+  Socket.on('AwardDiscipline:changed', function (registrationPointsDetails) {
+    if(service.settings.intake._id) {
+      var registration = registrationPointsDetails.awardDiscipline._registration;
+      var user = registration._user;
+      var userName = user.firstName + ' ' + user.lastName;
 
-    var award = registrationPointsDetails.awardDiscipline._award.name;
-    var awardPoints = registrationPointsDetails.awardDiscipline._award.value;
-    var discipline = registrationPointsDetails.awardDiscipline._discipline.name;
+      var award = registrationPointsDetails.awardDiscipline._award.name;
+      var awardPoints = registrationPointsDetails.awardDiscipline._award.value;
+      var discipline = registrationPointsDetails.awardDiscipline._discipline.name;
 
-    if (registrationPointsDetails.new) {
-      Notification.info(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
-    } else {
+      if (registrationPointsDetails.new) {
+        Notification.info(userName + ' has just been awarded a ' + award + 'valued at ' + awardPoints + ' points for ' + discipline);
+      } else {
+        Notification.warning(userName + ' \'s ' + award + 'valued at ' + awardPoints + ' points for ' + discipline + 'has been removed!');
+      }
+
+      service.settings.points[registration._id] = registrationPointsDetails.newPoints;
+    }
+  });
+
+  // remove award-discipline
+  Socket.on('AwardDiscipline:remove', function (registrationPointsDetails) {
+    if(service.settings.intake._id) {
+      var registration = registrationPointsDetails.removedAwardDiscipline._registration;
+      var user = registration._user;
+      var userName = user.firstName + ' ' + user.lastName;
+
+      var award = registrationPointsDetails.removedAwardDiscipline._award.name;
+      var awardPoints = registrationPointsDetails.removedAwardDiscipline._award.value;
+      var discipline = registrationPointsDetails.removedAwardDiscipline._discipline.name;
+
       Notification.warning(userName + ' \'s ' + award + 'valued at ' + awardPoints + ' points for ' + discipline + 'has been removed!');
-    }
-    
-    service.settings.points[registration._id] = registrationPointsDetails.newPoints;
-  }
-});
 
-// remove award-discipline
-Socket.on('AwardDiscipline:remove', function (registrationPointsDetails) {
-  if(service.settings.intake._id) {
-    var registration = registrationPointsDetails.removedAwardDiscipline._registration;
-    var user = registration._user;
-    var userName = user.firstName + ' ' + user.lastName;
-
-    var award = registrationPointsDetails.removedAwardDiscipline._award.name;
-    var awardPoints = registrationPointsDetails.removedAwardDiscipline._award.value;
-    var discipline = registrationPointsDetails.removedAwardDiscipline._discipline.name;
-
-    Notification.warning(userName + ' \'s ' + award + 'valued at ' + awardPoints + ' points for ' + discipline + 'has been removed!');
-
-    service.settings.points[registration._id] = registrationPointsDetails.newPoints;
-  }
-});
-
-service.showDashboardLayout = function () {
-  // remove container class from ng-view
-  service.settings.container = false;
-  // add body position class to body
-  service.settings.bodyOffset = true;
-  // show dashboard nav bars
-  service.settings.dashboardNavs = true;
-};
-
-service.hideDashboardLayout = function () {
-  // add container class from ng-view
-  service.settings.container = true;
-  // remove body position class to body
-  service.settings.bodyOffset = false;
-  // hide dashboard nav bars
-  service.settings.dashboardNavs = false;
-};
-
-
-
-service.rankedRegistrations = function () {
-  var ranked = _.sortBy(service.settings.registrations, function (registration) {
-    if(service.settings.points[registration._id].totalPoints) {
-      console.log(service.settings.points[registration._id]);
-      return -1 * service.settings.points[registration._id].totalPoints;
-    } else {
-      return 0;
+      service.settings.points[registration._id] = registrationPointsDetails.newPoints;
     }
   });
-  return ranked;
-};
 
+  service.showDashboardLayout = function () {
+    // remove container class from ng-view
+    service.settings.container = false;
+    // add body position class to body
+    service.settings.bodyOffset = true;
+    // show dashboard nav bars
+    service.settings.dashboardNavs = true;
+  };
 
-service.getCurrentScheduledItems = function () {
-  var currentItems = _.filter(service.settings.scheduledItems, function (scheduledItem) {
-    return moment().isBetween(scheduledItem.start, scheduledItem.end);
-  });
-  return currentItems;
-}
+  service.hideDashboardLayout = function () {
+    // add container class from ng-view
+    service.settings.container = true;
+    // remove body position class to body
+    service.settings.bodyOffset = false;
+    // hide dashboard nav bars
+    service.settings.dashboardNavs = false;
+  };
 
-return service;
+  service.tableNames = function () {
+    var disciplines = service.settings.disciplines;
+    var names = ["image", "name"];
+    for (var i = 0; i < disciplines.length; i++) {
+      names.push(disciplines[i].name);
+    }
+    names.push("total");
+    return names;
+  }
+
+  service.studentPoints = function () {
+    var studentPoints = {};
+    studentPoints.students = [];
+    var regs = service.settings.registrations.filter(function (reg) { return reg.role === "Student"});
+    for (var i = 0; i < regs.length; i++) {
+      var reg = regs[i];
+      studentPoints.students[i] = {};
+      studentPoints.students[i].image = reg._user.image;
+      studentPoints.students[i].name = reg._user.firstName + ' ' + reg._user.lastName;
+
+      var disciplines = service.settings.disciplines;
+      var points = service.settings.points;
+
+      var totalPoints = 0;
+      for (var j = 0; j < disciplines.length; j++) {
+        var dPoints = points[reg._id][disciplines[j]._id];
+        if (dPoints == null) {
+          studentPoints.students[i][disciplines[j].name] = 0;
+          totalPoints += 0;
+        } else {
+          studentPoints.students[i][disciplines[j].name] = dPoints.points;
+          totalPoints += dPoints.points;
+        }
+      }
+      studentPoints.students[i].total = totalPoints;
+    }
+    return studentPoints;
+  }
+
+  service.getCurrentScheduledItems = function () {
+    var currentItems = _.filter(service.settings.scheduledItems, function (scheduledItem) {
+      return moment().isBetween(scheduledItem.start, scheduledItem.end);
+    });
+    return currentItems;
+  }
+
+  return service;
 }]);

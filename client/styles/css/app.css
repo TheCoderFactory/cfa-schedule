@@ -12,32 +12,28 @@
  */
 /* Move down content because we have a fixed navbar that is 50px tall */
 .bodyOffset {
-  padding-top: 70px;
-}
+  padding-top: 70px; }
 
 /*
  * Global add-ons
  */
 .sub-header {
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
-}
+  border-bottom: 1px solid #eee; }
 
 /*
  * Top navigation
  * Hide default border to remove 1px line.
  */
 .navbar-fixed-top {
-  border: 0;
-}
+  border: 0; }
 
 /*
  * Sidebar
  */
 /* Hide for mobile, show later */
 .sidebar {
-  display: none;
-}
+  display: none; }
 
 @media (min-width: 768px) {
   .sidebar {
@@ -52,82 +48,66 @@
     overflow-y: auto;
     /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
-    border-right: 1px solid #eee;
-  }
-}
+    border-right: 1px solid #eee; } }
 
 /* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px;
   /* 20px padding + 1px border */
   margin-bottom: 20px;
-  margin-left: -20px;
-}
+  margin-left: -20px; }
 
 .nav-sidebar > li > a {
   padding-right: 20px;
-  padding-left: 20px;
-}
+  padding-left: 20px; }
 
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
   color: #fff;
-  background-color: #428bca;
-}
+  background-color: #428bca; }
 
 /* Horizontal Nav*/
 .dashboardNav {
-  height: 70px !important;
-}
+  height: 70px !important; }
 
 /*
  * Main content
  */
 .main {
-  padding: 20px;
-}
+  padding: 20px; }
 
 @media (min-width: 768px) {
   .main {
     padding-right: 40px;
-    padding-left: 40px;
-  }
-}
+    padding-left: 40px; } }
 
 .main .page-header {
-  margin-top: 0;
-}
+  margin-top: 0; }
 
 /*
  * Placeholder dashboard ideas
  */
 .placeholders {
   margin-bottom: 30px;
-  text-align: center;
-}
+  text-align: center; }
 
 .placeholders h4 {
-  margin-bottom: 0;
-}
+  margin-bottom: 0; }
 
 .placeholder {
-  margin-bottom: 20px;
-}
+  margin-bottom: 20px; }
 
 .placeholder img {
   display: inline-block;
-  border-radius: 50%;
-}
+  border-radius: 50%; }
 
 body {
-  font-family: sans-serif;
-}
+  font-family: sans-serif; }
 
 .clock {
   font-size: 40px;
-  margin-left: 100px;
-}
+  margin-left: 100px; }
 
 .circle {
   width: 30px;
@@ -135,34 +115,29 @@ body {
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
   border-radius: 50px;
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .circleHeading {
   display: inline-flex;
   float: left;
   padding-right: 5px;
-  vertical-align: middle;
-}
+  vertical-align: middle; }
 
 .circleTable {
   width: 20px;
   height: 20px;
   display: inline-flex;
-  margin-left: 4px;
-}
+  margin-left: 4px; }
 
 .circleSelector {
   width: 20px;
   height: 20px;
   display: inline-block;
-  margin-left: 8px;
-}
+  margin-left: 8px; }
 
 .circleSelected {
   width: 50px;
-  height: 50px;
-}
+  height: 50px; }
 
 .circleAnouncementList {
   width: 30px;
@@ -170,67 +145,63 @@ body {
   display: inline-block;
   margin-left: 5px;
   text-align: center;
-  vertical-align: middle;
-}
+  vertical-align: middle; }
 
 .circleIntakeSelectionDashboard {
   width: 100px;
   height: 100px;
   margin-left: 20px;
   text-align: center;
-  margin-top: 50px;
-}
+  margin-top: 50px; }
 
 .selectIntakes {
-  text-align: center !important;
-}
+  text-align: center !important; }
 
 .trashHover {
-  background-color: #ffe6e6 !important;
-}
+  background-color: #ffe6e6 !important; }
 
 .intakePanel {
   align-items: center !important;
-  display: flex;
-}
+  display: flex; }
 
 .intakePanelElement {
-  padding-left: 5px;
-}
+  padding-left: 5px; }
 
 .addTermLink {
   margin-top: 10px !important;
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .intakeHeading {
-  align-items: center !important;
-}
+  align-items: center !important; }
 
 a {
-  cursor: pointer !important;
-}
+  cursor: pointer !important; }
 
 /*.nav-sidebar > li > a {
-color: red !important;
+	color: red !important;
 }*/
 /*Animations*/
 /* The starting CSS styles for the enter animation */
 .fadeInOut.ng-enter {
   transition: 0.5s linear all;
-  opacity: 0;
-}
+  opacity: 0; }
 
 /* The finishing CSS styles for the enter animation */
 .fadeInOut.ng-enter.ng-enter-active {
-  opacity: 1;
-}
+  opacity: 1; }
 
 .fadeInOut.ng-leave {
   transition: 0.5s linear all;
-  opacity: 1;
-}
+  opacity: 1; }
 
 .fadeInOut.ng-leave.ng-leave-active {
-  opacity: 0;
+  opacity: 0; }
+/*
+ * Order dashboard
+ */
+.sort-true {
+  color: green;
+}
+.sort-false {
+  color: red;
 }
