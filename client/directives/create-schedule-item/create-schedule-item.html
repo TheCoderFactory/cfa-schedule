@@ -24,11 +24,12 @@
 	<div class="col-md-6">
 		<label for="scheduleItemStart">Start</label>
 		<div class="input-group">
-		  <input ng-model="formScheduledItem.start" type="text"
+		  <input name="start" other-date="{{formScheduledItem.end}}" ng-model="formScheduledItem.start" type="text"
 		  uib-datepicker-popup="mediumDate"
 		  is-open="startDatePickerIsOpen"
 		  ng-click="valuationDatePickerOpen()"
-			class="form-control" id="scheduleItemStart">
+			class="form-control" id="scheduleItemStart"
+			start-end-date>
 		  <span class="input-group-btn">
 		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
 		      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
@@ -44,11 +45,12 @@
 	<div class="col-md-6">
 		<label for="scheduleItemEnd">End</label>
 		<div class="input-group">
-		  <input ng-model="formScheduledItem.end" type="text"
+		  <input name="end" other-date="{{formScheduledItem.start}}" ng-model="formScheduledItem.end" type="text"
 		  uib-datepicker-popup="mediumDate"
 		  is-open="endDatePickerIsOpen"
 		  ng-click="valuationDatePickerOpen()"
-			class="form-control" id="scheduleItemEnd">
+			class="form-control" id="scheduleItemEnd"
+			start-end-date>
 		  <span class="input-group-btn">
 		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'end')">
 		      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
