@@ -230,6 +230,18 @@ angular.module('cfaDashboard')
     return studentPoints;
   }
 
+  service.rankedRegistrations = function () {
+    var ranked = _.sortBy(service.settings.registrations, function (registration) {
+      if(service.settings.points[registration._id].totalPoints) {
+        return -1 * service.settings.points[registration._id].totalPoints;
+      } else {
+        return 0;
+      }
+    });
+    return ranked;
+  };
+
+
   service.getCurrentScheduledItems = function () {
     var currentItems = _.filter(service.settings.scheduledItems, function (scheduledItem) {
       return moment().isBetween(scheduledItem.start, scheduledItem.end);
