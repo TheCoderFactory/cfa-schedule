@@ -110,6 +110,9 @@ body {
   font-size: 40px;
   margin-left: 100px; }
 
+.navbar-inverse .navbar-nav > li > a {
+  color: white; }
+
 .circle {
   width: 30px;
   height: 30px;
