@@ -237,7 +237,7 @@ angular.module('cfaDashboard')
         return 0;
       }
     });
-    return ranked;
+    return ranked.filter(function (reg) { return reg.role === "Student"});
   };
 
 
