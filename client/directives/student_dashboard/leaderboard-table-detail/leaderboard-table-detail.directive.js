@@ -20,7 +20,7 @@ angular.module('cfaDashboard')
       scope.rank = 0;
       scope.settings = DashboardService.settings;
       scope.sort = {
-        column: "total",
+        column: "Total",
         descending: true
       };
 
