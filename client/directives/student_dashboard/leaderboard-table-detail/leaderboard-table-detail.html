@@ -1,14 +1,9 @@
-<span class="label" style="color: black;">Ordered By: {{orderByField}}, Reverse Sort: {{reverseSort}}</span><br><br>
 <table class="table table-striped table-hover">
 <thead>
   <tr>
-    <th>Rank</th>
-    <th ng:repeat="(i,th) in tableNames" ng:class="selectedCls(i)" ng:click="changeSorting(i)">{{th}}
-      <span ng-show="selectedCls(i)">
-        <span ng-show="!sort.descending">^</span>
-        <span ng-show="sort.descending">v</span>
-      </span>
-    </th>
+    <th width="100/{{columnWidth}}%">Rank</th>
+    <th class="table-headers" width="100/{{columnWidth}}%" ng:repeat="(i,th) in tableNames" ng:class="selectedCls(i)" ng:click="changeSorting(i)">{{th}}
+      </th>
   </tr>
 </thead>
 <tbody>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * award-disciplines.scss
  */
@@ -196,12 +197,14 @@ a {
 
 .fadeInOut.ng-leave.ng-leave-active {
   opacity: 0; }
-/*
- * Order dashboard
- */
-.sort-true {
+
+.sort-true:before {
   color: green;
-}
-.sort-false {
+  content: "▼"; }
+
+.sort-false:before {
   color: red;
-}
+  content: "▲"; }
+
+.table-headers {
+  cursor: pointer; }

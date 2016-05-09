@@ -120,3 +120,14 @@ a {
 .fadeInOut.ng-leave.ng-leave-active {
   opacity:0;
 }
+.sort-true:before {
+  color: green;
+  content: "▼";
+}
+.sort-false:before {
+  color: red;
+  content: "▲";
+}
+.table-headers {
+  cursor: pointer;
+}

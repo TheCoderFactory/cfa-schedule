@@ -20,6 +20,7 @@ angular.module('cfaDashboard')
 
       scope.students = DashboardService.studentPoints().students;
       scope.tableNames = DashboardService.tableNames();
+      scope.columnWidth = scope.tableNames.length+1;
 
       scope.selectedCls = function(column) {
         return column == scope.sort.column && 'sort-' + scope.sort.descending;
