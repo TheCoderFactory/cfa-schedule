@@ -1,8 +1,5 @@
-<div>
-  {{ vm.name }}
-</div>
 
-<form ng-submit="vm.login()">
+<!-- <form ng-submit="vm.login()">
   <input type="email"
          ng-model="vm.user.email"
          placeholder="email">
@@ -12,6 +9,12 @@
   <button type="submit">
     login
   </button>
-</form>
+</form> -->
+
+<div class="row">
+  <div class="login-form col-md-offset-4 col-md-4">
+    <login-form></login-form>
+  </div>
+</div>
 
 <pre ng-if="vm.error">{{ vm.error | json }}</pre>
