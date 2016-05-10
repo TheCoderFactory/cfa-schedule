@@ -30,6 +30,8 @@ angular.module('cfaDashboard')
                     // redirect to summary
                     deferred.reject();
                     $location.path('/dashboard/' + userDetails.data._registrations[0]._intake._id + '/summary');
+                  } else if (userDetails.data._registrations.length === 0) {
+                    deferred.resolve(userDetails.data);
                   } else {
                     // redurect to root
                     deferred.reject();
