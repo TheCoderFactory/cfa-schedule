@@ -24,6 +24,11 @@ angular.module('cfaDashboard')
         descending: true
       };
 
+      scope.$watch('settings', function () {
+        console.log('Dashboard settings changed from leaderboard-table-detail');
+        scope.students = DashboardService.studentPoints().students;
+      }, true);
+
       scope.predicate = function(val) {
         // $scope.corder corresponds to the object property name to sort by
         return val[scope.sort.column];

@@ -225,6 +225,7 @@ angular.module('cfaDashboard')
         }
       }
       studentPoints.students[i].Total = totalPoints;
+
     }
     return studentPoints;
   }
