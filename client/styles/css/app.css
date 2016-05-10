@@ -196,12 +196,3 @@ a {
 
 .fadeInOut.ng-leave.ng-leave-active {
   opacity: 0; }
-/*
- * Order dashboard
- */
-.sort-true {
-  color: green;
-}
-.sort-false {
-  color: red;
-}

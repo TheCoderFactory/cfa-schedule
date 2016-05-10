@@ -8,6 +8,7 @@ module.exports = function (app) {
 
   // API
   app.use('/api/award-disciplines', auth.isAuthenticated(), require('./api/award-discipline'));
+  app.use('/api/projects', auth.isAuthenticated(), require('./api/project'));
   app.use('/api/disciplines', auth.isAuthenticated(), require('./api/discipline'));
   app.use('/api/awards', auth.isAuthenticated(), require('./api/award'));
   app.use('/api/users', require('./api/user'));
