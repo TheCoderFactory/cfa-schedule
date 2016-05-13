@@ -11,6 +11,7 @@ angular.module('cfaDashboard')
     
     vm.registeredStudents = [];
     vm.registeredTeachers = [];
+    vm.registeredTas = [];
 
     vm.toggleShowCreateScheduledItem = function () {
       if (vm.showCreateScheduledItem === true) {
@@ -54,8 +55,10 @@ angular.module('cfaDashboard')
         _.each(registrations, function (registration) {
           if (registration.role === 'Teacher') {
             vm.registeredTeachers.push(registration);
-          } else {
+          } else if (registration.role === 'Student') {
             vm.registeredStudents.push(registration);
+          } else if (registration.role === 'TA') {
+            vm.registeredTas.push(registration);
           }
         });
       })
