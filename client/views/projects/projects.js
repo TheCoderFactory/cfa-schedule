@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cfa_dashboard')
+angular.module('cfaDashboard')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/projects', {
