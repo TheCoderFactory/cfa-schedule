@@ -10,6 +10,7 @@ angular.module('cfaDashboard')
 				unregisteredUsers: '=',
 				formRegisterUser: '=',
 				registeredStudents: '=',
+				registeredTas: '=',
 				registeredTeachers: '='
 
 			},
@@ -33,8 +34,10 @@ angular.module('cfaDashboard')
 							//sort by role and add to controller
 							if (registration.data.role === 'Teacher') {
 								scope.registeredTeachers.push(registration.data);
-							} else {
+							} else if (registration.data.role === 'Student') {
 								scope.registeredStudents.push(registration.data);
+							} else if (registration.data.role === 'TA') {
+								scope.registeredTas.push(registration.data);
 							}
 							// purge form
 							scope.formRegisterUser = {};
