@@ -72,7 +72,7 @@ angular.module('cfaDashboard')
       service.removeCurrentUser();
       $cookieStore.remove('token');
       _user = {};
-      $location.path('/login');
+      $location.path('/');
     };
 
     /**

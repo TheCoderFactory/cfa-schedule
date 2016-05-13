@@ -10,16 +10,29 @@ angular.module('cfaDashboard')
       selectRegistration: '='
     },
     link: function (scope, elem, attrs) {
-      scope.rank = 0;
-      scope.settings = DashboardService.settings;
-      scope.sort = {
-        column: 'total',
-        descending: true
-      };
 
 
       scope.students = DashboardService.studentPoints().students;
       scope.tableNames = DashboardService.tableNames();
+      scope.columnWidth = 100/scope.tableNames.length+1;
+      scope.leaderRank = 1;
+
+      scope.rank = 0;
+      scope.settings = DashboardService.settings;
+      scope.sort = {
+        column: "Total",
+        descending: true
+      };
+
+      scope.$watch('settings', function () {
+        console.log('Dashboard settings changed from leaderboard-table-detail');
+        scope.students = DashboardService.studentPoints().students;
+      }, true);
+
+      scope.predicate = function(val) {
+        // $scope.corder corresponds to the object property name to sort by
+        return val[scope.sort.column];
+      }
 
       scope.selectedCls = function(column) {
         return column == scope.sort.column && 'sort-' + scope.sort.descending;
@@ -31,7 +44,7 @@ angular.module('cfaDashboard')
           sort.descending = !sort.descending;
         } else {
           sort.column = column;
-          sort.descending = false;
+          sort.descending = true;
         }
       };
 

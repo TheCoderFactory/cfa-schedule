@@ -34,7 +34,7 @@ angular.module('cfaDashboard', [
 
       responseError: function (response) {
         if (response.status === 401) {
-          $location.path('/login');
+          $location.path('/');
           $cookieStore.remove('token');
           return $q.reject(response);
         }

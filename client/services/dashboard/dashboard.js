@@ -193,11 +193,11 @@ angular.module('cfaDashboard')
 
   service.tableNames = function () {
     var disciplines = service.settings.disciplines;
-    var names = ["image", "name"];
+    var names = ["Name"];
     for (var i = 0; i < disciplines.length; i++) {
       names.push(disciplines[i].name);
     }
-    names.push("total");
+    names.push("Total");
     return names;
   }
 
@@ -208,7 +208,6 @@ angular.module('cfaDashboard')
     for (var i = 0; i < regs.length; i++) {
       var reg = regs[i];
       studentPoints.students[i] = {};
-      studentPoints.students[i].image = reg._user.image;
       studentPoints.students[i].name = reg._user.firstName + ' ' + reg._user.lastName;
 
       var disciplines = service.settings.disciplines;
@@ -225,7 +224,8 @@ angular.module('cfaDashboard')
           totalPoints += dPoints.points;
         }
       }
-      studentPoints.students[i].total = totalPoints;
+      studentPoints.students[i].Total = totalPoints;
+
     }
     return studentPoints;
   }
@@ -238,7 +238,7 @@ angular.module('cfaDashboard')
         return 0;
       }
     });
-    return ranked;
+    return ranked.filter(function (reg) { return reg.role === "Student"});
   };
 
 
