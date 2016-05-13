@@ -11,7 +11,6 @@ angular.module('cfaDashboard')
 		// call db to get all users
 		Auth.getUsers()
 			.then(function (users) {
-				console.log(users);
 				var allUsers = users.data;
 				//loop through users and sort them in to teachers and students
 				_.each(allUsers, function (user) {
