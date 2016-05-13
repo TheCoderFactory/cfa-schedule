@@ -1,3 +1,32 @@
-<div>
-  {{ vm.name }}
+<div class="col-md-6">	
+	<h1>Create A Project</h1>
+	<form ng-submit="vm.createProject()">
+		<div class="form-group col-md-12">
+	  	<label for="intakeInput">Name</label>
+			<input class="form-control" ng-model="vm.projectData.name"/>
+		</div>
+		<div class="form-group col-md-12">
+	  	<label for="intakeInput">Intake</label>
+			<select class="form-control" ng-model="vm.projectData.intake" ng-options="intake.name for intake in vm.intakes" 
+			ng-change="vm.getIntakeRegistrations(vm.projectData.intake)" >
+			</select>
+		</div>
+		<div class="form-group col-md-12">
+	  	<label for="awardInput">Registrations</label>
+			<select multiple class="form-control" ng-model="vm.projectData.selectedRegistrations">
+				<option ng-repeat="registration in vm.registrations" 
+				value="{{registration._id}}">
+					{{registration._user.firstName}} {{registration._user.lastName}}
+				</option>
+			</select>
+	  </div>
+	  <div class="form-group col-md-12">
+		  <button class="btn btn-primary" type="submit">
+		  	Create Project
+			</button>
+		</div>
+	</form>
+</div>
+<div class="col-md-6">	
+	<tt> selectedValues = {{ vm.projectData.selectedRegistrations }}</tt>
 </div>

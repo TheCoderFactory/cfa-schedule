@@ -25,7 +25,6 @@ angular.module('cfaDashboard')
 			    				return registration.role === 'Student';
 			    			});
 			    			// additionally remove reg of student logged on
-			    			
 			    			if(!Auth.getUser().admin) {
 			    				scope.registrations = _.filter(registrations.data, function (registration) {
 				    				return registration._user._id !== Auth.getUser()._id;
