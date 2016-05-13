@@ -17,7 +17,6 @@
 		      <td>
 		      	<div ng-repeat="registration in user._registrations" ng-if="registration.role === userType" uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(registration._intake._id)"  ng-style="{'background': registration._intake.colour}" class="circle circleTable"></div>
 		      </td>
-		      
 		    </tr>
 	   	</tbody>
 		</table>
