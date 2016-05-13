@@ -28,5 +28,16 @@
 	</form>
 </div>
 <div class="col-md-6">	
-	<tt> selectedValues = {{ vm.projectData.selectedRegistrations }}</tt>
+	<h1>Projects</h1>
+	<div class="row" ng-repeat="project in vm.projects">
+		<div class="panel panel-default">
+		  <div class="panel-heading">{{project.name}}
+	  		<div class="pull-right">
+		  		<a href="" ng-click="vm.deleteAward(award._id)">Remove</a>
+	  		</div>
+			</div>
+			<div class="panel-body">Points: {{}}</h3></div>
+		</div>
+	</div>
 </div>
+

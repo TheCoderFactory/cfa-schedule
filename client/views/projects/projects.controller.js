@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('cfaDashboard')
-  .controller('ProjectsCtrl', ['RegistrationService','IntakeService', 'Auth', '$scope',
-    function (RegistrationService, IntakeService, Auth, $scope) {
+  .controller('ProjectsCtrl', ['ProjectService', 'RegistrationService','IntakeService', 'Auth', '$scope',
+    function (ProjectService, RegistrationService, IntakeService, Auth, $scope) {
 
   	var vm =  this;
   	vm.intakes = {};
@@ -57,19 +57,19 @@ angular.module('cfaDashboard')
 	  }
 
     vm.createProject = function(){
-      // ProjectService.createProject(vm.projectData);
+      ProjectService.createProject(vm.projectData);
       vm.projectData = {}; //Clear Cache
-      vm.getAwards();
+      vm.getProjects();
     };
 
     vm.getProjects = function () {
-      // ProjectService.getProjects()
-      // .then(function (projects) {
-      //   vm.projects = projects.data;
-      // })
-      // .catch(function (err) {
-      //   vm.error = err;
-      // });
+      ProjectService.getProjects()
+      .then(function (projects) {
+        vm.projects = projects.data;
+      })
+      .catch(function (err) {
+        vm.error = err;
+      });
     };
 
     vm.getProjects();
