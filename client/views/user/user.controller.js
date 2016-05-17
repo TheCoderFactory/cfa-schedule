@@ -1,21 +1,20 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.controller('UserCtrl', ['$location', 'userDetails', '$q', '$http', function ($location, userDetails, $q, $http) {
+	.controller('UserCtrl', ['$location', 'userDetails', '$q', '$http', 'Auth', function ($location, userDetails, $q, $http, Auth) {
 		var vm = this;
 		vm.user = userDetails.data;
 		vm.editingUser = false;
 
     vm.editUser = function () {
-			var deferred = $q.defer();
-			$http.put('/api/users/' + vm.user._id, vm.user)
+			Auth.editUser(vm.user)
 				.then(function (res) {
-		        deferred.resolve(res);
-		      })
-		      .catch(function (err) {
-		        deferred.reject(err.data);
-		      });
-		      return deferred.promise;
+					console.log(res);
+					vm.editingUser = false;
+				})
+				.catch(function (err) {
+					vm.error = err;
+				})
     }
 
     vm.showEditUser = function () {

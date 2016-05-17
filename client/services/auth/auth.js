@@ -101,6 +101,18 @@ angular.module('cfaDashboard')
       return def.promise;
     };
 
+    this.editUser = function (user) {
+      var deferred = $q.defer();
+      $http.put('/api/users/' + user._id, user)
+        .then(function (res) {
+            deferred.resolve(res);
+          })
+          .catch(function (err) {
+            deferred.reject(err.data);
+          });
+          return deferred.promise;
+    };
+
    
     // methods -->
 
