@@ -1,3 +1,4 @@
+<!-- Actions -->
 <div class="container ">
 	<div class="row">
 		<ul class="nav navbar-nav">
@@ -6,12 +7,19 @@
 	</div>
 </div>
 
+<h1> {{vm.user.firstName}} {{vm.user.lastName}}</h1>
+
+<!-- Edit form -->
 <div ng-show="vm.editingUser" class="container row col-md-6">
 	<form role="form">
 		<h2>Edit Profile</h2>
 	  <div class="form-group">
 	    <label for="email">Email:</label>
 	    <input class="form-control" ng-model="vm.user.email"/>
+	  </div>
+	  <div class="form-group">
+	    <label for="email">Alternative Email:</label>
+	    <input class="form-control" ng-model="vm.user.altEmail"/>
 	  </div>
 	  <div class="form-group">
 	    <label for="email">Password:</label>
@@ -25,30 +33,26 @@
 	</form>
 </div>
 
-<div class="row">
-	<h1> {{vm.user.firstName}} {{vm.user.lastName}}</h1>
-</div>
 
-<!-- intake circles -->
-<div ng-repeat="registration in vm.user._registrations" uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-click="vm.openIntake(registration._intake._id)"  ng-style="{'background': registration._intake.colour}" class="circle circleTable">
-</div>
-
-<!-- Meta data -->
-<div class="row">
-	<div class="col-md-6">
-			
+<!-- user data -->
+<div ng-show="!vm.editingUser">
+	<div class="row">
+		<div class="col-md-6">
+			<!-- Intakes -->
+			<p><strong>Intakes: </strong><div ng-repeat="registration in vm.user._registrations" uib-popover="{{registration._intake.name}}" popover-trigger="mouseenter" ng-click="vm.openIntake(registration._intake._id)"  ng-style="{'background': registration._intake.colour}" class="circle circleTable">
+	</div></p>
+			<p><strong>Email: </strong>{{vm.user.email}}</p>
+			<p><strong>Alternative Email: </strong>{{vm.user.altEmail}}</p>
+		</div>
 	</div>
-</div>
 
-<div class="container col-md-6 pull-left">
 	<h2>Intake Points</h2>
 	<!-- Points table -->
 	<div ng-repeat="registration in vm.user._registrations">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<user-points-table registration="registration"></user-points-table>
 			</div>
 		</div>
 	</div>
 </div>
-

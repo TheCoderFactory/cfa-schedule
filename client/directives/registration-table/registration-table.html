@@ -9,8 +9,8 @@
   </thead>
   <tbody>
     <tr ng-class="rowItem" ng-repeat = "registration in registrations">
-      <td>{{registration._user.firstName}}</td>
-      <td>{{registration._user.lastName}}</td>
+      <td><a ng-href="users/{{registration._user._id}}">{{registration._user.firstName}}</a></td>
+      <td><a ng-href="users/{{registration._user._id}}">{{registration._user.lastName}}</a></td>
       <td>{{registration._user.email}}</td>
       <td><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="unregisterAlert(registration)" class="glyphicon glyphicon-trash"></span></td>
     </tr>
