@@ -2,28 +2,32 @@
 
 <div class="row">
 	<h3>Students</h3>
+	<p ng-if="vm.studentUsers.length < 1"><i>There are currently no students registered!</i></p>
 	<div class="col-md-offset-2 col-md-offset-8">
-		<users-table users="vm.studentUsers" user-type="Student"></users-table>
+		<users-table ng-if="vm.studentUsers.length > 0" users="vm.studentUsers" user-type="Student"></users-table>
 	</div>
 </div>
 
 <div class="row">
 	<h3>Teachers</h3>
+	<p ng-if="vm.teacherUsers.length < 1"><i>There are currently no teachers registered!</i></p>
 	<div class="col-md-offset-2 col-md-offset-8">
-		<users-table users="vm.teacherUsers" user-type="Teacher"></users-table>
+		<users-table ng-if="vm.teacherUsers.length > 0" users="vm.teacherUsers" user-type="Teacher"></users-table>
 	</div>
 </div>
 
 <div class="row">
 	<h3>Teacher's Assistants</h3>
+	<p ng-if="vm.taUsers.length < 1"><i>There are currently no teacher's assistants registered!</i></p>
 	<div class="col-md-offset-2 col-md-offset-8">
-		<users-table users="vm.taUsers" user-type="TA"></users-table>
+		<users-table ng-if="vm.taUsers.length > 0" users="vm.taUsers" user-type="TA"></users-table>
 	</div>
 </div>
 
 <div class="row">
 	<h3>Unregistered Users</h3>
+	<p ng-if="vm.unregisteredUsers.length < 1"><i>There are currently no teacher's assistants registered!</i></p>
 	<div class="col-md-offset-2 col-md-offset-8">
-		<users-table users="vm.unregisteredUsers" user-type="Unregistered"></users-table>
+		<users-table ng-if="vm.unregisteredUsers.length > 0" users="vm.unregisteredUsers" user-type="Unregistered"></users-table>
 	</div>
 </div>
