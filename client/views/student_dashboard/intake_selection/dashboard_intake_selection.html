@@ -2,7 +2,7 @@
 <h1 align="center">Welcome {{vm.settings.userDetails.firstName}}</h1>
 
 <!-- user but not registered to any intakes -->
-<p align="center" ng-if="vm.settings.userDetails._registrations.length < 1">Sorry, you are not currently registered to any intake. Please contact Pete (pete@coderfactory.com) for assistance</p>
+<p align="center" ng-if="vm.settings.userDetails._registrations.length < 1 && !vm.settings.userDetails.admin">Sorry, you are not currently registered to any intake. Please contact Pete (pete@coderfactory.com) for assistance</p>
 
 <p ng-if="!vm.settings.userDetails._registrations.length < 1">Please select an intake!</p>
 <!-- user intakes (not admin) -->

@@ -18,7 +18,9 @@
     </div>
   </div>
   
+  <div class="row">
+    <div role="alert" class="alert alert-danger login-alert" ng-if="error">Oooops!! {{error.msg}}</div>
+  </div>
   
 </form>
 
-<pre ng-if="vm.error">{{ vm.error | json }}</pre>

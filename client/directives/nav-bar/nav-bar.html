@@ -95,7 +95,11 @@
       <li><a ng-style="{color: settings.intake.colour}" ng-href="/dashboard/{{settings.intake._id}}/contact">Contact</a></li>
     </ul>
 
+    <ul class="nav nav-sidebar" ng-if="Auth.getUser()._registrations.length > 1">
+      <li><a ng-style="{color: settings.intake.colour}" ng-href="/dashboard/intakeSelection">BACK TO INTAKE SELECTION</a></li>
+    </ul>
+
     <ul class="nav nav-sidebar" ng-if="Auth.getUser().admin">
-      <li><a ng-style="{color: settings.intake.colour}" ng-href="/">BACK TO ADMIN</a></li>
+      <li><a ng-style="{color: settings.intake.colour}" ng-href="/intakes">BACK TO ADMIN</a></li>
     </ul>
   </div>

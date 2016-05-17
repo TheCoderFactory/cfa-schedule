@@ -25,7 +25,7 @@
 			<div class="col-md-12">
 				<div ng-if="vm.registerUser" class="fadeInOut well">
 					<h3 align="center">Register User</h3>
-					<register-user form-register-user="vm.formRegisterUser" intake-id="{{vm.intake._id}}" unregistered-users="vm.unregisteredUsers" registered-students="vm.registeredStudents" registered-teachers="vm.registeredTeachers"></register-user>
+					<register-user form-register-user="vm.formRegisterUser" intake-id="{{vm.intake._id}}" unregistered-users="vm.unregisteredUsers" registered-students="vm.registeredStudents" registered-teachers="vm.registeredTeachers" registered-tas="vm.registeredTas"></register-user>
 				</div>
 			</div>
 		</div>
@@ -35,6 +35,14 @@
 				<h4>Teachers</h4>
 				<registration-table ng-if="vm.registeredTeachers.length > 0" registrations="vm.registeredTeachers" unregistered-users="vm.unregisteredUsers"></registration-table>
 				<p ng-if="vm.registeredTeachers.length < 1"><i>There are no teachers currently registered for this intake!</i></p>
+			</div>
+		</div>
+		<!-- TAs table -->
+		<div class="row">
+			<div class="col-md-12">
+				<h4>Teacher's Assistants</h4>
+				<registration-table ng-if="vm.registeredTas.length > 0" registrations="vm.registeredTas" unregistered-users="vm.unregisteredUsers"></registration-table>
+				<p ng-if="vm.registeredTas.length < 1"><i>There are no teacher's assistants currently registered for this intake!</i></p>
 			</div>
 		</div>
 		<!-- Students table -->

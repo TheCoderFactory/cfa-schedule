@@ -6,6 +6,7 @@ var authService = require('../../auth/auth.service');
 var User = require('./user.model');
 
 function handleError (res, err) {
+  console.log(err);
   return res.status(500).send(err);
 }
 
@@ -32,12 +33,17 @@ exports.create = function (req, res) {
  * @param res
  */
 exports.update = function (req, res) {
-  if (req.body._id) { delete req.body._id; }
+  // if (req.body._id) { delete req.body._id; }
   User.findById(req.params.id, function (err, user) {
     if (err) { return handleError(res, err); }
     if (!user) { return res.status(404).end(); }
-    var updated = _.merge(user, req.body);
-    updated.save(function (err) {
+    // update emails and password only
+    user.password = req.body.password;
+    user.email = req.body.email;
+    user.altEmail = req.body.altEmail;
+
+    // var updated = _.merge(user, req.body);
+    user.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(user);
     });

@@ -8,9 +8,18 @@ angular.module('cfaDashboard')
 				controller: 'UserCtrl',
 				controllerAs: 'vm',
 				resolve: {
-					userDetails: ['$route','Auth', function ($route, Auth) {
-						console.log($route.current.params.userId);
-						return Auth.getUserDetails($route.current.params.userId);
+					userDetails: ['$route', '$location','Auth', function ($route, $location, Auth) {
+						var currentUser = Auth.getUser();
+						// Check user is admin
+						if (currentUser.admin || currentUser._id === $route.current.params.userId) {
+							// All good, resolve the user details
+							return Auth.getUserDetails($route.current.params.userId);
+						} else {
+							// not admin or the users requested for editing -->reject
+              $location.path('/dashboard/intakeSelection');
+						}	
+
+						
 					}] 
 				}
 			});
