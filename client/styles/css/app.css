@@ -186,6 +186,10 @@ body {
 .intakeHeading {
   align-items: center !important; }
 
+.login-alert {
+  margin-top: 20px;
+  text-align: center; }
+
 a {
   cursor: pointer !important; }
 
