@@ -59,7 +59,7 @@ angular.module('cfaDashboard', [
 
     // get the intakeID for nav bar links
     $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
-        if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 1) {
+        if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 0) {
           // render layout
           DashboardService.showDashboardLayout();
         } else {
@@ -87,8 +87,12 @@ angular.module('cfaDashboard', [
     // dont allow non -admin to view admin pages
     $rootScope.$on('$routeChangeStart', function (event, next) {
       if(Auth.isLogged()) {
-        if (!Auth.getUser().admin) {
-          if(next.$$route.originalPath.indexOf('dashboard') < 1 && next.$$route.originalPath.indexOf('login') < 1) {
+        var currentUser = Auth.getUser();
+        if (!currentUser.admin) {
+          console.log(currentUser._id);
+          console.log(next.$$route);
+
+          if(next.$$route.originalPath.indexOf('dashboard') < 0 && next.$$route.originalPath.indexOf('login') < 0 && next.$$route.originalPath.indexOf('users/') < 0) {
             $location.path('/dashboard/intakeSelection');
           } 
         }
