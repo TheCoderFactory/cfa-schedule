@@ -8,7 +8,8 @@ angular.module('cfaDashboard')
   	vm.intakes = {};
   	vm.registrations = {};
   	vm.projectData = {};
-  	vm.projectData.selectedRegistrations = [];
+  	vm.projectData._registrations = [];
+    vm.githubData = {};
 
   	$scope.selected = [];
 
@@ -17,13 +18,13 @@ angular.module('cfaDashboard')
     });
 
 	  $scope.$watch('selected', function(element){
-      vm.projectData.selectedRegistrations = [];
+      vm.projectData._registrations = [];
       
       if(!element){
           return;
       }
       angular.forEach(element, function(val){
-          vm.projectData.selectedRegistrations.push( val._id.toString() );
+          vm.projectData._registrations.push( val._id.toString() );
       });
   	});
 
@@ -56,6 +57,16 @@ angular.module('cfaDashboard')
 	  		})
 	  }
 
+    vm.getProjectData = function(name){
+      console.log(name);
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://www.codecademy.com/", false);
+      // Add your code below!
+      xhr.send();
+      console.log(xhr.status);
+      console.log(xhr.statusText);
+    }
+
     vm.createProject = function(){
       ProjectService.createProject(vm.projectData);
       vm.projectData = {}; //Clear Cache
@@ -70,6 +81,16 @@ angular.module('cfaDashboard')
       .catch(function (err) {
         vm.error = err;
       });
+    };
+
+    vm.deleteProject = function (id) {
+      ProjectService.deleteProject(id)
+        .then(function (res) {
+          vm.getProjects();
+        })
+        .catch(function (err) {
+          vm.error = err;
+        });
     };
 
     vm.getProjects();

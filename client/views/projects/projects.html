@@ -13,7 +13,7 @@
 		</div>
 		<div class="form-group col-md-12">
 	  	<label for="awardInput">Registrations</label>
-			<select multiple class="form-control" ng-model="vm.projectData.selectedRegistrations">
+			<select multiple class="form-control" ng-model="vm.projectData._registrations">
 				<option ng-repeat="registration in vm.registrations" 
 				value="{{registration._id}}">
 					{{registration._user.firstName}} {{registration._user.lastName}}
@@ -29,14 +29,24 @@
 </div>
 <div class="col-md-6">	
 	<h1>Projects</h1>
+	<br>
 	<div class="row" ng-repeat="project in vm.projects">
 		<div class="panel panel-default">
 		  <div class="panel-heading">{{project.name}}
 	  		<div class="pull-right">
-		  		<a href="" ng-click="vm.deleteAward(award._id)">Remove</a>
+	  			
+		  		<a href="" ng-click="vm.deleteProject(project._id)">Remove</a>
 	  		</div>
 			</div>
-			<div class="panel-body">Points: {{}}</h3></div>
+			<div class="panel-body" ng-repeat="registration in project._registrations">
+				{{registration._user.firstName}}
+
+			</div>
+			<p>
+			  <button type="button" class="btn btn-default form-icon align-center" ng-click="vm.getProjectData(project.name)">
+          Get data
+        </button>
+      </p>
 		</div>
 	</div>
 </div>

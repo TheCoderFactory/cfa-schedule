@@ -14,10 +14,13 @@ function handleError (res, err) {
  * @param res
  */
 exports.index = function (req, res) {
-  Project.find(function (err, projects) {
-    if (err) { return handleError(res, err); }
-    return res.status(200).json(projects);
-  });
+  Project    
+  .find()
+    .populate({path: '_intake _registrations', populate: {path: '_user'}})
+    .exec(function (err, awardDisciplines) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(awardDisciplines);
+    });
 };
 
 /**
