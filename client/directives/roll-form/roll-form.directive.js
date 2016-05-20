@@ -30,8 +30,9 @@ angular.module('cfaDashboard')
 				scope.getIntakeRegistrations = function (intake) {
 					RegistrationService.getIntakeRegistrations(intake._id)
 						.then(function (registrations) {
-							scope.registrations = registrations.data;
-							console.log(registrations);
+							scope.registrations = _.filter(registrations.data, function (registration) {
+			    				return registration.role === 'Student';
+			    			});
 							scope.roll._intake = intake;
 							createFormObject(scope.registrations);
 						})
@@ -45,6 +46,22 @@ angular.module('cfaDashboard')
 						return { _registration: reg, attended: true };
 					})
 				}
+
+				// for date picker -->
+					scope.startDatePickerIsOpen = false;
+			    scope.endDatePickerIsOpen = false;
+	
+					scope.valuationDatePickerOpen = function ($event, whichDate) {
+			      if ($event) {
+			          $event.preventDefault();
+			          $event.stopPropagation(); // This is the magic
+			      }
+			      if(whichDate === 'start'){
+			        scope.startDatePickerIsOpen = true;
+			      }else if(whichDate === 'end'){
+			        scope.endDatePickerIsOpen = true;
+			      }
+		      };
 
 				init();
 

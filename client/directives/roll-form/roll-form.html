@@ -1,15 +1,40 @@
 <form>
 
-	<!-- Select intake -->
-	<div class="form-group">
-		<label for="intakeSelection">Intake</label>
-		<select class="form-control" ng-model="selectedIntake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(selectedIntake)"></select>
+	<!-- Select date -->
+	<div class="row">
+		<label for="rollDate">Date</label>
+		<div class="input-group">
+		  <input ng-model="roll.date" type="text"
+		  uib-datepicker-popup="mediumDate"
+		  is-open="startDatePickerIsOpen"
+		  ng-click="valuationDatePickerOpen()"
+			class="form-control" id="rollDate">
+		  <span class="input-group-btn">
+		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
+		      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+		    </button>
+		  </span>
+		</div>
 	</div>
 
-	<div class="checkbox" ng-repeat="registration in roll.attendance">
-    <label>
-      <input type="checkbox" value="true" ng-model="registration.attended" ng-change=""> {{registration._registration._user.firstName}} {{registration._registration._user.lastName}}
-    </label>
+	<!-- select intake -->
+	<div class="row">
+		<label for="intakeSelection">Intake</label>
+		<div class="form-group">
+			<select class="form-control" ng-model="selectedIntake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(selectedIntake)"></select>
+		</div>
+	</div>
+
+	<!-- intake checkboxes -->
+	<div class="row">
+		<h3>Students</h3>
+		<div class="checkbox" ng-repeat="attendence in roll.attendance">
+	    <label>
+	      <input type="checkbox" value="true" ng-model="attendence.attended" ng-change=""> {{attendence._registration._user.firstName}} {{attendence._registration._user.lastName}}
+	    </label>
+	  </div>
   </div>
-   {{roll}}
+
+	
+
 </form>
