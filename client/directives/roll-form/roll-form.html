@@ -1,0 +1,15 @@
+<form>
+
+	<!-- Select intake -->
+	<div class="form-group">
+		<label for="intakeSelection">Intake</label>
+		<select class="form-control" ng-model="selectedIntake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(selectedIntake)"></select>
+	</div>
+
+	<div class="checkbox" ng-repeat="registration in roll.attendance">
+    <label>
+      <input type="checkbox" value="true" ng-model="registration.attended" ng-change=""> {{registration._registration._user.firstName}} {{registration._registration._user.lastName}}
+    </label>
+  </div>
+   {{roll}}
+</form>
