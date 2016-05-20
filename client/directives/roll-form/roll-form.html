@@ -1,40 +1,47 @@
-<form>
+<form ng-submit="createRoll()">
 
 	<!-- Select date -->
 	<div class="row">
-		<label for="rollDate">Date</label>
-		<div class="input-group">
-		  <input ng-model="roll.date" type="text"
-		  uib-datepicker-popup="mediumDate"
-		  is-open="startDatePickerIsOpen"
-		  ng-click="valuationDatePickerOpen()"
-			class="form-control" id="rollDate">
-		  <span class="input-group-btn">
-		    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
-		      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
-		    </button>
-		  </span>
+		<div class="col-md-6">
+			<label for="rollDate">Date</label>
+			<div class="input-group">
+			  <input ng-model="roll.date" type="text"
+			  uib-datepicker-popup="mediumDate"
+			  is-open="startDatePickerIsOpen"
+			  ng-click="valuationDatePickerOpen()"
+				class="form-control" id="rollDate">
+			  <span class="input-group-btn">
+			    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
+			      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+			    </button>
+			  </span>
+			</div>
 		</div>
-	</div>
 
 	<!-- select intake -->
-	<div class="row">
-		<label for="intakeSelection">Intake</label>
-		<div class="form-group">
-			<select class="form-control" ng-model="selectedIntake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(selectedIntake)"></select>
+		<div class="col-md-6">
+			<label for="intakeSelection">Intake</label>
+			<div class="form-group">
+				<select class="form-control" ng-model="selectedIntake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(selectedIntake)"></select>
+			</div>
 		</div>
 	</div>
 
 	<!-- intake checkboxes -->
-	<div class="row">
-		<h3>Students</h3>
-		<div class="checkbox" ng-repeat="attendence in roll.attendance">
-	    <label>
-	      <input type="checkbox" value="true" ng-model="attendence.attended" ng-change=""> {{attendence._registration._user.firstName}} {{attendence._registration._user.lastName}}
-	    </label>
+	<div ng-if="roll.attendance.length > 0" class="row">
+		<div class="col-md-12">
+			<h3>Students</h3>
+			<div class="checkbox" ng-repeat="attendance in roll.attendance">
+		    <label>
+		      <input type="checkbox" value="true" ng-model="attendance.attended" ng-change=""> {{attendance._registration._user.firstName}} {{attendance._registration._user.lastName}}
+		    </label>
+		  </div>
 	  </div>
   </div>
 
-	
+  <hr>
+
+  <button class="btn btn-lg btn-block" type="submit">Submit Roll</button>
+
 
 </form>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('rollForm', ['RegistrationService', 'IntakeService', function (RegistrationService, IntakeService) {
+	.directive('rollForm', ['RegistrationService', 'IntakeService', 'RollService', function (RegistrationService, IntakeService, RollService) {
 		return {
 			restrict: 'E',
 			templateUrl: 'directives/roll-form/roll-form.html',
@@ -11,6 +11,7 @@ angular.module('cfaDashboard')
 
 				scope.roll = {};
 				scope.roll.attendance = [];
+				scope.roll.date = moment();
 
 				function init () {
 					scope.getIntakes();
@@ -41,11 +42,21 @@ angular.module('cfaDashboard')
 						});
 				}
 
+				scope.createRoll = function () {
+					RollService.createRoll(scope.roll)
+						.then(function (roll) {
+							console.log(roll.data);
+						})
+						.catch(function (err) {
+							console.log(err);
+						})
+				};
+
 				function createFormObject (registrations) {
 					scope.roll.attendance = _.map(registrations, function (reg) {
 						return { _registration: reg, attended: true };
 					})
-				}
+				};
 
 				// for date picker -->
 					scope.startDatePickerIsOpen = false;
