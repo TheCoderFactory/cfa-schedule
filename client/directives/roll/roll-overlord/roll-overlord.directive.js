@@ -7,9 +7,12 @@ angular.module('cfaDashboard')
 			scope: {},
 			controller: ['$scope', 'RollService', function ($scope, RollService) {
 
-				// $scope.rolls = [];
-				console.log('overlord init');
-
+				this.roll = {};
+				this.roll.attendance = [];
+				this.roll.date = moment();
+				$scope.rolls = [];
+				$scope.roll = this.roll;
+				
 				
 			}]
 		}

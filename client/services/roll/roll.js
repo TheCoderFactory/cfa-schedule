@@ -43,6 +43,19 @@ angular.module('cfaDashboard')
 			return deferred.promise;
 		}
 
+		service.updateRoll = function (rollId) {
+			var deferred = $q.defer();
+			$http.put('api/roll/' + rollId)
+				.then(function (res) {
+					deferred.resolve(res);
+				})
+				.catch(function (err) {
+					deferred.reject(err);
+				});
+
+			return deferred.promise;
+		}
+
 
 		
 	}]);

@@ -14,7 +14,9 @@
 		  </td>
       <td>{{roll.date | date: 'medium'}}</td>
       <td>{{roll.attendancePercent}}</td>
-      <td><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="deleteRoll(roll)" class="glyphicon glyphicon-trash"></span></td>
+      <td><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="deleteRoll(roll)" class="glyphicon glyphicon-trash"></span>
+       | 
+       <span ng-mouseover="rowItem = 'editHover'" ng-mouseleave="rowItem = ''"  ng-click="updateRoll(roll)" class="glyphicon glyphicon-edit"></span></td>
     </tr>
 	</tbody>
 </table>

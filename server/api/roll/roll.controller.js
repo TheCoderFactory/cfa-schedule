@@ -49,10 +49,24 @@ exports.update = function (req, res) {
 	Roll.findOne({_id: req.params.id}, function (err, roll) {
 		if(err) { return errorHandler(res, err, 500); }
 		if(!roll) { return errorHandler(res, err, 404); }		
-		roll.attendance = req.body.attendance,
-		roll.date = req.body.date
-	})
-}
+		// updated values
+		roll.attendance = req.body.attendance;
+		roll.date = req.body.date;
+		roll.attendancePercent = Roll.attendancePercent(roll.attendance);
+		// save new document
+		roll.save(function (err, roll) {
+			if(err) { return errorHandler(res, err, 500); }
+			// populate and send back
+			Roll
+			 	.findOne({_id: roll._id})
+			 	.populate('attendance._registration _intake')
+			 	.exec(function (err, roll) {
+			 		if (err) { return errorHandler(res, err, 500); }
+			 		res.json(roll);
+			 	});
+		});
+	});
+};
 
 exports.delete = function (req, res) {
 

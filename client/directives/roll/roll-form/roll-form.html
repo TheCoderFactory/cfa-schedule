@@ -30,7 +30,7 @@
 	<hr>
 
 	<!-- intake checkboxes -->
-	<div ng-if="roll.attendance.length > 0" class="row">
+	<div ng-show="roll.attendance.length > 0" class="row">
 		<div class="col-md-12">
 			<div class="checkbox" ng-repeat="attendance in roll.attendance | orderBy: _registration._user.firstName : true">
 		    <label class="col-md-6">
@@ -39,6 +39,8 @@
 		  </div>
 	  </div>
   </div>
+
+  <p ng-if="!roll.attendance.length > 0" align="center"><i>Please select an intake to take the roll!</i></p>
 
   <hr>
 

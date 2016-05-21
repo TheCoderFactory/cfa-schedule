@@ -9,6 +9,10 @@ body {
   /*background-color: #f5f5f5;*/
 }
 
+.glyphicon {
+	cursor: pointer;
+}
+
 #cfa-logo {
 	width: 100%;
 	height: auto;
@@ -85,6 +89,10 @@ body {
 
 .trashHover {
 	background-color: #ffe6e6 !important;
+}
+
+.editHover {
+	background-color:  #99e699 !important;
 }
 
 .intakePanel {

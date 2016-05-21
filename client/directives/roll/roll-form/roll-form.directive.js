@@ -10,9 +10,7 @@ angular.module('cfaDashboard')
 			link: function (scope, elem, attrs, rollOverlordCtrl) {
 				console.log('roll-form init');
 
-				scope.roll = {};
-				scope.roll.attendance = [];
-				scope.roll.date = moment();
+				scope.roll = rollOverlordCtrl.roll;
 
 				function init () {
 					scope.getIntakes();
@@ -44,10 +42,11 @@ angular.module('cfaDashboard')
 				}
 
 				scope.createRoll = function () {
+
 					RollService.createRoll(scope.roll)
 						.then(function (roll) {
-							console.log(roll.data);
 							rollOverlordCtrl.rolls.push(roll.data);
+							console.log(rollOverlordCtrl.rolls);
 						})
 						.catch(function (err) {
 							console.log(err);

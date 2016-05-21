@@ -17,15 +17,10 @@ var RollSchema = new Schema({
 });
 
 RollSchema.statics.attendancePercent = function (attendance) {
-		console.log(attendance);
 		var attendedCount = _.filter(attendance, function (singleAttend) {
 			return singleAttend.attended;
 		}).length;
-
-		console.log(attendance);
-
 		var total = attendance.length;
-
 		return (attendedCount/total) * 100;
 	}
 

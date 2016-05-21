@@ -33,6 +33,13 @@ angular.module('cfaDashboard')
 						});
 				};
 
+				scope.updateRoll = function (roll) {
+					var preEdit = {};
+					angular.extend(preEdit, roll);
+					rollOverlordCtrl.roll = roll;
+					console.log(rollOverlordCtrl.roll);
+				}
+
 				scope.openIntake = function (intakeId) {
 					$location.path('/intakes/' + intakeId);
 				};
