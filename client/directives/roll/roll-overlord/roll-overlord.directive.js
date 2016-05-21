@@ -5,15 +5,22 @@ angular.module('cfaDashboard')
 		return {
 			restrict: 'E',
 			scope: {},
-			controller: ['$scope', 'RollService', function ($scope, RollService) {
+			controller: ['$rootScope', '$scope', 'RollService', function ($rootScope, $scope, RollService) {
 
 				this.roll = {};
 				this.roll.attendance = [];
 				this.roll.date = moment();
-				$scope.rolls = [];
-				$scope.roll = this.roll;
+				this.rolls = [];
 				
-				
+				this.editRoll = function (roll) {
+					this.roll = roll;
+					$rootScope.$broadcast('rollEdited');
+				};
+
+				this.addRoll = function (roll) {
+					this.rolls.push(roll);
+				};
+
 			}]
 		}
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('rollForm', ['RegistrationService', 'IntakeService', 'RollService', function (RegistrationService, IntakeService, RollService) {
+	.directive('rollForm', ['$rootScope', 'RegistrationService', 'IntakeService', 'RollService', function ($rootScope, RegistrationService, IntakeService, RollService) {
 		return {
 			restrict: 'E',
 			templateUrl: 'directives/roll/roll-form/roll-form.html',
@@ -10,7 +10,14 @@ angular.module('cfaDashboard')
 			link: function (scope, elem, attrs, rollOverlordCtrl) {
 				console.log('roll-form init');
 
+				scope.edit = false;
 				scope.roll = rollOverlordCtrl.roll;
+
+				$rootScope.$on('rollEdited', function () {
+					scope.roll = rollOverlordCtrl.roll;
+					scope.edit = true;
+					console.log(scope.roll);
+				});
 
 				function init () {
 					scope.getIntakes();
@@ -20,7 +27,6 @@ angular.module('cfaDashboard')
 					IntakeService.getAllIntakes()
 						.then(function (intakes) {
 							scope.intakes = intakes.data;
-							console.log(scope.intakes);
 						})
 						.catch(function (err) {
 							console.log(err);
@@ -33,7 +39,7 @@ angular.module('cfaDashboard')
 							scope.registrations = _.filter(registrations.data, function (registration) {
 			    				return registration.role === 'Student';
 			    			});
-							scope.roll._intake = intake;
+							// scope.roll._intake = intake;
 							createFormObject(scope.registrations);
 						})
 						.catch(function (err) {
@@ -45,8 +51,8 @@ angular.module('cfaDashboard')
 
 					RollService.createRoll(scope.roll)
 						.then(function (roll) {
-							rollOverlordCtrl.rolls.push(roll.data);
-							console.log(rollOverlordCtrl.rolls);
+							rollOverlordCtrl.addRoll(roll.data);
+							scope.roll = {};
 						})
 						.catch(function (err) {
 							console.log(err);

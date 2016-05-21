@@ -9,7 +9,7 @@
 			  uib-datepicker-popup="mediumDate"
 			  is-open="startDatePickerIsOpen"
 			  ng-click="valuationDatePickerOpen()"
-				class="form-control" id="rollDate">
+				class="form-control" id="rollDate" required="true">
 			  <span class="input-group-btn">
 			    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
 			      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
@@ -19,10 +19,10 @@
 		</div>
 
 	<!-- select intake -->
-		<div class="col-md-6">
+		<div ng-if="!edit" class="col-md-6">
 			<label for="intakeSelection">Intake</label>
 			<div class="form-group">
-				<select class="form-control" ng-model="selectedIntake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(selectedIntake)"></select>
+				<select class="form-control" ng-model="roll._intake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(roll._intake)"></select>
 			</div>
 		</div>
 	</div>
@@ -45,6 +45,4 @@
   <hr>
 
   <button class="btn btn-lg btn-block" type="submit">Submit Roll</button>
-
-
 </form>

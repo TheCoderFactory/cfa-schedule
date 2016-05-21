@@ -10,7 +10,7 @@ var errorHandler = require('../../error/error-handling');
 exports.index = function (req, res) {
 	Roll
 		.find()
-		.populate('attendance._registration _intake')
+		.populate({path: 'attendance._registration _intake', populate: {path: '_user'}})
 		.exec(function (err, rolls) {
 			if (err) { return errorHandler(res, err, 500); }
 			if (!rolls) { return errorHandler(res, err, 404); }
@@ -36,7 +36,7 @@ exports.create = function (req, res) {
 		 // populate and send back
 		 Roll
 		 	.findOne({_id: roll._id})
-		 	.populate('attendance._registration _intake')
+		 	.populate({path: 'attendance._registration _intake', populate: {path: '_user'}})
 		 	.exec(function (err, roll) {
 		 		if (err) { return errorHandler(res, err, 500); }
 		 		res.json(roll);
@@ -59,7 +59,7 @@ exports.update = function (req, res) {
 			// populate and send back
 			Roll
 			 	.findOne({_id: roll._id})
-			 	.populate('attendance._registration _intake')
+			 	.populate({path: 'attendance._registration _intake', populate: {path: '_user'}})
 			 	.exec(function (err, roll) {
 			 		if (err) { return errorHandler(res, err, 500); }
 			 		res.json(roll);

@@ -11,6 +11,10 @@ angular.module('cfaDashboard')
 
 				scope.rolls = rollOverlordCtrl.rolls;
 
+				scope.$watch('rolls', function () {
+					rollOverlordCtrl.rolls = scope.rolls;
+				});
+
 				function init () {
 					// Get all rolls
 					RollService.getRolls()
@@ -34,10 +38,9 @@ angular.module('cfaDashboard')
 				};
 
 				scope.updateRoll = function (roll) {
-					var preEdit = {};
-					angular.extend(preEdit, roll);
-					rollOverlordCtrl.roll = roll;
-					console.log(rollOverlordCtrl.roll);
+					var editRoll = {};
+					angular.extend(editRoll, roll);
+					rollOverlordCtrl.editRoll(editRoll);
 				}
 
 				scope.openIntake = function (intakeId) {
