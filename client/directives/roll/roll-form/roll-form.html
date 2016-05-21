@@ -27,12 +27,13 @@
 		</div>
 	</div>
 
+	<hr>
+
 	<!-- intake checkboxes -->
 	<div ng-if="roll.attendance.length > 0" class="row">
 		<div class="col-md-12">
-			<h3>Students</h3>
-			<div class="checkbox" ng-repeat="attendance in roll.attendance">
-		    <label>
+			<div class="checkbox" ng-repeat="attendance in roll.attendance | orderBy: _registration._user.firstName : true">
+		    <label class="col-md-6">
 		      <input type="checkbox" value="true" ng-model="attendance.attended" ng-change=""> {{attendance._registration._user.firstName}} {{attendance._registration._user.lastName}}
 		    </label>
 		  </div>

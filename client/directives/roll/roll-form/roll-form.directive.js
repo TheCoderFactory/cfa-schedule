@@ -4,9 +4,10 @@ angular.module('cfaDashboard')
 	.directive('rollForm', ['RegistrationService', 'IntakeService', 'RollService', function (RegistrationService, IntakeService, RollService) {
 		return {
 			restrict: 'E',
-			templateUrl: 'directives/roll-form/roll-form.html',
+			templateUrl: 'directives/roll/roll-form/roll-form.html',
+			require: '^^rollOverlord',
 			scope: {},
-			link: function (scope, elem, attrs) {
+			link: function (scope, elem, attrs, rollOverlordCtrl) {
 				console.log('roll-form init');
 
 				scope.roll = {};
@@ -46,6 +47,7 @@ angular.module('cfaDashboard')
 					RollService.createRoll(scope.roll)
 						.then(function (roll) {
 							console.log(roll.data);
+							rollOverlordCtrl.rolls.push(roll.data);
 						})
 						.catch(function (err) {
 							console.log(err);

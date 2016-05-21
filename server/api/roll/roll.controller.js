@@ -7,6 +7,19 @@ var authService = require('../../auth/auth.service');
 var Roll = require('./roll.model');
 var errorHandler = require('../../error/error-handling');
 
+exports.index = function (req, res) {
+	Roll
+		.find()
+		.populate('attendance._registration _intake')
+		.exec(function (err, rolls) {
+			if (err) { return errorHandler(res, err, 500); }
+			if (!rolls) { return errorHandler(res, err, 404); }
+
+			res.json(rolls);
+		});
+}
+
+
 exports.create = function (req, res) {
 
 	var roll = new Roll ({
@@ -15,13 +28,20 @@ exports.create = function (req, res) {
 		date: req.body.date
 	});
 
+	roll.attendancePercent = Roll.attendancePercent(roll.attendance);
+	console.log(roll.attendancePercent);
+
 	roll.save(function (err, roll) {
 		if(err) { return errorHandler(res, err, 500); }
-
-		res.json(roll);
-	
+		 // populate and send back
+		 Roll
+		 	.findOne({_id: roll._id})
+		 	.populate('attendance._registration _intake')
+		 	.exec(function (err, roll) {
+		 		if (err) { return errorHandler(res, err, 500); }
+		 		res.json(roll);
+		 	});
 	});
-
 };
 
 exports.update = function (req, res) {
@@ -33,3 +53,14 @@ exports.update = function (req, res) {
 		roll.date = req.body.date
 	})
 }
+
+exports.delete = function (req, res) {
+
+	Roll
+		.remove({_id: req.params.id}, function (err) {
+			if(err) { return errorHandler(res, err, 500); }
+			res.send('roll deleted');
+		})
+};
+
+
