@@ -12,11 +12,11 @@ angular.module('cfaDashboard')
 
 				scope.edit = false;
 				scope.roll = rollOverlordCtrl.roll;
+				scope.noIntakeReg = false;
 
 				$rootScope.$on('rollEdited', function () {
 					scope.roll = rollOverlordCtrl.roll;
 					scope.edit = true;
-					console.log(scope.roll);
 				});
 
 				function init () {
@@ -39,8 +39,14 @@ angular.module('cfaDashboard')
 							scope.registrations = _.filter(registrations.data, function (registration) {
 			    				return registration.role === 'Student';
 			    			});
-							// scope.roll._intake = intake;
+							if (scope.registrations.length > 0) {
+								scope.noIntakeReg = false;
+							} else {
+
+								scope.noIntakeReg = true;
+							}
 							createFormObject(scope.registrations);
+							
 						})
 						.catch(function (err) {
 							console.log(err);

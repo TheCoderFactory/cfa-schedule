@@ -2,5 +2,13 @@
 
 angular.module('cfaDashboard')
 	.controller('RollCtrl', [function () {
-		console.log('roll ctrl init');
+		var vm = this;
+
+		vm.toggleTakeRoll = function () {
+			if(vm.takeRoll) {
+				vm.takeRoll = false;
+			} else {
+				vm.takeRoll = true;
+			}
+		};
 	}]);

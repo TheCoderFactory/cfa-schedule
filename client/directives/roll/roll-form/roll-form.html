@@ -40,8 +40,9 @@
 	  </div>
   </div>
 
-  <p ng-if="!roll.attendance.length > 0" align="center"><i>Please select an intake to take the roll!</i></p>
+  <p ng-if="!roll.attendance.length > 0 && !noIntakeReg" align="center"><i>Please select an intake to take the roll!</i></p>
 
+  <p ng-if="noIntakeReg" align="center"><i>Sorry, the selected intake has no registered students!</i></p>
   <hr>
 
   <button class="btn btn-lg btn-block" type="submit">Submit Roll</button>

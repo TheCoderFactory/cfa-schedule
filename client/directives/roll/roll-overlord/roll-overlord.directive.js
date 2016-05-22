@@ -21,6 +21,19 @@ angular.module('cfaDashboard')
 					this.rolls.push(roll);
 				};
 
+				this.daySelectRoll = function (date) {
+					var selectedDate = moment(date);
+					
+					this.rolls = _.filter(this.rolls, function (roll) {
+						console.log(moment(roll.date));
+						console.log(selectedDate);
+						console.log(moment(roll.date).isSame(selectedDate, 'day'));
+						
+						return moment(roll.date).isSame(selectedDate, 'day');
+					});
+					console.log(this.rolls);
+				};
+
 			}]
 		}
 

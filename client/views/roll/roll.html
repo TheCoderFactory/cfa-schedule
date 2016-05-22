@@ -2,36 +2,43 @@
 <div class="container ">
 	<div class="row">
 		<ul class="nav navbar-nav">
-		  <li><a ng-click="vm.toggleRegisterUser()">Take Role</a></li>
-		  <li><a ng-click="vm.toggleShowCreateScheduledItem()">View all Roles</a></li>
+		  <li><a ng-click="vm.toggleTakeRoll()">Take Role</a></li>
+		  <li><a ng-click="vm.toggleTakeRoll()">View all Roles</a></li>
 		</ul>
 	</div>
 </div>
 
-<h1>Roles</h1>
-
+<h1>Roll</h1>
 <!-- overlord controls the communication between the directives -->
 <roll-overlord>
 
-	<!-- Roll form -->
 	<div class="row">
-		<div class="col-md-6">
+		
+		<!-- Roll form -->
+		<div ng-if="vm.takeRoll" class="col-md-6">
 			<roll-form></roll-form>	
 		</div>
+		
+		
 	</div>
 
-	<!-- Roll Day selector -->
+	<h2>Rolls</h2>
 	<div class="row">
-		<div class="col-md-6">
-			<roll-day-selector></roll-day-selector>
+		
+		<!-- Roll Day selector -->
+		<div class="col-md-4">
+				<day-selector></day-selector>
+		</div>
+
+		<!-- Rolls -->
+		<div class="col-md-8">
+			<role-intake-filter></role-intake-filter>
+			
+			<!-- Roll table -->
+
+			<roll-table></roll-table>
 		</div>
 	</div>
-
-	<!-- Roll intake filter -->
-	<role-intake-filter></role-intake-filter>
 	
-	<!-- Roll table -->
-	<roll-table></roll-table>
-
 </roll-overlord>
 
