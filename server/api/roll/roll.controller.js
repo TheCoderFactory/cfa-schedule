@@ -19,6 +19,15 @@ exports.index = function (req, res) {
 		});
 }
 
+exports.show = function (req, res) {
+	Roll
+		.findOne({_id: req.params.id})
+		.populate({path: 'attendance._registration _intake', populate: {path: '_user'}})
+		.exec(function (err, roll) {
+			if(err) { return errorHandler(res, err, 500); }
+			res.json(roll);
+		});
+};
 
 exports.create = function (req, res) {
 

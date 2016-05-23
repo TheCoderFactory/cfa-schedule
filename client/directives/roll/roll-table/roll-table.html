@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover ">
+<table ng-if="selectedRolls.length > 0" class="table table-striped table-hover ">
   <thead>
     <tr>
     	<th>Intake</th>
@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-class="rowItem" ng-repeat = "roll in selectedRolls">
+    <tr ng-click="gotoRoll(roll._id)" ng-class="rowItem" ng-repeat = "roll in selectedRolls">
       <td>
       	<div uib-popover="{{roll._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(roll._intake._id)"  ng-style="{'background': roll._intake.colour}" class="circle circleTable"></div>
 		  </td>
@@ -20,3 +20,5 @@
     </tr>
 	</tbody>
 </table>
+
+<p ng-if="selectedRolls.length < 1"><i>No rolls have been taken for this day!</i></p>

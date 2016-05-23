@@ -37,6 +37,10 @@ angular.module('cfaDashboard')
 					rollOverlordCtrl.daySelectRoll();
 				};
 
+				scope.gotoRoll = function (rollId) {
+					$location.path('/roll/' + rollId);
+				}
+
 				scope.deleteRoll = function (roll) {
 					RollService.deleteRoll(roll._id)
 						.then(function (res) {
