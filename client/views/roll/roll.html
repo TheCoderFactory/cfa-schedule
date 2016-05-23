@@ -2,7 +2,7 @@
 <div class="container ">
 	<div class="row">
 		<ul class="nav navbar-nav">
-		  <li><a ng-click="vm.toggleTakeRoll()">Take Role</a></li>
+		  <li><a ng-click="vm.toggleTakeRoll()">Take New Role</a></li>
 		  <li><a ng-click="vm.toggleTakeRoll()">View all Roles</a></li>
 		</ul>
 	</div>
@@ -15,8 +15,8 @@
 	<div class="row">
 		
 		<!-- Roll form -->
-		<div ng-if="vm.takeRoll" class="col-md-6">
-			<roll-form></roll-form>	
+		<div class="col-md-6">
+			<roll-form show-form="vm.showForm"></roll-form>	
 		</div>
 		
 	</div>

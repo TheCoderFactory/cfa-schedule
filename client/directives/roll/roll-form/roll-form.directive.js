@@ -6,7 +6,9 @@ angular.module('cfaDashboard')
 			restrict: 'E',
 			templateUrl: 'directives/roll/roll-form/roll-form.html',
 			require: '^^rollOverlord',
-			scope: {},
+			scope: {
+				showForm: '='
+			},
 			link: function (scope, elem, attrs, rollOverlordCtrl) {
 				console.log('roll-form init');
 
@@ -14,9 +16,11 @@ angular.module('cfaDashboard')
 				scope.roll = rollOverlordCtrl.roll;
 				scope.noIntakeReg = false;
 
-				$rootScope.$on('rollEdited', function () {
+				$rootScope.$on('rollEditClicked', function () {
 					scope.roll = rollOverlordCtrl.roll;
 					scope.edit = true;
+					console.log(scope.edit);
+					scope.noIntakeReg = false;
 				});
 
 				function init () {
@@ -51,7 +55,15 @@ angular.module('cfaDashboard')
 						.catch(function (err) {
 							console.log(err);
 						});
-				}
+				};
+
+				scope.createOrEditRoll = function () {
+					if(scope.edit) {
+						scope.updateRoll();
+					} else {
+						scope.createRoll();
+					}
+				};
 
 				scope.createRoll = function () {
 
@@ -59,11 +71,33 @@ angular.module('cfaDashboard')
 						.then(function (roll) {
 							rollOverlordCtrl.addRoll(roll.data);
 							rollOverlordCtrl.daySelectRoll();
-							scope.roll = {};
+							purgeForm();
 						})
 						.catch(function (err) {
 							console.log(err);
 						})
+				};
+
+				scope.updateRoll = function () {
+					RollService.updateRoll(scope.roll)
+						.then(function (roll) {
+							rollOverlordCtrl.updateRoll(roll.data);
+							purgeForm();
+						})
+						.catch(function (err) {
+							console.log(err);
+						});
+				};
+
+				scope.cancelForm = function () {
+					purgeForm();
+				};
+
+				function purgeForm () {
+					scope.roll = {};
+					scope.edit = false;
+					scope.showForm = false;
+
 				};
 
 				function createFormObject (registrations) {

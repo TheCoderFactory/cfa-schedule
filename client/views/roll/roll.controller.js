@@ -1,14 +1,18 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.controller('RollCtrl', [function () {
+	.controller('RollCtrl', ['$scope', function ($scope) {
 		var vm = this;
 
+		$scope.$on('rollEditClicked', function () {
+			vm.showForm = true;
+		});
+
 		vm.toggleTakeRoll = function () {
-			if(vm.takeRoll) {
-				vm.takeRoll = false;
+			if(vm.showForm) {
+				vm.showForm = false;
 			} else {
-				vm.takeRoll = true;
+				vm.showForm = true;
 			}
 		};
 	}]);

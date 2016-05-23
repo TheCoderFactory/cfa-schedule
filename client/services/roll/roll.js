@@ -43,9 +43,9 @@ angular.module('cfaDashboard')
 			return deferred.promise;
 		}
 
-		service.updateRoll = function (rollId) {
+		service.updateRoll = function (roll) {
 			var deferred = $q.defer();
-			$http.put('api/roll/' + rollId)
+			$http.put('api/roll/' + roll._id, roll)
 				.then(function (res) {
 					deferred.resolve(res);
 				})

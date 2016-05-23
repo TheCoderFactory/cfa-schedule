@@ -12,9 +12,21 @@ angular.module('cfaDashboard')
 				this.roll.date = moment();
 				this.rolls = [];
 
-				this.editRoll = function (roll) {
+				this.editRollClicked = function (roll) {
 					this.roll = roll;
-					$rootScope.$broadcast('rollEdited');
+					$rootScope.$broadcast('rollEditClicked');
+					console.log('edit clicked');
+				};
+
+				this.updateRoll = function (editedRoll) {
+					this.rolls = _.map(this.rolls, function (roll) {
+						if(editedRoll._id === roll._id) {
+							return editedRoll;
+						} else {
+							return roll;
+						}
+					});
+					this.daySelectRoll();	
 				};
 
 				this.addRoll = function (roll) {

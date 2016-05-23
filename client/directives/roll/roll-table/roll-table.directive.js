@@ -25,19 +25,23 @@ angular.module('cfaDashboard')
 					RollService.getRolls()
 						.then(function (rolls) {
 							scope.rolls = rolls.data;
-							// display todays rolls on load
-							rollOverlordCtrl.rolls = scope.rolls;
-							rollOverlordCtrl.daySelectRoll();
+							updateList();
 						})
 						.catch(function (err) {
 							console.log(err);
 						});
-				}
+				};
+
+				function updateList () {
+					rollOverlordCtrl.rolls = scope.rolls;
+					rollOverlordCtrl.daySelectRoll();
+				};
 
 				scope.deleteRoll = function (roll) {
 					RollService.deleteRoll(roll._id)
 						.then(function (res) {
 							scope.rolls = _.without(scope.rolls, roll);
+							updateList();
 						})
 						.catch(function (err) {
 							console.log(err);
@@ -47,7 +51,7 @@ angular.module('cfaDashboard')
 				scope.updateRoll = function (roll) {
 					var editRoll = {};
 					angular.extend(editRoll, roll);
-					rollOverlordCtrl.editRoll(editRoll);
+					rollOverlordCtrl.editRollClicked(editRoll);
 				}
 
 				scope.openIntake = function (intakeId) {

@@ -1,5 +1,4 @@
-<form ng-submit="createRoll()">
-
+<form ng-show="showForm" ng-submit="createOrEditRoll()">
 	<!-- Select date -->
 	<div class="row">
 		<div class="col-md-6">
@@ -45,5 +44,7 @@
   <p ng-if="noIntakeReg" align="center"><i>Sorry, the selected intake has no registered students!</i></p>
   <hr>
 
-  <button class="btn btn-lg btn-block" type="submit">Submit Roll</button>
+  <button ng-if="!edit" class="btn btn-lg btn-block" type="submit">Submit Roll</button>
+  <button ng-if="edit" class="btn btn-lg btn-block" type="submit">Edit Roll</button>
+  <button class="btn btn-lg btn-block" ng-click="cancelForm()">Cancel</button>
 </form>
