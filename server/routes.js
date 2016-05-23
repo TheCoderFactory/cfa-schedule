@@ -15,6 +15,7 @@ module.exports = function (app) {
   app.use('/api/intakes', auth.isAuthenticated(), require('./api/intake'));
   app.use('/api/registrations', auth.isAuthenticated(), require('./api/registration'));
   app.use('/api/anouncements', auth.isAuthenticated(), require('./api/anouncement'));
+  app.use('/api/roll', auth.isAuthenticated(), require('./api/roll'));
   
   // Auth
   app.use('/auth', require('./auth'));

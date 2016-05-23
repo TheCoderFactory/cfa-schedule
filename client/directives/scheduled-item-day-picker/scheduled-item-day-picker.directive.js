@@ -13,7 +13,6 @@ angular.module('cfaDashboard')
     link: function (scope, elem, attrs) {
 
       scope.$watch('allScheduledItems', function () {
-        console.log('scheduled items watched');
         scope.selectedScheduledItems = scope.scheduledItems();
       }, true);
 
