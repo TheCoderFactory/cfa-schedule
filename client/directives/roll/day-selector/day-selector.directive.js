@@ -9,8 +9,11 @@ angular.module('cfaDashboard')
 			scope: {},
 			link: function (scope, elem, attrs, rollOverlordCtrl) {
 
+				scope.date = rollOverlordCtrl.date = moment();
+
 				scope.$watch('date', function () {
-					rollOverlordCtrl.daySelectRoll(scope.date);
+					rollOverlordCtrl.selectedDate = scope.date;
+					rollOverlordCtrl.daySelectRoll();
 				});
 
 

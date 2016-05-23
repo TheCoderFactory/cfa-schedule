@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-class="rowItem" ng-repeat = "roll in rolls">
+    <tr ng-class="rowItem" ng-repeat = "roll in selectedRolls">
       <td>
       	<div uib-popover="{{roll._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(roll._intake._id)"  ng-style="{'background': roll._intake.colour}" class="circle circleTable"></div>
 		  </td>

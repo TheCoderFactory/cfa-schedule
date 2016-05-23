@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cfaDashboard')
-	.directive('rollTable', ['$location', 'RollService', function ($location, RollService) {
+	.directive('rollTable', ['$rootScope', '$location', 'RollService', function ($rootScope, $location, RollService) {
 		return {
 			retrict: 'E',
 			templateUrl: '/directives/roll/roll-table/roll-table.html',
@@ -15,12 +15,19 @@ angular.module('cfaDashboard')
 					rollOverlordCtrl.rolls = scope.rolls;
 				});
 
+				$rootScope.$on('rollDateSelected', function () {
+					console.log('roll Date Selected');
+					scope.selectedRolls = rollOverlordCtrl.selectedRolls;
+				});
+
 				function init () {
 					// Get all rolls
 					RollService.getRolls()
 						.then(function (rolls) {
 							scope.rolls = rolls.data;
+							// display todays rolls on load
 							rollOverlordCtrl.rolls = scope.rolls;
+							rollOverlordCtrl.daySelectRoll();
 						})
 						.catch(function (err) {
 							console.log(err);

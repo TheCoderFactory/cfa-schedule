@@ -58,6 +58,7 @@ angular.module('cfaDashboard')
 					RollService.createRoll(scope.roll)
 						.then(function (roll) {
 							rollOverlordCtrl.addRoll(roll.data);
+							rollOverlordCtrl.daySelectRoll();
 							scope.roll = {};
 						})
 						.catch(function (err) {
