@@ -58,6 +58,9 @@ angular.module('cfaDashboard')
         return deferred.resolve();
       })
       .finally(function (disciplines) {
+
+        // ensure the navbar coloour is reset to the intake colour
+        service.settings.navTextColour = service.settings.intake.colour;
         return deferred.resolve();
       })
       .catch(function (err) {

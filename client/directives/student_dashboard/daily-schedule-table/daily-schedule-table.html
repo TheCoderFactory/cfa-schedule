@@ -1,4 +1,4 @@
-<table ng-if="selectedScheduledItems.length > 0" class="table table-hover ">
+<table ng-if="selectedScheduledItems.length > 0" class="table">
   <thead>
     <tr>
       <th>Start/Finish</th>
@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-class="{'active' : scheduledItem === selectedScheduledItem}" ng-click="selectScheduledItem(scheduledItem)" ng-class="rowItem" ng-repeat = "scheduledItem in selectedScheduledItems">
+    <tr ng-class="{'projectorDisplayTable': settings.projectorDisplay}" ng-class="{'active' : scheduledItem === selectedScheduledItem}" ng-click="selectScheduledItem(scheduledItem)" class="rowItem" ng-repeat = "scheduledItem in selectedScheduledItems">
       <td>
         <p>{{scheduledItem.start | date: 'shortTime'}}</p>
         <p>{{scheduledItem.end | date: 'shortTime'}}</p>

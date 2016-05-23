@@ -12,6 +12,8 @@ angular.module('cfaDashboard')
     },
     link: function (scope, elem, attrs) {
 
+      scope.settings = DashboardService.seetings;
+
       $rootScope.$on('ScheduledItemChanged', function () {
         scope.selectedScheduledItems = scope.scheduledItems();
       })

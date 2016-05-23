@@ -13,9 +13,6 @@ angular.module('cfaDashboard')
   // initially get current scheduled items
   vm.currentScheduledItems = DashboardService.getCurrentScheduledItems();
 
-  // ensure the navbar coloour is reset to the intake colour
-  DashboardService.settings.navTextColour = DashboardService.settings.intake.colour;
-
   // update current scheduled Item every minute
   $interval(function () {
     vm.currentScheduledItems = DashboardService.getCurrentScheduledItems();

@@ -124,12 +124,20 @@ body {
 .projectorDisplayNavText li a:hover {
   color: black !important; }
 
+.projectorDisplayTable:hover {
+  color: black !important; }
+
+.projectorDisplayTable td p:hover {
+  color: black !important; }
+
 .projectorDisplayNavText:hover {
   color: black !important; }
 
 .projectorDisplayTable {
-  background-color: #999 !important;
   color: white; }
+
+.projectorDisplayPanel div {
+  background-color: #666; }
 
 .projectDisplayTableOdd {
   background-color: #333;

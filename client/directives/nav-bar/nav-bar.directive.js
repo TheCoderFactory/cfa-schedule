@@ -12,7 +12,7 @@ angular.module('cfaDashboard')
           scope.settings = DashboardService.settings;
           scope.intakeId = $routeParams.intakeId;
           scope.settings.navTextColour = scope.settings.intake.colour;
-
+          
           scope.toggleDisplay = function () {
             if(scope.settings.projectorDisplay) {
               scope.settings.projectorDisplay = false;
