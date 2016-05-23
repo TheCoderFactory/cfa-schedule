@@ -21,8 +21,8 @@
   </thead>
   <tbody>
     <tr ng-class="rowItem" ng-repeat = "attendant in vm.roll.attendance">
-      <td>{{attendant._registration._user.firstName}}</td>
-      <td>{{attendant._registration._user.lastName}}</td>
+      <td><a ng-href="/users/{{attendant._registration._user._id}}">{{attendant._registration._user.firstName}}</a></td>
+      <td><a ng-href="/users/{{attendant._registration._user._id}}">{{attendant._registration._user.lastName}}</a></td>
       <td>
         <span ng-if="attendant.attended" class="glyphicon glyphicon-ok"></span>
         <span ng-if="!attendant.attended" class="glyphicon glyphicon-remove"></span>
