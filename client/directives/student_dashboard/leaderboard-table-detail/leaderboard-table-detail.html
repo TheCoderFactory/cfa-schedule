@@ -7,7 +7,7 @@
   </tr>
 </thead>
 <tbody>
-  <tr ng:repeat="student in students | orderBy: predicate: sort.descending">
+  <tr ng-class="{'projectorDisplayTable': settings.projectorDisplay}" ng:repeat="student in students | orderBy: predicate: sort.descending">
     <td width="{{columnWidth}}%" ng-if="$index > 0">{{$index + 1}}</td>
     <td width="{{columnWidth}}%" ng-if="$index === 0"><span class="glyphicon glyphicon-king"></span></td>
     <td width="{{columnWidth}}%" ng-repeat="data in student">{{data}}</td>

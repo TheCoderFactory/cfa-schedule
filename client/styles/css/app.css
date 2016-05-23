@@ -108,7 +108,32 @@ body {
   /*background-color: #f5f5f5;*/ }
 
 .glyphicon {
-  cursor: pointer; }
+  cursor: pointer;
+   }
+.projectorDisplayBody {
+  background-color: #333;
+  color: white; }
+
+.projectorDisplayNav {
+  background-color: #666;
+  color: white !important; }
+
+.projectorDisplayNavText {
+  color: white; }
+
+.projectorDisplayNavText li a:hover {
+  color: black !important; }
+
+.projectorDisplayNavText:hover {
+  color: black !important; }
+
+.projectorDisplayTable {
+  background-color: #999 !important;
+  color: white; }
+
+.projectDisplayTableOdd {
+  background-color: #333;
+  color: #666; }
 
 #cfa-logo {
   width: 100%;
