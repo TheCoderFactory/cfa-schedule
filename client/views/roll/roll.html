@@ -1,0 +1,40 @@
+<!-- Actions -->
+<div class="container ">
+	<div class="row">
+		<ul class="nav navbar-nav">
+		  <li><a ng-click="vm.toggleTakeRoll()">Take New Role</a></li>
+		</ul>
+	</div>
+</div>
+
+<h1>Roll</h1>
+<!-- overlord controls the communication between the directives -->
+<roll-overlord>
+
+	<div class="row">
+		
+		<!-- Roll form -->
+		<div class="col-md-6">
+			<roll-form show-form="vm.showForm"></roll-form>	
+		</div>
+		
+	</div>
+
+	<div class="row">
+		
+		<!-- Roll Day selector -->
+		<div class="col-md-4">
+				<day-selector></day-selector>
+		</div>
+
+		<!-- Rolls -->
+		<div class="col-md-8">
+			
+			<!-- Roll table -->
+			<roll-table></roll-table>
+		</div>
+
+	</div>
+	
+</roll-overlord>
+

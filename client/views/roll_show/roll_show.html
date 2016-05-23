@@ -1,0 +1,34 @@
+<!-- Actions -->
+<div class="container ">
+  <div class="row">
+    <ul class="nav navbar-nav">
+      <li><a ng-href="/roll">Back to Rolls</a></li>
+    </ul>
+  </div>
+</div>
+
+<h2>
+  <div uib-popover="{{vm.roll._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(vm.roll._intake._id)"  ng-style="{'background': vm.roll._intake.colour}" class="circle circleTable"></div> Roll (taken: {{vm.roll.date | date: 'short'}})
+</h2>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+    	<th>First Name</th>
+      <th>Last Name</th>
+      <th>Attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-class="rowItem" ng-repeat = "attendant in vm.roll.attendance">
+      <td><a ng-href="/users/{{attendant._registration._user._id}}">{{attendant._registration._user.firstName}}</a></td>
+      <td><a ng-href="/users/{{attendant._registration._user._id}}">{{attendant._registration._user.lastName}}</a></td>
+      <td>
+        <span ng-if="attendant.attended" class="glyphicon glyphicon-ok"></span>
+        <span ng-if="!attendant.attended" class="glyphicon glyphicon-remove"></span>
+
+      </td>
+    </tr>
+	</tbody>
+</table>
+

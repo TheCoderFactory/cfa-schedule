@@ -1,0 +1,24 @@
+<table ng-if="selectedRolls.length > 0" class="table table-striped table-hover ">
+  <thead>
+    <tr>
+    	<th>Intake</th>
+      <th>Date</th>
+      <th>Attendance (%)</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="cursor:pointer" ng-click="gotoRoll(roll._id)" ng-class="rowItem" ng-repeat = "roll in selectedRolls">
+      <td>
+      	<div uib-popover="{{roll._intake.name}}" popover-trigger="mouseenter" ng-click="openIntake(roll._intake._id)"  ng-style="{'background': roll._intake.colour}" class="circle circleTable"></div>
+		  </td>
+      <td>{{roll.date | date: 'medium'}}</td>
+      <td>{{roll.attendancePercent}}</td>
+      <td><span ng-mouseover="rowItem = 'trashHover'" ng-mouseleave="rowItem = ''"  ng-click="deleteRoll(roll)" class="glyphicon glyphicon-trash"></span>
+       | 
+       <span ng-mouseover="rowItem = 'editHover'" ng-mouseleave="rowItem = ''"  ng-click="updateRoll(roll)" class="glyphicon glyphicon-edit"></span></td>
+    </tr>
+	</tbody>
+</table>
+
+<p ng-if="selectedRolls.length < 1"><i>No rolls have been taken for this day!</i></p>

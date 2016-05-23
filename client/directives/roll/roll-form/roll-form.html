@@ -1,0 +1,52 @@
+<form ng-show="showForm" ng-submit="createOrEditRoll()">
+	<!-- Select date -->
+	<div class="row">
+		<div class="col-md-6">
+			<label for="rollDate">Date</label>
+			<div class="input-group">
+			  <input ng-model="roll.date" type="text"
+			  uib-datepicker-popup="mediumDate"
+			  is-open="startDatePickerIsOpen"
+			  ng-click="valuationDatePickerOpen()"
+				class="form-control" id="rollDate" required="true">
+			  <span class="input-group-btn">
+			    <button type="button" class="btn btn-default form-icon" ng-click="valuationDatePickerOpen($event, 'start')">
+			      <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+			    </button>
+			  </span>
+			</div>
+		</div>
+
+	<!-- select intake -->
+		<div ng-if="!edit" class="col-md-6">
+			<label for="intakeSelection">Intake</label>
+			<div class="form-group">
+				<select class="form-control" ng-model="roll._intake" ng-options="intake.name for intake in intakes" ng-change="getIntakeRegistrations(roll._intake)"></select>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<!-- intake checkboxes -->
+	<div ng-show="roll.attendance.length > 0" class="row">
+		<div class="col-md-12">
+			<div class="checkbox" ng-repeat="attendance in roll.attendance | orderBy: _registration._user.firstName : true">
+		    <label class="col-md-6">
+		      <input type="checkbox" value="true" ng-model="attendance.attended" ng-change=""> {{attendance._registration._user.firstName}} {{attendance._registration._user.lastName}}
+		    </label>
+		  </div>
+	  </div>
+  </div>
+
+  <p ng-if="!roll.attendance.length > 0 && !noIntakeReg" align="center"><i>Please select an intake to take the roll!</i></p>
+
+  <p ng-if="noIntakeReg" align="center"><i>Sorry, the selected intake has no registered students!</i></p>
+  <hr>
+
+  <button ng-if="!edit" class="btn btn-lg btn-block" type="submit">Submit Roll</button>
+  <button ng-if="edit" class="btn btn-lg btn-block" type="submit">Edit Roll</button>
+  <button class="btn btn-lg btn-block" ng-click="cancelForm()">Cancel</button>
+
+  <hr>
+</form>
