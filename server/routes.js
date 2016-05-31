@@ -2,9 +2,18 @@
 
 var config = require('./config/environment');
 var auth = require('./auth/auth.service');
-
+// var cors = require('cors');
 
 module.exports = function (app) {
+
+  // app.all('*', function(req, res, next) {
+  //   res.header('Access-Control-Allow-Origin', '*');
+  //   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  //   res.header('Access-Control-Allow-Headers', 'Content-Type');
+  //   next();
+  // });
+
+  // app.use(cors());
 
   // API
   app.use('/api/award-disciplines', auth.isAuthenticated(), require('./api/award-discipline'));
@@ -32,5 +41,4 @@ module.exports = function (app) {
         { root: config.root }
       );
     });
-
 };

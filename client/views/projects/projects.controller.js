@@ -59,12 +59,16 @@ angular.module('cfaDashboard')
 
     vm.getProjectData = function(name){
       console.log(name);
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "https://www.codecademy.com/", false);
-      // Add your code below!
-      xhr.send();
-      console.log(xhr.status);
-      console.log(xhr.statusText);
+      ProjectService.getGithubData(name)
+        .success(function (data) {
+            console.log('Success');
+            console.log(data);
+          
+        })
+        .error(function (data) {
+            console.log('Error');
+            console.log(data);
+    });
     }
 
     vm.createProject = function(){
