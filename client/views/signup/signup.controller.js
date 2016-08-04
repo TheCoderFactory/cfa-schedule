@@ -10,18 +10,24 @@ angular.module('cfaDashboard')
       name: 'SignupCtrl',
 
       /**
-       * User credentials
-       */
-      user: { email: 'test@test.com', password: 'test', admin: false },
-
-      /**
        * Signup
        */
       signup: function () {
         vm.user._registrations = [];
+        if (!vm.user.admin) {
+          vm.user.admin = false;
+        }
+        console.log(vm.user);
         Auth.signup(vm.user)
           .then(function () {
-            $location.path('/');
+            if (Auth.getUser().admin) {
+              console.log('admin signed up user');
+              vm.user = {};
+              vm.message = 'well done, you signed up a user';
+            } else {
+              $location.path('/');
+            }
+            
           })
           .catch(function (err) {
             vm.error = err;

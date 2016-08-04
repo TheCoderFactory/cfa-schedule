@@ -11,6 +11,17 @@ angular.module('cfaDashboard')
           scope.Auth = Auth;
           scope.settings = DashboardService.settings;
           scope.intakeId = $routeParams.intakeId;
+          scope.settings.navTextColour = scope.settings.intake.colour;
+          
+          scope.toggleDisplay = function () {
+            if(scope.settings.projectorDisplay) {
+              scope.settings.projectorDisplay = false;
+              DashboardService.settings.navTextColour = scope.settings.intake.colour;
+            } else {
+              scope.settings.projectorDisplay =  true;
+              DashboardService.settings.navTextColour = '#fff';
+            }
+          };
 
         }
       };

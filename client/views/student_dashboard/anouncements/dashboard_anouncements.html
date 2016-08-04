@@ -3,7 +3,7 @@
 	
 	<!-- Anouncement boxes -->
 	<div class="row" ng-repeat="anouncement in vm.anouncements">
-		<div class="panel panel-default">
+		<div ng-class="{'projectorDisplayPanel': vm.settings.projectorDisplay}" class="panel panel-default">
 			<div class="panel-heading">
 				{{anouncement.title}}
 			</div>

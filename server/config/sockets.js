@@ -19,5 +19,4 @@ module.exports = function (io) {
     console.log('[%s] %s logged.', socket.connectDate.toUTCString(), socket.ip);
 
   });
-
 };

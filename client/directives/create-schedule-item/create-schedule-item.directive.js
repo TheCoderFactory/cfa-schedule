@@ -13,7 +13,7 @@ angular.module('cfaDashboard')
 					showIntakes: '=',
 					showCreateScheduledItem: '=',
 					intakes: '='
-				}, 
+				},
 				link: function (scope, elem, attrs) {
 					
 					scope.purgeForm = function () {

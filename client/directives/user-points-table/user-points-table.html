@@ -9,7 +9,11 @@
 			<div ng-repeat="discipline in disciplines">
 				<p >Total <a ng-click="showHideAwards(registration._id, discipline._id)" uib-popover="{{discipline.description}} (click to see awards)" popover-trigger="mouseenter">{{discipline.name}}</a> points: {{discipline.points}}</p>
 				<div ng-if="showAwardsFor.indexOf(discipline._id) !== -1">
-					<p ng-repeat="awardDiscopline in disciplineAwards[discipline._id] ">{{awardDiscopline._award.name}} ({{awardDiscopline._award.value}} points)</p>
+					<div ng-repeat="awardDiscopline in disciplineAwards[discipline._id] ">
+						<p>{{awardDiscopline._award.name}} ({{awardDiscopline._award.value}} points)</p>
+						<p ng-if="awardDiscopline.reason"><strong>Reason: </strong>{{awardDiscopline.reason}}</p>
+						<hr>
+					</div>
 				</div>
 			</div>
 			<p><strong>Total points: {{totalPoints}}</strong>

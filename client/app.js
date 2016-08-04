@@ -59,6 +59,7 @@ angular.module('cfaDashboard', [
 
     // get the intakeID for nav bar links
     $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
+        
         if($location.path().indexOf('dashboard') > 0 && $location.path().indexOf('intakeSelection') < 0) {
           // render layout
           DashboardService.showDashboardLayout();
@@ -66,7 +67,11 @@ angular.module('cfaDashboard', [
           // not dashboard url - hide layout - and clear dashboard settings
           DashboardService.settings.intake = {};
           DashboardService.hideDashboardLayout();
+          // Switch off projector display
+          DashboardService.settings.projectorDisplay = false;
         }
+        
+
     });
 
   })

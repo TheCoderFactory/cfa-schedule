@@ -3,7 +3,12 @@
 <div ng-if="!vm.awardDetails">
   <h1 class="page-header">Leaderboard</h1>
 
-  <p><a ng-if="Auth.getUser().admin" ng-click="vm.showAssignAward()">(Assign Award!)</a></p>
+  <p><a ng-if="!vm.AssignAwardShowing" ng-click="vm.showAssignAward()">(Assign Award!)</a></p>
+
+  <div ng-if="vm.AssignAwardShowing">
+	  <p><a ng-click="vm.showAssignAward()">(Hide Form)</a></p>
+	  <assign-award intake="vm.intake"></assign-award>
+	</div>
 
   <leaderboard-table-detail select-registration="vm.selectRegistration" award-details="vm.awardDetails"></leaderboard-table-detail>
 </div>
@@ -12,11 +17,6 @@
   <h2 class="section-header">{{vm.selectRegistration._user.firstName}} {{vm.selectRegistration._user.lastName}}'s Awards</h2>
   <p><a ng-click="vm.clearAwardDetails()">(Back to leader board)</a></p>
   <registration-award-details award-details="vm.awardDetails"></registration-award-details>
-</div>
-
-<div ng-if="vm.AssignAwardShowing">
-  <p><a ng-click="vm.showAssignAward()">(Hide Form)</a></p>
-  <assign-award intake="vm.intake"></assign-award>
 </div>
 
 </div>

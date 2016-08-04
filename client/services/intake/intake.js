@@ -19,6 +19,7 @@ angular.module('cfaDashboard')
         .catch(function (err) {
           deferred.reject(err.data);
         });
+        
         return deferred.promise;
     }
 

@@ -80,27 +80,29 @@
 
 
 <!-- Dashboard Sidebar: only for student dashboard pages -->
-  <div ng-if="settings.dashboardNavs" class="col-sm-3 col-md-2 sidebar">
+  <div ng-class="{'projectorDisplayNav': settings.projectorDisplay}" ng-if="settings.dashboardNavs" class="col-sm-3 col-md-2 sidebar">
     <div class="row">
       <div class="col-xs-12">
         <p class="navbar-brand" href="#">{{settings.intake.name}}</p>
       </div>
     </div>
-    <ul class="nav nav-sidebar">
-      <li><a ng-style="{color: settings.intake.colour}" ng-href="/dashboard/{{settings.intake._id}}/summary">Summary</a></li>
-      <li><a ng-style="{color: settings.intake.colour}" ng-href="/dashboard/{{settings.intake._id}}/scheduledItems">Scheduled Items</a></li>
-      <li><a ng-style="{color: settings.intake.colour}" ng-href="/dashboard/{{settings.intake._id}}/leaderboard">Leaderboard</a></li>
-      <li><a ng-style="{color: settings.intake.colour}" ng-href="/dashboard/{{settings.intake._id}}/anouncements">Anouncements</a></li>
+    <ul ng-class="{'projectorDisplayNavText': settings.projectorDisplay}" class="nav nav-sidebar">
+      <li ><a ng-style="{color: settings.navTextColour}" ng-href="/dashboard/{{settings.intake._id}}/summary">Summary</a></li>
+      <li><a ng-style="{color: settings.navTextColour}" ng-href="/dashboard/{{settings.intake._id}}/scheduledItems">Scheduled Items</a></li>
+      <li><a ng-style="{color: settings.navTextColour}" ng-href="/dashboard/{{settings.intake._id}}/leaderboard">Leaderboard</a></li>
+      <li><a ng-style="{color: settings.navTextColour}" ng-href="/dashboard/{{settings.intake._id}}/anouncements">Anouncements</a></li>
     </ul>
-    <ul class="nav nav-sidebar">
-      <li><a ng-style="{color: settings.intake.colour}" ng-href="/dashboard/{{settings.intake._id}}/contact">Contact</a></li>
-    </ul>
-
-    <ul class="nav nav-sidebar" ng-if="Auth.getUser()._registrations.length > 1">
-      <li><a ng-style="{color: settings.intake.colour}" ng-href="/dashboard/intakeSelection">BACK TO INTAKE SELECTION</a></li>
+    <ul ng-class="{'projectorDisplayNavText': settings.projectorDisplay}" class="nav nav-sidebar">
+      <li><a ng-style="{color: settings.navTextColour}" ng-href="/dashboard/{{settings.intake._id}}/contact">Contact</a></li>
     </ul>
 
-    <ul class="nav nav-sidebar" ng-if="Auth.getUser().admin">
-      <li><a ng-style="{color: settings.intake.colour}" ng-href="/intakes">BACK TO ADMIN</a></li>
+    <ul ng-class="{'projectorDisplayNavText': settings.projectorDisplay}" class="nav nav-sidebar" ng-if="Auth.getUser()._registrations.length > 1">
+      <li><a ng-style="{color: settings.navTextColour}" ng-href="/dashboard/intakeSelection">BACK TO INTAKE SELECTION</a></li>
+    </ul>
+
+    <ul ng-class="{'projectorDisplayNavText': settings.projectorDisplay}" class="nav nav-sidebar" ng-if="Auth.getUser().admin">
+      <li ng-if="settings.projectorDisplay"><a ng-style="{color: settings.navTextColour}" ng-click="toggleDisplay()">NORMAL DISPLAY</a></li>
+      <li ng-if="!settings.projectorDisplay"><a ng-style="{color: settings.navTextColour}" ng-click="toggleDisplay()">PROJECTOR DISPLAY</a></li>
+      <li><a ng-style="{color: settings.navTextColour}" ng-href="/intakes">BACK TO ADMIN</a></li>
     </ul>
   </div>
