@@ -1,37 +1,62 @@
 
 <div class="row">
   <div class="col-md-offset-3 col-md-6">
+    <h2>Sign up</h2>
     <form ng-submit="vm.signup()">
-      <input class="form-control" type="text"
+      
+      <!-- First Name -->
+      <div class="row">
+        <input class="form-control" type="text"
              ng-model="vm.user.firstName"
              placeholder="first name" required>
-      <input class="form-control" type="text"
+      </div>
+
+      <!-- Last Name -->
+      <div class="row">
+        <input class="form-control" type="text"
              ng-model="vm.user.lastName"
              placeholder="last name" required>
-      <input class="form-control" type="text"
+      </div>
+      
+      
+      <!-- <input class="form-control" type="text"
              ng-model="vm.user.image"
-             placeholder="image">
-      <input class="form-control" type="email"
+             placeholder="image"> -->
+
+      <!-- Email -->
+      <div class="row">
+        <input class="form-control" type="email"
              ng-model="vm.user.email"
              placeholder="email">
-      <input class="form-control" type="email"
+      </div>
+      
+      <!-- <input class="form-control" type="email"
              ng-model="vm.user.altEmail"
-             placeholder="Alternative Email">
-      <input class="form-control" type="password"
+             placeholder="Alternative Email"> -->
+
+      <!-- Password -->
+      <div class="row">
+        <input class="form-control" type="password"
              ng-model="vm.user.password"
              placeholder="password">
+      </div>
+      
 
-    <div class="checkbox">
+    <div ng-if="Auth.getUser().admin" class="checkbox">
       <label>
         <input ng-model="vm.user.admin" type="checkbox" value="vm.user.admin">
           Admin
       </label>
     </div>
-      
-      <button class="btn btn-default" type="submit">
+      <div class="row">
+        <button class="btn btn-lg btn-block" type="submit">
         signup
       </button>
+      </div>
+      
     </form>
+    <div>{{vm.message}}</div>
   </div>
 </div>
+
 <pre ng-if="vm.error">{{ vm.error | json }}</pre>

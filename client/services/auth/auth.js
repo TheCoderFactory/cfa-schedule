@@ -33,10 +33,19 @@ angular.module('cfaDashboard')
       var deferred = $q.defer();
       $http.post('/api/users', user)
         .then(function (res) {
-          _user = res.data.user;
-          service.setCurrentUser(_user);
-          $cookieStore.put('token', res.data.token);
-          deferred.resolve();
+          console.log(res.data);
+          console.log(service.getUser());
+          // if user currently signed in, then do not set user
+          if (service.getUser()) {
+            deferred.resolve();
+            // do something cool here
+          } else {
+            _user = res.data.user;
+            service.setCurrentUser(_user);
+            $cookieStore.put('token', res.data.token);
+            deferred.resolve();
+          }
+          
         })
         .catch(function (err) {
           deferred.reject(err.data);
@@ -125,7 +134,7 @@ angular.module('cfaDashboard')
         service.setCurrentUser($cookieStore.get('user'));
         return service._user;
       } else {
-        return {};
+        return false;
       }
     };
 

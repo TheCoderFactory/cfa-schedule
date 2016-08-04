@@ -19,7 +19,9 @@ var AwardDisciplineSchema = new Schema({
       type: Schema.ObjectId,
       ref: 'Discipline',
       required: true
-  }
+  },
+  reason: String
+
 });
 
 

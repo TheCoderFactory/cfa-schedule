@@ -7,6 +7,7 @@ angular.module('cfaDashboard')
 
   	service.createAwardDiscipline = function (data) {
     	var deferred = $q.defer();
+    	console.log(data.reason);
       $http.post('/api/award-disciplines', data)
 	      .then(function (res) {
 		        deferred.resolve(res);
